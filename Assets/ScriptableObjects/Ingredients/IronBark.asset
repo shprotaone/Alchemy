@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fac156ad6a5548a8d73290bdcdef3, type: 3}
+  m_Name: IronBark
+  m_EditorClassIdentifier: 
+  ingredientName: IronBark
+  color: {r: 1, g: 0, b: 0, a: 1}
+  mainSprite: {fileID: 21300000, guid: 8c8256e7b1c192548b53fab0eed191d4, type: 3}
+  emptySprite: {fileID: 21300000, guid: c904cb4a496ee36448c3f3915ced559f, type: 3}
+  dragableSprite: {fileID: 21300000, guid: e27a1dcb508f6cb4b9170ba95af69664, type: 3}
+  pressedSprite: {fileID: 21300000, guid: 1e7f53453d794bf4eac57ea1e41636b3, type: 3}
+  resourceType: 0
+  resourceRarity: 0
+  dragSound: {fileID: 0}
+  dropSound: {fileID: 0}

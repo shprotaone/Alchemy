@@ -32,14 +32,14 @@ public class AutoSave : MonoBehaviour
 
             resourceSystem.GetComponent<Fuel>().fuelCount = save.fuelCount;
 
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, save.amountRed);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, save.amountBlue);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, save.amountYellow);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, save.amountWhite);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Ladan, save.amountLadan);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Eye, save.amountEye);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Stone, save.amountStone);
-            resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Sand, save.amountSand);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, save.amountRed);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, save.amountBlue);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, save.amountYellow);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, save.amountWhite);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Ladan, save.amountLadan);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Eye, save.amountEye);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Stone, save.amountStone);
+            resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Sand, save.amountSand);
 
             mixingSystem.GetComponent<MixingSystem>().ChangeCauldron(save.cauldronId);
 

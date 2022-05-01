@@ -25,13 +25,13 @@ public class ShopSystem : MonoBehaviour
     private void Start()
     {
         textBuyBottle.text = "Купить бутылку: " + bottleCost;
-        if (bottles.GetComponent<Bottles>().GetBottleCount() == 8)
+        if (bottles.GetComponent<Bottles>().GetBottleCount() == 8)  //Информирует о том, что бутылок максимальное количество
         {
             buttonBuyBottle.interactable = false;
             textBuyBottle.text = "Максимум бутылок";
         }
 
-        switch (cauldron.GetComponent<MixingSystem>().GetCauldron())
+        switch (cauldron.GetComponent<MixingSystem>().GetCauldron())    //выбор текущего котла
         {
             case 0:
                 textBuyCauldron.text = "Купить нормальный котел: 3000";
@@ -53,45 +53,45 @@ public class ShopSystem : MonoBehaviour
 
     public void BuyResource(int resNumber)
     {
-        switch ((Resource)resNumber)
+        switch ((ResourceType)resNumber)
         {
-            case Resource.Red:
+            case ResourceType.Red:
                 if (GetComponent<MoneySystem>().GetMoney() >= 100)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(100);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 1);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 1);
                 }
                 break;
 
-            case Resource.Blue:
+            case ResourceType.Blue:
                 if (GetComponent<MoneySystem>().GetMoney() >= 100)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(100);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 1);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 1);
                 }
                 break;
 
-            case Resource.Yellow:
+            case ResourceType.Yellow:
                 if (GetComponent<MoneySystem>().GetMoney() >= 100)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(100);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 1);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 1);
                 }
                 break;
 
-            case Resource.White:
+            case ResourceType.White:
                 if (GetComponent<MoneySystem>().GetMoney() >= 100)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(100);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 1);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 1);
                 }
                 break;
 
@@ -99,7 +99,7 @@ public class ShopSystem : MonoBehaviour
                 break;
         }
 
-        if (!UIControls.GetComponent<Tutorial>().mainGame && resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Red) == 1 && resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Blue) == 1)
+        if (!UIControls.GetComponent<Tutorial>().mainGame && resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Red) == 1 && resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Blue) == 1)
         {
             UIControls.GetComponent<Tutorial>().canOpenShop = false;
             UIControls.GetComponent<Tutorial>().ToggleMessage("Все готово, возвращаемся на рабочее место.");
@@ -111,45 +111,45 @@ public class ShopSystem : MonoBehaviour
 
     public void BuyResourceX5(int resNumber)
     {
-        switch ((Resource)resNumber)
+        switch ((ResourceType)resNumber)
         {
-            case Resource.Red:
+            case ResourceType.Red:
                 if (GetComponent<MoneySystem>().GetMoney() >= 500)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(500);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 5);
                 }
                 break;
 
-            case Resource.Blue:
+            case ResourceType.Blue:
                 if (GetComponent<MoneySystem>().GetMoney() >= 500)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(500);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 5);
                 }
                 break;
 
-            case Resource.Yellow:
+            case ResourceType.Yellow:
                 if (GetComponent<MoneySystem>().GetMoney() >= 500)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(500);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 5);
                 }
                 break;
 
-            case Resource.White:
+            case ResourceType.White:
                 if (GetComponent<MoneySystem>().GetMoney() >= 500)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(500);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 5);
                 }
                 break;
 
@@ -160,45 +160,45 @@ public class ShopSystem : MonoBehaviour
 
     public void BuyResourceX10(int resNumber)
     {
-        switch ((Resource)resNumber)
+        switch ((ResourceType)resNumber)
         {
-            case Resource.Red:
+            case ResourceType.Red:
                 if (GetComponent<MoneySystem>().GetMoney() >= 1000)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(1000);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 10);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 10);
                 }
                 break;
 
-            case Resource.Blue:
+            case ResourceType.Blue:
                 if (GetComponent<MoneySystem>().GetMoney() >= 1000)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(1000);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 10);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 10);
                 }
                 break;
 
-            case Resource.Yellow:
+            case ResourceType.Yellow:
                 if (GetComponent<MoneySystem>().GetMoney() >= 1000)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(1000);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 10);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 10);
                 }
                 break;
 
-            case Resource.White:
+            case ResourceType.White:
                 if (GetComponent<MoneySystem>().GetMoney() >= 1000)
                 {
                     GetComponent<AudioSource>().clip = buyResource;
                     GetComponent<AudioSource>().Play();
                     GetComponent<MoneySystem>().SpendMoney(1000);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 10);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 10);
                 }
                 break;
 

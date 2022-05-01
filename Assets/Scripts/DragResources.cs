@@ -81,98 +81,98 @@ public class DragResources : MonoBehaviour
                     switch (hit.transform.tag)                                                                                      //switch для выбранного ресурса
                     {
                         case "ResourceRed":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Red) > 0)     //если предмета нет в сумке, то взять нельзя
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Red) > 0)     //если предмета нет в сумке, то взять нельзя
                             {
                                 spawnerRed.GetComponent<SpriteRenderer>().sprite = redTaken;    //замена спрайта на спрайт взятия(выделение при нажатии)
                                 GetComponent<AudioSource>().clip = takeRed;                     //звук взятия
                                 GetComponent<AudioSource>().Play();                             //??
                                 canTake = false;
                                 toDrag = Instantiate(resourceRed, pos, transform.rotation).transform;   //Создание префаба с порошком, когда обьект тянется
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Red, 1);         //удаление из сумки
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Red, 1);         //удаление из сумки
                             }
                             break;
 
                         case "ResourceBlue":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Blue) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Blue) > 0)
                             {
                                 spawnerBlue.GetComponent<SpriteRenderer>().sprite = blueTaken;
                                 GetComponent<AudioSource>().clip = takeBlue;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceBlue, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Blue, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Blue, 1);
                             }
                             break;
 
                         case "ResourceYellow":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Yellow) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Yellow) > 0)
                             {
                                 spawnerYellow.GetComponent<SpriteRenderer>().sprite = yellowTaken;
                                 GetComponent<AudioSource>().clip = takeYellow;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceYellow, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Yellow, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Yellow, 1);
                             }
                             break;
 
                         case "ResourceWhite":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.White) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.White) > 0)
                             {
                                 spawnerWhite.GetComponent<SpriteRenderer>().sprite = whiteTaken;
                                 GetComponent<AudioSource>().clip = takeWhite;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceWhite, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.White, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.White, 1);
                             }
                             break;
 
                         case "ResourceLadan":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Ladan) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Ladan) > 0)
                             {
                                 spawnerLadan.GetComponent<SpriteRenderer>().sprite = ladanTaken;
                                 GetComponent<AudioSource>().clip = takeLadan;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceLadan, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Ladan, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Ladan, 1);
                             }
                             break;
 
                         case "ResourceEye":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Eye) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Eye) > 0)
                             {
                                 spawnerEye.GetComponent<SpriteRenderer>().sprite = eyeTaken;
                                 GetComponent<AudioSource>().clip = takeEye;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceEye, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Eye, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Eye, 1);
                             }
                             break;
 
                         case "ResourceStone":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Stone) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Stone) > 0)
                             {
                                 spawnerStone.GetComponent<SpriteRenderer>().sprite = stoneTaken;
                                 GetComponent<AudioSource>().clip = takeStone;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceStone, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Stone, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Stone, 1);
                             }
                             break;
 
                         case "ResourceSand":
-                            if (GetComponent<ResourceSystem>().GetAmount(Resource.Sand) > 0)
+                            if (GetComponent<ResourceSystem>().GetAmount(ResourceType.Sand) > 0)
                             {
                                 spawnerSand.GetComponent<SpriteRenderer>().sprite = sandTaken;
                                 GetComponent<AudioSource>().clip = takeSand;
                                 GetComponent<AudioSource>().Play();
                                 canTake = false;
                                 toDrag = Instantiate(resourceSand, pos, transform.rotation).transform;
-                                GetComponent<ResourceSystem>().RemoveResource(Resource.Sand, 1);
+                                GetComponent<ResourceSystem>().RemoveResource(ResourceType.Sand, 1);
                             }
                             break;
 
@@ -224,7 +224,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerRed.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Red, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 1);
                         canTake = true;
                     }
                     break;
@@ -234,7 +234,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerBlue.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Blue, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 1);
                         canTake = true;
                     }
                     break;
@@ -244,7 +244,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerYellow.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 1);
                         canTake = true;
                     }
                     break;
@@ -254,7 +254,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerWhite.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.White, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.White, 1);
                         canTake = true;
                     }
                     break;
@@ -264,7 +264,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerLadan.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Ladan, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Ladan, 1);
                         canTake = true;
                     }
                     break;
@@ -274,7 +274,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerEye.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Eye, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Eye, 1);
                         canTake = true;
                     }
                     break;
@@ -284,7 +284,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerStone.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Stone, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Stone, 1);
                         canTake = true;
                     }
                     break;
@@ -294,7 +294,7 @@ public class DragResources : MonoBehaviour
                     if (toDrag.position == spawnerSand.transform.position)
                     {
                         Destroy(toDrag.gameObject);
-                        GetComponent<ResourceSystem>().AddResource(Resource.Sand, 1);
+                        GetComponent<ResourceSystem>().AddResource(ResourceType.Sand, 1);
                         canTake = true;
                     }
                     break;

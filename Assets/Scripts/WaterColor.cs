@@ -16,7 +16,7 @@ public class WaterColor : MonoBehaviour
         targetColor = startColor;
     }
 
-    public void ChangeColor(List<Resource> components, bool isWrong)
+    public void ChangeColor(List<ResourceType> components, bool isWrong)
     {
         if (isWrong)
             targetColor = startColor;
@@ -28,19 +28,19 @@ public class WaterColor : MonoBehaviour
                 case 1:
                     switch (components[0])
                     {
-                        case Resource.Red:
+                        case ResourceType.Red:
                             targetColor = settings.colors[11];
                             break;
 
-                        case Resource.Blue:
+                        case ResourceType.Blue:
                             targetColor = settings.colors[12];
                             break;
 
-                        case Resource.Yellow:
+                        case ResourceType.Yellow:
                             targetColor = settings.colors[13];
                             break;
 
-                        case Resource.White:
+                        case ResourceType.White:
                             targetColor = settings.colors[14];
                             break;
 
@@ -50,36 +50,36 @@ public class WaterColor : MonoBehaviour
                     break;
 
                 case 2:
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.Blue))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.Blue))
                         targetColor = settings.colors[0];
 
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.Yellow))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.Yellow))
                         targetColor = settings.colors[1];
 
-                    if (components.Contains(Resource.Blue) && components.Contains(Resource.Yellow))
+                    if (components.Contains(ResourceType.Blue) && components.Contains(ResourceType.Yellow))
                         targetColor = settings.colors[2];
 
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[3];
 
-                    if (components.Contains(Resource.Blue) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Blue) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[5];
 
-                    if (components.Contains(Resource.Yellow) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Yellow) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[4];
                     break;
 
                 case 3:
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.Blue) && components.Contains(Resource.Yellow))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.Blue) && components.Contains(ResourceType.Yellow))
                         targetColor = settings.colors[6];
 
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.Blue) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.Blue) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[9];
 
-                    if (components.Contains(Resource.Red) && components.Contains(Resource.Yellow) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Red) && components.Contains(ResourceType.Yellow) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[8];
 
-                    if (components.Contains(Resource.Blue) && components.Contains(Resource.Yellow) && components.Contains(Resource.White))
+                    if (components.Contains(ResourceType.Blue) && components.Contains(ResourceType.Yellow) && components.Contains(ResourceType.White))
                         targetColor = settings.colors[10];
                     break;
 

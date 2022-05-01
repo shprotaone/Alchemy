@@ -75,10 +75,10 @@ public class Tutorial : MonoBehaviour
                     ToggleMessage("Твой первый клиент был добр и в помощь начинающему алхимику дал тебе немного ресурсов.");
                     break;
                 case "Твой первый клиент был добр и в помощь начинающему алхимику дал тебе немного ресурсов.":
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 5);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 5);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 5);
-                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 5);
+                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 5);
                     moneySystem.GetComponent<MoneySystem>().AddMoney(200);
                     canMove = true;
                     canOpenPopups = true;

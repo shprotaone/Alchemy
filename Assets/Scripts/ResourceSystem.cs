@@ -3,31 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum Resource
-{
-    Red,
-    Blue,
-    Yellow,
-    White,
-    Ladan,
-    Eye,
-    Stone,
-    Sand
-};
-
-public enum Rarity
-{
-    Common,
-    Rare,
-};
 
 public class ResourceData
 {
-    public Resource resourceName;
+    public ResourceType resourceName;
     public int amount;
-    public Rarity resourceRarity;
+    public ResourceRarity resourceRarity;
 
-    public ResourceData(Resource _resourceName, Rarity _resourceRarity)
+    public ResourceData(ResourceType _resourceName, ResourceRarity _resourceRarity)
     {
         resourceName = _resourceName;
         amount = 0;
@@ -76,45 +59,45 @@ public class ResourceSystem : MonoBehaviour
 
     private void Awake()
     {
-        ResourceData red = new ResourceData(Resource.Red, Rarity.Common);
+        ResourceData red = new ResourceData(ResourceType.Red, ResourceRarity.Common);
         resources.Add(red);
-        ResourceData blue = new ResourceData(Resource.Blue, Rarity.Common);
+        ResourceData blue = new ResourceData(ResourceType.Blue, ResourceRarity.Common);
         resources.Add(blue);
-        ResourceData yellow = new ResourceData(Resource.Yellow, Rarity.Common);
+        ResourceData yellow = new ResourceData(ResourceType.Yellow, ResourceRarity.Common);
         resources.Add(yellow);
-        ResourceData white = new ResourceData(Resource.White, Rarity.Common);
+        ResourceData white = new ResourceData(ResourceType.White, ResourceRarity.Common);
         resources.Add(white);
-        ResourceData ladan = new ResourceData(Resource.Ladan, Rarity.Rare);
+        ResourceData ladan = new ResourceData(ResourceType.Ladan, ResourceRarity.Rare);
         resources.Add(ladan);
-        ResourceData eye = new ResourceData(Resource.Eye, Rarity.Rare);
+        ResourceData eye = new ResourceData(ResourceType.Eye, ResourceRarity.Rare);
         resources.Add(eye);
-        ResourceData stone = new ResourceData(Resource.Stone, Rarity.Rare);
+        ResourceData stone = new ResourceData(ResourceType.Stone, ResourceRarity.Rare);
         resources.Add(stone);
-        ResourceData sand = new ResourceData(Resource.Sand, Rarity.Rare);
+        ResourceData sand = new ResourceData(ResourceType.Sand, ResourceRarity.Rare);
         resources.Add(sand);
     }
 
     private void Start()
     {
-        if (GetAmount(Resource.Red) == 0)
+        if (GetAmount(ResourceType.Red) == 0)
             platformRed.GetComponent<SpriteRenderer>().sprite = redEmpty;
-        if (GetAmount(Resource.Blue) == 0)
+        if (GetAmount(ResourceType.Blue) == 0)
             platformBlue.GetComponent<SpriteRenderer>().sprite = blueEmpty;
-        if (GetAmount(Resource.Yellow) == 0)
+        if (GetAmount(ResourceType.Yellow) == 0)
             platformYellow.GetComponent<SpriteRenderer>().sprite = yellowEmpty;
-        if (GetAmount(Resource.White) == 0)
+        if (GetAmount(ResourceType.White) == 0)
             platformWhite.GetComponent<SpriteRenderer>().sprite = whiteEmpty;
-        if (GetAmount(Resource.Ladan) == 0)
+        if (GetAmount(ResourceType.Ladan) == 0)
             platformLadan.GetComponent<SpriteRenderer>().sprite = ladanEmpty;
-        if (GetAmount(Resource.Eye) == 0)
+        if (GetAmount(ResourceType.Eye) == 0)
             platformEye.GetComponent<SpriteRenderer>().sprite = eyeEmpty;
-        if (GetAmount(Resource.Stone) == 0)
+        if (GetAmount(ResourceType.Stone) == 0)
             platformStone.GetComponent<SpriteRenderer>().sprite = stoneEmpty;
-        if (GetAmount(Resource.Sand) == 0)
+        if (GetAmount(ResourceType.Sand) == 0)
             platformSand.GetComponent<SpriteRenderer>().sprite = sandEmpty;
     }
 
-    public void AddResource(Resource resourceType, int amount)
+    public void AddResource(ResourceType resourceType, int amount)
     {
         foreach (ResourceData res in resources)
         {
@@ -124,44 +107,44 @@ public class ResourceSystem : MonoBehaviour
 
                 switch (res.resourceName)
                 {
-                    case Resource.Red:
+                    case ResourceType.Red:
                         platformRed.GetComponent<SpriteRenderer>().sprite = red;
-                        textRed.text = $"{GetAmount(Resource.Red)}";
+                        textRed.text = $"{GetAmount(ResourceType.Red)}";
                         break;
 
-                    case Resource.Blue:
+                    case ResourceType.Blue:
                         platformBlue.GetComponent<SpriteRenderer>().sprite = blue;
-                        textBlue.text = $"{GetAmount(Resource.Blue)}";
+                        textBlue.text = $"{GetAmount(ResourceType.Blue)}";
                         break;
 
-                    case Resource.Yellow:
+                    case ResourceType.Yellow:
                         platformYellow.GetComponent<SpriteRenderer>().sprite = yellow;
-                        textYellow.text = $"{GetAmount(Resource.Yellow)}";
+                        textYellow.text = $"{GetAmount(ResourceType.Yellow)}";
                         break;
 
-                    case Resource.White:
+                    case ResourceType.White:
                         platformWhite.GetComponent<SpriteRenderer>().sprite = white;
-                        textWhite.text = $"{GetAmount(Resource.White)}";
+                        textWhite.text = $"{GetAmount(ResourceType.White)}";
                         break;
 
-                    case Resource.Ladan:
+                    case ResourceType.Ladan:
                         platformLadan.GetComponent<SpriteRenderer>().sprite = ladan;
-                        textLadan.text = $"{GetAmount(Resource.Ladan)}";
+                        textLadan.text = $"{GetAmount(ResourceType.Ladan)}";
                         break;
 
-                    case Resource.Eye:
+                    case ResourceType.Eye:
                         platformEye.GetComponent<SpriteRenderer>().sprite = eye;
-                        textEye.text = $"{GetAmount(Resource.Eye)}";
+                        textEye.text = $"{GetAmount(ResourceType.Eye)}";
                         break;
 
-                    case Resource.Stone:
+                    case ResourceType.Stone:
                         platformStone.GetComponent<SpriteRenderer>().sprite = stone;
-                        textStone.text = $"{GetAmount(Resource.Stone)}";
+                        textStone.text = $"{GetAmount(ResourceType.Stone)}";
                         break;
 
-                    case Resource.Sand:
+                    case ResourceType.Sand:
                         platformSand.GetComponent<SpriteRenderer>().sprite = sand;
-                        textSand.text = $"{GetAmount(Resource.Sand)}";
+                        textSand.text = $"{GetAmount(ResourceType.Sand)}";
                         break;
 
                     default:
@@ -171,7 +154,7 @@ public class ResourceSystem : MonoBehaviour
         }
     }
 
-    public void RemoveResource(Resource resourceType, int amount)
+    public void RemoveResource(ResourceType resourceType, int amount)
     {
         foreach (ResourceData res in resources)
         {
@@ -181,52 +164,52 @@ public class ResourceSystem : MonoBehaviour
 
                 switch (res.resourceName)
                 {
-                    case Resource.Red:
-                        if (GetAmount(Resource.Red) == 0)
+                    case ResourceType.Red:
+                        if (GetAmount(ResourceType.Red) == 0)
                             platformRed.GetComponent<SpriteRenderer>().sprite = redEmpty;
-                        textRed.text = $"{GetAmount(Resource.Red)}";
+                        textRed.text = $"{GetAmount(ResourceType.Red)}";
                         break;
 
-                    case Resource.Blue:
-                        if (GetAmount(Resource.Blue) == 0)
+                    case ResourceType.Blue:
+                        if (GetAmount(ResourceType.Blue) == 0)
                             platformBlue.GetComponent<SpriteRenderer>().sprite = blueEmpty;
-                        textBlue.text = $"{GetAmount(Resource.Blue)}";
+                        textBlue.text = $"{GetAmount(ResourceType.Blue)}";
                         break;
 
-                    case Resource.Yellow:
-                        if (GetAmount(Resource.Yellow) == 0)
+                    case ResourceType.Yellow:
+                        if (GetAmount(ResourceType.Yellow) == 0)
                             platformYellow.GetComponent<SpriteRenderer>().sprite = yellowEmpty;
-                        textYellow.text = $"{GetAmount(Resource.Yellow)}";
+                        textYellow.text = $"{GetAmount(ResourceType.Yellow)}";
                         break;
 
-                    case Resource.White:
-                        if (GetAmount(Resource.White) == 0)
+                    case ResourceType.White:
+                        if (GetAmount(ResourceType.White) == 0)
                             platformWhite.GetComponent<SpriteRenderer>().sprite = whiteEmpty;
-                        textWhite.text = $"{GetAmount(Resource.White)}";
+                        textWhite.text = $"{GetAmount(ResourceType.White)}";
                         break;
 
-                    case Resource.Ladan:
-                        if (GetAmount(Resource.Ladan) == 0)
+                    case ResourceType.Ladan:
+                        if (GetAmount(ResourceType.Ladan) == 0)
                             platformLadan.GetComponent<SpriteRenderer>().sprite = ladanEmpty;
-                        textLadan.text = $"{GetAmount(Resource.Ladan)}";
+                        textLadan.text = $"{GetAmount(ResourceType.Ladan)}";
                         break;
 
-                    case Resource.Eye:
-                        if (GetAmount(Resource.Eye) == 0)
+                    case ResourceType.Eye:
+                        if (GetAmount(ResourceType.Eye) == 0)
                             platformEye.GetComponent<SpriteRenderer>().sprite = eyeEmpty;
-                        textEye.text = $"{GetAmount(Resource.Eye)}";
+                        textEye.text = $"{GetAmount(ResourceType.Eye)}";
                         break;
 
-                    case Resource.Stone:
-                        if (GetAmount(Resource.Stone) == 0)
+                    case ResourceType.Stone:
+                        if (GetAmount(ResourceType.Stone) == 0)
                             platformStone.GetComponent<SpriteRenderer>().sprite = stoneEmpty;
-                        textStone.text = $"{GetAmount(Resource.Stone)}";
+                        textStone.text = $"{GetAmount(ResourceType.Stone)}";
                         break;
 
-                    case Resource.Sand:
-                        if (GetAmount(Resource.Sand) == 0)
+                    case ResourceType.Sand:
+                        if (GetAmount(ResourceType.Sand) == 0)
                             platformSand.GetComponent<SpriteRenderer>().sprite = sandEmpty;
-                        textSand.text = $"{GetAmount(Resource.Sand)}";
+                        textSand.text = $"{GetAmount(ResourceType.Sand)}";
                         break;
 
                     default:
@@ -236,7 +219,7 @@ public class ResourceSystem : MonoBehaviour
         }
     }
 
-    public int GetAmount(Resource resourceType)
+    public int GetAmount(ResourceType resourceType)
     {
         int returnAmount = 0;
 
@@ -248,9 +231,9 @@ public class ResourceSystem : MonoBehaviour
         return returnAmount;
     }
 
-    public Rarity GetRarity(Resource resourceType)
+    public ResourceRarity GetRarity(ResourceType resourceType)
     {
-        Rarity returnRarity = Rarity.Common;
+        ResourceRarity returnRarity = ResourceRarity.Common;
 
         foreach (ResourceData res in resources)
         {

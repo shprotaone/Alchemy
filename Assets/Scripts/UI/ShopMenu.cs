@@ -23,8 +23,8 @@ public class ShopMenu : MonoBehaviour
         if (!UIControls.GetComponent<Tutorial>().mainTutorial)
         {
             buyFuel.interactable = false;
-            if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Red) == 1) buyResX1[0].interactable = false;
-            if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Blue) == 1) buyResX1[1].interactable = false;
+            if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Red) == 1) buyResX1[0].interactable = false;
+            if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Blue) == 1) buyResX1[1].interactable = false;
             return;
         }
 

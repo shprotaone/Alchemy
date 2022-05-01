@@ -4,28 +4,30 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Bottle
+  - Ingredient
+  - Bottle5
+  - BottleSpawner
+  - Bottle3
+  - Bottle7
+  - Bottle6
+  - Priest
+  - Magician
+  - TouchDetect
+  - Warrior
+  - Bottle8
+  - Bandit
+  - Bottle1
+  - Bottle4
+  - Bottle2
+  - ResourceRed
   - ResourceBlue
   - ResourceYellow
-  - ResourceRed
   - ResourceWhite
   - ResourceLadan
   - ResourceEye
   - ResourceStone
   - ResourceSand
-  - Bottle1
-  - Bottle2
-  - Bottle3
-  - Bottle4
-  - Bottle5
-  - Bottle6
-  - Bottle7
-  - Bottle8
-  - Priest
-  - Warrior
-  - Magician
-  - Bandit
-  - TouchDetect
-  - BottleSpawner
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - UI
   - 
   - 
-  - Platform
+  - Shelfs
   - Cauldron
   - Bottle
   - Resource
@@ -60,12 +62,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BG
-    uniqueID: 1417627711
-    locked: 0
-  - name: Interior
-    uniqueID: 3188050697
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Shelfs
+    uniqueID: 3120045473
     locked: 0

@@ -65,14 +65,14 @@ public class SaveData
 
         fuelCount = fuel.fuelCount;
 
-        amountRed = resourceSystem.GetAmount(Resource.Red);
-        amountBlue = resourceSystem.GetAmount(Resource.Blue);
-        amountYellow = resourceSystem.GetAmount(Resource.Yellow);
-        amountWhite = resourceSystem.GetAmount(Resource.White);
-        amountLadan = resourceSystem.GetAmount(Resource.Ladan);
-        amountEye = resourceSystem.GetAmount(Resource.Eye);
-        amountStone = resourceSystem.GetAmount(Resource.Stone);
-        amountSand = resourceSystem.GetAmount(Resource.Sand);
+        amountRed = resourceSystem.GetAmount(ResourceType.Red);
+        amountBlue = resourceSystem.GetAmount(ResourceType.Blue);
+        amountYellow = resourceSystem.GetAmount(ResourceType.Yellow);
+        amountWhite = resourceSystem.GetAmount(ResourceType.White);
+        amountLadan = resourceSystem.GetAmount(ResourceType.Ladan);
+        amountEye = resourceSystem.GetAmount(ResourceType.Eye);
+        amountStone = resourceSystem.GetAmount(ResourceType.Stone);
+        amountSand = resourceSystem.GetAmount(ResourceType.Sand);
 
         cauldronId = mixingSystem.GetCauldron();
 

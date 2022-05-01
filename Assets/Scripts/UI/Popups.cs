@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Popups : MonoBehaviour
+public class Popups : MonoBehaviour     //динамический help? 
 {
     public GameObject popupShop;
     public GameObject popupGuilds;

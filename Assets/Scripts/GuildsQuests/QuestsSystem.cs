@@ -108,10 +108,10 @@ public class QuestsSystem : MonoBehaviour
         if (firstAmount > 0 && !UIControls.GetComponent<Tutorial>().mainGame)
         {
             firstAmount = 0;
-            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(Resource.Red, resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Red));
-            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(Resource.Blue, resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Blue));
-            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(Resource.Yellow, resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Yellow));
-            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(Resource.White, resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.White));
+            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(ResourceType.Red, resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Red));
+            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(ResourceType.Blue, resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Blue));
+            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(ResourceType.Yellow, resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.Yellow));
+            resourceSystem.GetComponent<ResourceSystem>().RemoveResource(ResourceType.White, resourceSystem.GetComponent<ResourceSystem>().GetAmount(ResourceType.White));
             moneySystem.GetComponent<MoneySystem>().SpendMoney(moneySystem.GetComponent<MoneySystem>().GetMoney() - 200);
         }
     }

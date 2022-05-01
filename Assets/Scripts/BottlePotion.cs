@@ -83,7 +83,7 @@ public class BottlePotion : MonoBehaviour
         #endregion
     }
 
-    public void AddPotion(List<Resource> inCauldron, List<Resource> inCauldronColored, bool isRare, int space)
+    public void AddPotion(List<ResourceType> inCauldron, List<ResourceType> inCauldronColored, bool isRare, int space)
     {
         takenSpace = space;
 
@@ -91,13 +91,13 @@ public class BottlePotion : MonoBehaviour
         {
             foreach (var item in inCauldron)
             {
-                if (item == Resource.Ladan)
+                if (item == ResourceType.Ladan)
                     potionEffect = PotionEffect.Glowing;
-                if (item == Resource.Eye)
+                if (item == ResourceType.Eye)
                     potionEffect = PotionEffect.Boiling;
-                if (item == Resource.Stone)
+                if (item == ResourceType.Stone)
                     potionEffect = PotionEffect.Burning;
-                if (item == Resource.Sand)
+                if (item == ResourceType.Sand)
                     potionEffect = PotionEffect.Smoking;
             }
         }
@@ -107,35 +107,35 @@ public class BottlePotion : MonoBehaviour
         switch (inCauldronColored.Count)
         {
             case 2:
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue))
                     potionColor = PotionColor.Purple;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Yellow))
                     potionColor = PotionColor.Orange;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow))
                     potionColor = PotionColor.Green;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.Pink;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.LightBlue;
 
-                if (inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.Gold;
                 break;
             case 3:
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.Violet;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.Peach;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     potionColor = PotionColor.Lime;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow))
                     potionColor = PotionColor.Black;
                 break;
             case 4:

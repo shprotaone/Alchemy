@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395fac156ad6a5548a8d73290bdcdef3, type: 3}
+  m_Name: Eye
+  m_EditorClassIdentifier: 
+  ingredientName: Eye
+  mainSprite: {fileID: 21300000, guid: f68e2971c15a63940ad394028214aa98, type: 3}
+  emptySprite: {fileID: 21300000, guid: 0811cdc8a6572e249a1e06d78d38ecf6, type: 3}
+  dragableSprite: {fileID: 21300000, guid: ebc255998f786344c874834983628bbb, type: 3}
+  pressedSprite: {fileID: 21300000, guid: f63cbfa9b7fe96248a81ad96bc16bcb0, type: 3}
+  resourceType: 5
+  resourceRarity: 1
+  dragSound: {fileID: 0}
+  dropSound: {fileID: 0}

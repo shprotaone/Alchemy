@@ -86,7 +86,7 @@ public class QuestComplete : MonoBehaviour
                     guildSystem.GetComponent<QuestsSystem>().questStep = 0;
                 }
 
-                guildSystem.GetComponent<QuestsSystem>().questStep++;
+                guildSystem.GetComponent<QuestsSystem>().questStep++;       //квесты разбиты на шаги? 
 
                 collision.GetComponent<BottlePotion>().justGiven = true;
                 collision.transform.Find("Water").GetComponent<SpriteRenderer>().color = Color.white;
@@ -94,7 +94,7 @@ public class QuestComplete : MonoBehaviour
                 collision.GetComponent<BottlePotion>().potionColor = PotionColor.Empty;
                 collision.GetComponent<BottlePotion>().potionEffect = PotionEffect.Empty;
 
-                switch (collision.tag)
+                switch (collision.tag)      //Выбор бутылки? 
                 {
                     case "Bottle1":
                         potionSystem.GetComponent<PotionSystem>().SetColor(0, PotionColor.Empty);
@@ -141,7 +141,8 @@ public class QuestComplete : MonoBehaviour
                 }
 
                 haveQuest = false;
-                switch (tag)
+
+                switch (tag)        //выдача заказа в зависимости от типа гильдии
                 {
                     case "Warrior":
                         moneySystem.GetComponent<MoneySystem>().AddMoney(reward);
@@ -228,16 +229,16 @@ public class QuestComplete : MonoBehaviour
                             switch (Random.Range(0,3))
                             {
                                 case 0:
-                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 1);
+                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 1);
                                     break;
                                 case 1:
-                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 1);
+                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 1);
                                     break;
                                 case 2:
-                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 1);
+                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 1);
                                     break;
                                 case 3:
-                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 1);
+                                    resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 1);
                                     break;
                                 default:
                                     break;

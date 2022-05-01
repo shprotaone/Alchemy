@@ -21,39 +21,13 @@ public class MixingSystem : MonoBehaviour
     public GameObject UIControls;
     public GameObject table;
 
-    public GameObject platformRed;
-    public GameObject platformBlue;
-    public GameObject platformYellow;
-    public GameObject platformWhite;
-    public GameObject platformLadan;
-    public GameObject platformEye;
-    public GameObject platformStone;
-    public GameObject platformSand;
-
-    public Sprite red;
-    public Sprite redEmpty;
-    public Sprite blue;
-    public Sprite blueEmpty;
-    public Sprite yellow;
-    public Sprite yellowEmpty;
-    public Sprite white;
-    public Sprite whiteEmpty;
-    public Sprite ladan;
-    public Sprite ladanEmpty;
-    public Sprite eye;
-    public Sprite eyeEmpty;
-    public Sprite stone;
-    public Sprite stoneEmpty;
-    public Sprite sand;
-    public Sprite sandEmpty;
-
     public Sprite tableOff;
     public Sprite tableOn;
 
     public Potions[] potions;
 
-    public List<Resource> inCauldron;
-    public List<Resource> inCauldronColored;
+    public List<ResourceType> inCauldron;
+    public List<ResourceType> inCauldronColored;
 
     public Cauldrons[] cauldrons;
 
@@ -127,113 +101,7 @@ public class MixingSystem : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        #region Добавление ресурса в котел
-        switch (collision.transform.tag)
-        {
-            case "ResourceRed":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Red) > 0)
-                    platformRed.GetComponent<SpriteRenderer>().sprite = red;
-                else platformRed.GetComponent<SpriteRenderer>().sprite = redEmpty;
-                if (inCauldron.Contains(Resource.Red))
-                    isWrong = true;
-                inCauldron.Add(Resource.Red);
-                inCauldronColored.Add(Resource.Red);
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Red) == 0 && !helpButton.interactable)
-                {
-                    UIControls.GetComponent<Tutorial>().helpStep = 4;
-                    UIControls.GetComponent<Tutorial>().GetHelp();
-                }
-                break;
-
-            case "ResourceBlue":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Blue) > 0)
-                    platformBlue.GetComponent<SpriteRenderer>().sprite = blue;
-                else platformBlue.GetComponent<SpriteRenderer>().sprite = blueEmpty;
-                if (inCauldron.Contains(Resource.Blue))
-                    isWrong = true;
-                inCauldron.Add(Resource.Blue);
-                inCauldronColored.Add(Resource.Blue);
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Blue) == 0 && !helpButton.interactable)
-                {
-                    UIControls.GetComponent<Tutorial>().helpStep = 4;
-                    UIControls.GetComponent<Tutorial>().GetHelp();
-                }
-                break;
-
-            case "ResourceYellow":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Yellow) > 0)
-                    platformYellow.GetComponent<SpriteRenderer>().sprite = yellow;
-                else platformYellow.GetComponent<SpriteRenderer>().sprite = yellowEmpty;
-                if (inCauldron.Contains(Resource.Yellow))
-                    isWrong = true;
-                inCauldron.Add(Resource.Yellow);
-                inCauldronColored.Add(Resource.Yellow);
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Yellow) == 0 && !helpButton.interactable)
-                {
-                    UIControls.GetComponent<Tutorial>().helpStep = 4;
-                    UIControls.GetComponent<Tutorial>().GetHelp();
-                }
-                break;
-
-            case "ResourceWhite":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.White) > 0)
-                    platformWhite.GetComponent<SpriteRenderer>().sprite = white;
-                else platformWhite.GetComponent<SpriteRenderer>().sprite = whiteEmpty;
-                if (inCauldron.Contains(Resource.White))
-                    isWrong = true;
-                inCauldron.Add(Resource.White);
-                inCauldronColored.Add(Resource.White);
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.White) == 0 && !helpButton.interactable)
-                {
-                    UIControls.GetComponent<Tutorial>().helpStep = 4;
-                    UIControls.GetComponent<Tutorial>().GetHelp();
-                }
-                break;
-
-            case "ResourceLadan":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Ladan) > 0)
-                    platformLadan.GetComponent<SpriteRenderer>().sprite = ladan;
-                else platformLadan.GetComponent<SpriteRenderer>().sprite = ladanEmpty;
-                if (isRare)
-                    isWrong = true;
-                inCauldron.Add(Resource.Ladan);
-                isRare = true;
-                break;
-
-            case "ResourceEye":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Eye) > 0)
-                    platformEye.GetComponent<SpriteRenderer>().sprite = eye;
-                else platformEye.GetComponent<SpriteRenderer>().sprite = eyeEmpty;
-                if (isRare)
-                    isWrong = true;
-                inCauldron.Add(Resource.Eye);
-                isRare = true;
-                break;
-
-            case "ResourceStone":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Stone) > 0)
-                    platformStone.GetComponent<SpriteRenderer>().sprite = stone;
-                else platformStone.GetComponent<SpriteRenderer>().sprite = stoneEmpty;
-                if (isRare)
-                    isWrong = true;
-                inCauldron.Add(Resource.Stone);
-                isRare = true;
-                break;
-
-            case "ResourceSand":
-                if (resourceSystem.GetComponent<ResourceSystem>().GetAmount(Resource.Sand) > 0)
-                    platformSand.GetComponent<SpriteRenderer>().sprite = sand;
-                else platformSand.GetComponent<SpriteRenderer>().sprite = sandEmpty;
-                if (isRare)
-                    isWrong = true;
-                inCauldron.Add(Resource.Sand);
-                isRare = true;
-                break;
-
-            default:
-                break;
-        }
-        #endregion
+       
 
         water.GetComponent<WaterColor>().ChangeColor(inCauldronColored, isWrong);
         waterBoil.GetComponent<WaterColor>().ChangeColor(inCauldronColored, isWrong);
@@ -580,36 +448,36 @@ public class MixingSystem : MonoBehaviour
             {
                 switch (item)
                 {
-                    case Resource.Red:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Red, 1);
+                    case ResourceType.Red:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Red, 1);
                         break;
 
-                    case Resource.Blue:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Blue, 1);
+                    case ResourceType.Blue:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Blue, 1);
                         break;
 
-                    case Resource.Yellow:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Yellow, 1);
+                    case ResourceType.Yellow:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Yellow, 1);
                         break;
 
-                    case Resource.White:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.White, 1);
+                    case ResourceType.White:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.White, 1);
                         break;
 
-                    case Resource.Ladan:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Ladan, 1);
+                    case ResourceType.Ladan:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Ladan, 1);
                         break;
 
-                    case Resource.Eye:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Eye, 1);
+                    case ResourceType.Eye:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Eye, 1);
                         break;
 
-                    case Resource.Stone:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Stone, 1);
+                    case ResourceType.Stone:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Stone, 1);
                         break;
 
-                    case Resource.Sand:
-                        resourceSystem.GetComponent<ResourceSystem>().AddResource(Resource.Sand, 1);
+                    case ResourceType.Sand:
+                        resourceSystem.GetComponent<ResourceSystem>().AddResource(ResourceType.Sand, 1);
                         break;
 
                     default:
@@ -688,13 +556,13 @@ public class MixingSystem : MonoBehaviour
     {
         foreach (var item in inCauldron)
         {
-            if (item==Resource.Ladan)
+            if (item==ResourceType.Ladan)
                 return PotionEffect.Glowing;
-            if (item == Resource.Eye)
+            if (item == ResourceType.Eye)
                 return PotionEffect.Boiling;
-            if (item == Resource.Stone)
+            if (item == ResourceType.Stone)
                 return PotionEffect.Burning;
-            if (item == Resource.Sand)
+            if (item == ResourceType.Sand)
                 return PotionEffect.Smoking;
         }
         return PotionEffect.Normal;
@@ -705,36 +573,36 @@ public class MixingSystem : MonoBehaviour
         switch (inCauldronColored.Count)
         {
             case 2:
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue))
                     return PotionColor.Purple;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Yellow))
                     return PotionColor.Orange;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow))
                     return PotionColor.Green;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.Pink;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.LightBlue;
 
-                if (inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.Gold;
                 break;
 
             case 3:
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.Violet;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.Peach;
 
-                if (inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow) && inCauldronColored.Contains(Resource.White))
+                if (inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow) && inCauldronColored.Contains(ResourceType.White))
                     return PotionColor.Lime;
 
-                if (inCauldronColored.Contains(Resource.Red) && inCauldronColored.Contains(Resource.Blue) && inCauldronColored.Contains(Resource.Yellow))
+                if (inCauldronColored.Contains(ResourceType.Red) && inCauldronColored.Contains(ResourceType.Blue) && inCauldronColored.Contains(ResourceType.Yellow))
                     return PotionColor.Black;
                 break;
 
