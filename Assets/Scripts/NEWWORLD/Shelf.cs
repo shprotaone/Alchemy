@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Shelf : MonoBehaviour
 {
+    [SerializeField] private GameObject _dragableParent;
     [SerializeField] private IngredientData[] _ingredients;
 
     private Slot[] _slots;

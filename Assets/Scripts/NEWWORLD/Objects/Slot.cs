@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Slot : MonoBehaviour,IBeginDragHandler,IDragHandler
+public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
 {
     private Image _slotImage;
     private InitShelfs _initShelfs;
@@ -22,15 +22,15 @@ public class Slot : MonoBehaviour,IBeginDragHandler,IDragHandler
         _amountText = GetComponentInChildren<TMP_Text>();
 
         _ingredientData = ingredientData;
-        _slotImage.sprite = ingredientData.mainSprite;       
+        _slotImage.sprite = ingredientData.mainSprite;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         GameObject ingredientGO = Instantiate(_initShelfs.CurrentPrefab, this.transform);
-        ingredientGO.GetComponent<Ingredient>().IngredientData = _ingredientData;
+
+        ingredientGO.GetComponent<Ingredient>().IngredientData = _ingredientData;        
         eventData.pointerDrag = ingredientGO;
-        eventData.pointerEnter = null;
     }
 
     public void OnDrag(PointerEventData eventData)

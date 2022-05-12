@@ -8,8 +8,15 @@ public class Bottle : MonoBehaviour
     [SerializeField] private Image _fullBottle;
 
     private bool _isFull;
+    private CanvasGroup _canvasGroup;
 
     public bool IsFull => _isFull;
+
+    private void Start()
+    {
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvasGroup.blocksRaycasts = true;
+    }
 
     public void FillBottle(Color color)
     {

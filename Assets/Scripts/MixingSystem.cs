@@ -125,7 +125,7 @@ public class MixingSystem : MonoBehaviour
         if (!isRare && inCauldron.Count < 2 || isRare && inCauldron.Count < 3)
             isWrong = true;
 
-        time = TimeCalc();
+        time = TimeCalc();      //время, за которое варится
         startTime = time;
         brewButton.interactable = false;
         showTimer = true;
@@ -510,7 +510,7 @@ public class MixingSystem : MonoBehaviour
                 new Vector4(waterBoil.GetComponent<SpriteRenderer>().color.r, waterBoil.GetComponent<SpriteRenderer>().color.g, waterBoil.GetComponent<SpriteRenderer>().color.b, 0), 0.02f);
         }
 
-        if (showTimer)
+        if (showTimer)                              //показывает процесс варки
         {
             time -= Time.deltaTime * curSpeed;
             if (slowCooldown)

@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Ladan
   m_EditorClassIdentifier: 
   ingredientName: Ladan
+  isRareIngredient: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
   mainSprite: {fileID: 21300000, guid: b14c9690d57f2524d889187fe822191b, type: 3}
   emptySprite: {fileID: 21300000, guid: f927ec993927b7e4f8eb916b8b60f28e, type: 3}
   dragableSprite: {fileID: 21300000, guid: a819499cf506a444682c598fc8c0ef27, type: 3}
   pressedSprite: {fileID: 21300000, guid: 8dc76c988007773418d084d5b27343e3, type: 3}
   resourceType: 4
   resourceRarity: 1
-  amount: 0
+  dragSound: {fileID: 0}
+  dropSound: {fileID: 0}

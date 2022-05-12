@@ -9,16 +9,25 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
     private const string bottleTag = "Bottle";
     private const string ingredientTag = "Ingredient";
 
-    [SerializeField] private WaterColorv2 _waterColor;
+    public delegate void RefreshCountIngredient();
+    public RefreshCountIngredient _refreshDelegate;
+
     [SerializeField] private List<Ingredient> _ingredients;
+
+    private WaterColorv2 _waterColor;
+    private Cook _cookSystem;
+
+    public List<Ingredient> Ingredients => _ingredients;
 
     private void Start()
     {
         _waterColor = GetComponentInChildren<WaterColorv2>();
+        _cookSystem = GetComponent<Cook>();
     }
+
     public void OnDrop(PointerEventData eventData)
     {
-        if (CheckIngredient(eventData.pointerDrag.gameObject))
+        if (CheckIngredientIn(eventData.pointerDrag.gameObject))
         {
             print("its a ingredient");
         }
@@ -40,20 +49,22 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
         return colors;
     }
 
-    private void CheckFullColorCapacity(Ingredient ingredient)
+    private void CheckFullColorCapacity(Ingredient ingredient)  //возможно разбить? 
     {
         if (_ingredients.Count < maxMixColor)
         {
             _ingredients.Add(ingredient);
+            _refreshDelegate.Invoke();
             _waterColor.ColorWater(MixColor());
         }
         else
         {
-            _ingredients.Clear();
-            _waterColor.SetColor(Color.white);
+            ClearMixSystem();            
         }
     }
-    private bool CheckIngredient(GameObject curentObject)
+
+
+    public bool CheckIngredientIn(GameObject curentObject)
     {
         if (curentObject.CompareTag(ingredientTag))
         {
@@ -62,7 +73,6 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
             CheckFullColorCapacity(currentIngredient);
 
             currentIngredient.DestroyIngredient();
-
             
             return true;
         }
@@ -71,16 +81,27 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
             return false;
         }
     }
+
     private bool CheckBottle(GameObject currentObject)
     {
         if (currentObject.CompareTag(bottleTag))
         {
+            if(_cookSystem.CanFillBottle)
             currentObject.GetComponent<Bottle>().FillBottle(_waterColor.ResultColor);
+            else { print("NotComplete"); }
+
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    public void ClearMixSystem()
+    {
+        _ingredients.Clear();
+        _refreshDelegate.Invoke();
+        _waterColor.SetColor(Color.white);
     }
 }
