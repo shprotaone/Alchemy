@@ -10,7 +10,7 @@ public class RecipesMenu : MonoBehaviour
     public GameObject content;
     public GameObject UIControls;
     public Settings settings;
-    public Potion[] potions;
+    public Potionv1[] potions;
 
     public Sprite burning;
     public Sprite smoking;
@@ -20,7 +20,7 @@ public class RecipesMenu : MonoBehaviour
     public bool[] addedArr = new bool[55];
     public bool pass = false;
 
-    public void AddPotionData(Potion potion)
+    public void AddPotionData(Potionv1 potion)
     {
         if (!addedArr[potion.id] || pass)
         {

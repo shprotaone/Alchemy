@@ -24,7 +24,7 @@ public class MixingSystem : MonoBehaviour
     public Sprite tableOff;
     public Sprite tableOn;
 
-    public Potion[] potions;
+    public Potionv1[] potions;
 
     public List<ResourceType> inCauldron;
     public List<ResourceType> inCauldronColored;

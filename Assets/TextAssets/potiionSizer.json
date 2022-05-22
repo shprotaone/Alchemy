@@ -1,0 +1,499 @@
+{
+ "Potion": [
+ {
+   "number": 1,
+   "name": "Золотой",
+   "firstIngredient": "Yellow",
+   "secondIngredient": "White",
+   "threeIngredient": "*",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 2,
+   "name": "золотой светящийся",
+   "firstIngredient": "Yellow",
+   "secondIngredient": "White",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 3,
+   "name": "золотой бурлящий",
+   "firstIngredient": "Yellow",
+   "secondIngredient": "White",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 4,
+   "name": "золотой горение",
+   "firstIngredient": "Yellow",
+   "secondIngredient": "White",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 5,
+   "name": "золотой дым",
+   "firstIngredient": "Yellow",
+   "secondIngredient": "White",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 6,
+   "name": "фиолетовый",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "*",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 7,
+   "name": "оранжевый",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "*",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 8,
+   "name": "сиреневый",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "White",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 9,
+   "name": "ярко-оранжевый",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 10,
+   "name": "розовый",
+   "firstIngredient": "Red",
+   "secondIngredient": "White",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 11,
+   "name": "фиолетовый светящийся",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 12,
+   "name": "оранжевый светящийся",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 13,
+   "name": "сиреневый светящийся",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "White",
+   "fourIngredient": "Ladan",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 14,
+   "name": "светло-оранжевый светящийся",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Ladan",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 15,
+   "name": "розовый светящийся",
+   "firstIngredient": "Red",
+   "secondIngredient": "White",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 16,
+   "name": "фиолетовый бурлящий",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 17,
+   "name": "оранжевый бурлящий",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 18,
+   "name": "сиреневый бурлящий",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "White",
+   "fourIngredient": "Eye",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 19,
+   "name": "светло-оранжевый бурлящий",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Eye",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 20,
+   "name": "розовый бурлящий",
+   "firstIngredient": "Red",
+   "secondIngredient": "White",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 21,
+   "name": "фиолетовый горение",
+   "firstIngredient": "Red",
+   "secondIngredient": " Blue",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 22,
+   "name": "оранжевый горение",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 23,
+   "name": "сиреневый горение",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "White",
+   "fourIngredient": "Stone",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 24,
+   "name": "светло-оранжевый горение",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Stone",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 25,
+   "name": "розовый горение",
+   "firstIngredient": "Red",
+   "secondIngredient": "White",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 26,
+   "name": "фиолетовый дым",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 27,
+   "name": "оранжевый дым",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 28,
+   "name": "сиреневый дым",
+   "firstIngredient": "Red",
+   "secondIngredient": "Blue",
+   "threeIngredient": "White",
+   "fourIngredient": "Sand",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 29,
+   "name": "светло-оранжевый дым",
+   "firstIngredient": "Red",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Sand",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 30,
+   "name": "розовый дым",
+   "firstIngredient": "Red",
+   "secondIngredient": "White",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 31,
+   "name": "зеленый",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "*",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 32,
+   "name": "светло-зеленый",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 33,
+   "name": "голубой",
+   "firstIngredient": "Blue",
+   "secondIngredient": "White",
+   "threeIngredient": "*",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 34,
+   "name": "зеленый светящийся",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 35,
+   "name": "светло-зеленый светящийся",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Ladan",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 36,
+   "name": "голубой светящийся",
+   "firstIngredient": "Blue",
+   "secondIngredient": "White",
+   "threeIngredient": "Ladan",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 37,
+   "name": "зеленый бурлящий",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 38,
+   "name": "светло-зеленый бурлящий",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Eye",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 39,
+   "name": "голубой бурлящий",
+   "firstIngredient": "Blue",
+   "secondIngredient": "White",
+   "threeIngredient": "Eye",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 40,
+   "name": "зеленый горение",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 41,
+   "name": "светло-зеленый горение",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Stone",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 42,
+   "name": "голубой горение",
+   "firstIngredient": "Blue",
+   "secondIngredient": "White",
+   "threeIngredient": "Stone",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 43,
+   "name": "зеленый дым",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 44,
+   "name": "светло-зеленый дым",
+   "firstIngredient": "Blue",
+   "secondIngredient": "Yellow",
+   "threeIngredient": "White",
+   "fourIngredient": "Sand",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 45,
+   "name": "голубой дым",
+   "firstIngredient": "Blue",
+   "secondIngredient": "White",
+   "threeIngredient": "Sand",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 46,
+   "name": "черный",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "*",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 47,
+   "name": "серый",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Color",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 48,
+   "name": "черный светящийся",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Ladan",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 49,
+   "name": "серый светящийся",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Color",
+   "fiveIngredient": "Ladan"
+ },
+ {
+   "number": 50,
+   "name": "черный бурлящий",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Eye",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 51,
+   "name": "серый бурлящий",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Color",
+   "fiveIngredient": "Eye"
+ },
+ {
+   "number": 52,
+   "name": "черный горение",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Stone",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 53,
+   "name": "серый горение",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Color",
+   "fiveIngredient": "Stone"
+ },
+ {
+   "number": 54,
+   "name": "черный дым",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Sand",
+   "fiveIngredient": "*"
+ },
+ {
+   "number": 55,
+   "name": "серый дым",
+   "firstIngredient": "Color",
+   "secondIngredient": "Color",
+   "threeIngredient": "Color",
+   "fourIngredient": "Color",
+   "fiveIngredient": "Sand"
+ }
+]
+}

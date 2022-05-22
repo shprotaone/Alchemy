@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Potion : ScriptableObject
+public class Potionv1 : ScriptableObject
 {
     public Sprite imageBottle;
     public Sprite imageWater;
