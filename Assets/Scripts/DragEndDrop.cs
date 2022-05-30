@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using System.Collections;
 
 public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
-    private float _moveSpeed = 2;
+    private float _moveSpeed = 3;
 
     private Vector2 _startPosition;
-    private Vector2 _endPosition;
+    private Vector2 _completeBottlePosition;
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
 
@@ -15,17 +16,13 @@ public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDrag
     {        
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
-    }
 
-    private void Update()
-    {
-        _endPosition = _rectTransform.anchoredPosition;
-        DestroyObj();
+        DOTween.SetTweensCapacity(1250, 50);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _startPosition = this.transform.position;
+        _startPosition = _rectTransform.anchoredPosition;
         _canvasGroup.blocksRaycasts = false;
     }
 
@@ -36,7 +33,6 @@ public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        print("End " + _startPosition);
         CheckObjectType(eventData);
         _canvasGroup.blocksRaycasts = true;
     }
@@ -45,26 +41,76 @@ public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDrag
     {
         if (eventData.pointerEnter.GetComponentInParent<MixingSystemv2>())
         {
-            print("Ingredient");
-            eventData.pointerEnter.GetComponentInParent<MixingSystemv2>().CheckIngredientIn(this.gameObject);
+            MixingSystemv2 _mixingSystem = eventData.pointerEnter.GetComponentInParent<MixingSystemv2>();
+
+            bool complete = _mixingSystem.BottleFilled;
+            
+            if (!complete)
+            {
+                StartCoroutine(ReplaceBottle(_startPosition));
+            }
+            else
+            {
+                _completeBottlePosition = _mixingSystem.CompleteTable;
+                StartCoroutine(ReplaceBottle(_completeBottlePosition));
+            }           
         }
-        else if (eventData.pointerEnter.GetComponent<Bottle>())
+        else if (this.gameObject.GetComponent<Bottle>())
         {
-            print("Bottle");
+            StartCoroutine(ReplaceBottle(_startPosition));
+        }
+        else if (eventData.pointerEnter.GetComponentInChildren<Task>())
+        {
+            Task task = eventData.pointerEnter.GetComponentInChildren<Task>();
+            task.ChekResult(this.GetComponent<Bottle>().PotionInBottle);
+            
         }
         else if (this.gameObject.GetComponent<Ingredient>())
-        {           
-            _rectTransform.DOAnchorPos(_startPosition, _moveSpeed, false);            //возврат на место
+        {
+            Ingredient ingredient = GetComponent<Ingredient>();
+                        
+            StartCoroutine(ReplaceIngredient(ingredient));            
         }
     }
-
-    private void DestroyObj()
+    /// <summary>
+    /// Возврат ингредиентов
+    /// </summary>
+    /// <param name="ingredient"></param>
+    /// <returns></returns>
+    private IEnumerator ReplaceIngredient(Ingredient ingredient)
     {
-        float distance = Vector2.Distance(_startPosition, _endPosition);
+        float distance = Vector2.Distance(this._rectTransform.anchoredPosition, _startPosition);
 
-        if( distance < 0.01 && distance != 0)
+        while (distance > 10)
         {
-            Destroy(this.gameObject);
+            _rectTransform.DOAnchorPos(_startPosition, _moveSpeed, false);
+
+            yield return new WaitForEndOfFrame();
+            distance = Vector2.Distance(this._rectTransform.anchoredPosition, _startPosition);
         }
+
+        ingredient.Slot.IncreaseAmount(1);
+        Destroy(this.gameObject);
+
+        yield return null;
+    }
+    /// <summary>
+    /// Возврат бутылок
+    /// </summary>
+    /// <param name="endPosition"></param>
+    /// <returns></returns>
+    private IEnumerator ReplaceBottle(Vector2 endPosition)      //добавить присвоение родителя к столу
+    {
+        float distance = Vector2.Distance(_rectTransform.anchoredPosition, endPosition);
+
+        while (distance > 10)
+        {
+            _rectTransform.DOAnchorPos(endPosition, _moveSpeed, false);
+
+            yield return new WaitForEndOfFrame();
+            distance = Vector2.Distance(_rectTransform.anchoredPosition, endPosition);
+        }
+
+        yield return null;
     }
 }

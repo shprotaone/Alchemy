@@ -11,7 +11,7 @@ public class Visitor : MonoBehaviour
 
     private Task _currentTask;
 
-    private void Start()
+    private void Awake()
     {
         _currentTask = GetComponentInChildren<Task>();
         _visitorImages = GetComponentsInChildren<Image>();
@@ -26,12 +26,18 @@ public class Visitor : MonoBehaviour
         {
             ChangeAlphaColor(0, item);
         }
+
+        _currentTask.InitTask();
     }
 
-    public void StartFading()
-    {
-        _currentTask.InitTask();
+    public void Rising()
+    {       
         StartCoroutine(Rise());
+    }
+
+    public void Fading()
+    {
+        StartCoroutine(Fade());
     }
 
     private IEnumerator Rise()
@@ -50,6 +56,26 @@ public class Visitor : MonoBehaviour
             
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    private IEnumerator Fade()
+    {
+        for (float i = 1; i >= 0.05f; i -= 0.05f)
+        {
+            foreach (var item in _visitorImages)
+            {
+                ChangeAlphaColor(i, item);
+            }
+
+            foreach (var item in _taskText)
+            {
+                ChangeAlphaColor(i, item);
+            }
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        this.gameObject.SetActive(false);
     }
 
     private void ChangeAlphaColor(float value,Image image)

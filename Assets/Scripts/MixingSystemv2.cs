@@ -12,12 +12,20 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
     public delegate void RefreshCountIngredient();
     public RefreshCountIngredient _refreshDelegate;
 
+    [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private List<Ingredient> _ingredients;
+    [SerializeField] private RectTransform _completeTable;
 
-    private WaterColorv2 _waterColor;
+    private WaterColorv2 _waterColor;    
+    private PotionData _resultPotion;
     private Cook _cookSystem;
 
+    private bool _bottleFilled;
+
     public List<Ingredient> Ingredients => _ingredients;
+    public PotionData ResultPotion => _resultPotion;
+    public Vector2 CompleteTable => _completeTable.anchoredPosition;
+    public bool BottleFilled => _bottleFilled;
 
     private void Start()
     {
@@ -86,14 +94,27 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
     {
         if (currentObject.CompareTag(bottleTag))
         {
-            if(_cookSystem.CanFillBottle)
-            currentObject.GetComponent<Bottle>().FillBottle(_waterColor.ResultColor);
-            else { print("NotComplete"); }
+            if (_cookSystem.CanFillBottle)
+            {
+                Bottle bottle = currentObject.GetComponent<Bottle>();
+
+                bottle.FillBottle(_waterColor.ResultColor);
+
+                _resultPotion = _potionDetector.FillCurrentPotion(_ingredients);
+                bottle.FillPotionInBottle(_resultPotion);
+                _bottleFilled = true;
+            }
+            else
+            {
+                print("NotComplete");
+                _bottleFilled = false;
+            }
 
             return true;
         }
         else
         {
+            _bottleFilled = false;
             return false;
         }
     }

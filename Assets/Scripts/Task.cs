@@ -12,11 +12,13 @@ public class Task : MonoBehaviour
     [SerializeField] private Image _firstIngredient;
     [SerializeField] private Image _secondIngredient;
 
+    private PotionData _currentPotion;
     private int _reward;
 
     public void InitTask()
     {
         _taskSystem.TakeTask(this);
+        _currentPotion = _taskSystem.CurrentPotion;
     }
 
     public void FillTask(string potionName, int reward)
@@ -36,9 +38,20 @@ public class Task : MonoBehaviour
         _rewardText.text = reward.ToString();
     }
 
-    public void ChekResult()
+    public void ChekResult(PotionData potion)
     {
-
+        if (_currentPotion.Ingredients == potion.Ingredients)
+        {
+            print("Need " + _currentPotion.name);
+            print("In Bottle " + potion.name);
+            _taskSystem.TaskComplete(_reward);            
+        }
+        else
+        {
+            print("Wrong");
+            print("Need " + _currentPotion.name);
+            print("In Bottle " + potion.name);
+        }
     }
     
 }

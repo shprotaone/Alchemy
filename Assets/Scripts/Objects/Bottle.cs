@@ -10,7 +10,10 @@ public class Bottle : MonoBehaviour
     private bool _isFull;
     private CanvasGroup _canvasGroup;
 
+    private PotionData _potionInBottle;
+
     public bool IsFull => _isFull;
+    public PotionData PotionInBottle => _potionInBottle;
 
     private void Start()
     {
@@ -23,6 +26,12 @@ public class Bottle : MonoBehaviour
         _fullBottle.enabled = true;
         _fullBottle.color = color;
         _isFull = true;
+
+    }
+
+    public void FillPotionInBottle(PotionData potion)
+    {
+        _potionInBottle = potion;
     }
 
 }

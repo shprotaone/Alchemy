@@ -8,7 +8,7 @@ public class PotionDetector : MonoBehaviour
 
     [SerializeField] private MixingSystemv2 _mixingSystem;
     [SerializeField] private JSONReader _jsonReader;
-    [SerializeField] private Potion _currentPotion;
+    [SerializeField] private PotionData _currentPotion;
 
     private PotionSizer _potionSizer;    
     private Ingredient[] _currentIngredients;
@@ -18,39 +18,36 @@ public class PotionDetector : MonoBehaviour
         _potionSizer = _jsonReader._potionSizer;       
     }
 
-    public void FindActivator()
-    {
-        FillCurrentPotion();
-        FindPotion();
-    }
-
-    private void FillCurrentPotion()
+    public PotionData FillCurrentPotion(List<Ingredient> ingredients)
     {
         _currentIngredients = new Ingredient[maxIngredients];
 
-        for (int i = 0; i < _mixingSystem.Ingredients.Count; i++)
+        for (int i = 0; i < ingredients.Count; i++)
         {
-            _currentIngredients[i] = _mixingSystem.Ingredients[i];
+            _currentIngredients[i] = ingredients[i];
         }
 
         _currentPotion.FillPotion(_currentIngredients);
+        FindPotion();
+
+        return _currentPotion;
     }
 
     private void FindPotion() //открыт вопрос с универсальными цветами
     {
-        for (int i = 0; i < _potionSizer.Potion.Length; i++)
+        for (int i = 0; i < _potionSizer.Potions.Length; i++)
         {
-            if(_currentPotion.firstIngredient == _potionSizer.Potion[i].firstIngredient)
+            if(_currentPotion.firstIngredient == _potionSizer.Potions[i].firstIngredient)
             {
-                if(_currentPotion.secondIngredient == _potionSizer.Potion[i].secondIngredient)
+                if(_currentPotion.secondIngredient == _potionSizer.Potions[i].secondIngredient)
                 {
-                    if(_currentPotion.threeIngredient == _potionSizer.Potion[i].threeIngredient)
+                    if(_currentPotion.threeIngredient == _potionSizer.Potions[i].threeIngredient)
                     {
-                        if(_currentPotion.fourIngredient == _potionSizer.Potion[i].fourIngredient)
+                        if(_currentPotion.fourIngredient == _potionSizer.Potions[i].fourIngredient)
                         {
-                            if(_currentPotion.fiveIngredient == _potionSizer.Potion[i].fiveIngredient)
+                            if(_currentPotion.fiveIngredient == _potionSizer.Potions[i].fiveIngredient)
                             {
-                                print(_potionSizer.Potion[i].name);
+                                _currentPotion = _potionSizer.Potions[i];
                             }
                             else
                             {
