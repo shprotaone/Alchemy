@@ -17,6 +17,7 @@ public class Claudron : MonoBehaviour
         _mixingSystem = GetComponent<MixingSystemv2>();
 
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
+
         _mixingSystem._refreshDelegate += ClaudronButtonState;
     }
 

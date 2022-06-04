@@ -70,7 +70,7 @@ public class PotionSystem : MonoBehaviour
         bottles.Add(bottle8);
     }
 
-    public void ChangePotion(PotionColor color, PotionEffect effect, GameObject bottle)
+    public void ChangePotion(PotionColor color, PotionEffect effect, UnityEngine.GameObject bottle)
     {
         #region сверка с текущей бутылкой? 
         switch (bottle.tag)

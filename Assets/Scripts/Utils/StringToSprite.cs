@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StringToSprite : MonoBehaviour
 {
     [SerializeField] private IngredientData[] _ingredients;
+
     public Sprite ParseStringToSprite(string name)
     {
         switch (name)
@@ -25,7 +27,24 @@ public class StringToSprite : MonoBehaviour
                 return _ingredients[6].mainSprite;
             case "Stone":
                 return _ingredients[7].mainSprite;
+            case "*":
+                return null;
         }
         return null;
+    }
+
+    public string[] GetNameIngredients(string first,string second,string third,string four,string five)
+    {
+        string[] ingredients = new string[5];
+
+        ingredients[0] = first;
+        ingredients[1] = second;
+        ingredients[2] = third;
+        ingredients[3] = four;
+        ingredients[4] = five;
+
+        return ingredients;
+
+
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IronBark
   m_EditorClassIdentifier: 
   ingredientName: IronBark
+  cost: 100
   isRareIngredient: 0
   color: {r: 1, g: 0, b: 0, a: 1}
   mainSprite: {fileID: 21300000, guid: 8c8256e7b1c192548b53fab0eed191d4, type: 3}

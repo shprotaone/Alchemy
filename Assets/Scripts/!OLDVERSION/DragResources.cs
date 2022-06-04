@@ -7,23 +7,23 @@ public class DragResources : MonoBehaviour
 {
     public Camera cam;
 
-    public GameObject resourceRed;
-    public GameObject resourceBlue;
-    public GameObject resourceYellow;
-    public GameObject resourceWhite;
-    public GameObject resourceLadan;
-    public GameObject resourceEye;
-    public GameObject resourceStone;
-    public GameObject resourceSand;
+    public UnityEngine.GameObject resourceRed;
+    public UnityEngine.GameObject resourceBlue;
+    public UnityEngine.GameObject resourceYellow;
+    public UnityEngine.GameObject resourceWhite;
+    public UnityEngine.GameObject resourceLadan;
+    public UnityEngine.GameObject resourceEye;
+    public UnityEngine.GameObject resourceStone;
+    public UnityEngine.GameObject resourceSand;
 
-    public GameObject spawnerRed;
-    public GameObject spawnerBlue;
-    public GameObject spawnerYellow;
-    public GameObject spawnerWhite;
-    public GameObject spawnerLadan;
-    public GameObject spawnerEye;
-    public GameObject spawnerStone;
-    public GameObject spawnerSand;
+    public UnityEngine.GameObject spawnerRed;
+    public UnityEngine.GameObject spawnerBlue;
+    public UnityEngine.GameObject spawnerYellow;
+    public UnityEngine.GameObject spawnerWhite;
+    public UnityEngine.GameObject spawnerLadan;
+    public UnityEngine.GameObject spawnerEye;
+    public UnityEngine.GameObject spawnerStone;
+    public UnityEngine.GameObject spawnerSand;
 
     public Sprite redTaken;
     public Sprite blueTaken;
@@ -205,7 +205,7 @@ public class DragResources : MonoBehaviour
                     toDrag = null;
                     toDragRB = null;
 
-                    GameObject[] goArray = FindObjectsOfType<GameObject>();     //??
+                    UnityEngine.GameObject[] goArray = FindObjectsOfType<UnityEngine.GameObject>();     //??
                     for (int i = 0; i < goArray.Length; i++)
                     {
                         if (goArray[i].layer == LayerMask.NameToLayer("Resource"))

@@ -10,25 +10,25 @@ public class GuildChecker
     public const string wizzardGuild = "Wizzard";
     public const string banditGuild = "Bandit";
 
-    public GuildsType GuildCheck(PotionData potionData)
+    public GuildsType GuildCheck(string value)
     {
-        if (potionData.guild == allGuilds)
+        if (value == allGuilds)
         {
             return GuildsType.All;
         }
-        else if (potionData.guild == saintGuild)
+        else if (value == saintGuild)
         {
             return GuildsType.Saint;
         }
-        else if (potionData.guild == knightGuild)
+        else if (value == knightGuild)
         {
             return GuildsType.Knight;
         }
-        else if (potionData.guild == wizzardGuild)
+        else if (value == wizzardGuild)
         {
             return GuildsType.Wizzard;
         }
-        else if (potionData.guild == banditGuild)
+        else if (value == banditGuild)
         {
             return GuildsType.Bandit;
         }

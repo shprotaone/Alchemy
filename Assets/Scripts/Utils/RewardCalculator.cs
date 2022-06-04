@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RewardCalculator
 {    
-
     private int _allGuildsReward = 300;
     private int _knightCommonReward = 400;
     private int _knightRareReward = 700;
@@ -25,35 +24,35 @@ public class RewardCalculator
         {
             _reward = _allGuildsReward;
         }
-        else if (guildType == GuildsType.Saint && rarity == ResourceRarity.Common)
+        else if (guildType == GuildsType.Saint && rarity == ResourceRarity.common)
         {
             _reward = _saintCommonReward;
         }
-        else if (guildType == GuildsType.Saint && rarity == ResourceRarity.Rare)
+        else if (guildType == GuildsType.Saint && rarity == ResourceRarity.rare)
         {
             _reward = _saintRareReward;
         }
-        else if (guildType == GuildsType.Bandit && rarity == ResourceRarity.Common)
+        else if (guildType == GuildsType.Bandit && rarity == ResourceRarity.common)
         {
             _reward = _banditCommonReward;
         }
-        else if (guildType == GuildsType.Bandit && rarity == ResourceRarity.Rare)
+        else if (guildType == GuildsType.Bandit && rarity == ResourceRarity.rare)
         {
             _reward = _banditRareReward;
         }
-        else if (guildType == GuildsType.Wizzard && rarity == ResourceRarity.Common)
+        else if (guildType == GuildsType.Wizzard && rarity == ResourceRarity.common)
         {
             _reward = _wizzardCommonReward;
         }
-        else if (guildType == GuildsType.Wizzard && rarity == ResourceRarity.Rare)
+        else if (guildType == GuildsType.Wizzard && rarity == ResourceRarity.rare)
         {
             _reward = _wizzardRareReward;
         }
-        else if (guildType == GuildsType.Knight && rarity == ResourceRarity.Common)
+        else if (guildType == GuildsType.Knight && rarity == ResourceRarity.common)
         {
             _reward = _knightCommonReward;
         }
-        else if (guildType == GuildsType.Knight && rarity == ResourceRarity.Rare)
+        else if (guildType == GuildsType.Knight && rarity == ResourceRarity.rare)
         {
             _reward = _knightRareReward;
         }

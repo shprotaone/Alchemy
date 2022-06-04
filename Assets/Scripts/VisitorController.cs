@@ -9,40 +9,56 @@ public class VisitorController : MonoBehaviour
 
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private bool _shopIsOpen = false;
 
     private Visitor _currentVisitor;
+    private Visitor _prevVisitor;
     
     private float _currentTimer;
 
+    public bool ShopIsOpen 
+    { 
+        get { return _shopIsOpen; }
+        set 
+        { 
+            _shopIsOpen = value;
+            if (_shopIsOpen)
+                CallVisitor();
+            else
+                DisableVisitor();
+        }    
+    }
     private void Start()
     {
-        StartCoroutine(Timer());
+        if(_shopIsOpen)
+        CallVisitor();
     }
 
-    private void CallVisitor()
+    public void CallVisitor()
     {
-        _currentVisitor = _visitors[Random.Range(0, _visitors.Length)];
+        if (_shopIsOpen)
+        {
+            _currentVisitor = _visitors[Random.Range(0, _visitors.Length)];
 
-        _currentVisitor.gameObject.SetActive(true);
-        _currentVisitor.Rising();
+            if (_currentVisitor == _prevVisitor)
+            {
+                _currentVisitor = _visitors[Random.Range(0, _visitors.Length)];
+            }
+            _currentVisitor.gameObject.SetActive(true);
+            _currentVisitor.Rising();
+
+            _prevVisitor = _currentVisitor;
+        }        
     }
 
-    private void DisableVisitor()
+    public void DisableVisitor()
     {
         _currentVisitor.Fading();
-        StartCoroutine(Timer());
     }
 
-    private IEnumerator Timer()
+    public void UpdateTimerDisplay(float value)
     {
-        CallVisitor();
-        _currentTimer = taskTime;
-        while (_currentTimer > 0)
-        {
-            _currentTimer--;
-            _timerText.text = "Time Left " + _currentTimer.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-        DisableVisitor();
+        float seconds = Mathf.FloorToInt(value % 60);
+        _timerText.text = seconds.ToString();
     }
 }

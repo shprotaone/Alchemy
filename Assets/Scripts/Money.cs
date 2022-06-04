@@ -10,6 +10,7 @@ public class Money : MonoBehaviour
     [SerializeField] private TMP_Text _moneyText;
     private int _money;
 
+    public int CurrentMoney => _money;
     private void Start()
     {
         _money = startMoney;

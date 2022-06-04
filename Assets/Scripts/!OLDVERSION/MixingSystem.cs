@@ -14,12 +14,12 @@ public class MixingSystem : MonoBehaviour
     public Button helpButton;
     public Slider progressBar;
 
-    public GameObject resourceSystem;
-    public GameObject water;
-    public GameObject waterBoil;
-    public GameObject recipes;
-    public GameObject UIControls;
-    public GameObject table;
+    public UnityEngine.GameObject resourceSystem;
+    public UnityEngine.GameObject water;
+    public UnityEngine.GameObject waterBoil;
+    public UnityEngine.GameObject recipes;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject table;
 
     public Sprite tableOff;
     public Sprite tableOn;

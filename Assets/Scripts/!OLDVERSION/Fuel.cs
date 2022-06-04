@@ -9,7 +9,7 @@ public class Fuel : MonoBehaviour
     public TextMeshProUGUI textFuel;
     public Button addFuelButton;
 
-    public GameObject cauldron;
+    public UnityEngine.GameObject cauldron;
 
     public AudioClip addFuelSound;
 

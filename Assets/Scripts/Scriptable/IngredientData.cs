@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class IngredientData : ScriptableObject
 {
     public string ingredientName;
+    public int cost;
     public bool isRareIngredient;
     public Color color;
     public Sprite mainSprite;
@@ -17,4 +18,5 @@ public class IngredientData : ScriptableObject
     public ResourceRarity resourceRarity;
     public AudioClip dragSound;
     public AudioClip dropSound;
+    public GameObject effect;
 }

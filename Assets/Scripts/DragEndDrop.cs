@@ -5,24 +5,31 @@ using System.Collections;
 
 public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler
 {
-    private float _moveSpeed = 3;
-
-    private Vector2 _startPosition;
-    private Vector2 _completeBottlePosition;
+    private Vector3 _startPosition;
+    private RectTransform _emptyBottlePosition;
+    private RectTransform _completeBottlePosition;
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
+
+    private Bottle _bottle;
+    private Ingredient _ingredient;
 
     private void Awake()
     {        
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
 
+        _emptyBottlePosition = TableManager.instance.EmptyPotionPosition;
+        _completeBottlePosition = TableManager.instance.FullPotionPosition;
+
         DOTween.SetTweensCapacity(1250, 50);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _startPosition = _rectTransform.anchoredPosition;
+        CheckObject();
+        _startPosition = this.transform.position;
+        print("From Drag Pos" + _startPosition);
         _canvasGroup.blocksRaycasts = false;
     }
 
@@ -47,70 +54,64 @@ public class DragEndDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDrag
             
             if (!complete)
             {
-                StartCoroutine(ReplaceBottle(_startPosition));
+                ReplaceBottle(_bottle,TableManager.instance.EmptyPotionTable);
             }
             else
             {
-                _completeBottlePosition = _mixingSystem.CompleteTable;
-                StartCoroutine(ReplaceBottle(_completeBottlePosition));
+                ReplaceBottle(_bottle, TableManager.instance.FullPotionTable);
             }           
-        }
-        else if (this.gameObject.GetComponent<Bottle>())
-        {
-            StartCoroutine(ReplaceBottle(_startPosition));
         }
         else if (eventData.pointerEnter.GetComponentInChildren<Task>())
         {
             Task task = eventData.pointerEnter.GetComponentInChildren<Task>();
-            task.ChekResult(this.GetComponent<Bottle>().PotionInBottle);
+            task.ChekResult(_bottle.PotionInBottle);
+
+            _bottle.ResetBottle();
+            ReplaceBottle(_bottle, TableManager.instance.EmptyPotionTable); ;
             
+        }
+        else if (this.gameObject.GetComponent<Bottle>())
+        {
+            ReplaceBottle(_bottle, TableManager.instance.EmptyPotionTable);
         }
         else if (this.gameObject.GetComponent<Ingredient>())
         {
             Ingredient ingredient = GetComponent<Ingredient>();
-                        
-            StartCoroutine(ReplaceIngredient(ingredient));            
-        }
+
+            ReplaceIngredient(ingredient);          
+        }        
     }
+
     /// <summary>
     /// Возврат ингредиентов
     /// </summary>
     /// <param name="ingredient"></param>
     /// <returns></returns>
-    private IEnumerator ReplaceIngredient(Ingredient ingredient)
-    {
-        float distance = Vector2.Distance(this._rectTransform.anchoredPosition, _startPosition);
-
-        while (distance > 10)
-        {
-            _rectTransform.DOAnchorPos(_startPosition, _moveSpeed, false);
-
-            yield return new WaitForEndOfFrame();
-            distance = Vector2.Distance(this._rectTransform.anchoredPosition, _startPosition);
-        }
-
+    private void ReplaceIngredient(Ingredient ingredient)
+    {               
         ingredient.Slot.IncreaseAmount(1);
-        Destroy(this.gameObject);
-
-        yield return null;
+        ingredient.Movement();
     }
+
     /// <summary>
     /// Возврат бутылок
     /// </summary>
     /// <param name="endPosition"></param>
     /// <returns></returns>
-    private IEnumerator ReplaceBottle(Vector2 endPosition)      //добавить присвоение родителя к столу
+    private void ReplaceBottle(Bottle bottle, Table table)      
     {
-        float distance = Vector2.Distance(_rectTransform.anchoredPosition, endPosition);
+        bottle.Movement(table,_startPosition);
+    }
 
-        while (distance > 10)
+    private void CheckObject()
+    {
+        if (this.gameObject.GetComponent<Bottle>())
         {
-            _rectTransform.DOAnchorPos(endPosition, _moveSpeed, false);
-
-            yield return new WaitForEndOfFrame();
-            distance = Vector2.Distance(_rectTransform.anchoredPosition, endPosition);
+            _bottle = GetComponent<Bottle>();
         }
-
-        yield return null;
+        else if (this.gameObject.GetComponent<Ingredient>())
+        {
+            _ingredient = GetComponent<Ingredient>();
+        }
     }
 }

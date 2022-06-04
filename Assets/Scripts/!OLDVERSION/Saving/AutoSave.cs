@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class AutoSave : MonoBehaviour
 {
-    public GameObject moneySystem;
-    public GameObject bottles;
-    public GameObject resourceSystem;
-    public GameObject mixingSystem;
-    public GameObject potionSystem;
-    public GameObject guildSystem;
-    public GameObject recipes;
-    public GameObject UIControls;
+    public UnityEngine.GameObject moneySystem;
+    public UnityEngine.GameObject bottles;
+    public UnityEngine.GameObject resourceSystem;
+    public UnityEngine.GameObject mixingSystem;
+    public UnityEngine.GameObject potionSystem;
+    public UnityEngine.GameObject guildSystem;
+    public UnityEngine.GameObject recipes;
+    public UnityEngine.GameObject UIControls;
     public Settings settings;
 
     private void Awake()
@@ -28,7 +28,7 @@ public class AutoSave : MonoBehaviour
             for (int i = 0; i < save.bottleCount - 2; i++)
                 bottles.GetComponent<Bottles>().AddBottle();
             if (save.bottleCost != 0)
-                moneySystem.GetComponent<ShopSystem>().bottleCost = save.bottleCost;
+                //moneySystem.GetComponent<ShopSystem>().bottleCost = save.bottleCost;
 
             resourceSystem.GetComponent<Fuel>().fuelCount = save.fuelCount;
 
@@ -77,10 +77,10 @@ public class AutoSave : MonoBehaviour
             potionSystem.GetComponent<PotionSystem>().SetEffect(6, (PotionEffect)save.bottle7Effect);
             potionSystem.GetComponent<PotionSystem>().SetEffect(7, (PotionEffect)save.bottle8Effect);
 
-            guildSystem.GetComponent<GuildSystem>().repWarriors = save.repWarriors;
-            guildSystem.GetComponent<GuildSystem>().repBandits = save.repBandits;
-            guildSystem.GetComponent<GuildSystem>().repPriests = save.repPriests;
-            guildSystem.GetComponent<GuildSystem>().repMagicians = save.repMagicians;
+            guildSystem.GetComponent<GuildSystemv1>().repWarriors = save.repWarriors;
+            guildSystem.GetComponent<GuildSystemv1>().repBandits = save.repBandits;
+            guildSystem.GetComponent<GuildSystemv1>().repPriests = save.repPriests;
+            guildSystem.GetComponent<GuildSystemv1>().repMagicians = save.repMagicians;
 
             recipes.GetComponent<RecipesMenu>().addedArr = save.added;
 
@@ -104,10 +104,10 @@ public class AutoSave : MonoBehaviour
 
         else
         {
-            guildSystem.GetComponent<GuildSystem>().repWarriors = settings.rep;
-            guildSystem.GetComponent<GuildSystem>().repBandits = settings.rep;
-            guildSystem.GetComponent<GuildSystem>().repPriests = settings.rep;
-            guildSystem.GetComponent<GuildSystem>().repMagicians = settings.rep;
+            guildSystem.GetComponent<GuildSystemv1>().repWarriors = settings.rep;
+            guildSystem.GetComponent<GuildSystemv1>().repBandits = settings.rep;
+            guildSystem.GetComponent<GuildSystemv1>().repPriests = settings.rep;
+            guildSystem.GetComponent<GuildSystemv1>().repMagicians = settings.rep;
 
             moneySystem.GetComponent<MoneySystem>().money = settings.money;
 
@@ -120,7 +120,7 @@ public class AutoSave : MonoBehaviour
         yield return new WaitForSeconds(1);
         SaveGameSystem.SaveGame(moneySystem.GetComponent<MoneySystem>(), bottles.GetComponent<Bottles>(), moneySystem.GetComponent<ShopSystem>(), resourceSystem.GetComponent<Fuel>(),
             resourceSystem.GetComponent<ResourceSystem>(), mixingSystem.GetComponent<MixingSystem>(),
-            potionSystem.GetComponent<PotionSystem>(), guildSystem.GetComponent<GuildSystem>(), recipes.GetComponent<RecipesMenu>(), UIControls.GetComponent<Tutorial>(), guildSystem.GetComponent<QuestsSystem>());
+            potionSystem.GetComponent<PotionSystem>(), guildSystem.GetComponent<GuildSystemv1>(), recipes.GetComponent<RecipesMenu>(), UIControls.GetComponent<Tutorial>(), guildSystem.GetComponent<QuestsSystem>());
         StartCoroutine(AutoSaveDelay());
     }
 }

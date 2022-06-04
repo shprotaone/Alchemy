@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class RecipesMenu : MonoBehaviour
 {
-    public GameObject potionData;
-    public GameObject content;
-    public GameObject UIControls;
+    public UnityEngine.GameObject potionData;
+    public UnityEngine.GameObject content;
+    public UnityEngine.GameObject UIControls;
     public Settings settings;
     public Potionv1[] potions;
 
@@ -29,7 +29,7 @@ public class RecipesMenu : MonoBehaviour
             RectTransform rt = content.GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y + 250);
 
-            GameObject data = Instantiate(potionData);
+            UnityEngine.GameObject data = Instantiate(potionData);
             data.transform.Find("Bottle").GetComponent<Image>().sprite = potion.imageBottle;
             data.transform.Find("Water").GetComponent<Image>().sprite = potion.imageWater;
             switch (potion.color)

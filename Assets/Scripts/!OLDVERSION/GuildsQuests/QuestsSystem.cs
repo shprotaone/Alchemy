@@ -37,21 +37,21 @@ public class QuestsSystem : MonoBehaviour
 
     public Button helpButton;
 
-    public GameObject warrior;
-    public GameObject bandit;
-    public GameObject priest;
-    public GameObject magician;
+    public UnityEngine.GameObject warrior;
+    public UnityEngine.GameObject bandit;
+    public UnityEngine.GameObject priest;
+    public UnityEngine.GameObject magician;
 
-    public GameObject warriorBubble;
-    public GameObject banditBubble;
-    public GameObject priestBubble;
-    public GameObject magicianBubble;
+    public UnityEngine.GameObject warriorBubble;
+    public UnityEngine.GameObject banditBubble;
+    public UnityEngine.GameObject priestBubble;
+    public UnityEngine.GameObject magicianBubble;
 
-    public GameObject UIControls;
-    public GameObject resourceSystem;
-    public GameObject moneySystem;
-    public GameObject cam;
-    public GameObject orders;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject resourceSystem;
+    public UnityEngine.GameObject moneySystem;
+    public UnityEngine.GameObject cam;
+    public UnityEngine.GameObject orders;
 
     public Settings settings;
 
@@ -119,7 +119,7 @@ public class QuestsSystem : MonoBehaviour
     private void Start()
     {
         questTime = settings.questDelay;
-        timePassed = questTime - settings.questFirst + GetComponent<GuildSystem>().CalcExtraTime();
+        timePassed = questTime - settings.questFirst + GetComponent<GuildSystemv1>().CalcExtraTime();
         if (firstAmount == 0)
         {
             cam.transform.position = new Vector3(0, orders.transform.position.y, -1);
@@ -297,13 +297,13 @@ public class QuestsSystem : MonoBehaviour
 
         timePassed += Time.deltaTime;
 
-        if (timePassed >= questTime + GetComponent<GuildSystem>().CalcExtraTime() && !(warriorsReady && banditsReady && priestsReady && magiciansReady))
+        if (timePassed >= questTime + GetComponent<GuildSystemv1>().CalcExtraTime() && !(warriorsReady && banditsReady && priestsReady && magiciansReady))
         {
             int guild = Random.Range(0, 4);
             switch (guild)
             {
                 case 0:
-                    if (!warriorsReady && GetComponent<GuildSystem>().GetRep(Guild.Warriors) >= settings.repMin)
+                    if (!warriorsReady && GetComponent<GuildSystemv1>().GetRep(Guild.Warriors) >= settings.repMin)
                     {
                         timePassed = 0;
                         warriorsReady = true;
@@ -311,7 +311,7 @@ public class QuestsSystem : MonoBehaviour
                         GetComponent<AudioSource>().clip = newTask;
                         GetComponent<AudioSource>().Play();
 
-                        if (GetComponent<GuildSystem>().GetRep(Guild.Warriors) >= settings.repMax && delayWarriors == 0)
+                        if (GetComponent<GuildSystemv1>().GetRep(Guild.Warriors) >= settings.repMax && delayWarriors == 0)
                             warriorsQuest = CreateQuest(Difficulty.Hard, Guild.Warriors);
                         else
                             warriorsQuest = CreateQuest(Difficulty.Easy, Guild.Warriors);
@@ -324,7 +324,7 @@ public class QuestsSystem : MonoBehaviour
                     break;
 
                 case 1:
-                    if (!banditsReady && GetComponent<GuildSystem>().GetRep(Guild.Bandits) >= settings.repMin)
+                    if (!banditsReady && GetComponent<GuildSystemv1>().GetRep(Guild.Bandits) >= settings.repMin)
                     {
                         timePassed = 0;
                         banditsReady = true;
@@ -332,7 +332,7 @@ public class QuestsSystem : MonoBehaviour
                         GetComponent<AudioSource>().clip = newTask;
                         GetComponent<AudioSource>().Play();
 
-                        if (GetComponent<GuildSystem>().GetRep(Guild.Bandits) >= settings.repMax && delayBandits == 0)
+                        if (GetComponent<GuildSystemv1>().GetRep(Guild.Bandits) >= settings.repMax && delayBandits == 0)
                             banditsQuest = CreateQuest(Difficulty.Hard, Guild.Bandits);
                         else
                             banditsQuest = CreateQuest(Difficulty.Easy, Guild.Bandits);
@@ -345,7 +345,7 @@ public class QuestsSystem : MonoBehaviour
                     break;
 
                 case 2:
-                    if (!priestsReady && GetComponent<GuildSystem>().GetRep(Guild.Priests) >= settings.repMin)
+                    if (!priestsReady && GetComponent<GuildSystemv1>().GetRep(Guild.Priests) >= settings.repMin)
                     {
                         timePassed = 0;
                         priestsReady = true;
@@ -353,7 +353,7 @@ public class QuestsSystem : MonoBehaviour
                         GetComponent<AudioSource>().clip = newTask;
                         GetComponent<AudioSource>().Play();
 
-                        if (GetComponent<GuildSystem>().GetRep(Guild.Priests) >= settings.repMax && delayPriests == 0)
+                        if (GetComponent<GuildSystemv1>().GetRep(Guild.Priests) >= settings.repMax && delayPriests == 0)
                             priestsQuest = CreateQuest(Difficulty.Hard, Guild.Priests);
                         else
                             priestsQuest = CreateQuest(Difficulty.Easy, Guild.Priests);
@@ -366,7 +366,7 @@ public class QuestsSystem : MonoBehaviour
                     break;
 
                 case 3:
-                    if (!magiciansReady && GetComponent<GuildSystem>().GetRep(Guild.Magicians) >= settings.repMin)
+                    if (!magiciansReady && GetComponent<GuildSystemv1>().GetRep(Guild.Magicians) >= settings.repMin)
                     {
                         timePassed = 0;
                         magiciansReady = true;
@@ -374,7 +374,7 @@ public class QuestsSystem : MonoBehaviour
                         GetComponent<AudioSource>().clip = newTask;
                         GetComponent<AudioSource>().Play();
 
-                        if (GetComponent<GuildSystem>().GetRep(Guild.Magicians) >= settings.repMax && delayMagicians == 0)
+                        if (GetComponent<GuildSystemv1>().GetRep(Guild.Magicians) >= settings.repMax && delayMagicians == 0)
                             magiciansQuest = CreateQuest(Difficulty.Hard, Guild.Magicians);
                         else
                             magiciansQuest = CreateQuest(Difficulty.Easy, Guild.Magicians);
@@ -401,7 +401,7 @@ public class QuestsSystem : MonoBehaviour
                 GetComponent<AudioSource>().clip = failTask;
                 GetComponent<AudioSource>().Play();
 
-                GetComponent<GuildSystem>().removeRep(Guild.Warriors, settings.repPenalty);
+                GetComponent<GuildSystemv1>().removeRep(Guild.Warriors, settings.repPenalty);
 
                 warrior.GetComponent<QuestComplete>().EndQuest();
                 warriorsReady = false;
@@ -434,7 +434,7 @@ public class QuestsSystem : MonoBehaviour
                 GetComponent<AudioSource>().clip = failTask;
                 GetComponent<AudioSource>().Play();
 
-                GetComponent<GuildSystem>().removeRep(Guild.Bandits, settings.repPenalty);
+                GetComponent<GuildSystemv1>().removeRep(Guild.Bandits, settings.repPenalty);
 
                 bandit.GetComponent<QuestComplete>().EndQuest();
                 banditsReady = false;
@@ -467,7 +467,7 @@ public class QuestsSystem : MonoBehaviour
                 GetComponent<AudioSource>().clip = failTask;
                 GetComponent<AudioSource>().Play();
 
-                GetComponent<GuildSystem>().removeRep(Guild.Priests, settings.repPenalty);
+                GetComponent<GuildSystemv1>().removeRep(Guild.Priests, settings.repPenalty);
 
                 priest.GetComponent<QuestComplete>().EndQuest();
                 priestsReady = false;
@@ -500,7 +500,7 @@ public class QuestsSystem : MonoBehaviour
                 GetComponent<AudioSource>().clip = failTask;
                 GetComponent<AudioSource>().Play();
 
-                GetComponent<GuildSystem>().removeRep(Guild.Magicians, settings.repPenalty);
+                GetComponent<GuildSystemv1>().removeRep(Guild.Magicians, settings.repPenalty);
 
                 magician.GetComponent<QuestComplete>().EndQuest();
                 magiciansReady = false;

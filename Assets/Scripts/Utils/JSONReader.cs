@@ -13,7 +13,9 @@ public class JSONReader : MonoBehaviour
 {
     [SerializeField] private TextAsset _potionClassificateJSON;
 
-    public PotionSizer _potionSizer;
+    private PotionSizer _potionSizer;
+
+    public PotionSizer PotionSizer => _potionSizer;
 
     private void Awake()
     {

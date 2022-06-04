@@ -4,12 +4,16 @@ using UnityEngine.UI;
 
 public class Cook : MonoBehaviour
 {
+    private const float cookingSpeed = 1f;
+
     [SerializeField] private Button _cookButton;
     [SerializeField] private Slider _boilProgress;
     [SerializeField] private Settings _settings;
 
     private MixingSystemv2 _mixingSystem;        
     private Claudron _claudron;
+    private WaterColorv2 _waterColor;
+    private AudioSource _audioSource;
     
     private bool _isRarePotion;
 
@@ -20,15 +24,19 @@ public class Cook : MonoBehaviour
 
     private void Start()
     {
+        _waterColor = GetComponentInChildren<WaterColorv2>();
         _mixingSystem = GetComponent<MixingSystemv2>();
         _claudron = GetComponent<Claudron>();
+        _audioSource = GetComponent<AudioSource>();
 
         _mixingSystem._refreshDelegate += RefreshBar;
         _cookButton.onClick.AddListener(Brew);
     }
     public void Brew()
     {
-        _speed = 1;
+        _speed = cookingSpeed;
+        _waterColor.Boiled();
+        _audioSource.Play();
         StartCoroutine(ProgressAnimation());
     }
 
@@ -36,7 +44,7 @@ public class Cook : MonoBehaviour
     {
         float startTime = 0;
         _boilProgress.maxValue = CalcCookTime();
-
+        
         while (startTime < _boilProgress.maxValue)
         {
             _canFillBottle = false;
@@ -45,6 +53,8 @@ public class Cook : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        _waterColor.StopBoiled();
+        _audioSource.Stop();
         _canFillBottle = true;
         _speed = 0;       
     }

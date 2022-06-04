@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TreeMushroom
   m_EditorClassIdentifier: 
   ingredientName: TreeMushroom
+  cost: 100
   isRareIngredient: 0
   color: {r: 0.999694, g: 1, b: 0, a: 1}
   mainSprite: {fileID: 21300000, guid: c4ee9cd2cba0ac541a8e96b93c138bdb, type: 3}

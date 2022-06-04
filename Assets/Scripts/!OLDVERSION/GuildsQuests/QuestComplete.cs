@@ -7,13 +7,13 @@ using DG.Tweening;
 
 public class QuestComplete : MonoBehaviour
 {
-    public GameObject guildSystem;
-    public GameObject potionSystem;
-    public GameObject moneySystem;
-    public GameObject resourceSystem;
-    public GameObject UIControls;
-    public GameObject coinDrop;
-    public GameObject coinTarget;
+    public UnityEngine.GameObject guildSystem;
+    public UnityEngine.GameObject potionSystem;
+    public UnityEngine.GameObject moneySystem;
+    public UnityEngine.GameObject resourceSystem;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject coinDrop;
+    public UnityEngine.GameObject coinTarget;
     public PotionColor potionColor;
     public PotionEffect potionEffect;
     public bool haveQuest = false;
@@ -31,7 +31,7 @@ public class QuestComplete : MonoBehaviour
     public AudioClip completeTask;
 
     private int reward;
-    private GameObject[] curCoins = new GameObject[5];
+    private UnityEngine.GameObject[] curCoins = new UnityEngine.GameObject[5];
 
     public void NewQuest(PotionColor _potionColor, PotionEffect _potionEffect, int _reward)
     {
@@ -157,10 +157,10 @@ public class QuestComplete : MonoBehaviour
                         guildSystem.GetComponent<QuestsSystem>().StopQuest(Guild.Warriors);
                         if (!guildSystem.GetComponent<QuestsSystem>().firstQuest)
                         {
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Warriors, settings.repReward);
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Priests, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Bandits, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Magicians, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Warriors, settings.repReward);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Priests, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Bandits, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Magicians, settings.repChangeSec);
                         }
                         if (guildSystem.GetComponent<QuestsSystem>().delayWarriors > 0)
                             guildSystem.GetComponent<QuestsSystem>().delayWarriors--;
@@ -169,7 +169,7 @@ public class QuestComplete : MonoBehaviour
                         break;
 
                     case "Bandit":
-                        if (Random.Range(0, 100) < settings.banditsX + guildSystem.GetComponent<GuildSystem>().GetRep(Guild.Bandits) / 100 * settings.banditsY)
+                        if (Random.Range(0, 100) < settings.banditsX + guildSystem.GetComponent<GuildSystemv1>().GetRep(Guild.Bandits) / 100 * settings.banditsY)
                         {
                             moneySystem.GetComponent<MoneySystem>().AddMoney(reward);
                             for (int i = 0; i < 5; i++)
@@ -184,10 +184,10 @@ public class QuestComplete : MonoBehaviour
                         guildSystem.GetComponent<QuestsSystem>().StopQuest(Guild.Bandits);
                         if (!guildSystem.GetComponent<QuestsSystem>().firstQuest)
                         {
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Bandits, settings.repReward);
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Magicians, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Warriors, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Priests, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Bandits, settings.repReward);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Magicians, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Warriors, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Priests, settings.repChangeSec);
                         }
                         if (guildSystem.GetComponent<QuestsSystem>().delayBandits > 0)
                             guildSystem.GetComponent<QuestsSystem>().delayBandits--;
@@ -196,7 +196,7 @@ public class QuestComplete : MonoBehaviour
                         break;
 
                     case "Priest":
-                        if (Random.Range(0, 100) < settings.priestsX + guildSystem.GetComponent<GuildSystem>().GetRep(Guild.Priests) / 100 * settings.priestsY)
+                        if (Random.Range(0, 100) < settings.priestsX + guildSystem.GetComponent<GuildSystemv1>().GetRep(Guild.Priests) / 100 * settings.priestsY)
                             moneySystem.GetComponent<MoneySystem>().AddMoney(reward * 2);
                         else
                             moneySystem.GetComponent<MoneySystem>().AddMoney(reward);
@@ -212,10 +212,10 @@ public class QuestComplete : MonoBehaviour
                         guildSystem.GetComponent<QuestsSystem>().StopQuest(Guild.Priests);
                         if (!guildSystem.GetComponent<QuestsSystem>().firstQuest)
                         {
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Priests, settings.repReward);
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Warriors, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Magicians, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Bandits, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Priests, settings.repReward);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Warriors, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Magicians, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Bandits, settings.repChangeSec);
                         }
                         if (guildSystem.GetComponent<QuestsSystem>().delayPriests > 0)
                             guildSystem.GetComponent<QuestsSystem>().delayPriests--;
@@ -224,7 +224,7 @@ public class QuestComplete : MonoBehaviour
                         break;
 
                     case "Magician":
-                        if (Random.Range(0, 100) < settings.magiciansX + guildSystem.GetComponent<GuildSystem>().GetRep(Guild.Magicians) / 100 * settings.magiciansY)
+                        if (Random.Range(0, 100) < settings.magiciansX + guildSystem.GetComponent<GuildSystemv1>().GetRep(Guild.Magicians) / 100 * settings.magiciansY)
                         {
                             switch (Random.Range(0,3))
                             {
@@ -256,10 +256,10 @@ public class QuestComplete : MonoBehaviour
                         guildSystem.GetComponent<QuestsSystem>().StopQuest(Guild.Magicians);
                         if (!guildSystem.GetComponent<QuestsSystem>().firstQuest)
                         {
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Magicians, settings.repReward);
-                            guildSystem.GetComponent<GuildSystem>().addRep(Guild.Bandits, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Priests, settings.repChangeSec);
-                            guildSystem.GetComponent<GuildSystem>().removeRep(Guild.Warriors, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Magicians, settings.repReward);
+                            guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Bandits, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Priests, settings.repChangeSec);
+                            guildSystem.GetComponent<GuildSystemv1>().removeRep(Guild.Warriors, settings.repChangeSec);
                         }
                         if (guildSystem.GetComponent<QuestsSystem>().delayMagicians > 0)
                             guildSystem.GetComponent<QuestsSystem>().delayMagicians--;

@@ -6,14 +6,14 @@ using TMPro;
 public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
 {
     private Image _slotImage;
-    private Inventory _initShelfs;
+    private Inventory _inventory;
     private IngredientData _ingredientData;
     private TMP_Text _amountText;
     private int _amount;
 
     private void Start()
     {
-        _initShelfs = GetComponentInParent<Inventory>();
+        _inventory = GetComponentInParent<Inventory>();
     }
 
     public void FillSlot(IngredientData ingredientData,int value)
@@ -29,10 +29,10 @@ public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GameObject ingredientGO = Instantiate(_initShelfs.CurrentPrefab, this.transform);
+        GameObject ingredientGO = Instantiate(_inventory.CurrentPrefab, this.transform);
         Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
-        ingredient.IngredientData = _ingredientData;
+        ingredient.SetIngredientData(_ingredientData);
         ingredient.SetSlot(this);
 
         DecreaseAmount(1);
@@ -53,6 +53,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
     public void DecreaseAmount(int value)
     {
         _amount -= value;
+        _inventory.DecreaseIngredient(_ingredientData, value);
         RefreshAmount();
     }
 

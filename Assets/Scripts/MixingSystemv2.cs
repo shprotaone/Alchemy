@@ -14,17 +14,15 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
 
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private List<Ingredient> _ingredients;
-    [SerializeField] private RectTransform _completeTable;
 
     private WaterColorv2 _waterColor;    
-    private PotionData _resultPotion;
+    private Potion _resultPotion;
     private Cook _cookSystem;
 
     private bool _bottleFilled;
 
     public List<Ingredient> Ingredients => _ingredients;
-    public PotionData ResultPotion => _resultPotion;
-    public Vector2 CompleteTable => _completeTable.anchoredPosition;
+    public Potion ResultPotion => _resultPotion;
     public bool BottleFilled => _bottleFilled;
 
     private void Start()
@@ -37,11 +35,11 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
     {
         if (CheckIngredientIn(eventData.pointerDrag.gameObject))
         {
-            print("its a ingredient");
+            
         }
         else if (CheckBottle(eventData.pointerDrag.gameObject))
         {
-            print("its a bottle");
+            
         }
     }
 
@@ -57,7 +55,7 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
         return colors;
     }
 
-    private void CheckFullColorCapacity(Ingredient ingredient)  //возможно разбить? 
+    private void CheckFullColorCapacity(Ingredient ingredient)  
     {
         if (_ingredients.Count < maxMixColor)
         {
@@ -71,8 +69,7 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
         }
     }
 
-
-    public bool CheckIngredientIn(GameObject curentObject)
+    public bool CheckIngredientIn(UnityEngine.GameObject curentObject)
     {
         if (curentObject.CompareTag(ingredientTag))
         {
@@ -80,7 +77,7 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
 
             CheckFullColorCapacity(currentIngredient);
 
-            currentIngredient.DestroyIngredient();
+            currentIngredient.DisableIngredient();
             
             return true;
         }
@@ -90,7 +87,7 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
         }
     }
 
-    private bool CheckBottle(GameObject currentObject)
+    private bool CheckBottle(UnityEngine.GameObject currentObject)
     {
         if (currentObject.CompareTag(bottleTag))
         {
@@ -101,6 +98,7 @@ public class MixingSystemv2 : MonoBehaviour, IDropHandler
                 bottle.FillBottle(_waterColor.ResultColor);
 
                 _resultPotion = _potionDetector.FillCurrentPotion(_ingredients);
+
                 bottle.FillPotionInBottle(_resultPotion);
                 _bottleFilled = true;
             }

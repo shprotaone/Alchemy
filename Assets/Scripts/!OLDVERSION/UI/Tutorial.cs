@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour
 {
     public Button helpButton;
-    public GameObject[] helpScreens;
-    public GameObject message;
-    public GameObject helpTutorial1;
-    public GameObject helpTutorial2;
-    public GameObject resourceSystem;
-    public GameObject moneySystem;
+    public UnityEngine.GameObject[] helpScreens;
+    public UnityEngine.GameObject message;
+    public UnityEngine.GameObject helpTutorial1;
+    public UnityEngine.GameObject helpTutorial2;
+    public UnityEngine.GameObject resourceSystem;
+    public UnityEngine.GameObject moneySystem;
     public TextMeshProUGUI messageText;
     public Settings settings;
     public bool mainGame = false;

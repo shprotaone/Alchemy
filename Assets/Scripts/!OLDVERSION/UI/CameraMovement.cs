@@ -7,10 +7,10 @@ public class CameraMovement : MonoBehaviour
 {
     public Camera cam;
 
-    public GameObject tableBG;
-    public GameObject ordersBG;
-    public GameObject helpTutorial1;
-    public GameObject bottles;
+    public UnityEngine.GameObject tableBG;
+    public UnityEngine.GameObject ordersBG;
+    public UnityEngine.GameObject helpTutorial1;
+    public UnityEngine.GameObject bottles;
 
     public AnimationCurve curve;
 

@@ -7,15 +7,15 @@ public class RarityChecker
     public const string rareRarity = "rare";
     private const string commonRarity = "common";
 
-    public ResourceRarity RarityCheck(PotionData potionData)
+    public ResourceRarity RarityCheck(string value)
     {
-        if (potionData.rarity == commonRarity)
+        if (value == commonRarity)
         {
-            return ResourceRarity.Common;
+            return ResourceRarity.common;
         }
         else
         {
-            return ResourceRarity.Rare;
+            return ResourceRarity.rare;
         }
   
     }

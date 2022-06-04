@@ -56,12 +56,12 @@ public class SaveData
     public bool firstQuest;
     public int firstAmount;
 
-    public SaveData(MoneySystem moneySystem, Bottles bottles, ShopSystem shopSystem, Fuel fuel, ResourceSystem resourceSystem, MixingSystem mixingSystem, PotionSystem potionSystem, GuildSystem guildSystem, RecipesMenu recipesMenu, Tutorial tutorial, QuestsSystem questsSystem)
+    public SaveData(MoneySystem moneySystem, Bottles bottles, ShopSystem shopSystem, Fuel fuel, ResourceSystem resourceSystem, MixingSystem mixingSystem, PotionSystem potionSystem, GuildSystemv1 guildSystem, RecipesMenu recipesMenu, Tutorial tutorial, QuestsSystem questsSystem)
     {
         money = moneySystem.money;
 
         bottleCount = bottles.bottleCount;
-        bottleCost = shopSystem.bottleCost;
+        //bottleCost = shopSystem.bottleCost;
 
         fuelCount = fuel.fuelCount;
 

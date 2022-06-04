@@ -10,8 +10,8 @@ public class MoneySystem : MonoBehaviour
     public TextMeshProUGUI moneyTextShop;
     public TextMeshProUGUI moneyTextGuilds;
 
-    public GameObject UIControls;
-    public GameObject mixingSystem;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject mixingSystem;
 
     public Button helpButton;
 

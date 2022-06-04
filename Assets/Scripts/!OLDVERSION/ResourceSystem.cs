@@ -29,14 +29,14 @@ public class ResourceSystem : MonoBehaviour
     public TextMeshProUGUI textStone;
     public TextMeshProUGUI textSand;
 
-    public GameObject platformRed;
-    public GameObject platformBlue;
-    public GameObject platformYellow;
-    public GameObject platformWhite;
-    public GameObject platformLadan;
-    public GameObject platformEye;
-    public GameObject platformStone;
-    public GameObject platformSand;
+    public UnityEngine.GameObject platformRed;
+    public UnityEngine.GameObject platformBlue;
+    public UnityEngine.GameObject platformYellow;
+    public UnityEngine.GameObject platformWhite;
+    public UnityEngine.GameObject platformLadan;
+    public UnityEngine.GameObject platformEye;
+    public UnityEngine.GameObject platformStone;
+    public UnityEngine.GameObject platformSand;
 
     public Sprite red;
     public Sprite redEmpty;
@@ -59,21 +59,21 @@ public class ResourceSystem : MonoBehaviour
 
     private void Awake()
     {
-        ResourceData red = new ResourceData(ResourceType.Red, ResourceRarity.Common);
+        ResourceData red = new ResourceData(ResourceType.Red, ResourceRarity.common);
         resources.Add(red);
-        ResourceData blue = new ResourceData(ResourceType.Blue, ResourceRarity.Common);
+        ResourceData blue = new ResourceData(ResourceType.Blue, ResourceRarity.common);
         resources.Add(blue);
-        ResourceData yellow = new ResourceData(ResourceType.Yellow, ResourceRarity.Common);
+        ResourceData yellow = new ResourceData(ResourceType.Yellow, ResourceRarity.common);
         resources.Add(yellow);
-        ResourceData white = new ResourceData(ResourceType.White, ResourceRarity.Common);
+        ResourceData white = new ResourceData(ResourceType.White, ResourceRarity.common);
         resources.Add(white);
-        ResourceData ladan = new ResourceData(ResourceType.Ladan, ResourceRarity.Rare);
+        ResourceData ladan = new ResourceData(ResourceType.Ladan, ResourceRarity.rare);
         resources.Add(ladan);
-        ResourceData eye = new ResourceData(ResourceType.Eye, ResourceRarity.Rare);
+        ResourceData eye = new ResourceData(ResourceType.Eye, ResourceRarity.rare);
         resources.Add(eye);
-        ResourceData stone = new ResourceData(ResourceType.Stone, ResourceRarity.Rare);
+        ResourceData stone = new ResourceData(ResourceType.Stone, ResourceRarity.rare);
         resources.Add(stone);
-        ResourceData sand = new ResourceData(ResourceType.Sand, ResourceRarity.Rare);
+        ResourceData sand = new ResourceData(ResourceType.Sand, ResourceRarity.rare);
         resources.Add(sand);
     }
 
@@ -233,7 +233,7 @@ public class ResourceSystem : MonoBehaviour
 
     public ResourceRarity GetRarity(ResourceType resourceType)
     {
-        ResourceRarity returnRarity = ResourceRarity.Common;
+        ResourceRarity returnRarity = ResourceRarity.common;
 
         foreach (ResourceData res in resources)
         {

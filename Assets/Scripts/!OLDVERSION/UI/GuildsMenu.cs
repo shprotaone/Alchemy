@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class GuildsMenu : MonoBehaviour
 {
-    public GameObject guildSystem;
-    public GameObject moneySystem;
-    public GameObject resourceSystem;
+    public UnityEngine.GameObject guildSystem;
+    public UnityEngine.GameObject moneySystem;
+    public UnityEngine.GameObject resourceSystem;
 
     public TextMeshProUGUI textLadan;
     public TextMeshProUGUI textEye;
@@ -104,28 +104,28 @@ public class GuildsMenu : MonoBehaviour
             switch (guildID)
             {
                 case 0:
-                    guildSystem.GetComponent<GuildSystem>().addRep(Guild.Warriors, settings.repAdd);
+                    guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Warriors, settings.repAdd);
                     repWarriorsGuilds.value = repWarriors.value;
                     if (repWarriors.value >= settings.repLimit)
                         buyRepWarriors.interactable = false;
                     break;
 
                 case 1:
-                    guildSystem.GetComponent<GuildSystem>().addRep(Guild.Bandits, settings.repAdd);
+                    guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Bandits, settings.repAdd);
                     repBanditsGuilds.value = repBandits.value;
                     if (repBandits.value >= settings.repLimit)
                         buyRepBandits.interactable = false;
                     break;
 
                 case 2:
-                    guildSystem.GetComponent<GuildSystem>().addRep(Guild.Priests, settings.repAdd);
+                    guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Priests, settings.repAdd);
                     repPriestsGuilds.value = repPriests.value;
                     if (repPriests.value >= settings.repLimit)
                         buyRepPriests.interactable = false;
                     break;
 
                 case 3:
-                    guildSystem.GetComponent<GuildSystem>().addRep(Guild.Magicians, settings.repAdd);
+                    guildSystem.GetComponent<GuildSystemv1>().addRep(Guild.Magicians, settings.repAdd);
                     repMagiciansGuilds.value = repMagicians.value;
                     if (repMagicians.value >= settings.repLimit)
                         buyRepMagicians.interactable = false;

@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class Popups : MonoBehaviour     //динамический help? 
 {
-    public GameObject popupShop;
-    public GameObject popupGuilds;
-    public GameObject popupRecipes;
-    public GameObject popupPause;
+    public UnityEngine.GameObject popupShop;
+    public UnityEngine.GameObject popupGuilds;
+    public UnityEngine.GameObject popupRecipes;
+    public UnityEngine.GameObject popupPause;
 
-    public GameObject buttonShop;
-    public GameObject buttonGuilds;
-    public GameObject buttonRecipes;
-    public GameObject buttonPause;
-    public GameObject helpTutorial2;
+    public UnityEngine.GameObject buttonShop;
+    public UnityEngine.GameObject buttonGuilds;
+    public UnityEngine.GameObject buttonRecipes;
+    public UnityEngine.GameObject buttonPause;
+    public UnityEngine.GameObject helpTutorial2;
 
     public AudioClip openRecipes;
     public AudioClip openGuilds;

@@ -35,9 +35,9 @@ MonoBehaviour:
   rareMax: 2
   costRep: 250
   repAdd: 5
-  timeBrew2: 4
-  timeBrew3: 5
-  timeBrew4: 6
+  timeBrew2: 1
+  timeBrew3: 2
+  timeBrew4: 3
   timeBrewRare: 8
   timeWood: 30
   woodSpeedup: 2

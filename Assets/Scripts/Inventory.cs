@@ -7,20 +7,20 @@ public class Inventory : MonoBehaviour
     public const int stockAmount = 5;
     public const int stockBottle = 2;
 
-    [SerializeField] private GameObject _currentIngredientPrefab;
-    [SerializeField] private GameObject _prefabBottle;
+    [SerializeField] private UnityEngine.GameObject _currentIngredientPrefab;
+    [SerializeField] private UnityEngine.GameObject _prefabBottle;
 
     [SerializeField] private Transform _parentDragableObject;
     [SerializeField] private IngredientData[] _ingredients;
-    [SerializeField] private TableSystem _clearBottleTable;
+    [SerializeField] private Table _clearBottleTable;
 
     private Dictionary<IngredientData, int> _inventory;
 
     private Slot[] _slots;
 
-    public GameObject CurrentPrefab => _currentIngredientPrefab;
+    public UnityEngine.GameObject CurrentPrefab => _currentIngredientPrefab;
     public Transform ParentDragableObject => _parentDragableObject;
-
+    public IngredientData[] Ingredients => _ingredients;
     void Start()
     {
         _slots = GetComponentsInChildren<Slot>();
@@ -36,20 +36,36 @@ public class Inventory : MonoBehaviour
             _inventory.Add(_ingredients[i], stockAmount);
         }
 
-        int count = 0;
-
-        foreach (KeyValuePair<IngredientData, int> item in _inventory)
-        {
-            
-            _slots[count].FillSlot(item.Key, item.Value);
-            count++;
-        }
+        RefreshInventory();
     }
     private void AddBottle(int value)
     {
         for (int i = 0; i < value; i++)
         {
-            GameObject bottle = Instantiate(_prefabBottle, _clearBottleTable.transform);
+            UnityEngine.GameObject bottle = Instantiate(_prefabBottle, _clearBottleTable.transform);
         }
+    }
+    private void RefreshInventory()
+    {
+        int count = 0;
+
+        foreach (KeyValuePair<IngredientData, int> item in _inventory)
+        {
+
+            _slots[count].FillSlot(item.Key, item.Value);
+            count++;
+        }
+    }
+
+    public void AddIngredient(IngredientData ingredient)
+    {
+        _inventory[ingredient]++;
+        RefreshInventory();
+    }
+
+    public void DecreaseIngredient(IngredientData ingredient,int value)
+    {
+        _inventory[ingredient] -= value;
+        RefreshInventory();
     }
 }

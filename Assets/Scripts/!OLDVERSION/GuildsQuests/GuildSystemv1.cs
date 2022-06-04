@@ -11,7 +11,7 @@ public enum Guild
     Magicians
 }
 
-public class GuildSystem : MonoBehaviour
+public class GuildSystemv1 : MonoBehaviour
 {
     public Slider sliderWarriors;
     public Slider sliderBandits;
@@ -31,8 +31,8 @@ public class GuildSystem : MonoBehaviour
 
     public Settings settings;
 
-    public GameObject UIControls;
-    public GameObject moneySystem;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject moneySystem;
 
     private void Start()
     {

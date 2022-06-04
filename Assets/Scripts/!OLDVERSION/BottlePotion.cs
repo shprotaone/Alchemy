@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BottlePotion : MonoBehaviour
 {
-    public GameObject potionSystem;
-    public GameObject[] potionPos;
+    public UnityEngine.GameObject potionSystem;
+    public UnityEngine.GameObject[] potionPos;
 
     public Settings settings;
 

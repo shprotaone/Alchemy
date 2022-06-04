@@ -1,5 +1,5 @@
 ﻿public enum ResourceRarity
 {
-    Common,
-    Rare,
+    common,
+    rare,
 };

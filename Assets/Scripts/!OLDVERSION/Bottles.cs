@@ -13,14 +13,14 @@ public class Bottles : MonoBehaviour
     public Button helpButton;
     public TextMeshProUGUI amountText;
 
-    public GameObject[] bottlePos;
-    public GameObject[] bottle;
-    public GameObject cauldron;
-    public GameObject UIControls;
-    public GameObject water;
-    public GameObject potionSystem;
-    public GameObject bottleSpawner;
-    public GameObject moneySystem;
+    public UnityEngine.GameObject[] bottlePos;
+    public UnityEngine.GameObject[] bottle;
+    public UnityEngine.GameObject cauldron;
+    public UnityEngine.GameObject UIControls;
+    public UnityEngine.GameObject water;
+    public UnityEngine.GameObject potionSystem;
+    public UnityEngine.GameObject bottleSpawner;
+    public UnityEngine.GameObject moneySystem;
 
     public Settings settings;
 
@@ -451,21 +451,21 @@ public class Bottles : MonoBehaviour
             }
             else
             {
-                if (toDrag.position == bottlePos[toDrag.GetComponent<BottlePotion>().takenSpace].transform.position)
-                {
-                    if (freeBottles == 0 && moneySystem.GetComponent<MoneySystem>().GetMoney() >= moneySystem.GetComponent<ShopSystem>().bottleCost && !helpButton.interactable)
-                    {
-                        UIControls.GetComponent<Tutorial>().helpStep = 0;
-                        UIControls.GetComponent<Tutorial>().GetHelp();
-                    }
-                    takenSpace[toDrag.GetComponent<BottlePotion>().takenSpace] = true;
-                    canTake = true;
-                    toDrag = null;
-                    toDragRB.simulated = true;
-                    toDragRB = null;
-                    justTook = false;
-                    justReturned = false;
-                }
+                //if (toDrag.position == bottlePos[toDrag.GetComponent<BottlePotion>().takenSpace].transform.position)
+                //{
+                //    if (freeBottles == 0 && moneySystem.GetComponent<MoneySystem>().GetMoney() >= moneySystem.GetComponent<ShopSystem>().bottleCost && !helpButton.interactable)
+                //    {
+                //        UIControls.GetComponent<Tutorial>().helpStep = 0;
+                //        UIControls.GetComponent<Tutorial>().GetHelp();
+                //    }
+                //    takenSpace[toDrag.GetComponent<BottlePotion>().takenSpace] = true;
+                //    canTake = true;
+                //    toDrag = null;
+                //    toDragRB.simulated = true;
+                //    toDragRB = null;
+                //    justTook = false;
+                //    justReturned = false;
+                //}
             }
         }
         #endregion

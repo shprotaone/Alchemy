@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SwipeDetection : MonoBehaviour
 {
-    public GameObject bottles;
-    public GameObject resourceSystem;
+    public UnityEngine.GameObject bottles;
+    public UnityEngine.GameObject resourceSystem;
     public Camera cam;
 
     private Vector2 firstPressPos;
