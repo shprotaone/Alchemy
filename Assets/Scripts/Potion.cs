@@ -9,6 +9,7 @@ public class Potion : MonoBehaviour
     private string[] _ingredients;
     private string _guild;
     private string _rarity;
+    private EffectController _effectController;
 
     private GuildsType _guildType;
     public GuildsType GuildsType => _guildType;
@@ -19,6 +20,7 @@ public class Potion : MonoBehaviour
     private void Start()
     {
         _ingredients = new string[5];
+        _effectController = GetComponentInChildren<EffectController>(); //остановился тут
     }
 
     public void FillPotion(PotionData potionData)
