@@ -64,7 +64,7 @@ public class Task : MonoBehaviour
         _currentPotion.SetGuild(_visitor.Guild);
     }
 
-    public void ChekResult(Potion potion)
+    public bool ChekResult(Potion potion)
     {
         if (_currentPotion.PotionName == potion.PotionName)
         {            
@@ -76,12 +76,15 @@ public class Task : MonoBehaviour
             
             Coin coin = curCoins.GetComponent<Coin>();
             coin.Movement(_taskSystem.JarTransform.position);
+
+            return true;
         }
         else
         {
             print("Wrong");
             print("Need " + _currentPotion.PotionName);
             print("In Bottle " + potion.PotionName);
+            return false;
         }
     }
 

@@ -56,57 +56,57 @@ public class SaveData
     public bool firstQuest;
     public int firstAmount;
 
-    public SaveData(MoneySystem moneySystem, Bottles bottles, ShopSystem shopSystem, Fuel fuel, ResourceSystem resourceSystem, MixingSystem mixingSystem, PotionSystem potionSystem, GuildSystemv1 guildSystem, RecipesMenu recipesMenu, Tutorial tutorial, QuestsSystem questsSystem)
-    {
-        money = moneySystem.money;
+    //public SaveData(MoneySystem moneySystem, Bottles bottles, ShopSystem shopSystem, Fuel fuel, ResourceSystem resourceSystem, MixingSystem mixingSystem, PotionSystem potionSystem, GuildSystemv1 guildSystem, RecipesMenu recipesMenu, Tutorial tutorial, QuestsSystem questsSystem)
+    //{
+    //    money = moneySystem.money;
 
-        bottleCount = bottles.bottleCount;
-        //bottleCost = shopSystem.bottleCost;
+    //    bottleCount = bottles.bottleCount;
+    //    //bottleCost = shopSystem.bottleCost;
 
-        fuelCount = fuel.fuelCount;
+    //    fuelCount = fuel.fuelCount;
 
-        amountRed = resourceSystem.GetAmount(ResourceType.Red);
-        amountBlue = resourceSystem.GetAmount(ResourceType.Blue);
-        amountYellow = resourceSystem.GetAmount(ResourceType.Yellow);
-        amountWhite = resourceSystem.GetAmount(ResourceType.White);
-        amountLadan = resourceSystem.GetAmount(ResourceType.Ladan);
-        amountEye = resourceSystem.GetAmount(ResourceType.Eye);
-        amountStone = resourceSystem.GetAmount(ResourceType.Stone);
-        amountSand = resourceSystem.GetAmount(ResourceType.Sand);
+    //    amountRed = resourceSystem.GetAmount(ResourceType.Red);
+    //    amountBlue = resourceSystem.GetAmount(ResourceType.Blue);
+    //    amountYellow = resourceSystem.GetAmount(ResourceType.Yellow);
+    //    amountWhite = resourceSystem.GetAmount(ResourceType.White);
+    //    amountLadan = resourceSystem.GetAmount(ResourceType.Ladan);
+    //    amountEye = resourceSystem.GetAmount(ResourceType.Eye);
+    //    amountStone = resourceSystem.GetAmount(ResourceType.Stone);
+    //    amountSand = resourceSystem.GetAmount(ResourceType.Sand);
 
-        cauldronId = mixingSystem.GetCauldron();
+    //    cauldronId = mixingSystem.GetCauldron();
 
-        bottle1Color = potionSystem.GetColor(0);
-        bottle2Color = potionSystem.GetColor(1);
-        bottle3Color = potionSystem.GetColor(2);
-        bottle4Color = potionSystem.GetColor(3);
-        bottle5Color = potionSystem.GetColor(4);
-        bottle6Color = potionSystem.GetColor(5);
-        bottle7Color = potionSystem.GetColor(6);
-        bottle8Color = potionSystem.GetColor(7);
+    //    bottle1Color = potionSystem.GetColor(0);
+    //    bottle2Color = potionSystem.GetColor(1);
+    //    bottle3Color = potionSystem.GetColor(2);
+    //    bottle4Color = potionSystem.GetColor(3);
+    //    bottle5Color = potionSystem.GetColor(4);
+    //    bottle6Color = potionSystem.GetColor(5);
+    //    bottle7Color = potionSystem.GetColor(6);
+    //    bottle8Color = potionSystem.GetColor(7);
 
-        bottle1Effect = potionSystem.GetEffect(0);
-        bottle2Effect = potionSystem.GetEffect(1);
-        bottle3Effect = potionSystem.GetEffect(2);
-        bottle4Effect = potionSystem.GetEffect(3);
-        bottle5Effect = potionSystem.GetEffect(4);
-        bottle6Effect = potionSystem.GetEffect(5);
-        bottle7Effect = potionSystem.GetEffect(6);
-        bottle8Effect = potionSystem.GetEffect(7);
+    //    bottle1Effect = potionSystem.GetEffect(0);
+    //    bottle2Effect = potionSystem.GetEffect(1);
+    //    bottle3Effect = potionSystem.GetEffect(2);
+    //    bottle4Effect = potionSystem.GetEffect(3);
+    //    bottle5Effect = potionSystem.GetEffect(4);
+    //    bottle6Effect = potionSystem.GetEffect(5);
+    //    bottle7Effect = potionSystem.GetEffect(6);
+    //    bottle8Effect = potionSystem.GetEffect(7);
 
-        repWarriors = guildSystem.repWarriors;
-        repBandits = guildSystem.repBandits;
-        repPriests = guildSystem.repPriests;
-        repMagicians = guildSystem.repMagicians;
+    //    repWarriors = guildSystem.repWarriors;
+    //    repBandits = guildSystem.repBandits;
+    //    repPriests = guildSystem.repPriests;
+    //    repMagicians = guildSystem.repMagicians;
 
-        added = recipesMenu.addedArr;
+    //    added = recipesMenu.addedArr;
 
-        bottleUsage = bottles.bottleUsage;
+    //    bottleUsage = bottles.bottleUsage;
 
-        mainGame = tutorial.mainGame;
-        helpShown = tutorial.helpShown;
+    //    mainGame = tutorial.mainGame;
+    //    helpShown = tutorial.helpShown;
 
-        firstQuest = questsSystem.firstQuest;
-        firstAmount = questsSystem.firstAmount;
-    }
+    //    firstQuest = questsSystem.firstQuest;
+    //    firstAmount = questsSystem.firstAmount;
+    //}
 }

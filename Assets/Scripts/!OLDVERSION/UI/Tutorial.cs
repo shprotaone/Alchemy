@@ -131,8 +131,8 @@ public class Tutorial : MonoBehaviour
                 helpScreens[4].SetActive(true);
                 break;
             case 5:
-                if (GetComponent<CameraMovement>().dir == 1)
-                    GetComponent<CameraMovement>().MoveCam();
+                //if (GetComponent<CameraMovementv2>().dir == 1)
+                //    GetComponent<CameraMovementv2>().MoveCam();
                 helpScreens[5].SetActive(true);
                 break;
             case 6:

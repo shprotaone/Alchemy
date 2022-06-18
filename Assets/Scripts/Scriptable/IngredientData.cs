@@ -8,7 +8,6 @@ public class IngredientData : ScriptableObject
 {
     public string ingredientName;
     public int cost;
-    public bool isRareIngredient;
     public Color color;
     public Sprite mainSprite;
     public Sprite emptySprite;

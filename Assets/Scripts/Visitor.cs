@@ -1,34 +1,44 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Visitor : MonoBehaviour
 {
+    private const float stockTime = 50;
+
     [SerializeField] private GuildsType _currentGuild;
     [SerializeField] private Transform _visitorControllerTransform;
-
-    private const float stockTime = 50;
-    private Image[] _visitorImages;
+    [SerializeField] private Task _currentTask;
+    [SerializeField] private TMP_Text _timerText;
+    
+    private SpriteRenderer[] _visitorImages;
     private TMP_Text[] _taskText;
-
     private VisitorController _visitorController;
-    private Task _currentTask;
     private float _timer;
 
     public GuildsType Guild => _currentGuild;
 
-    private void Awake()
+    private void OnEnable()
     {
         _visitorController = _visitorControllerTransform.GetComponentInParent<VisitorController>();
-        _currentTask = GetComponentInChildren<Task>();
-        _visitorImages = GetComponentsInChildren<Image>();
+        _visitorImages = GetComponentsInChildren<SpriteRenderer>();
         _taskText = GetComponentsInChildren<TMP_Text>();
 
         SetAlpha(0);
         
         _timer = stockTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bottle"))
+        {
+            Bottle bottle = collision.GetComponent<Bottle>();
+            if (bottle.IsFull && _currentTask.ChekResult(bottle.PotionInBottle))
+            {
+                bottle.ResetBottle();
+            }
+        }
     }
 
     private void Update()
@@ -37,9 +47,9 @@ public class Visitor : MonoBehaviour
     }
 
     public void Rising()
-    {
-        _currentTask.InitTask();
+    {       
         StartCoroutine(Rise());
+        _currentTask.InitTask();
     }
 
     public void Fading()
@@ -90,11 +100,11 @@ public class Visitor : MonoBehaviour
 
     }
 
-    private void ChangeAlphaColor(float value,Image image)
+    private void ChangeAlphaColor(float value,SpriteRenderer sprite)
     {
-        Color color = image.color;
+        Color color = sprite.color;
         color.a = value;
-        image.color = color;
+        sprite.color = color;
     }
 
     private void ChangeAlphaColor(float value, TMP_Text text)
@@ -109,7 +119,7 @@ public class Visitor : MonoBehaviour
         if (_timer > 0.02)
         {
             _timer -= Time.deltaTime;
-            _visitorController.UpdateTimerDisplay(_timer);
+            UpdateTimerDisplay(_timer);
         }
         else
         {
@@ -137,4 +147,9 @@ public class Visitor : MonoBehaviour
         }
     }
 
+    private void UpdateTimerDisplay(float value)
+    {
+        float seconds = Mathf.FloorToInt(value % 60);
+        _timerText.text = seconds.ToString();
+    }
 }

@@ -41,7 +41,7 @@ public class Fuel : MonoBehaviour
         textFuel.text = fuelCount.ToString();
         if (fuelCount==0)
             addFuelButton.interactable = false;
-        cauldron.GetComponent<MixingSystem>().fuelSpeedUp();
+        //cauldron.GetComponent<MixingSystem>().fuelSpeedUp();
     }
 
     public int GetFuelCount()

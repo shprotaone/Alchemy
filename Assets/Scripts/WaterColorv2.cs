@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 
 public class WaterColorv2 : MonoBehaviour
 {
-    [SerializeField] private Image _waterImage;
+    [SerializeField] private SpriteRenderer _waterImage;
     [SerializeField] private Material _boilMaterial;
 
     [SerializeField] private Sprite _waterSprite;
@@ -21,6 +19,7 @@ public class WaterColorv2 : MonoBehaviour
         _waterImage.material.color = Color.white;
         _waterImage.sprite = _waterSprite;
     }
+
     public void ColorWater(List<Color> color)
     {
         Color resultSumColor = new Color();
@@ -33,20 +32,20 @@ public class WaterColorv2 : MonoBehaviour
         resultSumColor = resultSumColor / color.Count;
 
         _resultColor = resultSumColor;
-        _waterImage.material.DOColor(_resultColor, 1);
+        _waterImage.DOColor(_resultColor, 1);
     }
 
     public void Boiled()
     {
-        _waterImage.color = _resultColor;
         _waterImage.sprite = _boiledWaterSprite;
-        _waterImage.material = _boilMaterial;        
+        //_waterImage.color = _resultColor;
+        //_waterImage.material = _boilMaterial;        
     }
 
     public void StopBoiled()
     {
         _waterImage.sprite = _waterSprite;
-        _waterImage.material = null;
+        //_waterImage.material = null;
     }
 
     public void SetColor(Color color)

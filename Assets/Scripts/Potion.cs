@@ -4,44 +4,43 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
+    private GameObject _effect;
+    public ResourceRarity _rarityType;
     private string _name;
 
     private string[] _ingredients;
-    private string _guild;
-    private string _rarity;
-    private EffectController _effectController;
 
     private GuildsType _guildType;
     public GuildsType GuildsType => _guildType;
-    public ResourceRarity Rarity => SetRarity(_rarity);
+    public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
     public string[] Ingredients => _ingredients;
+    public GameObject Effect => _effect;
 
     private void Start()
     {
         _ingredients = new string[5];
-        _effectController = GetComponentInChildren<EffectController>(); //остановился тут
     }
 
-    public void FillPotion(PotionData potionData)
+    public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem
     {
         _name = potionData.name;
-        _guild = potionData.guild;
-        _rarity = potionData.rarity;
+        SetGuild(potionData.guild);
+        SetRarity(potionData.rarity);
 
         _ingredients = new string[5];
         FillIngredients(potionData.firstIngredient, potionData.secondIngredient, potionData.threeIngredient, potionData.fourIngredient, potionData.fiveIngredient);
-
     }
 
-    public void FillPotion(Ingredient[] ingredients)
+    public void FillPotion(Ingredient[] ingredients)        //посмотреть для чего перевод в массив string
     {
         _name = name;
+
         _ingredients = new string[ingredients.Length];
 
         for (int i = 0; i < ingredients.Length; i++)
         {
-            _ingredients[i] = IngredientsToString(ingredients[i]);
+            _ingredients[i] = IngredientsToString(ingredients[i]);           
         }
     }
 
@@ -60,6 +59,21 @@ public class Potion : MonoBehaviour
         _ingredients[4] = fiveIngredient;
     }
 
+    public void SetEffect(Ingredient[] ingredients)
+    {
+        foreach (Ingredient item in ingredients)
+        {
+            if (item != null)
+            {
+                if (item.IngredientData.resourceRarity == ResourceRarity.rare)
+                {
+                    _effect = item.EffectPrefab;
+                    return;
+                }
+            }
+        }
+    }
+
     public void SetGuild(string guild)
     {
         GuildChecker guildChecker = new GuildChecker();
@@ -71,10 +85,10 @@ public class Potion : MonoBehaviour
         _guildType = guild;
     }
 
-    public ResourceRarity SetRarity(string rarity)
+    public void SetRarity(string rarity)
     {
         RarityChecker rarityChecker = new RarityChecker();
-        return rarityChecker.RarityCheck(rarity);
+        _rarityType = rarityChecker.RarityCheck(rarity);
     }
 
     private string IngredientsToString(Ingredient ingredient)

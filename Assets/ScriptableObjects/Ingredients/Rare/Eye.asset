@@ -15,7 +15,7 @@ MonoBehaviour:
   ingredientName: Eye
   cost: 300
   isRareIngredient: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
   mainSprite: {fileID: 21300000, guid: f68e2971c15a63940ad394028214aa98, type: 3}
   emptySprite: {fileID: 21300000, guid: 0811cdc8a6572e249a1e06d78d38ecf6, type: 3}
   dragableSprite: {fileID: 21300000, guid: ebc255998f786344c874834983628bbb, type: 3}
@@ -24,3 +24,4 @@ MonoBehaviour:
   resourceRarity: 1
   dragSound: {fileID: 0}
   dropSound: {fileID: 0}
+  effect: {fileID: 1569570798650821917, guid: 31d815c69d3036341a3e6c3a11abadb2, type: 3}

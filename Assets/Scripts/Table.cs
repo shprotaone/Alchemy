@@ -1,35 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class Table : MonoBehaviour,IDropHandler
+public class Table : MonoBehaviour
 {
     [SerializeField] private bool _fullPotionTable;
-    private const string bottleTag = "Bottle";
-    private GridLayoutGroup _gridLayout;
-    private Vector2 _offset;
-
+    private TableManager _tableManager;
     public bool FullPotionTable => _fullPotionTable;
-    public Vector2 Offset => _offset;
 
-    private void Start()
+    public Vector2 SetPositionForBottle()
     {
-        _gridLayout = GetComponent<GridLayoutGroup>();
-        _offset = _gridLayout.cellSize;
-    }
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (eventData.pointerDrag.CompareTag(bottleTag))
+        if(transform.childCount == 0)
         {
-            eventData.pointerDrag.transform.SetParent(eventData.pointerEnter.transform);
-        }           
-    }
-
-    public void RefreshPos()
-    {
-        _gridLayout.enabled = false;
-        _gridLayout.enabled = true;
+            return transform.position;
+        }
+        else if(transform.childCount > 0 && _fullPotionTable)
+        {
+            return transform.position + new Vector3(transform.childCount, 0, 0);
+        }
+        else  ///clear table
+        {            
+            return transform.position - new Vector3(transform.childCount,0,0);
+        }
     }
 }

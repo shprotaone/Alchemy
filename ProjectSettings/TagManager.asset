@@ -37,11 +37,11 @@ TagManager:
   - UI
   - 
   - 
-  - Shelfs
-  - Cauldron
-  - Bottle
-  - Resource
+  - DropValid
+  - DropInvalid
   - 
+  - 
+  - Draggable
   - 
   - 
   - 
@@ -67,4 +67,10 @@ TagManager:
     locked: 0
   - name: Shelfs
     uniqueID: 3120045473
+    locked: 0
+  - name: Back
+    uniqueID: 1223403359
+    locked: 0
+  - name: Forward
+    uniqueID: 635694839
     locked: 0

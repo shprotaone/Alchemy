@@ -3,13 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
+public class Slot : MonoBehaviour
 {
-    private Image _slotImage;
+    private SpriteRenderer _slotImage;
     private Inventory _inventory;
     private IngredientData _ingredientData;
     private TMP_Text _amountText;
-    private int _amount;
 
     private void Start()
     {
@@ -18,16 +17,20 @@ public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
 
     public void FillSlot(IngredientData ingredientData,int value)
     {
-        _slotImage = GetComponent<Image>();
+        _slotImage = GetComponentInChildren<SpriteRenderer>();
         _amountText = GetComponentInChildren<TMP_Text>();
-        _amount = value;
-        RefreshAmount();
-
+        
         _ingredientData = ingredientData;
         _slotImage.sprite = ingredientData.mainSprite;
+        RefreshAmount();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    private void OnMouseDown()
+    {
+        OnBeginDrag();
+    }
+
+    public void OnBeginDrag()
     {
         GameObject ingredientGO = Instantiate(_inventory.CurrentPrefab, this.transform);
         Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
@@ -35,31 +38,24 @@ public class Slot : MonoBehaviour, IBeginDragHandler,IDragHandler
         ingredient.SetIngredientData(_ingredientData);
         ingredient.SetSlot(this);
 
-        DecreaseAmount(1);
-        eventData.pointerDrag = ingredientGO;
+        DecreaseAmount();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void IncreaseAmount()
     {
-        
-    }
-
-    public void IncreaseAmount(int value)
-    {
-        _amount += value;
+        _inventory.AddIngredient(_ingredientData);
         RefreshAmount();
     }
 
-    public void DecreaseAmount(int value)
+    public void DecreaseAmount()
     {
-        _amount -= value;
-        _inventory.DecreaseIngredient(_ingredientData, value);
+        _inventory.DecreaseIngredient(_ingredientData);
         RefreshAmount();
     }
 
     private void RefreshAmount()
     {
-        _amountText.text = _amount.ToString();
+        _amountText.text = _inventory.ShowIngredientValue(_ingredientData).ToString();
     }
 }
 

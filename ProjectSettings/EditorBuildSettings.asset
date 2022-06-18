@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 2411c545014a18c44b3691e071769e33
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Workbench.unity
     guid: ac4ff1f5cd0d89745b3a7877624f45b2
+  - enabled: 1
+    path: Assets/Scenes/Alchemi.unity
+    guid: 23b1267858686e541bc4f82d372c2ae4
   m_configObjects: {}

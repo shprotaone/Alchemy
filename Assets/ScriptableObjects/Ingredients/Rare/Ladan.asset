@@ -15,7 +15,7 @@ MonoBehaviour:
   ingredientName: Ladan
   cost: 300
   isRareIngredient: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
   mainSprite: {fileID: 21300000, guid: b14c9690d57f2524d889187fe822191b, type: 3}
   emptySprite: {fileID: 21300000, guid: f927ec993927b7e4f8eb916b8b60f28e, type: 3}
   dragableSprite: {fileID: 21300000, guid: a819499cf506a444682c598fc8c0ef27, type: 3}
@@ -24,3 +24,4 @@ MonoBehaviour:
   resourceRarity: 1
   dragSound: {fileID: 0}
   dropSound: {fileID: 0}
+  effect: {fileID: 7627892562164389108, guid: a00d67f8b94e7be4a8826a22b26ec315, type: 3}

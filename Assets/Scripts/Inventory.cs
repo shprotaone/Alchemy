@@ -7,18 +7,18 @@ public class Inventory : MonoBehaviour
     public const int stockAmount = 5;
     public const int stockBottle = 2;
 
-    [SerializeField] private UnityEngine.GameObject _currentIngredientPrefab;
-    [SerializeField] private UnityEngine.GameObject _prefabBottle;
+    [SerializeField] private GameObject _currentIngredientPrefab;
+    [SerializeField] private GameObject _prefabBottle;
 
     [SerializeField] private Transform _parentDragableObject;
     [SerializeField] private IngredientData[] _ingredients;
-    [SerializeField] private Table _clearBottleTable;
+    [SerializeField] private TableManager _tableManager;
 
     private Dictionary<IngredientData, int> _inventory;
 
     private Slot[] _slots;
 
-    public UnityEngine.GameObject CurrentPrefab => _currentIngredientPrefab;
+    public GameObject CurrentPrefab => _currentIngredientPrefab;
     public Transform ParentDragableObject => _parentDragableObject;
     public IngredientData[] Ingredients => _ingredients;
     void Start()
@@ -38,13 +38,16 @@ public class Inventory : MonoBehaviour
 
         RefreshInventory();
     }
+
     private void AddBottle(int value)
     {
         for (int i = 0; i < value; i++)
         {
-            UnityEngine.GameObject bottle = Instantiate(_prefabBottle, _clearBottleTable.transform);
+            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetPositionForBottle(),Quaternion.identity);
+            bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);
         }
     }
+
     private void RefreshInventory()
     {
         int count = 0;
@@ -63,9 +66,14 @@ public class Inventory : MonoBehaviour
         RefreshInventory();
     }
 
-    public void DecreaseIngredient(IngredientData ingredient,int value)
+    public void DecreaseIngredient(IngredientData ingredient)
     {
-        _inventory[ingredient] -= value;
+        _inventory[ingredient]--;
         RefreshInventory();
+    }
+
+    public float ShowIngredientValue(IngredientData ingredient)
+    {
+        return _inventory[ingredient];
     }
 }

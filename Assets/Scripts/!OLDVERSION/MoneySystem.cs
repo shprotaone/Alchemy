@@ -30,7 +30,7 @@ public class MoneySystem : MonoBehaviour
         moneyTextShop.text = money.ToString();
         moneyTextGuilds.text = "Деньги: " + money.ToString();
         moneyText.text = money.ToString();
-        if (money > 4000 && mixingSystem.GetComponent<MixingSystem>().cauldronId == 0 && !helpButton.interactable)
+        //if (money > 4000 && mixingSystem.GetComponent<MixingSystem>().cauldronId == 0 && !helpButton.interactable)
         {
             UIControls.GetComponent<Tutorial>().helpStep = 3;
             UIControls.GetComponent<Tutorial>().GetHelp();

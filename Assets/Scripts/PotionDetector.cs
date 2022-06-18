@@ -13,6 +13,7 @@ public class PotionDetector : MonoBehaviour
     private string _potionName;
     private PotionSizer _potionSizer;    
     private Ingredient[] _currentIngredients;
+    public Potion CurrentPotion => _currentPotion;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class PotionDetector : MonoBehaviour
         _currentPotion = GetComponent<Potion>();
     }
 
-    public Potion FillCurrentPotion(List<Ingredient> ingredients)
+    public void FillCurrentPotion(List<Ingredient> ingredients)
     {
         _currentIngredients = new Ingredient[maxIngredients];
 
@@ -28,14 +29,12 @@ public class PotionDetector : MonoBehaviour
         {
             _currentIngredients[i] = ingredients[i];
         }
-
         
         _currentPotion.FillPotion(_currentIngredients);
-        FindPotion();       
+        FindPotion();
+        _currentPotion.SetEffect(_currentIngredients);  //перенести в Potion
 
-        return _currentPotion;
     }
-
 
 
     private void FindPotion() //открыт вопрос с универсальными цветами
@@ -56,7 +55,7 @@ public class PotionDetector : MonoBehaviour
                                 _currentPotion.SetRarity(_potionSizer.Potions[i].rarity);
                                 _currentPotion.SetGuild(_potionSizer.Potions[i].guild);
 
-                                print("FromFind" + _currentPotion.name);
+                                print("FromFind" + _currentPotion.PotionName);
                                 break;
                             }
                             else

@@ -6,30 +6,29 @@ public class Ingredient : MonoBehaviour
 {
     private const float moveSpeed = 1;
 
-    [SerializeField] private Image _dragableImage;
+    [SerializeField] private SpriteRenderer _dragableImage;
     [SerializeField] private Color _color;
 
+    private GameObject _effectPrefab;
     private Slot _slot;
     private IngredientData _ingredientData;
-    private CanvasGroup _canvasGroup;
+    private bool _inClaudron;
 
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor => _color;
     public Slot Slot => _slot;
+    public GameObject EffectPrefab => _effectPrefab;
 
     private void Start()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
-        _canvasGroup.blocksRaycasts = false;
-
-        _dragableImage = GetComponent<Image>();
+        _dragableImage = GetComponent<SpriteRenderer>();
         _dragableImage.sprite = IngredientData.dragableSprite;
         _color = IngredientData.color;
     }
 
     public void Movement()
     {
-        transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(DestroyIngredient);
+        transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(IngredientInClaudron);       
     }
 
     public void SetSlot(Slot slot)
@@ -37,9 +36,19 @@ public class Ingredient : MonoBehaviour
         _slot = slot;
     }
 
+    public void SetInClaudron(bool flag)
+    {
+        _inClaudron = flag;
+    }
+
     public void SetIngredientData(IngredientData ingredient)
     {
         _ingredientData = ingredient;
+
+        if(ingredient.effect != null)
+        {
+            _effectPrefab = ingredient.effect;
+        }
     }
 
     public void DisableIngredient()
@@ -47,8 +56,13 @@ public class Ingredient : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void DestroyIngredient()
+    private void IngredientInClaudron()
     {
-        Destroy(this.gameObject);
+        if (!_inClaudron)
+        {
+            _slot.IncreaseAmount();
+        }
+
+        DisableIngredient();
     }
 }

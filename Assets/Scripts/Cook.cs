@@ -13,7 +13,7 @@ public class Cook : MonoBehaviour
     private MixingSystemv2 _mixingSystem;        
     private Claudron _claudron;
     private WaterColorv2 _waterColor;
-    private AudioSource _audioSource;
+    //private AudioSource _audioSource;
     
     private bool _isRarePotion;
 
@@ -27,7 +27,7 @@ public class Cook : MonoBehaviour
         _waterColor = GetComponentInChildren<WaterColorv2>();
         _mixingSystem = GetComponent<MixingSystemv2>();
         _claudron = GetComponent<Claudron>();
-        _audioSource = GetComponent<AudioSource>();
+        //_audioSource = GetComponent<AudioSource>();
 
         _mixingSystem._refreshDelegate += RefreshBar;
         _cookButton.onClick.AddListener(Brew);
@@ -36,7 +36,7 @@ public class Cook : MonoBehaviour
     {
         _speed = cookingSpeed;
         _waterColor.Boiled();
-        _audioSource.Play();
+        //_audioSource.Play();
         StartCoroutine(ProgressAnimation());
     }
 
@@ -54,7 +54,7 @@ public class Cook : MonoBehaviour
         }
 
         _waterColor.StopBoiled();
-        _audioSource.Stop();
+        //_audioSource.Stop();
         _canFillBottle = true;
         _speed = 0;       
     }
@@ -98,7 +98,7 @@ public class Cook : MonoBehaviour
     {
         foreach (var item in _mixingSystem.Ingredients)
         {
-            if (item.IngredientData.isRareIngredient)
+            if (item.IngredientData.resourceRarity == ResourceRarity.rare)
             {
                 _isRarePotion = true;
             }
