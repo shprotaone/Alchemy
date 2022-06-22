@@ -22,17 +22,4 @@ public class Draggable : MonoBehaviour
         if(TryGetComponent(out _currentBottle)) { }
         else if(TryGetComponent(out _currentIngredient)) { }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //Draggable colliderDraggble = other.GetComponent<Draggable>();     //выталкивание, если объекты рядом
-
-        //if (colliderDraggble != null && _dragController.LastDragged.gameObject == gameObject)
-        //{
-        //    ColliderDistance2D colliderDistance2D = other.Distance(_collider);
-        //    Vector3 diff = new Vector3(colliderDistance2D.normal.x, colliderDistance2D.normal.y) * colliderDistance2D.distance; //??
-
-        //    transform.position -= diff;
-        //}
-    }
 }

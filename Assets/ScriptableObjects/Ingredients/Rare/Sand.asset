@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Sand
   cost: 300
-  isRareIngredient: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   mainSprite: {fileID: 21300000, guid: a853bdfa1b18ed842a31193d3751aef6, type: 3}
   emptySprite: {fileID: 21300000, guid: 7ee28cde505737a468921a53814828f0, type: 3}
@@ -22,6 +21,6 @@ MonoBehaviour:
   pressedSprite: {fileID: 21300000, guid: ae3b3917be962934cac339cfa9aaf16e, type: 3}
   resourceType: 7
   resourceRarity: 1
-  dragSound: {fileID: 0}
+  dragSound: {fileID: 8300000, guid: 13f9116bf8ddd1f4384a27945482cb2a, type: 3}
   dropSound: {fileID: 0}
   effect: {fileID: 7090866186000523765, guid: a122bcf114ab0c64f95336395e6a3187, type: 3}

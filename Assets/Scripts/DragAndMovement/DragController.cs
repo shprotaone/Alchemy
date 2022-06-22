@@ -11,9 +11,10 @@ public class DragController : MonoBehaviour
     private Camera _camera;
     private Vector2 _screenPosition;
     private Vector3 _worldPosition;
-    private Draggable _lastDragged;  
+    private Draggable _lastDragged;
 
     private bool _isDragActive = false;
+    private bool _isCall = false;
 
     public Draggable LastDragged => _lastDragged;
     public bool IsDragActive => _isDragActive;
@@ -22,6 +23,7 @@ public class DragController : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
+
         if (instance == null)
         {
             instance = this;
@@ -33,7 +35,14 @@ public class DragController : MonoBehaviour
     }
     private void Update()
     {
-        CheckDrop();
+        if (_isDragActive)
+        {
+            if (Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended))
+            {
+                Drop();
+                return;
+            }
+        }
 
         if (Input.GetMouseButton(0))
         {
@@ -51,8 +60,38 @@ public class DragController : MonoBehaviour
 
         _worldPosition = _camera.ScreenToWorldPoint(_screenPosition);
 
-        SetDraggable();
-        
+        if (_isDragActive)
+        {
+            Drag();
+        }
+        else
+        {
+            RaycastHit2D hit = Physics2D.Raycast(_worldPosition, Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                Draggable draggable = hit.transform.gameObject.GetComponent<Draggable>();
+                Slot slot = hit.transform.gameObject.GetComponent<Slot>();
+
+                if (draggable != null && !_isDragActive)
+                {
+                    _lastDragged = draggable;
+                    InitDrag();
+                }
+                else if (slot != null && !_isDragActive)
+                {
+                    if (!_isCall)
+                    {
+                        slot.OnBeginDrag();
+                        InitDrag();
+                        _isCall = true;
+                    }
+
+                }
+            }
+        }
+        //SetDraggable();
+
     }
 
     private void CheckDrop()
@@ -64,7 +103,7 @@ public class DragController : MonoBehaviour
                 Drop();
                 return;
             }
-        }       
+        }
     }
 
     private void SetDraggable()
@@ -80,12 +119,23 @@ public class DragController : MonoBehaviour
             if(hit.collider != null)
             {
                 Draggable draggable = hit.transform.gameObject.GetComponent<Draggable>();
+                Slot slot = hit.transform.gameObject.GetComponent<Slot>();
 
                 if(draggable != null && !_isDragActive)
                 {
                     _lastDragged = draggable;
                     InitDrag();
-                }                
+                }
+                else if(slot != null && !_isDragActive)
+                {
+                    if (!_isCall)
+                    {
+                        slot.OnBeginDrag();
+                        InitDrag();
+                        _isCall = true;
+                    }
+                    
+                }
             }
         }
 
@@ -94,7 +144,7 @@ public class DragController : MonoBehaviour
     private void InitDrag()
     {
         UpdateDragStatus(true);
-        if(_lastDragged.CurrentBottle != null)
+        if(_lastDragged != null && _lastDragged.CurrentBottle)
         _lastDragged.CurrentBottle.gameObject.transform.SetParent(_tempTransform);
     }
 
@@ -107,20 +157,23 @@ public class DragController : MonoBehaviour
     {
         UpdateDragStatus(false);
         DropMovement();
+        _isCall = false;
     }
 
     private void UpdateDragStatus(bool isDragging)
     {
-        _isDragActive = _lastDragged.IsDragging = isDragging;
-        _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
+        if(_lastDragged != null)
+        {
+            _isDragActive = _lastDragged.IsDragging = isDragging;
+            _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
+        }
     }
     
     private void DropMovement()
     {
         if (_lastDragged.CurrentBottle != null)
         {
-            _lastDragged.CurrentBottle.SetTable();
-            _lastDragged.CurrentBottle.Movement();
+            _lastDragged.CurrentBottle.SetTable();            
         }
         else if (_lastDragged.CurrentIngredient != null)
         {

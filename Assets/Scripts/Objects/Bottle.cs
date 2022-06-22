@@ -11,6 +11,7 @@ public class Bottle : MonoBehaviour
     [SerializeField] private Transform _effectTransform;
 
     private GameObject _effect;
+    private CircleCollider2D _collider;
     private Wobble _wobble;
     private Potion _potionInBottle;
     private Table _currentTable;
@@ -24,11 +25,12 @@ public class Bottle : MonoBehaviour
         _potionInBottle = GetComponent<Potion>();
         _wobble = GetComponentInChildren<Wobble>();
         _currentTable = GetComponentInParent<Table>();
+        _collider = GetComponent<CircleCollider2D>();
     }
 
     public void Movement()
-    {    
-        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);
+    {
+        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnPlay(DisableCollider).OnComplete(SetBottleParent);
     }
 
     public void FillWaterInBottle(Color color)
@@ -60,6 +62,7 @@ public class Bottle : MonoBehaviour
     private void SetBottleParent()
     {
         transform.SetParent(_currentTable.transform);
+        _collider.enabled = true;
     }
 
     public void ResetBottle()
@@ -71,5 +74,10 @@ public class Bottle : MonoBehaviour
 
         Destroy(_effect);
         Movement();
+    }
+
+    private void DisableCollider()
+    {
+        _collider.enabled = false;
     }
 }

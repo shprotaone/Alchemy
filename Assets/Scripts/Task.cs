@@ -10,10 +10,10 @@ public class Task : MonoBehaviour
     [SerializeField] private TaskSystem _taskSystem;
     [SerializeField] private TMP_Text _potionNameText;
     [SerializeField] private TMP_Text _rewardText;
-    [SerializeField] private Image _firstIngredient;
-    [SerializeField] private Image _secondIngredient;
-    [SerializeField] private Image _thirdIngredient;
+    [SerializeField] private Transform _imagesObj;
+    
 
+    private Image [] _ingredientImages;
     private Potion _currentPotion;
     private Visitor _visitor;
     private int _rewardCoin;
@@ -23,7 +23,9 @@ public class Task : MonoBehaviour
     public Visitor Visitor => _visitor;
     public void InitTask()
     {
+        _ingredientImages = _imagesObj.GetComponentsInChildren<Image>();
         _taskSystem.TakeTask(this);
+        
         _visitor = GetComponentInParent<Visitor>();
         _currentPotion = _taskSystem.CurrentPotion;
 
@@ -36,23 +38,24 @@ public class Task : MonoBehaviour
     public void FillTask(string potionName, int reward)
     {
         _potionNameText.gameObject.SetActive(true);
+        _imagesObj.gameObject.SetActive(false);
+
         _potionNameText.text = potionName;
         _rewardCoin = reward;
         _rewardText.text = reward.ToString();
     }
 
-    public void FillTask(Sprite firstIngredient,Sprite secondIngredient,Sprite thirdIngredient, int reward)
+    public void FillTask(Sprite[] ingredientSprites, int reward)
     {        
         _potionNameText.gameObject.SetActive(false);        //лучше переделать
-        _thirdIngredient.enabled = false;
 
-        _firstIngredient.sprite = firstIngredient;
-        _secondIngredient.sprite = secondIngredient;
-
-        if(thirdIngredient != null)
+        for (int i = 0; i < ingredientSprites.Length; i++)
         {
-            _thirdIngredient.enabled = true;
-            _thirdIngredient.sprite = thirdIngredient;
+            if (ingredientSprites[i] != null)
+                _ingredientImages[i].sprite = ingredientSprites[i];
+            else
+                _ingredientImages[i].enabled = false;
+               
         }
         
         _rewardCoin = reward;

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: Stone
   cost: 300
-  isRareIngredient: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   mainSprite: {fileID: 21300000, guid: b4b4dd13c438d4443829e537af20aefa, type: 3}
   emptySprite: {fileID: 21300000, guid: 5351a40f8cd0b4e468353e1f58540d0a, type: 3}
@@ -22,6 +21,6 @@ MonoBehaviour:
   pressedSprite: {fileID: 21300000, guid: 099a320145b2b4c48bb6b3199c3340ba, type: 3}
   resourceType: 6
   resourceRarity: 1
-  dragSound: {fileID: 0}
+  dragSound: {fileID: 8300000, guid: 4d8e2a0579abb8d459572c5b59b6e031, type: 3}
   dropSound: {fileID: 0}
   effect: {fileID: 7676615127978879978, guid: 4717f9ae69baca5418e4f984ef1e4409, type: 3}

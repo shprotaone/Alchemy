@@ -8,10 +8,15 @@ public class Ingredient : MonoBehaviour
 
     [SerializeField] private SpriteRenderer _dragableImage;
     [SerializeField] private Color _color;
+    [SerializeField] private AudioClip _backSound;
 
     private GameObject _effectPrefab;
+ 
     private Slot _slot;
     private IngredientData _ingredientData;
+
+    private AudioSource _audioSource;
+    
     private bool _inClaudron;
 
     public IngredientData IngredientData => _ingredientData; 
@@ -24,11 +29,15 @@ public class Ingredient : MonoBehaviour
         _dragableImage = GetComponent<SpriteRenderer>();
         _dragableImage.sprite = IngredientData.dragableSprite;
         _color = IngredientData.color;
+        //_audioSource = GetComponent<AudioSource>();
+
+        //_audioSource.PlayOneShot(_ingredientData.dragSound);
     }
 
     public void Movement()
     {
-        transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(IngredientInClaudron);       
+        transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(IngredientInClaudron);
+        //_audioSource.PlayOneShot(_backSound);
     }
 
     public void SetSlot(Slot slot)
@@ -60,7 +69,7 @@ public class Ingredient : MonoBehaviour
     {
         if (!_inClaudron)
         {
-            _slot.IncreaseAmount();
+            _slot.IncreaseAmount();           
         }
 
         DisableIngredient();

@@ -60,16 +60,15 @@ public class TaskSystem : MonoBehaviour
         
         if (_trainingTask)
         {
-            Sprite firstIngredient = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[0]);
-            Sprite secondIngredient = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[1]);
-            Sprite thirdIngredient = null;
-            if (_currentPotion.Ingredients[2] != "*")
-            {
-                thirdIngredient = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[2]);
-            }
-             
+            Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Length];
 
-            task.FillTask(firstIngredient, secondIngredient,thirdIngredient,SetReward(_currentPotion));  //к системе тасков добавить стоимость, занести ее в JSON таблицу
+            for (int i = 0; i < ingredientsSprite.Length; i++)
+            {
+                if(_currentPotion.Ingredients[i] != "*")
+                ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[i]);
+            }
+
+            task.FillTask(ingredientsSprite,SetReward(_currentPotion));
         }
         else
         {
