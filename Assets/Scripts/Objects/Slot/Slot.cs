@@ -3,12 +3,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour,IAction
 {
     private SpriteRenderer _slotImage;
     private Inventory _inventory;
     private IngredientData _ingredientData;
     private TMP_Text _amountText;
+
+    public IngredientData IngredientData => _ingredientData;
 
     private void OnEnable()
     {
@@ -31,6 +33,7 @@ public class Slot : MonoBehaviour
         Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
         ingredient.SetIngredientData(_ingredientData);
+        
         ingredient.SetSlot(this);
 
         DecreaseAmount();
@@ -52,5 +55,12 @@ public class Slot : MonoBehaviour
     {
         _amountText.text = _inventory.ShowIngredientValue(_ingredientData).ToString();
     }
+
+    public void Action()
+    {
+        OnBeginDrag();
+    }
+
+    public void Movement() { }
 }
 

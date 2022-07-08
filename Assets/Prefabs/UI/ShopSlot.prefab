@@ -249,6 +249,8 @@ MonoBehaviour:
   _cost: {fileID: 2389914343343685830}
   _inInventoryValue: {fileID: 7061585816744477744}
   _slotImage: {fileID: 2389914342283357468}
+  _shopSystem: {fileID: 0}
+  _buyButton: {fileID: 2389914341974677124}
 --- !u!222 &5708073332538249657
 CanvasRenderer:
   m_ObjectHideFlags: 0

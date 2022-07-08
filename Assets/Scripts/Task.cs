@@ -12,7 +12,6 @@ public class Task : MonoBehaviour
     [SerializeField] private TMP_Text _rewardText;
     [SerializeField] private Transform _imagesObj;
     
-
     private Image [] _ingredientImages;
     private Potion _currentPotion;
     private Visitor _visitor;
@@ -60,6 +59,11 @@ public class Task : MonoBehaviour
         
         _rewardCoin = reward;
         _rewardText.text = reward.ToString();
+    }
+
+    public void SetCustomTask()
+    {
+
     }
 
     public void SetGuild()

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193668372587723891}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EffectTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 5975492717675343278}
   - component: {fileID: 5975492717675343277}
   - component: {fileID: 5975492717675343276}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 54c77801f686d9d47a72b45809614ee5, type: 2}
@@ -99,8 +99,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 635694839
-  m_SortingLayer: 3
+  m_SortingLayerID: -768495831
+  m_SortingLayer: 4
   m_SortingOrder: 16
   m_Sprite: {fileID: 21300000, guid: 4ecbc1b716834fe4a8e2ae2303c183b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -138,12 +138,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5975492717874033008}
   - component: {fileID: 5975492717874033023}
-  - component: {fileID: 320586687}
+  - component: {fileID: -8574785794516881806}
   - component: {fileID: 1826892289}
   - component: {fileID: 7383387637611308367}
   - component: {fileID: 8089389689234083995}
   - component: {fileID: 2439843633981381608}
-  m_Layer: 0
+  - component: {fileID: 7680754332407386074}
+  m_Layer: 12
   m_Name: Bottle
   m_TagString: Bottle
   m_Icon: {fileID: 0}
@@ -203,8 +204,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 635694839
-  m_SortingLayer: 3
+  m_SortingLayerID: -768495831
+  m_SortingLayer: 4
   m_SortingOrder: 16
   m_Sprite: {fileID: 21300000, guid: 0dfe86d0e3fbd3f4da305eaa8b3d3d51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -217,8 +218,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &320586687
-CircleCollider2D:
+--- !u!61 &-8574785794516881806
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -230,9 +231,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.59}
+  m_Offset: {x: -0.011254549, y: -0.022509217}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 1.59
+  m_Size: {x: 3.341773, y: 3.99454}
+  m_EdgeRadius: 0
 --- !u!50 &1826892289
 Rigidbody2D:
   serializedVersion: 4
@@ -266,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggingObject: 1
   IsDragging: 0
 --- !u!114 &8089389689234083995
 MonoBehaviour:
@@ -280,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fullBottle: {fileID: 5975492717675343277}
+  _bottle: {fileID: 0}
   _effectTransform: {fileID: 7193668372587723891}
 --- !u!114 &2439843633981381608
 MonoBehaviour:
@@ -294,3 +307,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rarityType: 0
+--- !u!114 &7680754332407386074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975492717874033009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fcd2b56237cd8c4e842044108e15c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickHerePrefab: {fileID: 0}

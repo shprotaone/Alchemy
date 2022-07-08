@@ -16,9 +16,8 @@ public class TaskSystem : MonoBehaviour
     [SerializeField] private GameObject _coinPrefab;
     [SerializeField] private Transform _jarTransform;
 
-    [SerializeField] private bool _trainingTask;
-    [SerializeField] private bool _commonType;
-
+    [SerializeField] private bool _imageTask;
+    
     private RewardCalculator _rewardCalculator;
     
     private PotionSizer _potionSizer;
@@ -26,22 +25,24 @@ public class TaskSystem : MonoBehaviour
     private Potion _currentPotion;
 
     private int _numberTask;
-    private bool _init;
+    [SerializeField] private bool _rareTaskInclude;
+    private bool _tutorialLevel;
     
     public Potion CurrentPotion => _currentPotion;
     public GameObject CoinPrefab => _coinPrefab;
     public Transform JarTransform => _jarTransform;
-    public PotionCyclopedia PotionCyclopedia => _potionCyclopedia;
 
     private void Start()
     {
+        TutorialSystem.OnEndedTutorial += TutorialMode;
+
         _potionSizer = _jsonReader.PotionSizer;
         _currentSizer = new PotionSizer();
         _rewardCalculator = new RewardCalculator();
 
         _currentPotion = GetComponent<Potion>();
 
-        if (_commonType)
+        if (!_rareTaskInclude)
         {
             OnlyCommonPotion();
             _currentSizer = _basePotionSizer;
@@ -49,16 +50,26 @@ public class TaskSystem : MonoBehaviour
         else
         {
             _currentSizer = _potionSizer;
+            print("Rare");
         }
     }
 
     public void TakeTask(Task task)
     {
-        PotionData currentPotionData = SetTaskPotion();
+        PotionData currentPotionData;
+
+        if (_tutorialLevel)
+        {
+            currentPotionData = SetFirstTaskPotion();
+        }
+        else
+        {
+            currentPotionData = SetTaskPotion();
+        }        
 
         _currentPotion.FillPotion(currentPotionData);
         
-        if (_trainingTask)
+        if (_imageTask)
         {
             Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Length];
 
@@ -88,11 +99,21 @@ public class TaskSystem : MonoBehaviour
         _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
     }
 
+    public void SetTaskType(bool rare)
+    {
+        _rareTaskInclude = rare;
+    }
+
     private PotionData SetTaskPotion()
     {
         _numberTask = Random.Range(0, _currentSizer.Potions.Length);
         return _currentSizer.Potions[_numberTask];
     }    
+
+    public PotionData SetFirstTaskPotion()
+    {
+        return _currentSizer.Potions[0];
+    }
 
     private int SetReward(Potion potion)
     {
@@ -113,5 +134,15 @@ public class TaskSystem : MonoBehaviour
         }
         _basePotionSizer = new PotionSizer();
         _basePotionSizer.Potions = result.ToArray();
+    }
+
+    public void TutorialMode(bool value)
+    {
+        _tutorialLevel = value;
+    }
+
+    private void OnDisable()
+    {
+        TutorialSystem.OnEndedTutorial -= TutorialMode;
     }
 }

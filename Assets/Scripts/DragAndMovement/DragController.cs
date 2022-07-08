@@ -6,8 +6,9 @@ public class DragController : MonoBehaviour
 {
     public static DragController instance = null;
 
-    [SerializeField] private Transform _tempTransform;
+    [SerializeField] private Transform _draggableParent;
 
+    public string _lastDraggedName;
     private Camera _camera;
     private Vector2 _screenPosition;
     private Vector3 _worldPosition;
@@ -15,6 +16,7 @@ public class DragController : MonoBehaviour
 
     private bool _isDragActive = false;
     private bool _isCall = false;
+    private bool _interractive = true;
 
     public Draggable LastDragged => _lastDragged;
     public bool IsDragActive => _isDragActive;
@@ -68,95 +70,45 @@ public class DragController : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(_worldPosition, Vector2.zero);
 
-            if (hit.collider != null)
+            if (hit.collider != null && _interractive)
             {
-                Draggable draggable = hit.transform.gameObject.GetComponent<Draggable>();
-                Slot slot = hit.transform.gameObject.GetComponent<Slot>();
+                Draggable draggable = hit.transform.GetComponent<Draggable>();
+                Clickable clickable = hit.transform.GetComponent<Clickable>();
+
+                Ingredient ingredient;
 
                 if (draggable != null && !_isDragActive)
                 {
                     _lastDragged = draggable;
                     InitDrag();
-                }
-                else if (slot != null && !_isDragActive)
-                {
-                    if (!_isCall)
+
+                    if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
-                        slot.OnBeginDrag();
-                        InitDrag();
-                        _isCall = true;
+                        _lastDragged = ingredient.GetComponent<Draggable>();
                     }
-
-                }
-            }
-        }
-        //SetDraggable();
-
-    }
-
-    private void CheckDrop()
-    {
-        if (_isDragActive)
-        {
-            if (Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended))
-            {
-                Drop();
-                return;
+                }            
             }
         }
     }
 
-    private void SetDraggable()
-    {
-        if (_isDragActive)
-        {
-            Drag();
-        }
-        else
-        {
-            RaycastHit2D hit = Physics2D.Raycast(_worldPosition, Vector2.zero);
-            
-            if(hit.collider != null)
-            {
-                Draggable draggable = hit.transform.gameObject.GetComponent<Draggable>();
-                Slot slot = hit.transform.gameObject.GetComponent<Slot>();
-
-                if(draggable != null && !_isDragActive)
-                {
-                    _lastDragged = draggable;
-                    InitDrag();
-                }
-                else if(slot != null && !_isDragActive)
-                {
-                    if (!_isCall)
-                    {
-                        slot.OnBeginDrag();
-                        InitDrag();
-                        _isCall = true;
-                    }
-                    
-                }
-            }
-        }
-
-    }
-
-    private void InitDrag()
+    public void InitDrag()
     {
         UpdateDragStatus(true);
-        if(_lastDragged != null && _lastDragged.CurrentBottle)
-        _lastDragged.CurrentBottle.gameObject.transform.SetParent(_tempTransform);
+        _lastDragged.DraggableAction();
+
+        _lastDragged.transform.SetParent(_draggableParent);
     }
 
     private void Drag()
-    {
+    {        
+        if(_lastDragged.DraggingObject)
         _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y);
     }
 
     private void Drop()
     {
-        UpdateDragStatus(false);
-        DropMovement();
+        UpdateDragStatus(false);       
+        DropAction();
         _isCall = false;
     }
 
@@ -168,18 +120,18 @@ public class DragController : MonoBehaviour
             _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
         }
     }
-    
-    private void DropMovement()
-    {
-        if (_lastDragged.CurrentBottle != null)
-        {
-            _lastDragged.CurrentBottle.SetTable();            
-        }
-        else if (_lastDragged.CurrentIngredient != null)
-        {
-            _lastDragged.CurrentIngredient.Movement();
-        }
 
-        _lastDragged = null;
+    /// <summary>
+    /// Активация на перетаскивание
+    /// </summary>
+    /// <param name="flag"></param>
+    public void ObjectsInterractable(bool flag)
+    {
+        _interractive = flag;
+    }
+
+    private void DropAction()
+    {
+        _lastDragged.DropMovementAction();
     }
 }

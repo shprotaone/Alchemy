@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ingredient : MonoBehaviour
+public class Ingredient : MonoBehaviour,IAction
 {
     private const float moveSpeed = 1;
 
@@ -14,6 +14,7 @@ public class Ingredient : MonoBehaviour
  
     private Slot _slot;
     private IngredientData _ingredientData;
+    private Draggable _draggable;
 
     private AudioSource _audioSource;
     
@@ -21,16 +22,13 @@ public class Ingredient : MonoBehaviour
 
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor => _color;
-    public Slot Slot => _slot;
     public GameObject EffectPrefab => _effectPrefab;
 
     private void Start()
     {
         _dragableImage = GetComponent<SpriteRenderer>();
-        _dragableImage.sprite = IngredientData.dragableSprite;
-        _color = IngredientData.color;
-        //_audioSource = GetComponent<AudioSource>();
 
+        //_audioSource = GetComponent<AudioSource>();
         //_audioSource.PlayOneShot(_ingredientData.dragSound);
     }
 
@@ -56,8 +54,15 @@ public class Ingredient : MonoBehaviour
 
         if(ingredient.effect != null)
         {
-            _effectPrefab = ingredient.effect;
+            _effectPrefab = ingredient.effect;      //почему эффекты тут? 
         }
+        DrawIngredient();
+    }
+
+    private void DrawIngredient()
+    {
+        _dragableImage.sprite = IngredientData.dragableSprite;
+        _color = IngredientData.color;
     }
 
     public void DisableIngredient()
@@ -73,5 +78,10 @@ public class Ingredient : MonoBehaviour
         }
 
         DisableIngredient();
+    }
+
+    public void Action()
+    {
+        print("Iam DRAG");
     }
 }

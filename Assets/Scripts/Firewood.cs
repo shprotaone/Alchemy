@@ -19,7 +19,7 @@ public class Firewood : MonoBehaviour
     public bool Activated => _activated;
     private void Start()
     {
-        _addFireWoodButton.onClick.AddListener(ActivateFirewood);
+        _addFireWoodButton.onClick.AddListener(AddFireWood);
         UpdateText(_fireWoodCount);
 
         if (_fireWoodCount == 0)
@@ -28,7 +28,7 @@ public class Firewood : MonoBehaviour
 
     public void AddFireWood()
     {
-        _fireWoodCount++;
+        _fireWoodCount++;           //добавить списание денег
         UpdateText(_fireWoodCount);
     }
 

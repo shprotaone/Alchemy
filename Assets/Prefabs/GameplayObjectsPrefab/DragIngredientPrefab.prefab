@@ -82,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 635694839
-  m_SortingLayer: 3
+  m_SortingLayerID: -768495831
+  m_SortingLayer: 4
   m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 1ddd95f545f51ac40afbccf2dfd15308, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -111,6 +111,7 @@ MonoBehaviour:
   _dragableImage: {fileID: 1021434656847022948}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _backSound: {fileID: 8300000, guid: 25174dd9cd1165244b33578190bd6c6b, type: 3}
+  _draggable: {fileID: -6870531906201209021}
 --- !u!114 &-6870531906201209021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggingObject: 1
   IsDragging: 0
 --- !u!61 &-2819906009747052319
 BoxCollider2D:

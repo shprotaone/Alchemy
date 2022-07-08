@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7965716357834795658}
   - component: {fileID: 2179072740849935116}
   - component: {fileID: 212684160}
+  - component: {fileID: -1244528406974802001}
   m_Layer: 0
   m_Name: Slot
   m_TagString: Untagged
@@ -230,6 +231,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1244528406974802001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265690884990992922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDragging: 0
 --- !u!1 &8229043669029254336
 GameObject:
   m_ObjectHideFlags: 0

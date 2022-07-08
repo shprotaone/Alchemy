@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 2411c545014a18c44b3691e071769e33
   - enabled: 1
-    path: Assets/Scenes/Alchemi.unity
+    path: Assets/Scenes/EndlessLevel.unity
     guid: 23b1267858686e541bc4f82d372c2ae4
   m_configObjects: {}

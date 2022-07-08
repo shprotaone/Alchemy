@@ -16,6 +16,7 @@ public class Visitor : MonoBehaviour
     private VisitorController _visitorController;
     private float _timer;
 
+    private bool _firstTask = true;
     public GuildsType Guild => _currentGuild;
 
     private void OnEnable()
@@ -36,6 +37,11 @@ public class Visitor : MonoBehaviour
             Bottle bottle = collision.GetComponent<Bottle>();
             if (bottle.IsFull && _currentTask.ChekResult(bottle.PotionInBottle))
             {
+                if (_firstTask)
+                {
+                    bottle.GetComponent<NextCountHandler>().DisableClickHerePrefab();   //сомнительно
+                    _firstTask = false;
+                }
                 bottle.ResetBottle();
             }
         }

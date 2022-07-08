@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
+    [SerializeField] private bool _draggingObject;
     public bool IsDragging;
 
     private Collider2D _collider;
     private DragController _dragController;
-    private Bottle _currentBottle;
-    private Ingredient _currentIngredient;
+    private IAction _action;
 
-    public Bottle CurrentBottle => _currentBottle;
-    public Ingredient CurrentIngredient => _currentIngredient;
+    public bool DraggingObject => _draggingObject;
+
 
     private void Start()
     {
+        _action = GetComponent<IAction>();
         _collider = GetComponent<Collider2D>();
-        _dragController = DragController.instance;
+        //_dragController = DragController.instance;
+    }
 
-        if(TryGetComponent(out _currentBottle)) { }
-        else if(TryGetComponent(out _currentIngredient)) { }
+    public void DraggableAction()
+    {                
+        _action.Action();       
+    }
+
+    public void DropMovementAction()
+    {
+        _action.Movement();
     }
 }

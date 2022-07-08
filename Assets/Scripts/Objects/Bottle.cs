@@ -3,20 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bottle : MonoBehaviour
+public class Bottle : MonoBehaviour,IAction
 {
     private const float moveSpeed = 1;
 
     [SerializeField] private SpriteRenderer _fullBottle;
+    [SerializeField] private SpriteRenderer _bottle;
     [SerializeField] private Transform _effectTransform;
 
     private GameObject _effect;
-    private CircleCollider2D _collider;
+    private BoxCollider2D _collider;
     private Wobble _wobble;
     private Potion _potionInBottle;
     private Table _currentTable;
+    private NextCountHandler _nextCountHandler;
 
     private bool _isFull;
+    private bool _firstFill = true;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
 
@@ -25,16 +28,24 @@ public class Bottle : MonoBehaviour
         _potionInBottle = GetComponent<Potion>();
         _wobble = GetComponentInChildren<Wobble>();
         _currentTable = GetComponentInParent<Table>();
-        _collider = GetComponent<CircleCollider2D>();
+        _collider = GetComponent<BoxCollider2D>();
+
+        _nextCountHandler = GetComponent<NextCountHandler>();
     }
 
     public void Movement()
     {
-        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnPlay(DisableCollider).OnComplete(SetBottleParent);
+        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);
     }
 
     public void FillWaterInBottle(Color color)
     {
+        if (_firstFill)
+        {
+            _nextCountHandler.DisableClickHerePrefab();
+            _firstFill = false;
+        }
+        
         _fullBottle.enabled = true;
         _wobble.ChangeColor(color);
         _isFull = true;
@@ -76,8 +87,13 @@ public class Bottle : MonoBehaviour
         Movement();
     }
 
-    private void DisableCollider()
+    public void DisableCollider()
     {
         _collider.enabled = false;
+    }
+
+    public void Action()
+    {
+        
     }
 }

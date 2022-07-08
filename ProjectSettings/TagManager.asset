@@ -74,3 +74,12 @@ TagManager:
   - name: Forward
     uniqueID: 635694839
     locked: 0
+  - name: Interractive
+    uniqueID: 3526471465
+    locked: 0
+  - name: UI
+    uniqueID: 4111608995
+    locked: 0
+  - name: Dialog
+    uniqueID: 3488625837
+    locked: 0

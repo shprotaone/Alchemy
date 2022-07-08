@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class VisitorController : MonoBehaviour
-{
-    private const float taskTime = 60;
-
+{   
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private AudioClip _visitorFadingSound;
     [SerializeField] private bool _shopIsOpen = false;
@@ -14,6 +11,8 @@ public class VisitorController : MonoBehaviour
     private Visitor _currentVisitor;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
+
+    public Visitor CurrentVisitor => _currentVisitor;
 
     public bool ShopIsOpen 
     { 

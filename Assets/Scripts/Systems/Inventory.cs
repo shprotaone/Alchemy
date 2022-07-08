@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
-{
-    public const int stockAmount = 5;
-    public const int stockBottle = 2;
-
+{    
     [SerializeField] private GameObject _currentIngredientPrefab;
     [SerializeField] private GameObject _prefabBottle;
 
@@ -21,30 +18,30 @@ public class Inventory : MonoBehaviour
     public GameObject CurrentPrefab => _currentIngredientPrefab;
     public Transform ParentDragableObject => _parentDragableObject;
     public IngredientData[] Ingredients => _ingredients;
+
     void Start()
     {
+        TutorialSystem.OnEndedTutorial += StartGameFilling;
         _slots = GetComponentsInChildren<Slot>();
-        _inventory = new Dictionary<IngredientData, int>();
-        AddBottle(stockBottle);
-        FillInventory();
+        _inventory = new Dictionary<IngredientData, int>();        
     }
 
-    private void FillInventory()
+    public void FillInventory(int amount)
     {
         for (int i = 0; i < _ingredients.Length; i++)
         {
-            _inventory.Add(_ingredients[i], stockAmount);
+            _inventory.Add(_ingredients[i], amount);
         }
-
+        
         RefreshInventory();
     }
 
-    private void AddBottle(int value)
+    public void AddBottle(int value)
     {
         for (int i = 0; i < value; i++)
         {
-            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetPositionForBottle(),Quaternion.identity);
-            bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);
+            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetStartPosition(),Quaternion.identity);
+            bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);            
         }
     }
 
@@ -54,9 +51,23 @@ public class Inventory : MonoBehaviour
 
         foreach (KeyValuePair<IngredientData, int> item in _inventory)
         {
-
             _slots[count].FillSlot(item.Key, item.Value);
             count++;
+        }
+    }
+
+    private void ClearIngredientsInInventory()
+    {
+        _inventory.Clear();
+    }
+
+    private void StartGameFilling(bool flag)
+    {
+        if (flag)
+        {
+            ClearIngredientsInInventory();
+            FillInventory(5);  //hardcode это плохо
+            TutorialSystem.OnEndedTutorial -= StartGameFilling;
         }
     }
 

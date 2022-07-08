@@ -1,40 +1,51 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CameraMovement : MonoBehaviour
-{
+{   
     private Camera _cam;
 
     [SerializeField] private Transform _orderWindow;
     [SerializeField] private Transform _room;
     [SerializeField] private Transform _button;
     [SerializeField] private float _cameraSpeed;
-    [SerializeField] private bool _startRoom;
-
-    private DragController _dragController;
-    private SwipeDirection _currentDirection;
-    private Vector3 _velocity = Vector3.zero;
     
+    private SwipeDirection _currentDirection;
+    private NextCountHandler _nextDialog;
+
+    private bool _startRoom;
+    private bool _isFirstChangePos;
+
     private void Start()
     {
         _cam = Camera.main;
-        _dragController = DragController.instance;
-
         StartPosition();
+        Movement();
+
+        _nextDialog = GetComponent<NextCountHandler>();
     }
 
     private void OnMouseDown()
     {
-        Movement();
+        Movement(); //ףיעט מע Mouse
+        if (_isFirstChangePos)
+        {
+            _nextDialog.DisableClickHerePrefab();
+            _isFirstChangePos = false;
+        }
+        
     }
 
-    private void Movement()
+    public void Movement()
     {
         if (_currentDirection == SwipeDirection.Down)
         {
             _cam.transform.DOMove(_orderWindow.position, _cameraSpeed, false);
             _currentDirection = SwipeDirection.Up;
             _button.DORotate(new Vector3(0, 0, 180), 1, RotateMode.Fast);
+
+            _isFirstChangePos = true;
         }
         else
         {
@@ -50,5 +61,10 @@ public class CameraMovement : MonoBehaviour
             _currentDirection = SwipeDirection.Down;
         else
             _currentDirection = SwipeDirection.Up;
+    }
+
+    public void SetStartPosition(bool startRoom)
+    {
+        _startRoom = startRoom;
     }
 }
