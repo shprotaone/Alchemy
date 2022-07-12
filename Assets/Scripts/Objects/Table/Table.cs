@@ -26,15 +26,20 @@ public class Table : MonoBehaviour
     public Vector2 SetPositionForBottle()
     {
         bottle = GetComponentInChildren<Bottle>();
-        bottle.transform.position = transform.position;
 
-        if (_fullPotionTable)
+        if (bottle != null)
         {
-            return bottle.transform.position + new Vector3(1, 0, 0);
+            bottle.transform.position = transform.position;
+
+            if (_fullPotionTable)
+            {
+                return bottle.transform.position + new Vector3(1, 0, 0);
+            }
+            else
+            {
+                return bottle.transform.position - new Vector3(1, 0, 0);
+            }
         }
-        else
-        {
-            return bottle.transform.position - new Vector3(1, 0, 0);
-        }       
+        return transform.position;
     }
 }

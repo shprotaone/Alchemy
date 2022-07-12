@@ -35,7 +35,7 @@ public class Bottle : MonoBehaviour,IAction
 
     public void Movement()
     {
-        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);
+        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);        
     }
 
     public void FillWaterInBottle(Color color)
@@ -62,6 +62,7 @@ public class Bottle : MonoBehaviour,IAction
             _effect.transform.SetParent(transform);
             _effect.transform.localScale = new Vector3(1, 1, 0);
         }
+
         print("From Bottle" + _potionInBottle.PotionName);
     }
 
@@ -82,14 +83,9 @@ public class Bottle : MonoBehaviour,IAction
         _fullBottle.enabled = false;
 
         SetTable();
-
         Destroy(_effect);
-        Movement();
-    }
 
-    public void DisableCollider()
-    {
-        _collider.enabled = false;
+        Movement();
     }
 
     public void Action()

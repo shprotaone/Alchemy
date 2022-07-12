@@ -7,7 +7,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject _currentIngredientPrefab;
     [SerializeField] private GameObject _prefabBottle;
 
-    [SerializeField] private Transform _parentDragableObject;
     [SerializeField] private IngredientData[] _ingredients;
     [SerializeField] private TableManager _tableManager;
 
@@ -16,8 +15,8 @@ public class Inventory : MonoBehaviour
     private Slot[] _slots;
 
     public GameObject CurrentPrefab => _currentIngredientPrefab;
-    public Transform ParentDragableObject => _parentDragableObject;
     public IngredientData[] Ingredients => _ingredients;
+    public Dictionary<IngredientData, int> InventoryAmout => _inventory;
 
     void Start()
     {

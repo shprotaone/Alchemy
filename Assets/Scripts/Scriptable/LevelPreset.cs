@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelPreset : ScriptableObject
 {
     public bool startWindow;
+    public bool tutorialLevel;
     public bool rareIngredientBlock;
     public bool rareTask;
     public int[] eventCount;

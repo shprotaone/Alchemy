@@ -23,11 +23,21 @@ public class Draggable : MonoBehaviour
 
     public void DraggableAction()
     {                
-        _action.Action();       
+        _action.Action();
+        _collider.enabled = true;
     }
 
     public void DropMovementAction()
-    {
+    {        
         _action.Movement();
+        StartCoroutine(DelayDisableCollider());
+    }
+
+    private IEnumerator DelayDisableCollider()
+    {
+        yield return new WaitForFixedUpdate();
+        _collider.enabled = false;
+
+        yield return null;
     }
 }

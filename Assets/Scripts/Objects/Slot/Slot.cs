@@ -5,11 +5,14 @@ using TMPro;
 
 public class Slot : MonoBehaviour,IAction
 {
-    private SpriteRenderer _slotImage;
     private Inventory _inventory;
     private IngredientData _ingredientData;
-    private TMP_Text _amountText;
 
+    private SpriteRenderer _slotImage;        
+    private GameObject _draggableIngredientPrefab;
+    private int _amountInSlot;
+
+    private TMP_Text _amountText;
     public IngredientData IngredientData => _ingredientData;
 
     private void OnEnable()
@@ -23,20 +26,26 @@ public class Slot : MonoBehaviour,IAction
         _amountText = GetComponentInChildren<TMP_Text>();
         
         _ingredientData = ingredientData;
+        _draggableIngredientPrefab = _inventory.CurrentPrefab;
         _slotImage.sprite = ingredientData.mainSprite;
         RefreshAmount();
     }
 
     public void OnBeginDrag()
     {
-        GameObject ingredientGO = Instantiate(_inventory.CurrentPrefab, this.transform);
-        Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
+        _inventory.InventoryAmout.TryGetValue(_ingredientData, out _amountInSlot);
 
-        ingredient.SetIngredientData(_ingredientData);
-        
-        ingredient.SetSlot(this);
+        if (_amountInSlot != 0)
+        {
+            GameObject ingredientGO = Instantiate(_draggableIngredientPrefab, this.transform);
+            Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
-        DecreaseAmount();
+            ingredient.SetIngredientData(_ingredientData);
+
+            ingredient.SetSlot(this);
+
+            DecreaseAmount();
+        }       
     }
 
     public void IncreaseAmount()

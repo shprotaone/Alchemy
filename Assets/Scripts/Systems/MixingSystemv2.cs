@@ -122,6 +122,8 @@ public class MixingSystemv2 : MonoBehaviour
         bottle.FillPotionInBottle(_potionDetector.CurrentPotion);
         bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
         bottle.Movement();
+
+        ClearMixSystem();
     }
 
     public void ClearMixSystem()

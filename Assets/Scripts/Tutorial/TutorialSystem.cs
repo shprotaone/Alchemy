@@ -42,8 +42,6 @@ public class TutorialSystem : MonoBehaviour
     /// <param name="eventNumber">предоставляет текущий count</param>
     public void CheckEvent(int eventNumber)
     {
-        print(eventNumber);
-
         if (eventNumber == _eventCounter.EventCount[0])        //инициализация первого гостя
         {
             _dialogManager.NextDialog();
@@ -128,6 +126,7 @@ public class TutorialSystem : MonoBehaviour
         {
             _UpOtherWindowFrame.SetActive(false);
             _dialogManager.NextDialog();
+            _dialogManager.PlateMovement(1);
         }
         else if (eventNumber == _eventCounter.EventCount[10])
         {
@@ -136,7 +135,7 @@ public class TutorialSystem : MonoBehaviour
             _dialogManager.NextDialog();
         }
         else if (eventNumber == _eventCounter.EventCount[11])
-        {
+        {            
             _guildClickFrame.SetActive(false);
             _dialogManager.DialogIsActive(false);
         }
@@ -150,12 +149,12 @@ public class TutorialSystem : MonoBehaviour
         {
             _dialogManager.NextDialog();           
         }
-        else if(eventNumber == _eventCounter.EventCount[14])//выдача задания
+        else if(eventNumber == _eventCounter.EventCount[14])  //выдача задания
         {
             _dialogManager.DialogIsActive(false);
             _dialogManager.PanelIsActive(false);
             _dialogManager.ButtonIsActive(false);
-
+           
             OnEndedTutorial?.Invoke(true);
             OnShopSlotDisabled?.Invoke(false);
         }

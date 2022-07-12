@@ -25,7 +25,7 @@ public class TaskSystem : MonoBehaviour
     private Potion _currentPotion;
 
     private int _numberTask;
-    [SerializeField] private bool _rareTaskInclude;
+    private bool _rareTaskInclude;
     private bool _tutorialLevel;
     
     public Potion CurrentPotion => _currentPotion;
@@ -36,22 +36,13 @@ public class TaskSystem : MonoBehaviour
     {
         TutorialSystem.OnEndedTutorial += TutorialMode;
 
+
         _potionSizer = _jsonReader.PotionSizer;
         _currentSizer = new PotionSizer();
         _rewardCalculator = new RewardCalculator();
 
         _currentPotion = GetComponent<Potion>();
 
-        if (!_rareTaskInclude)
-        {
-            OnlyCommonPotion();
-            _currentSizer = _basePotionSizer;
-        }
-        else
-        {
-            _currentSizer = _potionSizer;
-            print("Rare");
-        }
     }
 
     public void TakeTask(Task task)
@@ -99,9 +90,20 @@ public class TaskSystem : MonoBehaviour
         _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
     }
 
-    public void SetTaskType(bool rare)
+    public void SetPotionSizer(bool rare)
     {
         _rareTaskInclude = rare;
+
+        if (!_rareTaskInclude)
+        {
+            OnlyCommonPotion();
+            _currentSizer = _basePotionSizer;
+        }
+        else
+        {
+            _currentSizer = _potionSizer;
+            print("Rare");
+        }
     }
 
     private PotionData SetTaskPotion()
@@ -138,7 +140,19 @@ public class TaskSystem : MonoBehaviour
 
     public void TutorialMode(bool value)
     {
-        _tutorialLevel = value;
+        if (_tutorialLevel)             //сомнительное решение
+        {
+            _tutorialLevel = false;
+        }
+        else
+        {
+            _tutorialLevel = true;
+        }
+
+        if (!value)
+        {
+            SetPotionSizer(_rareTaskInclude);
+        }
     }
 
     private void OnDisable()

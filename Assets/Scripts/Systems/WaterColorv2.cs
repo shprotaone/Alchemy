@@ -50,6 +50,6 @@ public class WaterColorv2 : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        _waterImage.color = color;
+        _waterImage.DOColor(color, 1);
     }    
 }

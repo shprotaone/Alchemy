@@ -2,35 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Money : MonoBehaviour
 {
-    private const int startMoney = 500;
+    public static Action OnMoneyChanged;
 
     [SerializeField] private TMP_Text _moneyText;
     private int _money;
 
     public int CurrentMoney => _money;
+
     private void Start()
     {
-        _money = startMoney;
-        RefreshMoneyText();
+        OnMoneyChanged += RefreshMoneyText;
+    }
+    public void SetStartMoney(int money)
+    {
+        _money = money;
+        Increase(_money);
     }
 
     public void Decrease(int value)
     {
         _money -= value;
-        RefreshMoneyText();
+        OnMoneyChanged?.Invoke();
     }
 
     public void Increase(int value)
     {
         _money += value;
-        RefreshMoneyText();
+        OnMoneyChanged?.Invoke();
     }
 
     private void RefreshMoneyText()
     {
         _moneyText.text = _money.ToString();
+    }
+
+    private void OnDisable()
+    {
+        OnMoneyChanged -= RefreshMoneyText;
     }
 }

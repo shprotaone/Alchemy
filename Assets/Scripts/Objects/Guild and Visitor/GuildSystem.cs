@@ -32,12 +32,12 @@ public class GuildSystem : MonoBehaviour
     public void AddRep(GuildsType type,float value)
     {
         _guildDictionary[type] += value;
-        _guildView.RefreshSlider(type, _guildDictionary[type]);
+        //_guildView.RefreshSlider(type, _guildDictionary[type]);
     }
 
     public void RemoveRep(GuildsType type, float value)
     {
         _guildDictionary[type] -= value;
-        _guildView.RefreshSlider(type, _guildDictionary[type]);
+        //_guildView.RefreshSlider(type, _guildDictionary[type]);
     }
 }
