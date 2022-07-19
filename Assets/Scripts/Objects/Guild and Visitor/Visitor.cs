@@ -1,33 +1,34 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using DG.Tweening;
+using System.Collections;
 
 public class Visitor : MonoBehaviour
 {
     private const float stockTime = 50;
 
     [SerializeField] private GuildsType _currentGuild;
-    [SerializeField] private Transform _visitorControllerTransform;
+    [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Task _currentTask;
     [SerializeField] private TMP_Text _timerText;
-    
-    private SpriteRenderer[] _visitorImages;
-    private TMP_Text[] _taskText;
-    private VisitorController _visitorController;
-    private float _timer;
 
+    private SpriteRenderer _visitorImage;
+
+    private float _currentTimer;
+    private float _timer;
     private bool _firstTask = true;
+
     public GuildsType Guild => _currentGuild;
+    public float CurrentTimer => _currentTimer;
+
+    private void Awake()
+    {
+        VisitorController.OnVisitorOut += Fading;
+    }
 
     private void OnEnable()
     {
-        _visitorController = _visitorControllerTransform.GetComponentInParent<VisitorController>();
-        _visitorImages = GetComponentsInChildren<SpriteRenderer>();
-        _taskText = GetComponentsInChildren<TMP_Text>();
-
-        SetAlpha(0);
-        
-        _timer = stockTime;
+        _visitorImage = GetComponentInChildren<SpriteRenderer>();       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,116 +48,54 @@ public class Visitor : MonoBehaviour
         }
     }
 
-    private void Update()
+    private IEnumerator Timer()
     {
-        Timer();
-    }
+        float counter = stockTime;
+        UpdateTimerDisplay(counter);
 
-    public void Rising()
-    {       
-        StartCoroutine(Rise());
-        _currentTask.InitTask();
-    }
-
-    public void Fading()
-    {
-        _visitorController.CallVisitor();
-        _visitorController.VisitorGoOutSound();
-        StartCoroutine(Fade());       
-    }
-
-    private IEnumerator Rise()
-    {
-        this.gameObject.SetActive(true);
-
-        for (float i = 0.05f; i <= 1; i+= 0.05f)
+        while (counter > 0)
         {
-            foreach (var item in _visitorImages)
-            {
-                ChangeAlphaColor(i, item);                
-            }
-
-            foreach (var item in _taskText)
-            {
-                ChangeAlphaColor(i, item);
-            }
-            
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(1);
+            counter--;
+            UpdateTimerDisplay(counter);
         }
-    }
-
-    private IEnumerator Fade()
-    {
-        for (float i = 1; i >= 0.05f; i -= 0.05f)
-        {
-            foreach (var item in _visitorImages)
-            {
-                ChangeAlphaColor(i, item);
-            }
-
-            foreach (var item in _taskText)
-            {
-                ChangeAlphaColor(i, item);
-            }
-
-            yield return new WaitForSeconds(0.05f);
-        }
-        ResetTimer();
-
-        this.gameObject.SetActive(false);
-
-    }
-
-    private void ChangeAlphaColor(float value,SpriteRenderer sprite)
-    {
-        Color color = sprite.color;
-        color.a = value;
-        sprite.color = color;
-    }
-
-    private void ChangeAlphaColor(float value, TMP_Text text)
-    {
-        Color color = text.color;
-        color.a = value;
-        text.color = color;
-    }
-
-    private void Timer()
-    {
-        if (_timer > 0.02)
-        {
-            _timer -= Time.deltaTime;
-            UpdateTimerDisplay(_timer);
-        }
-        else
+        
+        if(counter == 0)
         {
             Fading();
             _currentTask.TaskCanceled();
-            ResetTimer();
-        }
-    }
-
-    private void ResetTimer()
-    {
-        _timer = stockTime;
-    }
-
-    private void SetAlpha(int value)
-    {
-        foreach (var item in _visitorImages)
-        {
-            ChangeAlphaColor(value, item);
         }
 
-        foreach (var item in _taskText)
-        {
-            ChangeAlphaColor(value, item);
-        }
+        yield break;
     }
 
     private void UpdateTimerDisplay(float value)
     {
         float seconds = Mathf.FloorToInt(value % 60);
         _timerText.text = seconds.ToString();
+    }
+
+    public void Rising()
+    {
+        StartCoroutine(Timer());
+        this.gameObject.SetActive(true);
+        _timerText.gameObject.SetActive(true);
+       
+        _currentTask.InitTask();
+        
+        DOTween.ToAlpha(()=> _visitorImage.color, x => _visitorImage.color = x, 1, 1);
+    }
+
+    public void Fading()
+    {        
+        this.gameObject.SetActive(true);
+
+        _currentTask.FadingTask();
+        StopAllCoroutines();
+
+        _timerText.gameObject.SetActive(false);
+        
+        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, 1);
+        VisitorController.OnVisitorOut -= Fading;       
     }
 }

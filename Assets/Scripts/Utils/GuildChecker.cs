@@ -12,29 +12,14 @@ public class GuildChecker
 
     public GuildsType GuildCheck(string value)
     {
-        if (value == allGuilds)
+        return value switch
         {
-            return GuildsType.All;
-        }
-        else if (value == saintGuild)
-        {
-            return GuildsType.Saint;
-        }
-        else if (value == knightGuild)
-        {
-            return GuildsType.Knight;
-        }
-        else if (value == wizzardGuild)
-        {
-            return GuildsType.Wizzard;
-        }
-        else if (value == banditGuild)
-        {
-            return GuildsType.Bandit;
-        }
-        else
-        {
-            return GuildsType.All;
-        }
+            allGuilds => GuildsType.All,
+            saintGuild => GuildsType.Saint,
+            knightGuild => GuildsType.Knight,
+            wizzardGuild => GuildsType.Wizzard,
+            banditGuild => GuildsType.Bandit,
+            _ => GuildsType.All
+        };
     }
 }

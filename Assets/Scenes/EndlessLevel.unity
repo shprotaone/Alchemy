@@ -2530,6 +2530,7 @@ MonoBehaviour:
   _stringToSprite: {fileID: 665253476}
   _potionCyclopedia: {fileID: 1320385059}
   _moneySystem: {fileID: 1313500667}
+  _visitorController: {fileID: 1120206558}
   _currentSizer:
     Potions: []
   _guildSystem: {fileID: 1886605364}
@@ -2549,7 +2550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad39b6420b0a2f49a20fcbcaa0cdb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rarityType: 0
 --- !u!1 &420973394
 GameObject:
   m_ObjectHideFlags: 0
@@ -7462,6 +7462,7 @@ GameObject:
   - component: {fileID: 873192736}
   - component: {fileID: 873192735}
   - component: {fileID: 873192738}
+  - component: {fileID: 873192739}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7567,6 +7568,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &873192739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873192734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!224 &893929627 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1836184103573775531, guid: 5b87ee758e25ef044b433765aa350bdd,
@@ -8163,7 +8180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 2
-  _visitorControllerTransform: {fileID: 1120206557}
+  _visitorController: {fileID: 1120206558}
   _currentTask: {fileID: 1772774367}
   _timerText: {fileID: 211530770}
 --- !u!212 &1000552443
@@ -9949,7 +9966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 0
-  _visitorControllerTransform: {fileID: 1120206557}
+  _visitorController: {fileID: 1120206558}
   _currentTask: {fileID: 867405869}
   _timerText: {fileID: 346681277}
 --- !u!50 &1328541192
@@ -10368,7 +10385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 1
-  _visitorControllerTransform: {fileID: 1120206557}
+  _visitorController: {fileID: 1120206558}
   _currentTask: {fileID: 2122287376}
   _timerText: {fileID: 1531684675}
 --- !u!50 &1362562651
@@ -11592,7 +11609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 3
-  _visitorControllerTransform: {fileID: 1120206557}
+  _visitorController: {fileID: 1120206558}
   _currentTask: {fileID: 480133677}
   _timerText: {fileID: 1431170321}
 --- !u!212 &1529919666
@@ -13481,7 +13498,7 @@ PrefabInstance:
     - target: {fileID: 4933494756206912478, guid: 1e46dc4548352784ea6ab8ddfc9b6edc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4933494756206912478, guid: 1e46dc4548352784ea6ab8ddfc9b6edc,
         type: 3}
@@ -14111,7 +14128,8 @@ MonoBehaviour:
   _dialogManager: {fileID: 224929401}
   _taskSystem: {fileID: 409848437}
   _inventory: {fileID: 1765153437}
-  _levelPreset: {fileID: 11400000, guid: 3e3e2d4db4aa70b4986a8abbdb6570d5, type: 2}
+  _money: {fileID: 1313500667}
+  _levelPreset: {fileID: 11400000, guid: 5a826d0eb275ad342b787552d2cfb8af, type: 2}
 --- !u!114 &1806170693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15326,7 +15344,7 @@ GameObject:
   - component: {fileID: 2014718933}
   - component: {fileID: 2014718934}
   - component: {fileID: 2014718935}
-  - component: {fileID: 2014718936}
+  - component: {fileID: 2014718937}
   m_Layer: 0
   m_Name: OrderPlate
   m_TagString: Untagged
@@ -15412,18 +15430,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visitorController: {fileID: 1120206558}
---- !u!114 &2014718936
-MonoBehaviour:
+--- !u!61 &2014718937
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014718932}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db7faa008d7b3499ace815ac1bf896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.17, y: 3.44}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.17, y: 3.44}
+  m_EdgeRadius: 0
 --- !u!1 &2018825409
 GameObject:
   m_ObjectHideFlags: 0
@@ -16045,7 +16077,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad39b6420b0a2f49a20fcbcaa0cdb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rarityType: 0
 --- !u!1 &2133809404
 GameObject:
   m_ObjectHideFlags: 0
@@ -19294,6 +19325,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2452824465042406446}
+        m_TargetAssemblyTypeName: ShopSlot, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2389914342205083805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19448,6 +19491,18 @@ MonoBehaviour:
       - m_Target: {fileID: 490588450}
         m_TargetAssemblyTypeName: NextDialogHandler, Assembly-CSharp
         m_MethodName: DisableClickHerePrefab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2452824463809825651}
+        m_TargetAssemblyTypeName: ShopSlot, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29546,6 +29601,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8671684322079226268}
         m_TargetAssemblyTypeName: NextCountHandler, Assembly-CSharp
         m_MethodName: DisableClickHerePrefab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6232517445341783363}
+        m_TargetAssemblyTypeName: ShopSystem, Assembly-CSharp
+        m_MethodName: RefreshMoneyCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

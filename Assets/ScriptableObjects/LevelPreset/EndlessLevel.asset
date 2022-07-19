@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564228740d25fe34181d692d1010233d, type: 3}
   m_Name: EndlessLevel
   m_EditorClassIdentifier: 
-  startWindow: 1
+  startWindow: 0
   tutorialLevel: 0
   rareIngredientBlock: 0
-  rareTask: 1
+  rareTask: 0
   eventCount: 
   startMoney: 500
   completeGoal: 100000

@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class VisitorController : MonoBehaviour
-{   
+{    
+    public static Action OnVisitorCall;
+    public static Action OnVisitorOut;
+
     [SerializeField] private Visitor[] _visitors;
-    [SerializeField] private AudioClip _visitorFadingSound;
+    [SerializeField] private AudioClip _visitorFadingSound;    
     [SerializeField] private bool _shopIsOpen = false;
 
     private Visitor _currentVisitor;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
-
+    private bool _isCall;
+    
     public Visitor CurrentVisitor => _currentVisitor;
 
     public bool ShopIsOpen 
@@ -20,10 +24,11 @@ public class VisitorController : MonoBehaviour
         set 
         { 
             _shopIsOpen = value;
+
             if (_shopIsOpen)
                 CallVisitor();
             else
-                DisableVisitor();
+                OnVisitorOut?.Invoke();
         }    
     }
 
@@ -31,25 +36,31 @@ public class VisitorController : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
 
-        if(_shopIsOpen)
-        CallVisitor();
+        OnVisitorCall += CallVisitor;
+        OnVisitorOut += VisitorGoOutSound;
+
+        if (_shopIsOpen)
+            OnVisitorCall?.Invoke();
     }
 
     public void CallVisitor()
     {
+        int visitorCount = UnityEngine.Random.Range(0, _visitors.Length);
+
         if (_shopIsOpen)
         {
-            _currentVisitor = _visitors[Random.Range(0, _visitors.Length)];
+            _currentVisitor = _visitors[visitorCount];
 
             if (_currentVisitor == _prevVisitor)
             {
-                _currentVisitor = _visitors[Random.Range(0, _visitors.Length)];
+                _currentVisitor = _visitors[visitorCount++];                
             }
+
             _currentVisitor.gameObject.SetActive(true);
             _currentVisitor.Rising();
             _audioSource.Play();
-
-            _prevVisitor = _currentVisitor;
+           
+            _prevVisitor = _currentVisitor;           
         }        
     }
 
@@ -60,9 +71,18 @@ public class VisitorController : MonoBehaviour
 
     public void DisableVisitor()
     {
-        if(_currentVisitor != null)
+        if (_currentVisitor != null)
         {
+            OnVisitorOut?.Invoke();
+
             _currentVisitor.Fading();
-        }       
+            OnVisitorCall?.Invoke();
+        }
+    }  
+
+    private void OnDisable()
+    {        
+        OnVisitorCall -= CallVisitor;
+        OnVisitorOut -= VisitorGoOutSound;
     }
 }

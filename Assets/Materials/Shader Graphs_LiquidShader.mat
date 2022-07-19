@@ -43,5 +43,5 @@ Material:
     m_Colors:
     - Color_7133d75df7fd4ee2853a40196befe27f: {r: 0.8867924, g: 0.7676148, b: 0.07864004,
         a: 0}
-    - _LiquidColor: {r: 0.9150943, g: 0.2365432, b: 0.2365432, a: 0.3254902}
+    - _LiquidColor: {r: 0.9150943, g: 0.2365432, b: 0.2365432, a: 0.5529412}
   m_BuildTextureStacks: []

@@ -14,9 +14,10 @@ public class NextCountHandler : MonoBehaviour
 
     public void DisableClickHerePrefab()
     {
-        if(_clickHerePrefab != null)
+        if(_clickHerePrefab != null && _clickHerePrefab.activeInHierarchy)
         {
             _clickHerePrefab.SetActive(false);
+            Destroy(this);
         }        
 
         OnNextCount?.Invoke();

@@ -35,7 +35,7 @@ public class Bottle : MonoBehaviour,IAction
 
     public void Movement()
     {
-        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);        
+        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);       
     }
 
     public void FillWaterInBottle(Color color)
@@ -84,12 +84,10 @@ public class Bottle : MonoBehaviour,IAction
 
         SetTable();
         Destroy(_effect);
-
-        Movement();
     }
 
     public void Action()
-    {
-        
+    {       
+
     }
 }

@@ -10,6 +10,7 @@ public class TaskSystem : MonoBehaviour
 
     [SerializeField] private PotionCyclopedia _potionCyclopedia;
     [SerializeField] private Money _moneySystem;
+    [SerializeField] private VisitorController _visitorController;
     [SerializeField] private PotionSizer _currentSizer;
     [SerializeField] private GuildSystem _guildSystem;
 
@@ -51,11 +52,11 @@ public class TaskSystem : MonoBehaviour
 
         if (_tutorialLevel)
         {
-            currentPotionData = SetFirstTaskPotion();
+            currentPotionData = GetFirstTaskPotion();
         }
         else
         {
-            currentPotionData = SetTaskPotion();
+            currentPotionData = GetTaskPotion();
         }        
 
         _currentPotion.FillPotion(currentPotionData);
@@ -83,11 +84,14 @@ public class TaskSystem : MonoBehaviour
         _moneySystem.Increase(reward);
         _potionCyclopedia.FindPotion(_currentPotion.PotionName);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
+
+        _visitorController.DisableVisitor();
     }
 
     public void TaskCanceled(float penaltyRep)
     {
         _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
+        _visitorController.DisableVisitor();
     }
 
     public void SetPotionSizer(bool rare)
@@ -106,13 +110,13 @@ public class TaskSystem : MonoBehaviour
         }
     }
 
-    private PotionData SetTaskPotion()
+    private PotionData GetTaskPotion()
     {
         _numberTask = Random.Range(0, _currentSizer.Potions.Length);
         return _currentSizer.Potions[_numberTask];
     }    
 
-    public PotionData SetFirstTaskPotion()
+    public PotionData GetFirstTaskPotion()
     {
         return _currentSizer.Potions[0];
     }

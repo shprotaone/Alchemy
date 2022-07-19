@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TradeShopController : MonoBehaviour
+public class TradeShopController : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] private VisitorController _visitorController;
     private SpriteRenderer _sprite;
@@ -8,11 +9,6 @@ public class TradeShopController : MonoBehaviour
     private void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        Controller();
-    }
-
-    private void OnMouseDown()
-    {
         Controller();
     }
 
@@ -28,5 +24,10 @@ public class TradeShopController : MonoBehaviour
             _visitorController.ShopIsOpen = true;
             _sprite.color = Color.white;
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Controller();
     }
 }

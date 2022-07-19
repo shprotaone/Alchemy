@@ -29,8 +29,7 @@ public class ShopSlot : MonoBehaviour
         }
 
         _inventory = _shopSystem.Inventory;
-        _buyButton = GetComponentInChildren<Button>();
-        _buyButton.onClick.AddListener(Buy);
+        _buyButton = GetComponentInChildren<Button>();        
 
         ShowValueInInventory();
     }
@@ -42,11 +41,13 @@ public class ShopSlot : MonoBehaviour
         _cost.text = ingredientData.cost.ToString();                   
     }
 
-    private void Buy()
+    public void Buy()
     {
-        _inventory.AddIngredient(_ingredient);
-        _shopSystem.Transaction(_ingredient.cost);
-        ShowValueInInventory();
+        if (_shopSystem.Transaction(_ingredient.cost))
+        {
+            _inventory.AddIngredient(_ingredient);
+            ShowValueInInventory();
+        }        
     }
 
     private void ShowValueInInventory()

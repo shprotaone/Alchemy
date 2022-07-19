@@ -20,13 +20,21 @@ public class Money : MonoBehaviour
     public void SetStartMoney(int money)
     {
         _money = money;
-        Increase(_money);
+        RefreshMoneyText();
     }
 
-    public void Decrease(int value)
+    public bool Decrease(int value)
     {
-        _money -= value;
-        OnMoneyChanged?.Invoke();
+        if (_money >= value)
+        {
+            _money -= value;
+            OnMoneyChanged?.Invoke();
+            return true;
+        }
+        else
+        {
+            return false;
+        }       
     }
 
     public void Increase(int value)

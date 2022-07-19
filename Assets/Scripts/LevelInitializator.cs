@@ -12,6 +12,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private DialogManager _dialogManager;
     [SerializeField] private TaskSystem _taskSystem;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private Money _money;
     
     [SerializeField] private LevelPreset _levelPreset;
     private LevelTask _levelTask;
@@ -29,6 +30,7 @@ public class LevelInitializator : MonoBehaviour
         LevelTaskInit();
 
         _tutorial = _levelPreset.tutorialLevel;
+        _money.SetStartMoney(_levelPreset.startMoney);
         _startCameraPos.SetStartPosition(_levelPreset.startWindow);
         _taskSystem.SetPotionSizer(_levelPreset.rareTask);
 

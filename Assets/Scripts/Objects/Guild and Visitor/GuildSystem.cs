@@ -23,7 +23,7 @@ public class GuildSystem : MonoBehaviour
 
         for (int i = 0; i < guildCount; i++)
         {
-            GuildsType guild = (GuildsType)Enum.GetValues(typeof(GuildsType)).GetValue(i);
+            GuildsType guild = (GuildsType)i;
 
             _guildDictionary.Add(guild,0);
         }

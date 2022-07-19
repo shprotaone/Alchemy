@@ -17,14 +17,12 @@ public class Draggable : MonoBehaviour
     private void Start()
     {
         _action = GetComponent<IAction>();
-        _collider = GetComponent<Collider2D>();
-        //_dragController = DragController.instance;
+        _collider = GetComponent<Collider2D>();        
     }
 
     public void DraggableAction()
     {                
-        _action.Action();
-        _collider.enabled = true;
+        _action.Action();        
     }
 
     public void DropMovementAction()
@@ -33,7 +31,7 @@ public class Draggable : MonoBehaviour
         StartCoroutine(DelayDisableCollider());
     }
 
-    private IEnumerator DelayDisableCollider()
+    private IEnumerator DelayDisableCollider()      //мешает при перетаскивании заново
     {
         yield return new WaitForFixedUpdate();
         _collider.enabled = false;

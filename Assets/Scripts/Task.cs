@@ -7,12 +7,15 @@ using DG.Tweening;
 
 public class Task : MonoBehaviour
 {
+    private const float timeAlpha = 1;
+
     [SerializeField] private TaskSystem _taskSystem;
     [SerializeField] private TMP_Text _potionNameText;
     [SerializeField] private TMP_Text _rewardText;
-    [SerializeField] private Transform _imagesObj;
-    
-    private Image [] _ingredientImages;
+    [SerializeField] private Transform _imagesObj;    
+    [SerializeField] private List<Image> _ingredientImages;
+    [SerializeField] private Image[] _taskImages;
+
     private Potion _currentPotion;
     private Visitor _visitor;
     private int _rewardCoin;
@@ -22,11 +25,12 @@ public class Task : MonoBehaviour
     public Visitor Visitor => _visitor;
     public void InitTask()
     {
-        _ingredientImages = _imagesObj.GetComponentsInChildren<Image>();
+        ResetIngredientImages();
         _taskSystem.TakeTask(this);
         
         _visitor = GetComponentInParent<Visitor>();
         _currentPotion = _taskSystem.CurrentPotion;
+        RisingTask();
 
         SetGuild();
         SetRewardAndPenalty();
@@ -50,15 +54,24 @@ public class Task : MonoBehaviour
 
         for (int i = 0; i < ingredientSprites.Length; i++)
         {
-            if (ingredientSprites[i] != null)
-                _ingredientImages[i].sprite = ingredientSprites[i];
-            else
+            _ingredientImages[i].sprite = ingredientSprites[i];
+
+            if (ingredientSprites[i] == null)
+            {
                 _ingredientImages[i].enabled = false;
-               
+            }
         }
-        
+
         _rewardCoin = reward;
         _rewardText.text = reward.ToString();
+    }
+
+    private void ResetIngredientImages()
+    {
+        foreach (var item in _ingredientImages)
+        {
+            item.enabled = true;
+        }
     }
 
     public void SetCustomTask()
@@ -77,13 +90,13 @@ public class Task : MonoBehaviour
         {            
             print("In Bottle " + potion.PotionName);
             _taskSystem.TaskComplete(_rewardCoin,_reward);
-            _visitor.Fading();
 
             GameObject curCoins = Instantiate(_taskSystem.CoinPrefab, transform.position, Quaternion.identity);
             
             Coin coin = curCoins.GetComponent<Coin>();
             coin.Movement(_taskSystem.JarTransform.position);
 
+            FadingTask();
             return true;
         }
         else
@@ -91,6 +104,7 @@ public class Task : MonoBehaviour
             print("Wrong");
             print("Need " + _currentPotion.PotionName);
             print("In Bottle " + potion.PotionName);
+            FadingTask();
             return false;
         }
     }
@@ -106,5 +120,36 @@ public class Task : MonoBehaviour
         _reward = calculator.CalculateReward(_currentPotion.Rarity);
         _penalty = calculator.CalculatePenalty(_currentPotion.Rarity);
     }
-    
+
+    private void RisingTask()
+    {
+        foreach (var item in _taskImages)
+        {
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha);   
+        }
+
+        foreach (var item in _ingredientImages)
+        {
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha);
+        }
+
+        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 1, timeAlpha);
+        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 1, timeAlpha);
+    }
+
+    public void FadingTask()
+    {
+        foreach (var item in _ingredientImages)
+        {
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha);
+        }
+
+        foreach (var item in _taskImages)
+        {
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha);
+        }
+
+        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 0, timeAlpha);
+        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 0, timeAlpha);
+    }
 }

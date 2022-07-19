@@ -15,7 +15,6 @@ public class DragController : MonoBehaviour
     private Draggable _lastDragged;
 
     private bool _isDragActive = false;
-    private bool _isCall = false;
     private bool _interractive = true;
 
     public Draggable LastDragged => _lastDragged;
@@ -72,8 +71,7 @@ public class DragController : MonoBehaviour
 
             if (hit.collider != null && _interractive)
             {
-                Draggable draggable = hit.transform.GetComponent<Draggable>();
-                Clickable clickable = hit.transform.GetComponent<Clickable>();
+                Draggable draggable = hit.transform.GetComponent<Draggable>();               
 
                 Ingredient ingredient;
 
@@ -96,7 +94,7 @@ public class DragController : MonoBehaviour
         UpdateDragStatus(true);
         _lastDragged.DraggableAction();
 
-        _lastDragged.transform.SetParent(_draggableParent);
+        _lastDragged.transform.SetParent(_draggableParent);     //необходимо для сброса родительского объекта!!!
     }
 
     private void Drag()
@@ -109,7 +107,6 @@ public class DragController : MonoBehaviour
     {
         UpdateDragStatus(false);       
         DropAction();
-        _isCall = false;
     }
 
     private void UpdateDragStatus(bool isDragging)

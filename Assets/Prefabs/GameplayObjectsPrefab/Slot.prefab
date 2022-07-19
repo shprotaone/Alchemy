@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cee6c7922f0454e90d56489a95ab90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider: {fileID: 7965716357834795658}
 --- !u!50 &212684160
 Rigidbody2D:
   serializedVersion: 4
@@ -243,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggingObject: 0
   IsDragging: 0
 --- !u!1 &8229043669029254336
 GameObject:

@@ -37,7 +37,7 @@ public class MixingSystemv2 : MonoBehaviour
             CheckIngredientIn(collision.gameObject);
         }
         else if (collision.CompareTag(bottleTag))
-        {
+        {            
             MixingIngredient(collision.gameObject);
         }
     }

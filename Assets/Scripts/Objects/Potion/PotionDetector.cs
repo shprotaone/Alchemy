@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PotionDetector : MonoBehaviour
@@ -8,11 +7,11 @@ public class PotionDetector : MonoBehaviour
 
     [SerializeField] private MixingSystemv2 _mixingSystem;
     [SerializeField] private JSONReader _jsonReader;
-    private Potion _currentPotion;
 
-    private string _potionName;
+    private Potion _currentPotion;
     private PotionSizer _potionSizer;    
     private Ingredient[] _currentIngredients;
+
     public Potion CurrentPotion => _currentPotion;
 
     private void Start()
@@ -36,47 +35,22 @@ public class PotionDetector : MonoBehaviour
 
     }
 
-
-    private void FindPotion() //открыт вопрос с универсальными цветами
+    private void FindPotion()
     {
         for (int i = 0; i < _potionSizer.Potions.Length; i++)
         {
-            if(_currentPotion.Ingredients[0] == _potionSizer.Potions[i].firstIngredient)
+            if (_currentPotion.PotionEquals(_potionSizer.Potions[i]))
             {
-                if(_currentPotion.Ingredients[1] == _potionSizer.Potions[i].secondIngredient)
-                {
-                    if(_currentPotion.Ingredients[2] == _potionSizer.Potions[i].threeIngredient)
-                    {
-                        if(_currentPotion.Ingredients[3] == _potionSizer.Potions[i].fourIngredient)
-                        {
-                            if(_currentPotion.Ingredients[4] == _potionSizer.Potions[i].fiveIngredient)
-                            {
-                                _currentPotion.SetNamePotion(_potionSizer.Potions[i].name);
-                                _currentPotion.SetRarity(_potionSizer.Potions[i].rarity);
-                                _currentPotion.SetGuild(_potionSizer.Potions[i].guild);
+                _currentPotion.SetNamePotion(_potionSizer.Potions[i].name);
+                _currentPotion.SetRarity(_potionSizer.Potions[i].rarity);
+                _currentPotion.SetGuild(_potionSizer.Potions[i].guild);
 
-                                break;
-                            }
-                            else
-                            {
-                                _currentPotion.SetNamePotion("");
-                            }
-                        }
-                        else
-                        {
-                            _currentPotion.SetNamePotion("");
-                        }
-                    }
-                    else
-                    {
-                        _currentPotion.SetNamePotion("");
-                    }
-                }
-                else
-                {
-                    _currentPotion.SetNamePotion("");
-                }
+                break;
             }
+            else
+            {
+                _currentPotion.SetNamePotion("");
+            }            
         }
     }           
 }

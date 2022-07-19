@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Wobble : MonoBehaviour
 {
+    private const float alfaValue = 0.8f;
     private Renderer _renderer;
 
     private Vector3 _lastPos;
@@ -59,6 +60,7 @@ public class Wobble : MonoBehaviour
 
     public void ChangeColor(Color color)
     {        
-        _renderer.material.SetColor("_LiquidColor", new Color(color.r,color.g,color.b));
+        _renderer.material.SetColor("_LiquidColor", new Color(color.r,color.g,color.b,alfaValue));
+
     }
 }

@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public class Slot : MonoBehaviour,IAction
 {
+    [SerializeField] private BoxCollider2D _boxCollider;
     private Inventory _inventory;
-    private IngredientData _ingredientData;
+    private IngredientData _ingredientData;   
 
     private SpriteRenderer _slotImage;        
     private GameObject _draggableIngredientPrefab;
-    private int _amountInSlot;
+    private float _amountInSlot;
 
     private TMP_Text _amountText;
     public IngredientData IngredientData => _ingredientData;
 
     private void OnEnable()
     {
-        _inventory = GetComponentInParent<Inventory>();
+        _inventory = GetComponentInParent<Inventory>();        
     }
 
     public void FillSlot(IngredientData ingredientData,int value)
@@ -32,11 +31,9 @@ public class Slot : MonoBehaviour,IAction
     }
 
     public void OnBeginDrag()
-    {
-        _inventory.InventoryAmout.TryGetValue(_ingredientData, out _amountInSlot);
-
-        if (_amountInSlot != 0)
-        {
+    {           
+        if (_inventory.DragFromInventory(_ingredientData))
+        {                    
             GameObject ingredientGO = Instantiate(_draggableIngredientPrefab, this.transform);
             Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
@@ -45,12 +42,12 @@ public class Slot : MonoBehaviour,IAction
             ingredient.SetSlot(this);
 
             DecreaseAmount();
-        }       
+        }
     }
 
     public void IncreaseAmount()
     {
-        _inventory.AddIngredient(_ingredientData);
+        _inventory.AddIngredient(_ingredientData);        
         RefreshAmount();
     }
 
@@ -62,7 +59,11 @@ public class Slot : MonoBehaviour,IAction
 
     private void RefreshAmount()
     {
-        _amountText.text = _inventory.ShowIngredientValue(_ingredientData).ToString();
+        _amountInSlot = _inventory.ShowIngredientValue(_ingredientData);
+
+        if (_amountInSlot > 0) _boxCollider.enabled = true;
+        _amountText.text = _amountInSlot.ToString();
+        
     }
 
     public void Action()

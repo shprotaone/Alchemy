@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
 
     public GameObject CurrentPrefab => _currentIngredientPrefab;
     public IngredientData[] Ingredients => _ingredients;
-    public Dictionary<IngredientData, int> InventoryAmout => _inventory;
+    public Dictionary<IngredientData, int> InventoryAmount => _inventory;
 
     void Start()
     {
@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
 
         foreach (KeyValuePair<IngredientData, int> item in _inventory)
         {
-            _slots[count].FillSlot(item.Key, item.Value);
+            _slots[count].FillSlot(item.Key, item.Value);            
             count++;
         }
     }
@@ -85,5 +85,17 @@ public class Inventory : MonoBehaviour
     public float ShowIngredientValue(IngredientData ingredient)
     {
         return _inventory[ingredient];
+    }
+
+    public bool DragFromInventory(IngredientData ingredient)
+    {
+        if (_inventory[ingredient] != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

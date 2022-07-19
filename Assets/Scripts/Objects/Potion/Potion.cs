@@ -5,7 +5,7 @@ using UnityEngine;
 public class Potion : MonoBehaviour
 {
     private GameObject _effect;
-    public ResourceRarity _rarityType;
+    private ResourceRarity _rarityType;
     private string _name;
 
     private string[] _ingredients;
@@ -101,5 +101,19 @@ public class Potion : MonoBehaviour
         {
             return "*";
         }
+    }
+
+    public bool PotionEquals(PotionData potionData)
+    {
+        bool potionFind = (Ingredients[0] == potionData.firstIngredient
+                            &&
+                            Ingredients[1] == potionData.secondIngredient
+                            &&
+                            Ingredients[2] == potionData.threeIngredient
+                            &&
+                            Ingredients[3] == potionData.fourIngredient
+                            &&
+                            Ingredients[4] == potionData.fiveIngredient);
+        return potionFind;
     }
 }

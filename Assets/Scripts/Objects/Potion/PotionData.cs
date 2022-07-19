@@ -18,25 +18,6 @@ public class PotionData
     public string guild;
     public string rarity;
 
-    //private string[] _ingredients;
+    //здесь можно перенести в массив прям в этом FillIngredient переносим сюда
 
-    //public string[] Ingredients => _ingredients;
-
-    //public void FillPotion(Ingredient[] ingredients)
-    //{        
-    //    firstIngredient = CheckNull(ingredients[0]);
-    //    secondIngredient = CheckNull(ingredients[1]);
-    //    threeIngredient = CheckNull(ingredients[2]);
-    //    fourIngredient = CheckNull(ingredients[3]);
-    //    fiveIngredient = CheckNull(ingredients[4]);
-
-    //    _ingredients = new string[ingredients.Length];
-
-    //    for (int i = 0; i < ingredients.Length; i++)
-    //    {
-    //        _ingredients[i] = CheckNull(ingredients[i]);
-    //    }
-    //}
-
-    
 }

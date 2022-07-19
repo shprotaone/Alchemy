@@ -22,13 +22,21 @@ public class ShopSystem : MonoBehaviour
     private void InitShopSystem()
     {        
         _ingredientData = _inventory.Ingredients;
-        _moneyText.text = _currentMoney.CurrentMoney.ToString();        
+        RefreshMoneyCount();
     }
 
-    public void Transaction(int value)
+    public bool Transaction(int value)
     {
-        _currentMoney.Decrease(value);
-        _moneyText.text = _currentMoney.CurrentMoney.ToString();
+        if(_currentMoney.Decrease(value))
+        {
+            _moneyText.text = _currentMoney.CurrentMoney.ToString();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public void FillShop()
@@ -53,6 +61,11 @@ public class ShopSystem : MonoBehaviour
             _shopSlots[0].HideSlot(false);
             _shopSlots[2].HideSlot(false);
         }
+    }
+
+    public void RefreshMoneyCount()
+    {
+        _moneyText.text = _currentMoney.CurrentMoney.ToString();
     }
 
     public void NextStepTutorial()
