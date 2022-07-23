@@ -17,7 +17,7 @@ MonoBehaviour:
   rareIngredientBlock: 0
   rareTask: 1
   eventCount: 
-  startMoney: 500
+  startMoney: 5000
   completeGoal: 10000
   resourceCountAdd: 5
   dialog: []

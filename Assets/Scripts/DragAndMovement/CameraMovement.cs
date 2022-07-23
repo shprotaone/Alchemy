@@ -1,8 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 using System;
 
-public class CameraMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour,IPointerClickHandler
 {   
     private Camera _cam;
 
@@ -24,18 +25,6 @@ public class CameraMovement : MonoBehaviour
         Movement();
 
         _nextDialog = GetComponent<NextCountHandler>();
-    }
-
-    private void OnMouseDown()
-    {
-        Movement(); //ףיעט מע Mouse
-        if (_isFirstChangePos)
-        {
-
-            _nextDialog.DisableClickHerePrefab();
-            _isFirstChangePos = false;
-        }
-        
     }
 
     public void Movement()
@@ -67,5 +56,15 @@ public class CameraMovement : MonoBehaviour
     public void SetStartPosition(bool startRoom)
     {
         _startRoom = startRoom;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Movement(); //ףיעט מע Mouse
+        if (_isFirstChangePos)
+        {
+            _nextDialog.DisableClickHerePrefab();
+            _isFirstChangePos = false;
+        }
     }
 }

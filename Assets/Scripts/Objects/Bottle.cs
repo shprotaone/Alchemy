@@ -89,6 +89,7 @@ public class Bottle : MonoBehaviour,IAction
         _fullBottle.enabled = false;
 
         SetTable();
+        SetBottleParent();
         Destroy(_effect);
     }
 

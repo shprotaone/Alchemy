@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class Table : MonoBehaviour
 {
     [SerializeField] private bool _fullPotionTable;
-    private Bottle bottle;
+    private Bottle _bottle;
     public bool FullPotionTable => _fullPotionTable;
 
     public Vector2 SetStartPosition()
@@ -25,21 +25,21 @@ public class Table : MonoBehaviour
 
     public Vector2 SetPositionForBottle()
     {
-        bottle = GetComponentInChildren<Bottle>();
+        _bottle = GetComponentInChildren<Bottle>();
 
-        if (bottle != null)
+        if (_bottle != null)
         {
-            bottle.transform.position = transform.position;
+            _bottle.transform.position = transform.position;
 
             if (_fullPotionTable)
             {
-                return bottle.transform.position + new Vector3(1, 0, 0);
+                return _bottle.transform.position + new Vector3(1, 0, 0);
             }
             else
             {
-                return bottle.transform.position - new Vector3(1, 0, 0);
+                return _bottle.transform.position - new Vector3(1, 0, 0);
             }
         }
-        return transform.position;
+        else return transform.position;
     }
 }

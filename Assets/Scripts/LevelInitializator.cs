@@ -15,6 +15,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Money _money;
 
+    //[SerializeField] private LevelPreset _levelPreset;
     private LevelPreset _levelPreset;
     private LevelTask _levelTask;
     private bool _tutorial;
@@ -76,6 +77,7 @@ public class LevelInitializator : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(LevelPresetLoader.instance != null)
         LevelPresetLoader.instance.ResetPreset();
     }
 }

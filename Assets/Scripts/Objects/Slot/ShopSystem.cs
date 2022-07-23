@@ -4,7 +4,14 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
+    private const int BottleCost = 500;
+    private const int FuelCost = 150;
+    private const int ClaudronUpgradeCost = 3000;
+
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private Firewood _firewoodSystem;
+    [SerializeField] private ClaudronQualityManager _claudronQualityManager;
+
     [SerializeField] private Money _currentMoney;
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private ShopSlot[] _shopSlots;
@@ -34,9 +41,35 @@ public class ShopSystem : MonoBehaviour
         }
         else
         {
+            Debug.LogWarning("NotHaveMoney");
             return false;
         }
         
+    }
+
+     public void BuyBottle()
+    {
+        if (Transaction(BottleCost))
+        {
+            _inventory.AddBottle(1);
+        }
+    }
+
+    public void BuyFuel()
+    {
+        if (Transaction(FuelCost))
+        {
+            _firewoodSystem.AddFireWood();
+        }
+    }
+
+    public void UpgradeClaudron()
+    {
+        if (Transaction(ClaudronUpgradeCost))
+        {
+            _claudronQualityManager.UpgradeClaudron();
+        }
+
     }
 
     public void FillShop()

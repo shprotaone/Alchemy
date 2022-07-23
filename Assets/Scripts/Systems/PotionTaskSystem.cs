@@ -104,8 +104,7 @@ public class PotionTaskSystem : MonoBehaviour
         }
         else
         {
-            _currentSizer = _potionSizer;
-            print("Rare");
+            _currentSizer = _potionSizer;            
         }
     }
 

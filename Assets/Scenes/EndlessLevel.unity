@@ -844,10 +844,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircularProgressBar_360
       objectReference: {fileID: 0}
+    - target: {fileID: 1902023251537522, guid: 0a0f1751d9b2c4855814f431fbe71c51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114020085071969746, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
       propertyPath: m_Color.a
       value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020085071969746, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114566443002095452, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
@@ -942,12 +951,12 @@ PrefabInstance:
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 220
+      value: 433.88
       objectReference: {fileID: 0}
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 220
+      value: 433.88
       objectReference: {fileID: 0}
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
@@ -1002,12 +1011,12 @@ PrefabInstance:
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 35.6
+      value: 0.000092506
       objectReference: {fileID: 0}
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 54.11
+      value: -29.106
       objectReference: {fileID: 0}
     - target: {fileID: 224255759885035486, guid: 0a0f1751d9b2c4855814f431fbe71c51,
         type: 3}
@@ -1023,6 +1032,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224567363017121320, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 433.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 224567363017121320, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 433.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 224567363017121320, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000041962
+      objectReference: {fileID: 0}
+    - target: {fileID: 224567363017121320, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00017166
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764207544658656, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 433.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764207544658656, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 433.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764207544658656, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00006485
+      objectReference: {fileID: 0}
+    - target: {fileID: 224764207544658656, guid: 0a0f1751d9b2c4855814f431fbe71c51,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00025558
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a0f1751d9b2c4855814f431fbe71c51, type: 3}
@@ -4129,8 +4178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b953ce111271746a3da6c71b74c643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireWoodCount: 5
-  _addFireWoodButton: {fileID: 8671684321362769033}
+  _addFireWoodButton: {fileID: 514624023478233501}
   _count: {fileID: 514624024212121905}
   _activeTimeSlider: {fileID: 63819520}
 --- !u!224 &551686194 stripped
@@ -7997,8 +8045,8 @@ Camera:
   m_GameObject: {fileID: 873192734}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.3647059, g: 0.18823531, b: 0.19607845, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -9630,7 +9678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126632597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.37, y: -5.53, z: 2}
+  m_LocalPosition: {x: 4.21, y: -5.53, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 915268230}
@@ -12852,7 +12900,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9ac03ef260d79c247b48e9afd4a4f22b, type: 2}
   - {fileID: 11400000, guid: 53f8854df42e3b746bb4d1052fcb00c6, type: 2}
   _claudronSystem: {fileID: 931180969}
-  _currentClaudronValue: 1
+  _currentClaudronValue: 0
 --- !u!1 &1576397813 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1741910056143206274, guid: c5b6eeff17b7c034388ebe6a5f8962d1,
@@ -18578,7 +18626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -19723,7 +19771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.18, y: 54.109985}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 54.109985}
   m_SizeDelta: {x: 76.84016, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &514624024212121905
@@ -19746,7 +19794,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: '5
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794005d9bbed06b4686d8071d312cc6f, type: 2}
   m_sharedMaterial: {fileID: 2914386488160502555, guid: 794005d9bbed06b4686d8071d312cc6f,
@@ -21367,6 +21417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 1765153437}
+  _firewoodSystem: {fileID: 550090480}
+  _claudronQualityManager: {fileID: 1571519165}
   _currentMoney: {fileID: 1313500667}
   _moneyText: {fileID: 8671684322886451956}
   _shopSlots:
@@ -25820,8 +25872,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 6232517445341783363}
+        m_TargetAssemblyTypeName: ShopSystem, Assembly-CSharp
         m_MethodName: BuyFuel
         m_Mode: 1
         m_Arguments:
@@ -31571,14 +31623,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 6232517445341783363}
+        m_TargetAssemblyTypeName: ShopSystem, Assembly-CSharp
         m_MethodName: BuyBottle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -33654,8 +33706,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1571519165}
-        m_TargetAssemblyTypeName: ClaudronQualityManager, Assembly-CSharp
+      - m_Target: {fileID: 6232517445341783363}
+        m_TargetAssemblyTypeName: ShopSystem, Assembly-CSharp
         m_MethodName: UpgradeClaudron
         m_Mode: 1
         m_Arguments:

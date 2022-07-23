@@ -26,7 +26,8 @@ public class ClaudronQualityManager : MonoBehaviour
         {
             _currentClaudronValue++;
         }
-        
+
+        CheckClaudronQuality();
         _claudronSystem.SetClaudron(_currentClaudron);
     }
 }
