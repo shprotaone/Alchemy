@@ -9,17 +9,14 @@ public class Visitor : MonoBehaviour
 
     [SerializeField] private GuildsType _currentGuild;
     [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private Task _currentTask;
+    [SerializeField] private PotionTask _currentTask;
     [SerializeField] private TMP_Text _timerText;
 
     private SpriteRenderer _visitorImage;
 
-    private float _currentTimer;
-    private float _timer;
     private bool _firstTask = true;
 
     public GuildsType Guild => _currentGuild;
-    public float CurrentTimer => _currentTimer;
 
     private void Awake()
     {
@@ -43,7 +40,9 @@ public class Visitor : MonoBehaviour
                     bottle.GetComponent<NextCountHandler>().DisableClickHerePrefab();   //сомнительно
                     _firstTask = false;
                 }
-                bottle.ResetBottle();
+                
+                bottle.ResetBottle();                
+                bottle.Movement();
             }
         }
     }
@@ -88,14 +87,19 @@ public class Visitor : MonoBehaviour
 
     public void Fading()
     {        
-        this.gameObject.SetActive(true);
+        //this.gameObject.SetActive(true);
 
         _currentTask.FadingTask();
         StopAllCoroutines();
 
         _timerText.gameObject.SetActive(false);
-        
-        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, 1);
-        VisitorController.OnVisitorOut -= Fading;       
+
+        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, 1).OnComplete(() => this.gameObject.SetActive(false));
+              
+    }
+
+    private void OnDisable()
+    {
+        VisitorController.OnVisitorOut -= Fading;
     }
 }

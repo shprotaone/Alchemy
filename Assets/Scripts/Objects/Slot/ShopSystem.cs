@@ -73,7 +73,7 @@ public class ShopSystem : MonoBehaviour
         _backButton.gameObject.GetComponent<NextCountHandler>().DisableClickHerePrefab();
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
         TutorialSystem.OnShopSlotDisabled -= TutorialMarkSlot;
     }

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GlobalTaskController : MonoBehaviour
-{  
-    [SerializeField] private LevelInitializator _levelInitializator;
+{
+    public static Action OnLevelComplete;
+
+    [SerializeField] private GameObject _endGamePanel;    
     [SerializeField] private Money _money;
     [SerializeField] private GuildSystem _guildSystem;
     [SerializeField] private TMP_Text _taskText;
@@ -15,33 +16,34 @@ public class GlobalTaskController : MonoBehaviour
 
     private void Start()
     {
-        TutorialSystem.OnEndedTutorial += SetLevelTask;
         Money.OnMoneyChanged += CheckLevelComplete;
     }
 
-    private void SetLevelTask(bool flag)
+    public void SetTaskValue(int value)
     {
-        if (flag)
+        _taskValue = value;
+        SetLevelTask();
+    }
+
+    private void SetLevelTask()
+    {
+        if (_taskValue != 0)
         {
-            if (_levelInitializator.LevelTask.MoneyTask != 0)
-            {
-                _taskValue = _levelInitializator.LevelTask.MoneyTask;
-                _taskText.text = _moneyTaskText + _taskValue;
-            }
-        }       
+            _taskText.text = _moneyTaskText + _taskValue;
+        }
     }
 
     private void CheckLevelComplete()
     {
         if (_taskValue < _money.CurrentMoney)
         {
-            print("Level Complete");
+            _endGamePanel.SetActive(true);
+            OnLevelComplete?.Invoke();
         }
     }
 
     private void OnDisable()
     {
-        TutorialSystem.OnEndedTutorial -= SetLevelTask;
         Money.OnMoneyChanged -= CheckLevelComplete;
     }
 }

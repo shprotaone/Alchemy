@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +9,15 @@ public class GuildView : MonoBehaviour
     [SerializeField] private Slider _banditSlider;
     [SerializeField] private GuildSystem _guildSystem;
 
-    private void Start()
+    private void OnEnable()
     {
-        InitSlider();
-    }
+        for (int i = 0; i < _guildSystem.GuildDictionary.Count; i++)
+        {
+            GuildsType guild = (GuildsType)i;
 
+            RefreshSlider(guild, _guildSystem.GuildDictionary[guild]);
+        }
+    }
     private void InitSlider()
     {
         _saintSlider.maxValue = _guildSystem.GuildMaxValue;
@@ -24,7 +26,7 @@ public class GuildView : MonoBehaviour
         _wizzardSlider.maxValue = _guildSystem.GuildMaxValue;
     }
 
-    public void RefreshSlider(GuildsType type,float value)
+    public void RefreshSlider(GuildsType type, float value)
     {
         switch (type)
         {
@@ -42,5 +44,4 @@ public class GuildView : MonoBehaviour
                 break;
         }
     }
-
 }

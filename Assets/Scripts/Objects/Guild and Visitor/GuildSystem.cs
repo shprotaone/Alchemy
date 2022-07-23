@@ -10,7 +10,7 @@ public class GuildSystem : MonoBehaviour
     private float _guildMaxValue = 100;
     
 
-    [SerializeField] private GuildView _guildView;
+    [SerializeField] private GuildCircleView _guildView;
 
     private Dictionary<GuildsType, float> _guildDictionary;
 
@@ -24,20 +24,20 @@ public class GuildSystem : MonoBehaviour
         for (int i = 0; i < guildCount; i++)
         {
             GuildsType guild = (GuildsType)i;
-
-            _guildDictionary.Add(guild,0);
+            _guildDictionary.Add(guild,guildMinValue);
+            _guildView.RefreshSlider(guild, guildMinValue);
         }
     }
 
     public void AddRep(GuildsType type,float value)
     {
         _guildDictionary[type] += value;
-        //_guildView.RefreshSlider(type, _guildDictionary[type]);
+        _guildView.RefreshSlider(type, _guildDictionary[type]);
     }
 
     public void RemoveRep(GuildsType type, float value)
     {
         _guildDictionary[type] -= value;
-        //_guildView.RefreshSlider(type, _guildDictionary[type]);
+        _guildView.RefreshSlider(type, _guildDictionary[type]);
     }
 }

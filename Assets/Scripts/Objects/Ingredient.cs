@@ -13,8 +13,7 @@ public class Ingredient : MonoBehaviour,IAction
     private GameObject _effectPrefab;
  
     private Slot _slot;
-    private IngredientData _ingredientData;
-    private Draggable _draggable;
+    private IngredientData _ingredientData;    
 
     private AudioSource _audioSource;
     

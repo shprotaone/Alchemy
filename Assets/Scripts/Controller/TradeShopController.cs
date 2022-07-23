@@ -9,6 +9,8 @@ public class TradeShopController : MonoBehaviour,IPointerClickHandler
     private void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
+
+        GlobalTaskController.OnLevelComplete += Controller;
         Controller();
     }
 
@@ -29,5 +31,10 @@ public class TradeShopController : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Controller();
+    }
+
+    private void OnDisable()
+    {
+        GlobalTaskController.OnLevelComplete -= Controller;
     }
 }

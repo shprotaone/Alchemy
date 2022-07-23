@@ -18,14 +18,17 @@ public class Inventory : MonoBehaviour
     public IngredientData[] Ingredients => _ingredients;
     public Dictionary<IngredientData, int> InventoryAmount => _inventory;
 
+    private void Awake()
+    {
+        _slots = GetComponentsInChildren<Slot>();
+    }
     void Start()
     {
-        TutorialSystem.OnEndedTutorial += StartGameFilling;
-        _slots = GetComponentsInChildren<Slot>();
+        TutorialSystem.OnEndedTutorial += StartGameFilling;       
         _inventory = new Dictionary<IngredientData, int>();        
     }
 
-    public void FillInventory(int amount)
+    public void FillClearInventory(int amount)
     {
         for (int i = 0; i < _ingredients.Length; i++)
         {
@@ -55,19 +58,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void ClearIngredientsInInventory()
+    private void StartGameFilling(bool secondFilling)
     {
-        _inventory.Clear();
-    }
-
-    private void StartGameFilling(bool flag)
-    {
-        if (flag)
+        if (secondFilling)
         {
-            ClearIngredientsInInventory();
-            FillInventory(5);  //hardcode это плохо
-            TutorialSystem.OnEndedTutorial -= StartGameFilling;
-        }
+            _inventory.Clear();
+            FillClearInventory(5);
+        }        
     }
 
     public void AddIngredient(IngredientData ingredient)
@@ -97,5 +94,10 @@ public class Inventory : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void OnDisable()
+    {
+        TutorialSystem.OnEndedTutorial -= StartGameFilling;
     }
 }

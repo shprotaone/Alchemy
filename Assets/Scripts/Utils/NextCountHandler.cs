@@ -17,7 +17,7 @@ public class NextCountHandler : MonoBehaviour
         if(_clickHerePrefab != null && _clickHerePrefab.activeInHierarchy)
         {
             _clickHerePrefab.SetActive(false);
-            Destroy(this);
+            //Destroy(this);
         }        
 
         OnNextCount?.Invoke();

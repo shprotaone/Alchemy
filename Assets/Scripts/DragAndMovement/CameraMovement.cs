@@ -31,6 +31,7 @@ public class CameraMovement : MonoBehaviour
         Movement(); //ףיעט מע Mouse
         if (_isFirstChangePos)
         {
+
             _nextDialog.DisableClickHerePrefab();
             _isFirstChangePos = false;
         }

@@ -15,6 +15,7 @@ public class Bottle : MonoBehaviour,IAction
     private BoxCollider2D _collider;
     private Wobble _wobble;
     private Potion _potionInBottle;
+    private TableManager _tableManager;
     private Table _currentTable;
     private NextCountHandler _nextCountHandler;
 
@@ -29,12 +30,13 @@ public class Bottle : MonoBehaviour,IAction
         _wobble = GetComponentInChildren<Wobble>();
         _currentTable = GetComponentInParent<Table>();
         _collider = GetComponent<BoxCollider2D>();
+        _tableManager = GetComponentInParent<TableManager>();
 
         _nextCountHandler = GetComponent<NextCountHandler>();
     }
 
     public void Movement()
-    {
+    {        
         transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);       
     }
 
@@ -54,7 +56,8 @@ public class Bottle : MonoBehaviour,IAction
     public void FillPotionInBottle(Potion potion)
     {
         _potionInBottle.SetNamePotion(potion.PotionName);
-        _currentTable = _currentTable.GetComponentInParent<TableManager>().FullPotionTable;
+
+        SetTable();
 
         if(potion.Rarity == ResourceRarity.rare)
         {
@@ -67,8 +70,11 @@ public class Bottle : MonoBehaviour,IAction
     }
 
     public void SetTable()
-    {
-        _currentTable = _currentTable.GetComponentInParent<TableManager>().EmptyPotionTable;
+    {        
+        if (_isFull)
+            _currentTable = _tableManager.FullPotionTable;
+        else
+            _currentTable = _tableManager.EmptyPotionTable;
     }
 
     private void SetBottleParent()
@@ -87,7 +93,7 @@ public class Bottle : MonoBehaviour,IAction
     }
 
     public void Action()
-    {       
-
+    {
+        
     }
 }

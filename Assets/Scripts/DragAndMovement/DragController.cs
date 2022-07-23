@@ -74,6 +74,7 @@ public class DragController : MonoBehaviour
                 Draggable draggable = hit.transform.GetComponent<Draggable>();               
 
                 Ingredient ingredient;
+                Bottle bottle;
 
                 if (draggable != null && !_isDragActive)
                 {
@@ -83,6 +84,11 @@ public class DragController : MonoBehaviour
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
+                        _lastDragged.transform.SetParent(_draggableParent);
+                    }
+                    else if(bottle = draggable.GetComponentInChildren<Bottle>())
+                    {
+                        bottle.transform.SetParent(_draggableParent);
                     }
                 }            
             }
@@ -93,8 +99,6 @@ public class DragController : MonoBehaviour
     {
         UpdateDragStatus(true);
         _lastDragged.DraggableAction();
-
-        _lastDragged.transform.SetParent(_draggableParent);     //необходимо для сброса родительского объекта!!!
     }
 
     private void Drag()

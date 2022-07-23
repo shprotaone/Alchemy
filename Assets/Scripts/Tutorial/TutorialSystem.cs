@@ -29,12 +29,6 @@ public class TutorialSystem : MonoBehaviour
       
     private Visitor _firstVisitor;
 
-    private void OnEnable()
-    {
-        EventCounter.OnIncreasedEventCount += CheckEvent;
-        OnEndedTutorial?.Invoke(false);
-        OnUIInterract?.Invoke(false);
-    }
 
     /// <summary>
     /// Все действия в привязке к номеру эвента
@@ -160,12 +154,18 @@ public class TutorialSystem : MonoBehaviour
         }
     }
 
-    public IEnumerator StartTutorialDelay()
+    public IEnumerator StartTutorialDelay(bool value)
     {
-        yield return new WaitForSeconds(2f);
-        OnUIInterract?.Invoke(false);
-        _dialogManager.StartDialogSystem();
-        yield return null;
+        if (value)
+        {
+            EventCounter.OnIncreasedEventCount += CheckEvent;
+            OnEndedTutorial?.Invoke(false);
+
+            yield return new WaitForSeconds(2f);
+            OnUIInterract?.Invoke(false);
+            _dialogManager.StartDialogSystem();
+            yield return null;
+        }       
     }
 
     private void SetFirstVisitor()

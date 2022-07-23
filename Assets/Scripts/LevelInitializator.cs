@@ -10,23 +10,27 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private EventCounter _eventDialogCounter;
     [SerializeField] private CameraMovement _startCameraPos;    
     [SerializeField] private DialogManager _dialogManager;
-    [SerializeField] private TaskSystem _taskSystem;
+    [SerializeField] private PotionTaskSystem _taskSystem;
+    [SerializeField] private GlobalTaskController _globalTaskController;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Money _money;
-    
-    [SerializeField] private LevelPreset _levelPreset;
+
+    private LevelPreset _levelPreset;
     private LevelTask _levelTask;
     private bool _tutorial;
 
     public LevelTask LevelTask => _levelTask;
 
-    private void Start()
+    private void Awake()
     {
-        //if (LevelPresetLoader.instance.LevelPreset != null)
-        //{
-        //    _levelPreset = LevelPresetLoader.instance.LevelPreset;
-        //}
+        if (LevelPresetLoader.instance.LevelPreset != null)
+        {
+            _levelPreset = LevelPresetLoader.instance.LevelPreset;
+        }
+    }
 
+    private void Start()
+    {        
         LevelTaskInit();
 
         _tutorial = _levelPreset.tutorialLevel;
@@ -38,21 +42,24 @@ public class LevelInitializator : MonoBehaviour
         {
             DragController.instance.ObjectsInterractable(false);
 
-            StartCoroutine(_tutorialSystem.StartTutorialDelay());
-            _taskSystem.TutorialMode(true);
-            _eventDialogCounter.SetEventCounterArray(_levelPreset.eventCount);
-            _inventory.FillInventory(0);
+            StartCoroutine(_tutorialSystem.StartTutorialDelay(true));
+            _taskSystem.SetTutorialMode();
+            _taskSystem.TutorialMode(true);            
+            _inventory.FillClearInventory(0);
             _inventory.AddBottle(stockBottleAmount);
+            _eventDialogCounter.SetEventCounterArray(_levelPreset.eventCount);                        
             _dialogManager.SetDialogArray(_levelPreset.dialog);
         }
         else
         {
             _eventDialogCounter.enabled = false;
             _dialogManager.enabled = false;
-            _tutorialSystem.enabled = false;
-            _inventory.FillInventory(stockAmount);
+            StartCoroutine(_tutorialSystem.StartTutorialDelay(false));
+            _taskSystem.TutorialMode(false);
+            _inventory.FillClearInventory(stockAmount);
             _inventory.AddBottle(stockBottleAmount);
-        }                  
+        }
+        _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
     }  
 
     private void LevelTaskInit()
@@ -60,5 +67,15 @@ public class LevelInitializator : MonoBehaviour
         _levelTask = new LevelTask();
 
         _levelTask.SetMoneyTask(_levelPreset.completeGoal);
+    }
+
+    private void TutorialLevelInit()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        LevelPresetLoader.instance.ResetPreset();
     }
 }
