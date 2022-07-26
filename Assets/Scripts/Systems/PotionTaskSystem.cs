@@ -33,16 +33,44 @@ public class PotionTaskSystem : MonoBehaviour
     public GameObject CoinPrefab => _coinPrefab;
     public Transform JarTransform => _jarTransform;
 
-    private void Start()
+    public void InitPotionSizer()
     {
         TutorialSystem.OnEndedTutorial += TutorialMode;
 
         _potionSizer = _jsonReader.PotionSizer;
         _currentSizer = new PotionSizer();
+       
         _rewardCalculator = new RewardCalculator();
-
         _currentPotion = GetComponent<Potion>();
+    }
 
+    public void SetPotionSizer(bool rare)
+    {
+        _rareTaskInclude = rare;
+
+        if (!_rareTaskInclude)
+        {
+            SetCommonPotionSizer();
+            _currentSizer = _basePotionSizer;
+        }
+        else
+        {
+            _currentSizer = _potionSizer;
+        }
+    }
+    private void SetCommonPotionSizer()
+    {
+        List<PotionData> result = new List<PotionData>();
+
+        foreach (var item in _potionSizer.Potions)
+        {
+            if (item.rarity == ResourceRarity.common.ToString())
+            {
+                result.Add(item);
+            }
+        }
+        _basePotionSizer = new PotionSizer();
+        _basePotionSizer.Potions = result.ToArray();
     }
 
     public void TakeTask(PotionTask task)
@@ -93,21 +121,6 @@ public class PotionTaskSystem : MonoBehaviour
         _visitorController.DisableVisitor();
     }
 
-    public void SetPotionSizer(bool rare)
-    {
-        _rareTaskInclude = rare;
-
-        if (!_rareTaskInclude)
-        {
-            OnlyCommonPotion();
-            _currentSizer = _basePotionSizer;
-        }
-        else
-        {
-            _currentSizer = _potionSizer;            
-        }
-    }
-
     private PotionData GetTaskPotion()
     {
         _numberTask = Random.Range(0, _currentSizer.Potions.Length);
@@ -124,21 +137,6 @@ public class PotionTaskSystem : MonoBehaviour
     {
         _rewardCalculator.Calculate(potion.GuildsType, potion.Rarity);
         return _rewardCalculator.Reward;
-    }
-
-    private void OnlyCommonPotion()
-    {
-        List<PotionData> result = new List<PotionData>();
-
-        foreach (var item in _potionSizer.Potions)
-        {
-            if (item.rarity == ResourceRarity.common.ToString())
-            {
-                result.Add(item);
-            }
-        }
-        _basePotionSizer = new PotionSizer();
-        _basePotionSizer.Potions = result.ToArray();
     }
 
     public void SetTutorialMode()

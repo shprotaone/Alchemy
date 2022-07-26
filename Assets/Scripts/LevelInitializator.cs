@@ -13,10 +13,13 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private PotionTaskSystem _taskSystem;
     [SerializeField] private GlobalTaskController _globalTaskController;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private ShopController _shopController;
     [SerializeField] private Money _money;
+    [SerializeField] private VisitorController _visitorController;
 
-    //[SerializeField] private LevelPreset _levelPreset;
-    private LevelPreset _levelPreset;
+    [SerializeField] private LevelPreset _levelPreset;
+    //private LevelPreset _levelPreset;
+
     private LevelTask _levelTask;
     private bool _tutorial;
 
@@ -24,21 +27,22 @@ public class LevelInitializator : MonoBehaviour
 
     private void Awake()
     {
-        if (LevelPresetLoader.instance.LevelPreset != null)
-        {
-            _levelPreset = LevelPresetLoader.instance.LevelPreset;
-        }
+        //if (LevelPresetLoader.instance.LevelPreset != null)
+        //{
+        //    _levelPreset = LevelPresetLoader.instance.LevelPreset;
+        //}
     }
 
     private void Start()
     {        
         LevelTaskInit();
+        _taskSystem.InitPotionSizer();
 
         _tutorial = _levelPreset.tutorialLevel;
         _money.SetStartMoney(_levelPreset.startMoney);
         _startCameraPos.SetStartPosition(_levelPreset.startWindow);
         _taskSystem.SetPotionSizer(_levelPreset.rareTask);
-
+      
         if (_tutorial)
         {
             DragController.instance.ObjectsInterractable(false);
@@ -60,6 +64,10 @@ public class LevelInitializator : MonoBehaviour
             _inventory.FillClearInventory(stockAmount);
             _inventory.AddBottle(stockBottleAmount);
         }
+
+        _visitorController.InitVisitorController();
+
+        CheckShopController();
         _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
     }  
 
@@ -70,9 +78,16 @@ public class LevelInitializator : MonoBehaviour
         _levelTask.SetMoneyTask(_levelPreset.completeGoal);
     }
 
-    private void TutorialLevelInit()
+    private void CheckShopController()
     {
-
+        if (_levelPreset.ShopController)
+        {
+            _shopController.gameObject.SetActive(true);
+        }
+        else
+        {
+            _shopController.gameObject.SetActive(false);
+        }
     }
 
     private void OnDestroy()

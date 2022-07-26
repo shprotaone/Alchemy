@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PotionCyclopedia : MonoBehaviour
 {
     [SerializeField] private JSONReader _jsonReader;
+    [SerializeField] private InGameTimeController _gameTimeController;
     [SerializeField] private StringToSprite _imageConverter;
     [SerializeField] private Transform _cyclopediaTransform;
 

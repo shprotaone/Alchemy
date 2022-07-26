@@ -24,7 +24,7 @@ public class Bottle : MonoBehaviour,IAction
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
 
-    private void Start()
+    private void Start()        //убрать GetComponent
     {
         _potionInBottle = GetComponent<Potion>();
         _wobble = GetComponentInChildren<Wobble>();
@@ -36,8 +36,8 @@ public class Bottle : MonoBehaviour,IAction
     }
 
     public void Movement()
-    {        
-        transform.DOMove(_currentTable.SetPositionForBottle(), moveSpeed, false).OnComplete(SetBottleParent);       
+    {               
+        transform.DOMove(_currentTable.transform.position, moveSpeed, false).OnStart(Test).OnComplete(EnableCollider);       
     }
 
     public void FillWaterInBottle(Color color)
@@ -77,9 +77,14 @@ public class Bottle : MonoBehaviour,IAction
             _currentTable = _tableManager.EmptyPotionTable;
     }
 
-    private void SetBottleParent()
+    private void Test()
     {
         transform.SetParent(_currentTable.transform);
+        _currentTable.SortBottlePosition();
+    }
+
+    private void EnableCollider()
+    {
         _collider.enabled = true;
     }
 
@@ -89,7 +94,7 @@ public class Bottle : MonoBehaviour,IAction
         _fullBottle.enabled = false;
 
         SetTable();
-        SetBottleParent();
+        EnableCollider();
         Destroy(_effect);
     }
 

@@ -16,6 +16,7 @@ MonoBehaviour:
   tutorialLevel: 0
   rareIngredientBlock: 0
   rareTask: 1
+  ShopController: 1
   eventCount: 
   startMoney: 5000
   completeGoal: 10000

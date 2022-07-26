@@ -21,12 +21,12 @@ public class Draggable : MonoBehaviour
     }
 
     public void DraggableAction()
-    {                
+    {
         _action.Action();        
     }
 
     public void DropMovementAction()
-    {        
+    {
         _action.Movement();
         StartCoroutine(DelayDisableCollider());
     }

@@ -8,7 +8,6 @@ public class DragController : MonoBehaviour
 
     [SerializeField] private Transform _draggableParent;
 
-    public string _lastDraggedName;
     private Camera _camera;
     private Vector2 _screenPosition;
     private Vector3 _worldPosition;

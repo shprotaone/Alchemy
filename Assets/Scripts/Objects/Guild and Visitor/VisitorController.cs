@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using DG.Tweening;
 
 public class VisitorController : MonoBehaviour
 {    
@@ -8,39 +7,38 @@ public class VisitorController : MonoBehaviour
     public static Action OnVisitorOut;
 
     [SerializeField] private Visitor[] _visitors;
-    [SerializeField] private AudioClip _visitorFadingSound;    
-    [SerializeField] private bool _shopIsOpen = false;
-
+    [SerializeField] private AudioClip _visitorFadingSound;
+    
     private Visitor _currentVisitor;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
     private bool _isCall;
-    
+    private bool _shopIsOpen;
+
     public Visitor CurrentVisitor => _currentVisitor;
 
-    public bool ShopIsOpen 
-    { 
-        get { return _shopIsOpen; }
-        set 
-        { 
-            _shopIsOpen = value;
+    public bool ShopIsOpen => _shopIsOpen;
 
-            if (_shopIsOpen)
-                CallVisitor();
-            else
-                OnVisitorOut?.Invoke();
-        }    
-    }
-
-    private void Start()
+    public void InitVisitorController()
     {
         _audioSource = GetComponent<AudioSource>();
-
+        _shopIsOpen = true;
+      
         OnVisitorCall += CallVisitor;
         OnVisitorOut += VisitorGoOutSound;
 
+        ShopControl(_shopIsOpen);
+
+    }
+
+    public void ShopControl(bool flag)
+    {
+        _shopIsOpen = flag;
+
         if (_shopIsOpen)
             OnVisitorCall?.Invoke();
+        else
+            DisableAllVisitors();
     }
 
     public void CallVisitor()
@@ -89,6 +87,17 @@ public class VisitorController : MonoBehaviour
             OnVisitorCall?.Invoke();
         }
     }  
+
+    private void DisableAllVisitors()
+    {
+        foreach (Visitor visitor in _visitors)
+        {
+            if (visitor.gameObject.activeInHierarchy)
+            {
+                visitor.Fading();
+            }
+        }
+    }
 
     private void OnDisable()
     {        

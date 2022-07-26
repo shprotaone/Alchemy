@@ -42,9 +42,11 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < value; i++)
         {
-            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetStartPosition(),Quaternion.identity);
+            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetStartPosition(i),Quaternion.identity);
             bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);            
         }
+
+        //_tableManager.EmptyPotionTable.SortBottlePosition();
     }
 
     private void RefreshInventory()

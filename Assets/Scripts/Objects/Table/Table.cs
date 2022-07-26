@@ -1,45 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class Table : MonoBehaviour
 {
+    private const float sizeOffset = 0.8f;
+
     [SerializeField] private bool _fullPotionTable;
     private Bottle _bottle;
+
+    private float _offset;
+    private float[] _startPositions;
+
     public bool FullPotionTable => _fullPotionTable;
 
-    public Vector2 SetStartPosition()
+    public Vector2 SetStartPosition(float index)
     {
-        if (transform.childCount > 0 && _fullPotionTable)
-        {
-            return transform.position + new Vector3(transform.childCount, 0, 0);
-        }
-        else if (transform.childCount > 0 && !_fullPotionTable)
-        {
-            return transform.position - new Vector3(transform.childCount, 0, 0);
-        }
-        else
-        {
-            return transform.position;
-        }
+        float offset = index * sizeOffset;
+        Vector3 result = transform.position + new Vector3(offset, 0, 0);
+        
+        print(offset);
+
+        return result;
     }
 
-    public Vector2 SetPositionForBottle()
+    public void SortBottlePosition()
     {
-        _bottle = GetComponentInChildren<Bottle>();
-
-        if (_bottle != null)
+        if (_fullPotionTable)
         {
-            _bottle.transform.position = transform.position;
-
-            if (_fullPotionTable)
-            {
-                return _bottle.transform.position + new Vector3(1, 0, 0);
-            }
-            else
-            {
-                return _bottle.transform.position - new Vector3(1, 0, 0);
+            for (int i = 0; i < transform.childCount; i++)
+            {               
+                transform.GetChild(i).position = transform.position - new Vector3(sizeOffset +_offset, 0, 0);
+                _offset += sizeOffset;
             }
         }
-        else return transform.position;
+        else if (!_fullPotionTable)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).position = transform.position + new Vector3(sizeOffset + _offset, 0, 0);
+                _offset += sizeOffset;
+            }
+        }
+
+        _offset = 0;
     }
 }
