@@ -294,6 +294,8 @@ MonoBehaviour:
   _fullBottle: {fileID: 5975492717675343277}
   _bottle: {fileID: 0}
   _effectTransform: {fileID: 7193668372587723891}
+  _collider: {fileID: -8574785794516881806}
+  _wobble: {fileID: 5975492717675343276}
 --- !u!114 &2439843633981381608
 MonoBehaviour:
   m_ObjectHideFlags: 0

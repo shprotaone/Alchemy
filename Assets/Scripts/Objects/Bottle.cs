@@ -1,6 +1,4 @@
 ﻿using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour,IAction
@@ -10,10 +8,10 @@ public class Bottle : MonoBehaviour,IAction
     [SerializeField] private SpriteRenderer _fullBottle;
     [SerializeField] private SpriteRenderer _bottle;
     [SerializeField] private Transform _effectTransform;
+    [SerializeField] private BoxCollider2D _collider;
+    [SerializeField] private Wobble _wobble;
 
     private GameObject _effect;
-    private BoxCollider2D _collider;
-    private Wobble _wobble;
     private Potion _potionInBottle;
     private TableManager _tableManager;
     private Table _currentTable;
@@ -27,9 +25,7 @@ public class Bottle : MonoBehaviour,IAction
     private void Start()        //убрать GetComponent
     {
         _potionInBottle = GetComponent<Potion>();
-        _wobble = GetComponentInChildren<Wobble>();
         _currentTable = GetComponentInParent<Table>();
-        _collider = GetComponent<BoxCollider2D>();
         _tableManager = GetComponentInParent<TableManager>();
 
         _nextCountHandler = GetComponent<NextCountHandler>();
@@ -61,7 +57,7 @@ public class Bottle : MonoBehaviour,IAction
 
         if(potion.Rarity == ResourceRarity.rare)
         {
-            _effect = Instantiate(potion.Effect,_effectTransform.position, Quaternion.identity);           
+            _effect = Instantiate(potion.Effect,_effectTransform.position, Quaternion.identity);     
             _effect.transform.SetParent(transform);
             _effect.transform.localScale = new Vector3(1, 1, 0);
         }

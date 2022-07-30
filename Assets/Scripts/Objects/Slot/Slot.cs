@@ -4,15 +4,18 @@ using TMPro;
 public class Slot : MonoBehaviour,IAction
 {
     [SerializeField] private BoxCollider2D _boxCollider;
+    [SerializeField] private SpriteRenderer _slotImage;
+    [SerializeField] private TMP_Text _amountText;
+
     private Inventory _inventory;
     private IngredientData _ingredientData;   
-
-    private SpriteRenderer _slotImage;        
+         
     private GameObject _draggableIngredientPrefab;
     private float _amountInSlot;
 
-    private TMP_Text _amountText;
-    public IngredientData IngredientData => _ingredientData;
+    public SpriteRenderer SlotImage => _slotImage;
+    public TMP_Text AmountText => _amountText;
+    public BoxCollider2D SlotCollider => _boxCollider;
 
     private void OnEnable()
     {
@@ -20,10 +23,7 @@ public class Slot : MonoBehaviour,IAction
     }
 
     public void FillSlot(IngredientData ingredientData,int value)
-    {
-        _slotImage = GetComponentInChildren<SpriteRenderer>();
-        _amountText = GetComponentInChildren<TMP_Text>();
-        
+    {       
         _ingredientData = ingredientData;
         _draggableIngredientPrefab = _inventory.CurrentPrefab;
         _slotImage.sprite = ingredientData.mainSprite;

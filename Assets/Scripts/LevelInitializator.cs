@@ -48,12 +48,18 @@ public class LevelInitializator : MonoBehaviour
             DragController.instance.ObjectsInterractable(false);
 
             StartCoroutine(_tutorialSystem.StartTutorialDelay(true));
+
             _taskSystem.SetTutorialMode();
             _taskSystem.TutorialMode(true);            
+
             _inventory.FillClearInventory(0);
             _inventory.AddBottle(stockBottleAmount);
+            _inventory.HideRareShelf();
+
             _eventDialogCounter.SetEventCounterArray(_levelPreset.eventCount);                        
             _dialogManager.SetDialogArray(_levelPreset.dialog);
+            _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
+
         }
         else
         {
@@ -63,12 +69,14 @@ public class LevelInitializator : MonoBehaviour
             _taskSystem.TutorialMode(false);
             _inventory.FillClearInventory(stockAmount);
             _inventory.AddBottle(stockBottleAmount);
+            _globalTaskController.SetTaskValue(100000); //!!!
+            _globalTaskController.DisableTask();
         }
 
         _visitorController.InitVisitorController();
 
         CheckShopController();
-        _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
+        
     }  
 
     private void LevelTaskInit()

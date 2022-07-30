@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
+    private const int MaxBottle = 4;
     private const int BottleCost = 500;
     private const int FuelCost = 150;
     private const int ClaudronUpgradeCost = 3000;
@@ -49,10 +50,17 @@ public class ShopSystem : MonoBehaviour
 
      public void BuyBottle()
     {
-        if (Transaction(BottleCost))
+        if (_inventory.BottleCount < MaxBottle)
         {
-            _inventory.AddBottle(1);
+            if (Transaction(BottleCost))
+            {
+                _inventory.AddBottle(1);
+            }
         }
+        else
+        {
+            print("Bottle shelf is full");
+        }        
     }
 
     public void BuyFuel()

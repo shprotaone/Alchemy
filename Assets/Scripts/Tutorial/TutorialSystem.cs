@@ -161,7 +161,7 @@ public class TutorialSystem : MonoBehaviour
             EventCounter.OnIncreasedEventCount += CheckEvent;
             OnEndedTutorial?.Invoke(false);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1);
             OnUIInterract?.Invoke(false);
             _dialogManager.StartDialogSystem();
             yield return null;

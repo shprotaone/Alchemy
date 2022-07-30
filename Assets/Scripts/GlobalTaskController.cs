@@ -25,6 +25,11 @@ public class GlobalTaskController : MonoBehaviour
         SetLevelTask();
     }
 
+    public void DisableTask()
+    {
+        _taskText.text = "";
+    }
+
     private void SetLevelTask()
     {
         if (_taskValue != 0)

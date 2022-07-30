@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxCollider: {fileID: 7965716357834795658}
+  _slotImage: {fileID: 7657957067675988637}
+  _amountText: {fileID: 8393229982775511352}
 --- !u!50 &212684160
 Rigidbody2D:
   serializedVersion: 4

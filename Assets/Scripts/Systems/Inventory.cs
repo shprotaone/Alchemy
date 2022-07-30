@@ -9,23 +9,28 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private IngredientData[] _ingredients;
     [SerializeField] private TableManager _tableManager;
+    [SerializeField] private Shelf _commonShelf;
+    [SerializeField] private Shelf _rareShelf;
 
     private Dictionary<IngredientData, int> _inventory;
 
-    private Slot[] _slots;
+    private List<Slot> _slots;
 
     public GameObject CurrentPrefab => _currentIngredientPrefab;
     public IngredientData[] Ingredients => _ingredients;
     public Dictionary<IngredientData, int> InventoryAmount => _inventory;
+    public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;
 
-    private void Awake()
-    {
-        _slots = GetComponentsInChildren<Slot>();
-    }
-    void Start()
+
+    private void Start()
     {
         TutorialSystem.OnEndedTutorial += StartGameFilling;       
-        _inventory = new Dictionary<IngredientData, int>();        
+        _inventory = new Dictionary<IngredientData, int>();
+
+        _slots = new List<Slot>();
+
+        InitSlots(_commonShelf);
+        InitSlots(_rareShelf);
     }
 
     public void FillClearInventory(int amount)
@@ -46,6 +51,7 @@ public class Inventory : MonoBehaviour
             bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);            
         }
 
+        _tableManager.EmptyPotionTable.SortBottlePosition();
         //_tableManager.EmptyPotionTable.SortBottlePosition();
     }
 
@@ -65,8 +71,20 @@ public class Inventory : MonoBehaviour
         if (secondFilling)
         {
             _inventory.Clear();
-            FillClearInventory(5);
+            FillClearInventory(0);
+
+            for (int i = 0; i < 4; i++)
+            {
+                AddIngredient(_ingredients[i], 5);
+            }
+
+            RefreshInventory();
         }        
+    }
+
+    private void AddIngredient(IngredientData ingredient, int value)
+    {
+        _inventory[ingredient] = value;
     }
 
     public void AddIngredient(IngredientData ingredient)
@@ -96,6 +114,19 @@ public class Inventory : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private void InitSlots(Shelf shelf)
+    {
+        for (int i = 0; i < shelf.Slots.Length; i++)
+        {
+            _slots.Add(shelf.Slots[i]);
+        }
+    }
+
+    public void HideRareShelf()
+    {
+        _rareShelf.HideShelf();
     }
 
     private void OnDisable()
