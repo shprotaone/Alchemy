@@ -83,7 +83,7 @@ public class DragController : MonoBehaviour
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
-                        _lastDragged.transform.SetParent(_draggableParent);
+                        //_lastDragged.transform.SetParent(_draggableParent);
                     }
                     else if(bottle = draggable.GetComponentInChildren<Bottle>())
                     {

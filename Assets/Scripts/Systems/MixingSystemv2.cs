@@ -61,7 +61,8 @@ public class MixingSystemv2 : MonoBehaviour
             print(_audioSource.gameObject.activeInHierarchy);
             print(_audioSource.enabled);
 
-            _ingredients.Add(ingredient);
+            _ingredients.Add(ingredient);           
+
             _audioSource.Play();
             _refreshDelegate.Invoke();
             _waterColor.ColorWater(MixColor());
@@ -69,6 +70,7 @@ public class MixingSystemv2 : MonoBehaviour
         else
         {
             ClearMixSystem();            
+
         }
     }
 

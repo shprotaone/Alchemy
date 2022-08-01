@@ -55,6 +55,7 @@ public class Ingredient : MonoBehaviour,IAction
         {
             _effectPrefab = ingredient.effect;      //почему эффекты тут? 
         }
+
         DrawIngredient();
     }
 

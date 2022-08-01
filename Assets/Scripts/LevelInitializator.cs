@@ -16,9 +16,10 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private ShopController _shopController;
     [SerializeField] private Money _money;
     [SerializeField] private VisitorController _visitorController;
+    [SerializeField] private BrightObject _brightObjectSystem;
 
-    [SerializeField] private LevelPreset _levelPreset;
-    //private LevelPreset _levelPreset;
+    //[SerializeField] private LevelPreset _levelPreset;
+    private LevelPreset _levelPreset;
 
     private LevelTask _levelTask;
     private bool _tutorial;
@@ -27,10 +28,10 @@ public class LevelInitializator : MonoBehaviour
 
     private void Awake()
     {
-        //if (LevelPresetLoader.instance.LevelPreset != null)
-        //{
-        //    _levelPreset = LevelPresetLoader.instance.LevelPreset;
-        //}
+        if (LevelPresetLoader.instance.LevelPreset != null)
+        {
+            _levelPreset = LevelPresetLoader.instance.LevelPreset;
+        }
     }
 
     private void Start()
@@ -71,6 +72,7 @@ public class LevelInitializator : MonoBehaviour
             _inventory.AddBottle(stockBottleAmount);
             _globalTaskController.SetTaskValue(100000); //!!!
             _globalTaskController.DisableTask();
+            _brightObjectSystem.BrightObjects(true);
         }
 
         _visitorController.InitVisitorController();

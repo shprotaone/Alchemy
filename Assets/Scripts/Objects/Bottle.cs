@@ -13,6 +13,7 @@ public class Bottle : MonoBehaviour,IAction
 
     private GameObject _effect;
     private Potion _potionInBottle;
+    private Color _potionColor;
     private TableManager _tableManager;
     private Table _currentTable;
     private NextCountHandler _nextCountHandler;
@@ -44,8 +45,9 @@ public class Bottle : MonoBehaviour,IAction
             _firstFill = false;
         }
         
+        _potionColor = color;
         _fullBottle.enabled = true;
-        _wobble.ChangeColor(color);
+        _wobble.ChangeColor(_potionColor);
         _isFull = true;
     }
 
@@ -57,7 +59,8 @@ public class Bottle : MonoBehaviour,IAction
 
         if(potion.Rarity == ResourceRarity.rare)
         {
-            _effect = Instantiate(potion.Effect,_effectTransform.position, Quaternion.identity);     
+            _effect = Instantiate(potion.Effect,_effectTransform.position, Quaternion.identity);
+            _effect.GetComponentInChildren<EffectChangeColor>().ChangeParticleColor(_potionColor);
             _effect.transform.SetParent(transform);
             _effect.transform.localScale = new Vector3(1, 1, 0);
         }

@@ -9,10 +9,9 @@ public class TutorialSystem : MonoBehaviour
     public static Action<bool> OnUIInterract;   //UI прожимается
     public static Action<bool> OnShopSlotDisabled;
 
-    private const string interactiveLayerName = "Interractive";
-    private const string dialogLayerName = "Dialog";
 
     [SerializeField] private EventCounter _eventCounter;
+    [SerializeField] private BrightObject _brightObject;
     [SerializeField] private DialogManager _dialogManager;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private InGameTimeController _pause;
@@ -24,8 +23,6 @@ public class TutorialSystem : MonoBehaviour
     [SerializeField] private GameObject _shopClickFrame;
     [SerializeField] private GameObject _inShopClickFrame;
     [SerializeField] private GameObject _guildClickFrame;
-
-    [SerializeField] private List<GameObject> _brightObjectInRoom;
       
     private Visitor _firstVisitor;
 
@@ -41,16 +38,16 @@ public class TutorialSystem : MonoBehaviour
             _dialogManager.NextDialog();
             SetFirstVisitor();
 
-            _firstVisitor.GetComponent<SpriteRenderer>().sortingLayerName = dialogLayerName;
-            _firstVisitor.GetComponentInChildren<Canvas>().sortingLayerName = dialogLayerName;
+            _firstVisitor.GetComponent<SpriteRenderer>().sortingLayerName = _brightObject.DialogLayerName;
+            _firstVisitor.GetComponentInChildren<Canvas>().sortingLayerName = _brightObject.DialogLayerName;
 
         }
         else if (eventNumber == _eventCounter.EventCount[1])   //шаг с переходом на нижнее окно
         {
             _dialogManager.NextDialog();
 
-            _firstVisitor.GetComponent<SpriteRenderer>().sortingLayerName = interactiveLayerName;
-            _firstVisitor.GetComponentInChildren<Canvas>().sortingLayerName = interactiveLayerName;
+            _firstVisitor.GetComponent<SpriteRenderer>().sortingLayerName = _brightObject.InteractiveLayerName;
+            _firstVisitor.GetComponentInChildren<Canvas>().sortingLayerName = _brightObject.InteractiveLayerName;
 
             _dialogManager.PlateMovement(1);
             _otherWindowFrame.SetActive(true);
@@ -67,7 +64,7 @@ public class TutorialSystem : MonoBehaviour
             _dialogManager.PanelIsActive(true);
             _dialogManager.ButtonIsActive(true);
 
-            BrightObjects(true);
+            _brightObject.BrightObjects(true);
             OnShopSlotDisabled?.Invoke(true);
         }
         else if (eventNumber == _eventCounter.EventCount[3]) // шаг перед покупкой ингредиентов
@@ -77,7 +74,7 @@ public class TutorialSystem : MonoBehaviour
             _dialogManager.DialogIsActive(false);
             _dialogManager.ButtonIsActive(false);
 
-            BrightObjects(false);
+            _brightObject.BrightObjects(false);
 
             _shopClickFrame.SetActive(true);
 
@@ -86,7 +83,7 @@ public class TutorialSystem : MonoBehaviour
         else if (eventNumber == _eventCounter.EventCount[4])
         {
             
-            _tutorialCanvas.sortingLayerName = dialogLayerName;
+            _tutorialCanvas.sortingLayerName = _brightObject.DialogLayerName;
             _inShopClickFrame.SetActive(true);
 
         }
@@ -97,7 +94,7 @@ public class TutorialSystem : MonoBehaviour
             _dialogManager.NextDialog();
 
             DragController.instance.ObjectsInterractable(true);
-            _tutorialCanvas.sortingLayerName = interactiveLayerName;
+            _tutorialCanvas.sortingLayerName = _brightObject.InteractiveLayerName;
         }
         else if (eventNumber == _eventCounter.EventCount[6]) // шаг перед варкой зелья
         {
@@ -173,30 +170,7 @@ public class TutorialSystem : MonoBehaviour
         _firstVisitor = _visitorController.CurrentVisitor;      
     }
 
-    public void BrightObjects(bool flag)
-    {
-        List<SpriteRenderer> brightObject = new List<SpriteRenderer>();
-
-        string nameLayer;
-        if (flag)
-        {
-            nameLayer = dialogLayerName;
-        }
-        else
-        {
-            nameLayer = interactiveLayerName;
-        }
-
-        foreach (var item in _brightObjectInRoom)
-        {
-            brightObject.Add(item.GetComponentInChildren<SpriteRenderer>());
-        }
-
-        foreach (var item in brightObject)
-        {
-            item.sortingLayerName = nameLayer;
-        }
-    }
+    
 
     private void OnDisable()
     {
