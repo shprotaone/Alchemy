@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class LevelPreset : ScriptableObject
 {
+    public LevelNumber levelNumber;
     public bool startWindow;
-    public bool tutorialLevel;
+    //public bool tutorialLevel;
     public bool rareIngredientBlock;
     public bool rareTask;
     public bool ShopController;

@@ -49,23 +49,30 @@ public class Visitor : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        float counter = stockTime;
-        UpdateTimerDisplay(counter);
-
-        while (counter > 0)
+        if (!_visitorController.FirstVisitor)
         {
-            yield return new WaitForSeconds(1);
-            counter--;
+            float counter = stockTime;
+            _timerText.gameObject.SetActive(true);
             UpdateTimerDisplay(counter);
-        }
-        
-        if(counter == 0)
-        {
-            Fading();
-            _currentTask.TaskCanceled();
-        }
 
-        yield break;
+            while (counter > 0)
+            {
+                yield return new WaitForSeconds(1);
+                counter--;
+                UpdateTimerDisplay(counter);
+            }
+
+            if (counter == 0)
+            {
+                Fading();
+                _currentTask.TaskCanceled();
+            }
+            yield break;
+        }
+        else
+        {
+            _timerText.gameObject.SetActive(false);
+        }              
     }
 
     private void UpdateTimerDisplay(float value)
@@ -78,8 +85,7 @@ public class Visitor : MonoBehaviour
     {
         StartCoroutine(Timer());
         this.gameObject.SetActive(true);
-        _timerText.gameObject.SetActive(true);
-       
+             
         _currentTask.InitTask();
         
         DOTween.ToAlpha(()=> _visitorImage.color, x => _visitorImage.color = x, 1, 1);

@@ -12,10 +12,13 @@ public class VisitorController : MonoBehaviour
     private Visitor _currentVisitor;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
-    private bool _isCall;
+
+    private int _visitorCounter;
+    private bool _firstVisitor = true;
     private bool _shopIsOpen;
 
     public Visitor CurrentVisitor => _currentVisitor;
+    public bool FirstVisitor => _firstVisitor;
 
     public bool ShopIsOpen => _shopIsOpen;
 
@@ -82,6 +85,7 @@ public class VisitorController : MonoBehaviour
         if (_currentVisitor != null)
         {
             OnVisitorOut?.Invoke();
+            _firstVisitor = false;
 
             _currentVisitor.Fading();
             OnVisitorCall?.Invoke();
