@@ -6,6 +6,7 @@ public class GlobalTaskController : MonoBehaviour
 {
     public static Action OnLevelComplete;
 
+    [SerializeField] private GlobalTaskViewer _globalTaskViewer;
     [SerializeField] private GameObject _endGamePanel;    
     [SerializeField] private Money _money;
     [SerializeField] private GuildSystem _guildSystem;
@@ -28,6 +29,12 @@ public class GlobalTaskController : MonoBehaviour
     public void DisableTask()
     {
         _taskText.text = "";
+    }
+
+    public void CallStartGlobalTaskViewer(string text)
+    {
+        _globalTaskViewer.gameObject.SetActive(true);
+        _globalTaskViewer.SetGlobalTaskText(text);
     }
 
     private void SetLevelTask()

@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803ffccb1a1387040bf551258bc3161f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _backgroundLoader: {fileID: 0}
   _tutorialSystem: {fileID: 0}
   _shopSystem: {fileID: 0}
   _eventDialogCounter: {fileID: 0}

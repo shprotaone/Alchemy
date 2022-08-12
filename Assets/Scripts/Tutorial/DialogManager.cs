@@ -13,6 +13,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private RectTransform _dialogBox;
     [SerializeField] private RectTransform _firstDialogWindowPos;
     [SerializeField] private RectTransform _secondDialogWindowPos;
+    [SerializeField] private RectTransform _thirdDialogWindowPos;
     [SerializeField] private InGameTimeController _pause;
     [SerializeField] private TMP_Text _dialogText;
     [SerializeField] private Button _nextButton;
@@ -47,7 +48,7 @@ public class DialogManager : MonoBehaviour
         _dialogCount++;
 
         RefreshText();
-        SetCloseTextInButton();
+        //SetCloseTextInButton();
     }
 
     private void RefreshText()
@@ -74,10 +75,18 @@ public class DialogManager : MonoBehaviour
     public void PlateMovement(int pos)
     {
         _pause.ResumeGame();
-        if (pos == 1)
-            _dialogBox.DOAnchorPos(_secondDialogWindowPos.anchoredPosition, 1, false);
-        else if (pos == 2)
-            _dialogBox.DOAnchorPos(_firstDialogWindowPos.anchoredPosition, 1, false);
+        switch (pos)
+        {
+            case 1:
+                _dialogBox.DOAnchorPos(_secondDialogWindowPos.anchoredPosition, 1, false);
+                break;
+            case 2:
+                _dialogBox.DOAnchorPos(_firstDialogWindowPos.anchoredPosition, 1, false);
+                break;
+            case 3:
+                _dialogBox.DOAnchorPos(_thirdDialogWindowPos.anchoredPosition, 1, false);
+                break;
+        }
     }
 
     public void PanelIsActive(bool flag)

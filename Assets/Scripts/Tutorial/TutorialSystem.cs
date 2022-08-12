@@ -49,7 +49,7 @@ public class TutorialSystem : MonoBehaviour
             _firstVisitor.GetComponent<SpriteRenderer>().sortingLayerName = _brightObject.InteractiveLayerName;
             _firstVisitor.GetComponentInChildren<Canvas>().sortingLayerName = _brightObject.InteractiveLayerName;
 
-            _dialogManager.PlateMovement(1);
+            _dialogManager.PlateMovement(3);
             _otherWindowFrame.SetActive(true);
 
             _dialogManager.PanelIsActive(false);
@@ -60,6 +60,7 @@ public class TutorialSystem : MonoBehaviour
 
             _dialogManager.NextDialog();
             _otherWindowFrame.SetActive(false);
+            _dialogManager.PlateMovement(1);
 
             _dialogManager.PanelIsActive(true);
             _dialogManager.ButtonIsActive(true);
@@ -89,6 +90,7 @@ public class TutorialSystem : MonoBehaviour
         }
         else if (eventNumber == _eventCounter.EventCount[5]) // шаг после покупки ингредиентов
         {
+            _dialogManager.PlateMovement(3);
             _dialogManager.DialogIsActive(true);
             _dialogManager.PanelIsActive(false);
             _dialogManager.NextDialog();
@@ -99,6 +101,7 @@ public class TutorialSystem : MonoBehaviour
         else if (eventNumber == _eventCounter.EventCount[6]) // шаг перед варкой зелья
         {
             _pause.ResumeGame();
+            _dialogManager.PlateMovement(1);
             _dialogManager.NextDialog();
         }
         else if (eventNumber == _eventCounter.EventCount[7]) // шаг после варки зелья
@@ -117,7 +120,7 @@ public class TutorialSystem : MonoBehaviour
         {
             _UpOtherWindowFrame.SetActive(false);
             _dialogManager.NextDialog();
-            _dialogManager.PlateMovement(1);
+            _dialogManager.PlateMovement(3);
         }
         else if (eventNumber == _eventCounter.EventCount[10])
         {

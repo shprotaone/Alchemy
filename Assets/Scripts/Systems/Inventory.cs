@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;
 
 
-    private void Start()
+    public void InitInventory()
     {
         TutorialSystem.OnEndedTutorial += StartGameFilling;       
         _inventory = new Dictionary<IngredientData, int>();

@@ -5,6 +5,9 @@ public class LevelInitializator : MonoBehaviour
     public const int stockAmount = 5;
     public const int stockBottleAmount = 2;
 
+    [SerializeField] private bool _directLoad;
+
+    [SerializeField] private BackgroundLoader _backgroundLoader;
     [SerializeField] private TutorialSystem _tutorialSystem;
     [SerializeField] private ShopSystem _shopSystem;
     [SerializeField] private EventCounter _eventDialogCounter;
@@ -18,8 +21,9 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private BrightObject _brightObjectSystem;
 
-    [SerializeField] private LevelPreset _levelPreset;
-    //private LevelPreset _levelPreset;
+    [SerializeField] private LevelPreset _levelPresetDirect;
+    
+    private LevelPreset _levelPreset;
 
     private LevelTask _levelTask;
     //private bool _tutorial;
@@ -28,30 +32,48 @@ public class LevelInitializator : MonoBehaviour
 
     private void Awake()
     {
-    //    Application.targetFrameRate = 75;
+        Application.targetFrameRate = 75;
 
-    //    if (LevelPresetLoader.instance.LevelPreset != null)
-    //    {
-    //        _levelPreset = LevelPresetLoader.instance.LevelPreset;
-    //    }
+        if (_directLoad)
+        {
+            _levelPreset = _levelPresetDirect;
+        }
+        else
+        {
+            if (LevelPresetLoader.instance.LevelPreset != null)
+            {
+                _levelPreset = LevelPresetLoader.instance.LevelPreset;
+            }
+        }
     }
 
     private void Start()
     {        
         LevelTaskInit();
         _taskSystem.InitPotionSizer();
+        _inventory.InitInventory();
+        _backgroundLoader.InitBackground(_levelPreset.backgroundSprite);
 
         _money.SetStartMoney(_levelPreset.startMoney);
         _startCameraPos.SetStartPosition(_levelPreset.startWindow);
         _taskSystem.SetPotionSizer(_levelPreset.rareTask);
 
+        LevelInitSelector();
+
+        _visitorController.InitVisitorController();
+
+        CheckShopController();
+        
+    }  
+
+    private void LevelInitSelector()
+    {
         switch (_levelPreset.levelNumber)
         {
             case LevelNumber.EndlessLevel:
                 _eventDialogCounter.enabled = false;
                 _dialogManager.enabled = false;
-                StartCoroutine(_tutorialSystem.StartTutorialDelay(false));
-                _taskSystem.TutorialMode(false);
+                _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
 
                 _inventory.FillClearInventory(stockAmount);
                 _inventory.AddBottle(stockBottleAmount);
@@ -84,7 +106,10 @@ public class LevelInitializator : MonoBehaviour
             case LevelNumber.Level2:
                 _eventDialogCounter.enabled = false;
                 _dialogManager.enabled = false;
+                _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
+
                 StartCoroutine(_tutorialSystem.StartTutorialDelay(false));
+
                 _taskSystem.TutorialMode(false);
                 _inventory.FillClearInventory(stockAmount);
                 _inventory.AddBottle(stockBottleAmount);
@@ -92,12 +117,7 @@ public class LevelInitializator : MonoBehaviour
                 _brightObjectSystem.BrightObjects(false);
                 break;
         }
-
-        _visitorController.InitVisitorController();
-
-        CheckShopController();
-        
-    }  
+    }
 
     private void LevelTaskInit()
     {
