@@ -68,14 +68,17 @@ TagManager:
   - name: Shelfs
     uniqueID: 3120045473
     locked: 0
-  - name: Back
+  - name: BackLight
     uniqueID: 1223403359
     locked: 0
-  - name: Forward
+  - name: ForwardLight
     uniqueID: 635694839
     locked: 0
   - name: Interractive
     uniqueID: 3526471465
+    locked: 0
+  - name: BrightObjects
+    uniqueID: 284681549
     locked: 0
   - name: UI
     uniqueID: 4111608995

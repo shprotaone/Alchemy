@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GuildSystem : MonoBehaviour
@@ -9,7 +7,6 @@ public class GuildSystem : MonoBehaviour
     private const float guildCount = 4;
     private float _guildMaxValue = 100;
     
-
     [SerializeField] private GuildCircleView _guildView;
 
     private Dictionary<GuildsType, float> _guildDictionary;

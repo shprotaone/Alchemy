@@ -43,12 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803ffccb1a1387040bf551258bc3161f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directLoad: 0
   _backgroundLoader: {fileID: 0}
-  _tutorialSystem: {fileID: 0}
+  _tutorialManager: {fileID: 0}
   _shopSystem: {fileID: 0}
-  _eventDialogCounter: {fileID: 0}
   _startCameraPos: {fileID: 0}
-  _dialogManager: {fileID: 0}
   _taskSystem: {fileID: 0}
   _globalTaskController: {fileID: 0}
   _inventory: {fileID: 0}
@@ -56,4 +55,5 @@ MonoBehaviour:
   _money: {fileID: 0}
   _visitorController: {fileID: 0}
   _brightObjectSystem: {fileID: 0}
-  _levelPreset: {fileID: 11400000, guid: 3f99e2787c72a42478a4a728185a8b44, type: 2}
+  _UIController: {fileID: 0}
+  _levelPresetDirect: {fileID: 11400000, guid: 3e3e2d4db4aa70b4986a8abbdb6570d5, type: 2}

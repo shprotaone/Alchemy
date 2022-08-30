@@ -1,0 +1,894 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7353413460417880862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413460417880863}
+  - component: {fileID: 7353413460417880848}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413460417880863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460417880862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7353413461135344371}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413460417880848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460417880862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867af88c419c76a478e3965e5bbde9f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _steps:
+  - {fileID: 7353413460631088467}
+  _visitorController: {fileID: 0}
+--- !u!1 &7353413460563904936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413460563904937}
+  - component: {fileID: 7353413460563904938}
+  m_Layer: 0
+  m_Name: Step14
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413460563904937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460563904936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413460563904938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460563904936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21704a9904e737a4d9d4a001b9aaa2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u0437\u043D\u0430\u0435\u0448\u044C
+    \u043E\u0441\u043D\u043E\u0432\u044B \u0442\u043E\u0440\u0433\u043E\u0432\u043B\u0438.
+    \u041D\u0430\u043A\u043E\u043F\u0438 2500 \u0437\u043E\u043B\u043E\u0442\u044B\u0445,
+    \u0447\u0442\u043E\u0431\u044B \u0442\u0435\u0431\u0435 \u0445\u0432\u0430\u0442\u0438\u043B\u043E
+    \u0434\u0435\u043D\u0435\u0433 \u043E\u0431\u043E\u0441\u043D\u043E\u0432\u0430\u0442\u044C\u0441\u044F
+    \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u0439 \u0434\u0435\u0440\u0435\u0432\u043D\u0435
+    \u043D\u0435\u043F\u043E\u0434\u0430\u043B\u0435\u043A\u0443 \u0438 \u043D\u0430\u0447\u0430\u0442\u044C
+    \u0441\u0432\u043E\u0439 \u043F\u0443\u0442\u044C \u043A \u0441\u043B\u0430\u0432\u0435
+    \u0412\u0435\u043B\u0438\u043A\u043E\u0433\u043E \u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0443\u044E\u0449\u0435\u0433\u043E
+    \u0430\u043B\u0445\u0438\u043C\u0438\u043A\u0430"
+  _shopSystem: {fileID: 0}
+--- !u!1 &7353413460631088465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413460631088466}
+  - component: {fileID: 7353413460631088467}
+  m_Layer: 0
+  m_Name: Step1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413460631088466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460631088465}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413460631088467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460631088465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3974b7dcb34bb0b458fb36f9009a872f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C
+    \u0432 \u0438\u0433\u0440\u0443 \u0410\u043B\u0445\u0438\u043C\u0438\u043A! \u0412\u044B
+    \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u0439
+    \u043B\u0430\u0432\u043A\u043E\u0439 \u0438 \u0432\u0430\u043C \u043D\u0443\u0436\u043D\u043E
+    \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0442\u044C \u0437\u0430\u043A\u0430\u0437\u044B
+    \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+    \u0434\u0435\u043D\u044C\u0433\u0438 \u0438 \u0440\u0435\u043F\u0443\u0442\u0430\u0446\u0438\u044E."
+  _uiController: {fileID: 0}
+  _dialogPos: {fileID: 0}
+--- !u!1 &7353413460711864984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413460711864985}
+  - component: {fileID: 7353413460711864986}
+  m_Layer: 0
+  m_Name: Step3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413460711864985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460711864984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413460711864986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460711864984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ee9057852c2a94a903189df2f9b55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043A\u043E\u0433\u0434\u0430 \u043C\u044B
+    \u0437\u043D\u0430\u0435\u043C \u0447\u0442\u043E \u0445\u043E\u0447\u0435\u0442
+    \u043A\u043B\u0438\u0435\u043D\u0442, \u043F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u0438\u043C
+    \u0435\u043C\u0443 \u044D\u0442\u043E \u0437\u0435\u043B\u044C\u0435! \u0414\u043B\u044F
+    \u044D\u0442\u043E\u0433\u043E \u0432\u0435\u0440\u043D\u0435\u043C\u0441\u044F
+    \u0432 \u0433\u043B\u0443\u0431\u044C \u043B\u0430\u0432\u043A\u0438 \u043A \u043A\u043E\u0442\u043B\u0443"
+  _dialogWindowPos: {fileID: 0}
+  _frameSprite: {fileID: 0}
+  _cameraMovementButton: {fileID: 0}
+--- !u!1 &7353413460935302299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413460935302300}
+  - component: {fileID: 7353413460935302301}
+  m_Layer: 0
+  m_Name: Step11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413460935302300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460935302299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413460935302301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413460935302299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7b236cdb4a79149babbdd04faf8357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u041F\u0435\u0440\u0435\u043D\u0435\u0441\u0438 \u0437\u0435\u043B\u044C\u0435
+    \u0437\u0430\u043A\u0430\u0437\u0447\u0438\u043A\u0443 \u0447\u0442\u043E\u0431\u044B
+    \u043E\u043D \u0435\u0433\u043E \u0437\u0430\u0431\u0440\u0430\u043B \u0438 \u0437\u0430\u043F\u043B\u0430\u0442\u0438\u043B
+    \u0432\u0430\u043C"
+  _brightObject: {fileID: 0}
+  _visitorController: {fileID: 0}
+  _dialogWindowPos: {fileID: 0}
+  _cameraMovementButton: {fileID: 0}
+--- !u!1 &7353413461109243632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461109243633}
+  - component: {fileID: 7353413461109243634}
+  m_Layer: 0
+  m_Name: Step12
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461109243633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461109243632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461109243634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461109243632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6986da3657c0d694b8b0e7ff543e0868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u041A\u043D\u043E\u043F\u043A\u0430 \u0441\u043B\u0435\u0432\u0430 \u043F\u043E\u0434\u0441\u043A\u0430\u0436\u0435\u0442
+    \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E\u0431 \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0435
+    \u0432 \u0433\u0438\u043B\u044C\u0434\u0438\u044F\u0445 \u0438 \u0433\u043B\u0430\u0432\u043D\u043E\u043C\u0443
+    \u0437\u0430\u0434\u0430\u043D\u0438\u044E. \u0415\u0441\u043B\u0438 \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0430
+    \u0431\u0443\u0434\u0435\u0442 \u043C\u0430\u043B\u043E, \u0433\u0438\u043B\u044C\u0434\u0438\u0438
+    \u043D\u0435 \u0431\u0443\u0434\u0443\u0442 \u0443 \u0442\u0435\u0431\u044F \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u044C
+    \u0437\u0435\u043B\u044C\u044F \u0438 \u0442\u044B \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u0435\u0448\u044C"
+  _guildButton: {fileID: 0}
+  _closeGuildButton: {fileID: 0}
+  _frameSprite: {fileID: 0}
+--- !u!1 &7353413461135344370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461135344371}
+  m_Layer: 0
+  m_Name: StepContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461135344371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461135344370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7353413460631088466}
+  - {fileID: 7353413461781244467}
+  - {fileID: 7353413460711864985}
+  - {fileID: 7353413462316482744}
+  - {fileID: 7353413461420701391}
+  - {fileID: 7353413461495364922}
+  - {fileID: 7353413462301713308}
+  - {fileID: 7353413461889421257}
+  - {fileID: 7353413461677385346}
+  - {fileID: 7353413461179093076}
+  - {fileID: 7353413460935302300}
+  - {fileID: 7353413461109243633}
+  - {fileID: 7353413462174961346}
+  - {fileID: 7353413460563904937}
+  - {fileID: 7353413461813714572}
+  m_Father: {fileID: 7353413460417880863}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7353413461179093075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461179093076}
+  - component: {fileID: 7353413461179093077}
+  m_Layer: 0
+  m_Name: Step10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461179093076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461179093075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461179093077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461179093075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad1706c0a94fe347a024cbfc0d3f4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0414\u0430\u0432\u0430\u0439 \u0432\u0435\u0440\u043D\u0435\u043C\u0441\u044F
+    \u043A \u043D\u0430\u0448\u0435\u043C\u0443 \u043A\u043B\u0438\u0435\u043D\u0442\u0443
+    \u0438 \u043E\u0442\u0434\u0430\u0434\u0438\u043C \u0435\u043C\u0443 \u0437\u0435\u043B\u044C\u0435"
+  _cameraMovementButton: {fileID: 0}
+--- !u!1 &7353413461420701390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461420701391}
+  - component: {fileID: 7353413461420701376}
+  m_Layer: 0
+  m_Name: Step5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461420701391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461420701390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461420701376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461420701390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71e331438a900d46a3bcb4d0b196ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0414\u0430\u0432\u0430\u0439 \u043A\u0443\u043F\u0438\u043C \u0438\u043D\u0433\u0440\u0435\u0434\u0438\u0435\u043D\u0442\u044B
+    \u0434\u043B\u044F \u0437\u0435\u043B\u044C\u044F \u043D\u0430\u0448\u0435\u0433\u043E
+    \u043A\u043B\u0438\u0435\u043D\u0442\u0430"
+  _shopButton: {fileID: 0}
+  _frame: {fileID: 0}
+  _brightObject: {fileID: 0}
+--- !u!1 &7353413461495364921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461495364922}
+  - component: {fileID: 7353413461495364923}
+  m_Layer: 0
+  m_Name: Step6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461495364922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461495364921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461495364923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461495364921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72eb1f279f61a064d8f70932087bb372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: 
+  _shopFrame: {fileID: 0}
+  _slotFrame: {fileID: 0}
+  _shopButton: {fileID: 0}
+  _brightObject: {fileID: 0}
+--- !u!1 &7353413461677385345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461677385346}
+  - component: {fileID: 7353413461677385347}
+  m_Layer: 0
+  m_Name: Step9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461677385346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461677385345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461677385347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461677385345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe64ed772ebdf740b6f9f991fab9b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0412\u043E\u0437\u044C\u043C\u0438 \u043F\u0443\u0441\u0442\u043E\u0439
+    \u0431\u0443\u0442\u044B\u043B\u044C \u0441 \u0432\u0435\u0440\u0445\u043D\u0435\u0439
+    \u043F\u043E\u043B\u043A\u0438 \u0438 \u043D\u0430\u043B\u0435\u0439 \u0432 \u043D\u0435\u0433\u043E
+    \u0437\u0435\u043B\u044C\u0435, \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0432
+    \u043D\u0430 \u043A\u043E\u0442\u0435\u043B"
+  _mixingSystem: {fileID: 0}
+--- !u!1 &7353413461781244466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461781244467}
+  - component: {fileID: 7353413461781244468}
+  m_Layer: 0
+  m_Name: Step2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461781244467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461781244466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461781244468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461781244466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470b872a4b514d14c88c694d76094213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0412\u043E\u0442 \u0432\u0430\u0448 \u043F\u0435\u0440\u0432\u044B\u0439
+    \u043A\u043B\u0438\u0435\u043D\u0442, \u0441\u0432\u0435\u0440\u0445\u0443 \u0443\u043A\u0430\u0437\u0430\u043D\u043E
+    \u0447\u0442\u043E \u043E\u043D \u0445\u043E\u0447\u0435\u0442 \u0443 \u0432\u0430\u0441
+    \u043A\u0443\u043F\u0438\u0442\u044C. \u041E\u043D \u043D\u0438\u043A\u0443\u0434\u0430
+    \u043D\u0435 \u0442\u043E\u0440\u043E\u043F\u0438\u0442\u0441\u044F, \u043D\u043E
+    \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u044B
+    \u0431\u0443\u0434\u0443\u0442 \u043D\u0435 \u0442\u0430\u043A \u0442\u0435\u0440\u043F\u0435\u043B\u0438\u0432\u044B
+    \u0442\u0430\u043A \u0447\u0442\u043E \u0432 \u0431\u0443\u0434\u0443\u044E\u0449\u0435\u043C
+    \u043F\u0440\u0438\u0439\u0434\u0435\u0442\u0441\u044F \u0442\u043E\u0440\u043E\u043F\u0438\u0442\u0441\u044F
+    \u0441 \u0438\u0445 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0435\u043C"
+  _brightObject: {fileID: 0}
+--- !u!1 &7353413461813714571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461813714572}
+  - component: {fileID: 7353413461813714573}
+  m_Layer: 0
+  m_Name: Step15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461813714572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461813714571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461813714573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461813714571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026f6df5a9a22de4790d50f55c287217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: 
+  _UIController: {fileID: 0}
+--- !u!1 &7353413461889421256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413461889421257}
+  - component: {fileID: 7353413461889421258}
+  m_Layer: 0
+  m_Name: Step8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413461889421257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461889421256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413461889421258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413461889421256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594275d832fb5f5448caac9d6432cd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u041F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435 \u043E\u0431\u0430
+    \u0440\u0435\u0441\u0443\u0440\u0441\u0430 \u0432 \u043A\u043E\u0442\u0435\u043B,
+    \u0438 \u043D\u0430\u0436\u043C\u0438 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441\u0432\u0430\u0440\u0438\u0442\u044C
+    \u0437\u0435\u043B\u044C\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+    \u0442\u043E \u0447\u0442\u043E \u043D\u0430\u043C \u043D\u0443\u0436\u043D\u043E"
+  _boilButton: {fileID: 0}
+--- !u!1 &7353413462174961345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413462174961346}
+  - component: {fileID: 7353413462174961347}
+  m_Layer: 0
+  m_Name: Step13
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413462174961346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462174961345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413462174961347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462174961345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45484c7d4f8485141b3ab78116c6b50b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0422\u0432\u043E\u0439 \u043F\u0435\u0440\u0432\u044B\u0439 \u043A\u043B\u0438\u0435\u043D\u0442
+    \u0431\u044B\u043B \u0434\u043E\u0431\u0440 \u0438 \u0432 \u043F\u043E\u043C\u043E\u0449\u044C
+    \u043D\u0430\u0447\u0438\u043D\u0430\u044E\u0449\u0435\u043C\u0443 \u0430\u043B\u0445\u0438\u043C\u0438\u043A\u0443
+    \u0434\u0430\u043B \u0442\u0435\u0431\u0435 \u043D\u0435\u043C\u043D\u043E\u0433\u043E
+    \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
+  _inventory: {fileID: 0}
+--- !u!1 &7353413462301713307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413462301713308}
+  - component: {fileID: 7353413462301713309}
+  m_Layer: 0
+  m_Name: Step7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413462301713308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462301713307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413462301713309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462301713307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d555545e5f7da64c9d41b11272e475b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u0412\u0441\u0435 \u0433\u043E\u0442\u043E\u0432\u043E, \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u043C\u0441\u044F
+    \u043D\u0430 \u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u043C\u0435\u0441\u0442\u043E"
+  _frameFirst: {fileID: 0}
+  _frameSecond: {fileID: 0}
+  _firstIngredientButton: {fileID: 0}
+  _secondIngredientButton: {fileID: 0}
+  _exitButton: {fileID: 0}
+--- !u!1 &7353413462316482727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7353413462316482744}
+  - component: {fileID: 7353413462316482745}
+  m_Layer: 0
+  m_Name: Step4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7353413462316482744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462316482727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7353413461135344371}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7353413462316482745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353413462316482727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458ea48078638704aa153588af3c2eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 7353413460417880848}
+  _dialogView: {fileID: 0}
+  _blackBackground: {fileID: 0}
+  _text: "\u042D\u0442\u043E \u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u043C\u0435\u0441\u0442\u043E
+    \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443 \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0441\u044F
+    \u043A\u043E\u0442\u0435\u043B, \u0441\u043B\u0435\u0432\u0430 \u0438 \u0441\u043F\u0440\u0430\u0432\u0430
+    \u0431\u0443\u0434\u0443\u0442 \u0440\u0430\u0441\u043F\u043E\u043B\u0430\u0433\u0430\u0442\u044C\u0441\u044F
+    \u0440\u0435\u0441\u0443\u0440\u0441\u044B \u0434\u043B\u044F \u0437\u0435\u043B\u044C\u0435\u0432\u0430\u0440\u0435\u043D\u0438\u044F"
+  _brightObject: {fileID: 0}
+  _uiController: {fileID: 0}
+  _dialogWindowPos: {fileID: 0}
+  _frameSprite: {fileID: 0}
+  _moveCameraButton: {fileID: 0}

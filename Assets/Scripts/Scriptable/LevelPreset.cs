@@ -17,6 +17,4 @@ public class LevelPreset : ScriptableObject
     [TextArea]
     public string levelTaskText;
     public Sprite backgroundSprite;
-    [TextArea]
-    public string[] dialog;
 }

@@ -18,6 +18,7 @@ public class GuildView : MonoBehaviour
             RefreshSlider(guild, _guildSystem.GuildDictionary[guild]);
         }
     }
+
     private void InitSlider()
     {
         _saintSlider.maxValue = _guildSystem.GuildMaxValue;

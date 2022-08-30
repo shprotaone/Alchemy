@@ -20,7 +20,7 @@ public class Visitor : MonoBehaviour
 
     private void Awake()
     {
-        VisitorController.OnVisitorOut += Fading;
+        _visitorController.OnVisitorOut += Fading;
     }
 
     private void OnEnable()
@@ -104,8 +104,14 @@ public class Visitor : MonoBehaviour
               
     }
 
+    public void BrightVisitor(string sortingLayerName)
+    {
+        _visitorImage.sortingLayerName = sortingLayerName;
+        this.GetComponentInChildren<Canvas>().sortingLayerName = sortingLayerName;
+    }
+
     private void OnDisable()
     {
-        VisitorController.OnVisitorOut -= Fading;
+        _visitorController.OnVisitorOut -= Fading;
     }
 }

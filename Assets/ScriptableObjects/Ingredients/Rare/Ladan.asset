@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ladan
   m_EditorClassIdentifier: 
   ingredientName: Ladan
-  cost: 300
+  cost: 150
   color: {r: 1, g: 0.59704876, b: 0, a: 1}
   mainSprite: {fileID: 21300000, guid: b14c9690d57f2524d889187fe822191b, type: 3}
   emptySprite: {fileID: 21300000, guid: f927ec993927b7e4f8eb916b8b60f28e, type: 3}

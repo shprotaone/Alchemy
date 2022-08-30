@@ -59,6 +59,7 @@ public class ShopSlot : MonoBehaviour
     {
         Image[] images = GetComponentsInChildren<Image>();
         Color currentColor;
+
         if (flag)
         {
             currentColor = _hideColor;

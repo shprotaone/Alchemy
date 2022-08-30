@@ -1,30 +1,31 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.EventSystems;
-using System;
+using UnityEngine.UI;
 
-public class CameraMovement : MonoBehaviour,IPointerClickHandler
+public class CameraMovement : MonoBehaviour
 {   
     private Camera _cam;
 
     [SerializeField] private Transform _orderWindow;
     [SerializeField] private Transform _room;
-    [SerializeField] private Transform _button;
+    [SerializeField] private Button _button;
+    [SerializeField] private RectTransform _buttonTransfrom;
     [SerializeField] private float _cameraSpeed;
     
     private SwipeDirection _currentDirection;
-    private NextCountHandler _nextDialog;
 
     private bool _startRoom;
-    private bool _isFirstChangePos;
 
     private void Start()
     {
         _cam = Camera.main;
+
+        _button.onClick.AddListener(Movement);
+
+
         StartPosition();
         Movement();
-
-        _nextDialog = GetComponent<NextCountHandler>();
     }
 
     public void Movement()
@@ -33,15 +34,13 @@ public class CameraMovement : MonoBehaviour,IPointerClickHandler
         {
             _cam.transform.DOMove(_orderWindow.position, _cameraSpeed, false);
             _currentDirection = SwipeDirection.Up;
-            _button.DORotate(new Vector3(0, 0, 180), 1, RotateMode.Fast);
-
-            _isFirstChangePos = true;
+            _buttonTransfrom.DORotate(new Vector3(0, 0, 180), 1, RotateMode.Fast);
         }
         else
         {
             _cam.transform.DOMove(_room.position, _cameraSpeed, false);
             _currentDirection = SwipeDirection.Down;
-            _button.DORotate(new Vector3(0, 0, 0), 1, RotateMode.Fast);
+            _buttonTransfrom.DORotate(new Vector3(0, 0, 0), 1, RotateMode.Fast);
         }
     }
 
@@ -56,15 +55,5 @@ public class CameraMovement : MonoBehaviour,IPointerClickHandler
     public void SetStartPosition(bool startRoom)
     {
         _startRoom = startRoom;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Movement(); //ףיעט מע Mouse
-        if (_isFirstChangePos)
-        {
-            _nextDialog.DisableClickHerePrefab();
-            _isFirstChangePos = false;
-        }
     }
 }

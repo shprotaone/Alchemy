@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WolfBerry
   m_EditorClassIdentifier: 
   ingredientName: WolfBerry
-  cost: 100
+  cost: 50
   color: {r: 0, g: 0.123636246, b: 1, a: 1}
   mainSprite: {fileID: 21300000, guid: 483e92c030409f44286b484339371d01, type: 3}
   emptySprite: {fileID: 21300000, guid: 90ea9829d91605d4ebe9c129f47db05c, type: 3}

@@ -1,14 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
+    public static Action<bool> OnShopSlotDisabled;
+
     [SerializeField] private Button[] _UIButtons;
 
-    private void Start()
-    {
-        TutorialSystem.OnUIInterract += SetInterractButtons;
-    }
 
     public void SetInterractButtons(bool flag)
     {
@@ -16,10 +15,12 @@ public class ButtonController : MonoBehaviour
         {
             item.interactable = flag;
         }
+
+        Debug.LogWarning("UI " + flag);
     }
 
-    private void OnDisable()
+    public void ShopSlotController(bool flag)
     {
-        TutorialSystem.OnUIInterract -= SetInterractButtons;
+        OnShopSlotDisabled?.Invoke(flag);
     }
 }

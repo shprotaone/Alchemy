@@ -40,7 +40,7 @@ public class DialogManager : MonoBehaviour
         _dialogText.text = _currentDialog[_dialogCount];
         RefreshText();
 
-        _pause.PauseGame();
+        //_pause.PauseGame();
     }
 
     public void NextDialog()

@@ -21,10 +21,11 @@ public class Inventory : MonoBehaviour
     public Dictionary<IngredientData, int> InventoryAmount => _inventory;
     public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;
 
-
+    /// <summary>
+    /// Заполнение инвентаря
+    /// </summary>
     public void InitInventory()
-    {
-        TutorialSystem.OnEndedTutorial += StartGameFilling;       
+    {     
         _inventory = new Dictionary<IngredientData, int>();
 
         _slots = new List<Slot>();
@@ -66,7 +67,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void StartGameFilling(bool secondFilling)
+    public void StartGameFilling(bool secondFilling)
     {
         if (secondFilling)
         {
@@ -127,10 +128,5 @@ public class Inventory : MonoBehaviour
     public void HideRareShelf()
     {
         _rareShelf.HideShelf();
-    }
-
-    private void OnDisable()
-    {
-        TutorialSystem.OnEndedTutorial -= StartGameFilling;
     }
 }

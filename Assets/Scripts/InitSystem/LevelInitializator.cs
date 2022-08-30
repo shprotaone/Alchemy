@@ -8,11 +8,9 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private bool _directLoad;
 
     [SerializeField] private BackgroundLoader _backgroundLoader;
-    [SerializeField] private TutorialSystem _tutorialSystem;
+    [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private ShopSystem _shopSystem;
-    [SerializeField] private EventCounter _eventDialogCounter;
     [SerializeField] private CameraMovement _startCameraPos;    
-    [SerializeField] private DialogManager _dialogManager;
     [SerializeField] private PotionTaskSystem _taskSystem;
     [SerializeField] private GlobalTaskController _globalTaskController;
     [SerializeField] private Inventory _inventory;
@@ -20,13 +18,13 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private Money _money;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private BrightObject _brightObjectSystem;
+    [SerializeField] private UIController _UIController;
 
     [SerializeField] private LevelPreset _levelPresetDirect;
     
     private LevelPreset _levelPreset;
 
     private LevelTask _levelTask;
-    //private bool _tutorial;
 
     public LevelTask LevelTask => _levelTask;
 
@@ -57,7 +55,7 @@ public class LevelInitializator : MonoBehaviour
         _money.SetStartMoney(_levelPreset.startMoney);
         _startCameraPos.SetStartPosition(_levelPreset.startWindow);
         _taskSystem.SetPotionSizer(_levelPreset.rareTask);
-
+       
         LevelInitSelector();
 
         _visitorController.InitVisitorController();
@@ -71,8 +69,9 @@ public class LevelInitializator : MonoBehaviour
         switch (_levelPreset.levelNumber)
         {
             case LevelNumber.EndlessLevel:
-                _eventDialogCounter.enabled = false;
-                _dialogManager.enabled = false;
+
+                _tutorialManager.gameObject.SetActive(false);
+
                 _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
 
                 _inventory.FillClearInventory(stockAmount);
@@ -87,8 +86,8 @@ public class LevelInitializator : MonoBehaviour
             case LevelNumber.Tutorial:
 
                 DragController.instance.ObjectsInterractable(false);
-
-                StartCoroutine(_tutorialSystem.StartTutorialDelay(true));
+                _tutorialManager.Init();
+                _tutorialManager.NextStep();
 
                 _taskSystem.SetTutorialMode();
                 _taskSystem.TutorialMode(true);
@@ -97,24 +96,24 @@ public class LevelInitializator : MonoBehaviour
                 _inventory.AddBottle(stockBottleAmount);
                 _inventory.HideRareShelf();
 
-                _eventDialogCounter.SetEventCounterArray(_levelPreset.eventCount);
-                _dialogManager.SetDialogArray(_levelPreset.dialog);
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
 
                 break;
 
             case LevelNumber.Level2:
-                _eventDialogCounter.enabled = false;
-                _dialogManager.enabled = false;
+
                 _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
 
-                StartCoroutine(_tutorialSystem.StartTutorialDelay(false));
+                _tutorialManager.gameObject.SetActive(false);
 
                 _taskSystem.TutorialMode(false);
+
                 _inventory.FillClearInventory(stockAmount);
                 _inventory.AddBottle(stockBottleAmount);
+
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal); //!!!
                 _brightObjectSystem.BrightObjects(false);
+
                 break;
         }
     }

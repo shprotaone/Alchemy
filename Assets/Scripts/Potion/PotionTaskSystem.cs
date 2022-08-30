@@ -33,10 +33,11 @@ public class PotionTaskSystem : MonoBehaviour
     public GameObject CoinPrefab => _coinPrefab;
     public Transform JarTransform => _jarTransform;
 
+    /// <summary>
+    /// Инициализация текущего списка зелий
+    /// </summary>
     public void InitPotionSizer()
     {
-        TutorialSystem.OnEndedTutorial += TutorialMode;
-
         _potionSizer = _jsonReader.PotionSizer;
         _currentSizer = new PotionSizer();
        
@@ -136,6 +137,7 @@ public class PotionTaskSystem : MonoBehaviour
     private int GetReward(Potion potion)
     {
         _rewardCalculator.Calculate(potion.GuildsType, potion.Rarity);
+        print(_rewardCalculator.Reward);
         return _rewardCalculator.Reward;
     }
 
@@ -146,9 +148,5 @@ public class PotionTaskSystem : MonoBehaviour
     public void TutorialMode(bool value)
     {
         SetPotionSizer(_rareTaskInclude);
-    }
-    private void OnDisable()
-    {
-        TutorialSystem.OnEndedTutorial -= TutorialMode;
     }
 }

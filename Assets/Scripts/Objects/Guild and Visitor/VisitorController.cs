@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class VisitorController : MonoBehaviour
 {    
-    public static Action OnVisitorCall;
-    public static Action OnVisitorOut;
+    public Action OnVisitorCall;
+    public Action OnVisitorOut;
 
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private AudioClip _visitorFadingSound;

@@ -5,18 +5,26 @@ using UnityEngine;
 public class BrightObject : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _brightObjectInRoom;
+    [SerializeField] private List<SpriteRenderer> _visitors;
 
     private string _interactiveLayerName = "Interractive";
     private string _dialogLayerName = "Dialog";
+    private string _brightLayerName = "BrightObjects";
 
     public string InteractiveLayerName => _interactiveLayerName;
     public string DialogLayerName => _dialogLayerName;
+    public string BrightLayerName => _brightLayerName;
 
+    /// <summary>
+    /// Подсвечивание кнопок для туториала
+    /// </summary>
+    /// <param name="flag"></param>
     public void BrightObjects(bool flag)
     {
         List<SpriteRenderer> brightObject = new List<SpriteRenderer>();
 
         string nameLayer;
+
         if (flag)
         {
             nameLayer = _dialogLayerName;
@@ -34,6 +42,24 @@ public class BrightObject : MonoBehaviour
         foreach (var item in brightObject)
         {
             item.sortingLayerName = nameLayer;
+        }
+    }
+
+    public void BrightVisitors(bool flag)
+    {
+        if (flag)
+        {
+            foreach (var item in _visitors)
+            {
+                item.sortingLayerName = _brightLayerName;
+            }
+        }
+        else
+        {
+            foreach (var item in _visitors)
+            {
+                item.sortingLayerName = _interactiveLayerName;
+            }
         }
     }
 }

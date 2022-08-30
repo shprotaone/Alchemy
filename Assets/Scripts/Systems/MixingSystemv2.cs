@@ -8,7 +8,10 @@ public class MixingSystemv2 : MonoBehaviour
     private const string ingredientTag = "Ingredient";
 
     public delegate void RefreshCountIngredient();
-    public RefreshCountIngredient _refreshDelegate;
+    public RefreshCountIngredient RefreshDelegate;
+
+    public delegate void FilledBottle();
+    public FilledBottle FilledBottleDelegete;
 
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private List<Ingredient> _ingredients;
@@ -58,19 +61,15 @@ public class MixingSystemv2 : MonoBehaviour
     {
         if (_ingredients.Count < maxMixColor)
         {
-            print(_audioSource.gameObject.activeInHierarchy);
-            print(_audioSource.enabled);
-
             _ingredients.Add(ingredient);           
 
             _audioSource.Play();
-            _refreshDelegate.Invoke();
+            RefreshDelegate.Invoke();
             _waterColor.ColorWater(MixColor());
         }
         else
         {
             ClearMixSystem();            
-
         }
     }
 
@@ -108,7 +107,7 @@ public class MixingSystemv2 : MonoBehaviour
 
         if (_potionDetector.CurrentPotion.PotionName == "")
         {
-            _bottleFilled = false;
+            _bottleFilled = false;  //ответсвенность заполнения перенести в бутылку
             print("BadPotion");
         }
         else
@@ -120,10 +119,13 @@ public class MixingSystemv2 : MonoBehaviour
 
     private void SetPotionInBottle(Bottle bottle)
     {
+
         bottle.FillWaterInBottle(_waterColor.ResultColor);        
-        bottle.FillPotionInBottle(_potionDetector.CurrentPotion);
+        bottle.FillPotionInBottle(_potionDetector.CurrentPotion);        
         bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
         bottle.Movement();
+
+        FilledBottleDelegete?.Invoke();
 
         ClearMixSystem();
     }
@@ -137,7 +139,7 @@ public class MixingSystemv2 : MonoBehaviour
 
         _cookSystem.CleanClaudron();
         _ingredients.Clear();
-        _refreshDelegate.Invoke();
+        RefreshDelegate.Invoke();
         _waterColor.SetColor(Color.white);
     }
 }

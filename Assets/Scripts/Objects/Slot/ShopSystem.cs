@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ShopSystem : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private Money _currentMoney;
     [SerializeField] private TMP_Text _moneyText;
     [SerializeField] private ShopSlot[] _shopSlots;
+
+    [SerializeField] private Button _addBottleButton;
+    [SerializeField] private Button _addFuelButton;
+    [SerializeField] private Button _upgradeClaudronButton;
+
     [SerializeField] private Button _backButton;
 
     private IngredientData[] _ingredientData;
@@ -24,7 +30,11 @@ public class ShopSystem : MonoBehaviour
 
     private void Start()
     {
-        TutorialSystem.OnShopSlotDisabled += TutorialMarkSlot;
+        UIController.OnShopSlotDisabled += HideShopSlot;
+
+        _addBottleButton.onClick.AddListener(BuyBottle);
+        _addFuelButton.onClick.AddListener(BuyFuel);
+        _upgradeClaudronButton.onClick.AddListener(UpgradeClaudron);
     }
 
     private void InitShopSystem()
@@ -90,7 +100,7 @@ public class ShopSystem : MonoBehaviour
         }
     }
 
-    public void TutorialMarkSlot(bool flag)
+    public void HideShopSlot(bool flag)
     {
         foreach (var item in _shopSlots)
         {
@@ -102,6 +112,22 @@ public class ShopSystem : MonoBehaviour
             _shopSlots[0].HideSlot(false);
             _shopSlots[2].HideSlot(false);
         }
+
+        HideAdditionalButton(true);
+    }
+
+    private void HideAdditionalButton(bool flag)
+    {
+        List<Button> buttons = new List<Button>();
+
+        buttons.Add(_addBottleButton);
+        buttons.Add(_addFuelButton);
+        buttons.Add(_upgradeClaudronButton);
+
+        foreach (var item in buttons)
+        {
+            item.interactable = !flag;
+        }
     }
 
     public void RefreshMoneyCount()
@@ -109,13 +135,8 @@ public class ShopSystem : MonoBehaviour
         _moneyText.text = _currentMoney.CurrentMoney.ToString();
     }
 
-    public void NextStepTutorial()
-    {
-        _backButton.gameObject.GetComponent<NextCountHandler>().DisableClickHerePrefab();
-    }
-
     private void OnDisable()
     {
-        TutorialSystem.OnShopSlotDisabled -= TutorialMarkSlot;
+        UIController.OnShopSlotDisabled -= HideShopSlot;
     }
 }

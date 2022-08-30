@@ -34,7 +34,9 @@ public class Cook : MonoBehaviour
         _claudron = GetComponent<ClaudronSystem>();
         _audioSource = GetComponent<AudioSource>();
 
-        _mixingSystem._refreshDelegate += RefreshBar;
+        _mixingSystem.RefreshDelegate += RefreshBar;
+        _mixingSystem.RefreshDelegate += CookButtonCheck;
+
         _cookButton.onClick.AddListener(Brew);
     }
     public void Brew()
@@ -168,8 +170,21 @@ public class Cook : MonoBehaviour
         _boilProgress.value = 0;
     }
 
+    public void CookButtonCheck()
+    {
+        if (_mixingSystem.Ingredients.Count > 0)
+        {
+            _cookButton.interactable = true;
+        }
+        else
+        {
+            _cookButton.interactable = false;
+        }
+    }
+
     private void OnDisable()
     {
-        _mixingSystem._refreshDelegate -= RefreshBar;
+        _mixingSystem.RefreshDelegate -= RefreshBar;
+        _mixingSystem.RefreshDelegate -= CookButtonCheck;
     }
 }

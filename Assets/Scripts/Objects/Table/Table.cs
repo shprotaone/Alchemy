@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using DG.Tweening;
+using System;
 
 public class Table : MonoBehaviour
 {
+    public Action OnChildChanged;
+
     private const float sizeOffset = 0.8f;
 
     [SerializeField] private bool _fullPotionTable;
@@ -18,8 +19,6 @@ public class Table : MonoBehaviour
     {
         float offset = index * sizeOffset;
         Vector3 result = transform.position + new Vector3(offset, 0, 0);
-        
-        print(offset);
 
         return result;
     }
@@ -31,6 +30,7 @@ public class Table : MonoBehaviour
             for (int i = 0; i < transform.childCount; i++)
             {               
                 transform.GetChild(i).position = transform.position + new Vector3(sizeOffset +_offset, 0, 0);
+                OnChildChanged?.Invoke();
                 _offset += sizeOffset;
             }
         }
