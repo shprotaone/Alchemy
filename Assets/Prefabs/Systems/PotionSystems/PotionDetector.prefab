@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8747158249419074355}
   - component: {fileID: 8747158249419074354}
-  - component: {fileID: 8747158249419074349}
   m_Layer: 0
   m_Name: PotionDetector
   m_TagString: Untagged
@@ -46,15 +45,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixingSystem: {fileID: 0}
   _jsonReader: {fileID: 0}
---- !u!114 &8747158249419074349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8747158249419074352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad39b6420b0a2f49a20fcbcaa0cdb70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

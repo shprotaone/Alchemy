@@ -6,7 +6,6 @@ public abstract class Step : MonoBehaviour
 {
     [SerializeField] protected TutorialManager _tutorialManager;
     [SerializeField] protected DialogView _dialogView;
-    [SerializeField] protected Image _blackBackground;
 
     [TextArea]
     [SerializeField] protected string _text;

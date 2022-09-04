@@ -13,15 +13,14 @@ public class TutorialManager : MonoBehaviour
 
     public Visitor FirstVisitor => _firstVisitor;
 
-    private void Start()
+    public void Init()
+    {              
+        _stepCounter = 1;
+    }
+
+    public void FirstVisitorInit()
     {
         _firstVisitor = _visitorController.CurrentVisitor;
-    }
-    public void Init()
-    {
-        _steps = GetComponentsInChildren<Step>();
-        
-        _stepCounter = 1;
     }
 
     public void NextStep()

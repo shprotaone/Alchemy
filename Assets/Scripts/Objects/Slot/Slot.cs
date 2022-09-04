@@ -30,8 +30,8 @@ public class Slot : MonoBehaviour,IAction
         RefreshAmount();
     }
 
-    public void OnBeginDrag()
-    {           
+    public void StartDrag()
+    {
         if (_inventory.DragFromInventory(_ingredientData))
         {                    
             GameObject ingredientGO = Instantiate(_draggableIngredientPrefab, this.transform);
@@ -68,7 +68,7 @@ public class Slot : MonoBehaviour,IAction
 
     public void Action()
     {
-        OnBeginDrag();
+        StartDrag();
     }
 
     public void Movement() { }

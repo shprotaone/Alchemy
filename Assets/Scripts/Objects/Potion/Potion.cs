@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
-public class Potion : MonoBehaviour
+public class Potion
 {
     private GameObject _effect;
     private ResourceRarity _rarityType;
@@ -17,13 +17,10 @@ public class Potion : MonoBehaviour
     public string[] Ingredients => _ingredients;
     public GameObject Effect => _effect;
 
-    private void Start()
-    {
-        _ingredients = new string[5];
-    }
-
     public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem
     {
+        _ingredients = new string[5];
+
         _name = potionData.name;
         SetGuild(potionData.guild);
         SetRarity(potionData.rarity);
@@ -34,8 +31,6 @@ public class Potion : MonoBehaviour
 
     public void FillPotion(Ingredient[] ingredients)        //посмотреть для чего перевод в массив string
     {
-        _name = name;
-
         _ingredients = new string[ingredients.Length];
 
         for (int i = 0; i < ingredients.Length; i++)
@@ -105,15 +100,11 @@ public class Potion : MonoBehaviour
 
     public bool PotionEquals(PotionData potionData)
     {
-        bool potionFind = (Ingredients[0] == potionData.firstIngredient
-                            &&
-                            Ingredients[1] == potionData.secondIngredient
-                            &&
-                            Ingredients[2] == potionData.threeIngredient
-                            &&
-                            Ingredients[3] == potionData.fourIngredient
-                            &&
-                            Ingredients[4] == potionData.fiveIngredient);
-        return potionFind;
+        Array.Sort(Ingredients);
+
+        potionData.SetIngrediets();
+        Array.Sort(potionData.ingredients);
+
+        return Enumerable.SequenceEqual(Ingredients, potionData.ingredients);
     }
 }

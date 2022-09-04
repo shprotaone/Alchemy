@@ -8,6 +8,7 @@ public class Step4 : Step
     [SerializeField] private UIController _uiController;
     [SerializeField] private RectTransform _dialogWindowPos;
     [SerializeField] private GameObject _frameSprite;
+    [SerializeField] private GameObject _panel;
     [SerializeField] private Button _moveCameraButton;
 
     private void Start()
@@ -17,6 +18,8 @@ public class Step4 : Step
 
     public override void StepAction()
     {
+        _panel.SetActive(true);
+
         _dialogView.MovementWindow(_dialogWindowPos);
         _dialogView.NextButton.gameObject.SetActive(true);
         _dialogView.NextButton.onClick.AddListener(_tutorialManager.NextStep);
@@ -25,7 +28,6 @@ public class Step4 : Step
         _brightObject.BrightObjects(true);
 
         _frameSprite.SetActive(false);
-        _blackBackground.enabled = true;
 
         _moveCameraButton.onClick.RemoveListener(_tutorialManager.NextStep);
         _moveCameraButton.interactable = false;

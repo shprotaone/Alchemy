@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Step2 : Step
 {
-    [SerializeField] private BrightObject _brightObject;
+    [SerializeField] private BrightObject _brightObject;  
 
     public override void StepAction()
     {
-        _tutorialManager.FirstVisitor.BrightVisitor(_brightObject.BrightLayerName);
+        _tutorialManager.FirstVisitorInit();
+        _tutorialManager.FirstVisitor.BrightVisitor(_brightObject.UILayerName);
     }
 }

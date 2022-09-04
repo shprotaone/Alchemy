@@ -119,15 +119,18 @@ public class MixingSystemv2 : MonoBehaviour
 
     private void SetPotionInBottle(Bottle bottle)
     {
+        if (!bottle.IsFull)
+        {
+            bottle.FillWaterInBottle(_waterColor.ResultColor);
+            bottle.FillPotionInBottle(_potionDetector.CurrentPotion);
+            bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
 
-        bottle.FillWaterInBottle(_waterColor.ResultColor);        
-        bottle.FillPotionInBottle(_potionDetector.CurrentPotion);        
-        bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
-        bottle.Movement();
+            bottle.Movement();
 
-        FilledBottleDelegete?.Invoke();
+            FilledBottleDelegete?.Invoke();
 
-        ClearMixSystem();
+            ClearMixSystem();
+        }
     }
 
     public void ClearMixSystem()

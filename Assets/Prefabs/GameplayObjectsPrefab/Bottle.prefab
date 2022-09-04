@@ -141,8 +141,6 @@ GameObject:
   - component: {fileID: 1826892289}
   - component: {fileID: 7383387637611308367}
   - component: {fileID: 8089389689234083995}
-  - component: {fileID: 2439843633981381608}
-  - component: {fileID: 7680754332407386074}
   m_Layer: 12
   m_Name: Bottle
   m_TagString: Bottle
@@ -245,31 +243,6 @@ MonoBehaviour:
   _effectTransform: {fileID: 7193668372587723891}
   _collider: {fileID: -8574785794516881806}
   _wobble: {fileID: 5975492717675343276}
---- !u!114 &2439843633981381608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5975492717874033009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad39b6420b0a2f49a20fcbcaa0cdb70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7680754332407386074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5975492717874033009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fcd2b56237cd8c4e842044108e15c99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _clickHerePrefab: {fileID: 0}
 --- !u!1 &6855598961857188054
 GameObject:
   m_ObjectHideFlags: 0

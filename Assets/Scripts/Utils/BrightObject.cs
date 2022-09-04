@@ -10,10 +10,12 @@ public class BrightObject : MonoBehaviour
     private string _interactiveLayerName = "Interractive";
     private string _dialogLayerName = "Dialog";
     private string _brightLayerName = "BrightObjects";
+    private string _UILayerName = "UI";
 
     public string InteractiveLayerName => _interactiveLayerName;
     public string DialogLayerName => _dialogLayerName;
     public string BrightLayerName => _brightLayerName;
+    public string UILayerName => _UILayerName;
 
     /// <summary>
     /// Подсвечивание кнопок для туториала

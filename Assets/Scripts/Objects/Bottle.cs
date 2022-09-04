@@ -16,20 +16,17 @@ public class Bottle : MonoBehaviour,IAction
     private Color _potionColor;
     private TableManager _tableManager;
     private Table _currentTable;
-    private NextCountHandler _nextCountHandler;
 
     private bool _isFull;
-    private bool _firstFill = true;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
 
     private void Start()        //убрать GetComponent
     {
-        _potionInBottle = GetComponent<Potion>();
+        _potionInBottle = new Potion();
+
         _currentTable = GetComponentInParent<Table>();
         _tableManager = GetComponentInParent<TableManager>();
-
-        _nextCountHandler = GetComponent<NextCountHandler>();
     }
 
     public void Movement()
@@ -38,13 +35,7 @@ public class Bottle : MonoBehaviour,IAction
     }
 
     public void FillWaterInBottle(Color color)
-    {
-        if (_firstFill)
-        {
-            _nextCountHandler.DisableClickHerePrefab();
-            _firstFill = false;
-        }
-        
+    {       
         _potionColor = color;
         _fullBottle.enabled = true;
         _wobble.ChangeColor(_potionColor);

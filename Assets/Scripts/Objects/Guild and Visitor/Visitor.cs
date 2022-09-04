@@ -37,7 +37,6 @@ public class Visitor : MonoBehaviour
             {
                 if (_firstTask)
                 {
-                    bottle.GetComponent<NextCountHandler>().DisableClickHerePrefab();   //сомнительно
                     _firstTask = false;
                 }
                 

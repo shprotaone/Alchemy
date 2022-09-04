@@ -9,5 +9,6 @@ public class Step15 : Step
     {
         _dialogView.EnableView(false);
         _UIController.SetInterractButtons(true);
+        _tutorialManager.gameObject.SetActive(false);
     }
 }

@@ -17,7 +17,7 @@ public class PotionDetector : MonoBehaviour
     private void Start()
     {
         _potionSizer = _jsonReader.PotionSizer;
-        _currentPotion = GetComponent<Potion>();
+        _currentPotion = new Potion();
     }
 
     public void FillCurrentPotion(List<Ingredient> ingredients)

@@ -29,6 +29,7 @@ public class Step12 : Step
 
     private void OnDisable()
     {
-        _closeGuildButton.onClick.RemoveListener(_tutorialManager.NextStep);      
+        _closeGuildButton.onClick.RemoveListener(_tutorialManager.NextStep);
+        _guildButton.onClick.RemoveListener(_tutorialManager.NextStep);
     }
 }

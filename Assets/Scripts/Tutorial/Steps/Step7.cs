@@ -12,7 +12,7 @@ public class Step7 : Step
     [SerializeField] private Button _secondIngredientButton;
     [SerializeField] private Button _exitButton;
 
-    private void Start()
+    private void OnEnable()
     {
         _exitButton.gameObject.SetActive(false);
 
@@ -24,6 +24,7 @@ public class Step7 : Step
 
         _exitButton.onClick.AddListener(_tutorialManager.NextStep);
     }
+
     public override void StepAction()
     {
        if(!_frameFirst.activeInHierarchy && !_frameSecond.activeInHierarchy)
@@ -57,6 +58,8 @@ public class Step7 : Step
 
         _secondIngredientButton.onClick.RemoveListener(() => DisableFrame(1));
         _secondIngredientButton.onClick.RemoveListener(StepAction);
+
+        _exitButton.onClick.RemoveListener(_tutorialManager.NextStep);
     }
 
 }

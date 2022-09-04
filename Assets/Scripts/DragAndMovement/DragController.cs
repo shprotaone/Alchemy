@@ -16,6 +16,8 @@ public class DragController : MonoBehaviour
     private bool _isDragActive = false;
     private bool _interractive = true;
 
+    private float delay;
+
     public Draggable LastDragged => _lastDragged;
     public bool IsDragActive => _isDragActive;
     public Vector3 WorldPosition => _worldPosition;
@@ -96,12 +98,15 @@ public class DragController : MonoBehaviour
 
     public void InitDrag()
     {
-        UpdateDragStatus(true);
-        _lastDragged.DraggableAction();
+        if (delay < 1)
+        {
+            UpdateDragStatus(true);
+            _lastDragged.DraggableAction();
+        }
     }
 
     private void Drag()
-    {        
+    {
         if(_lastDragged.DraggingObject)
         _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y);
     }

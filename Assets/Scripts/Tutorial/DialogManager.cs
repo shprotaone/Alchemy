@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,7 +7,6 @@ public class DialogManager : MonoBehaviour
 {
     private const string closeText = "Закрыть";
 
-    [SerializeField] private EventCounter _eventCounter;
     [SerializeField] private GameObject _dialogPanel;
     [SerializeField] private RectTransform _dialogBox;
     [SerializeField] private RectTransform _firstDialogWindowPos;
@@ -39,8 +37,6 @@ public class DialogManager : MonoBehaviour
         _dialogPanel.SetActive(true);
         _dialogText.text = _currentDialog[_dialogCount];
         RefreshText();
-
-        //_pause.PauseGame();
     }
 
     public void NextDialog()
@@ -48,45 +44,12 @@ public class DialogManager : MonoBehaviour
         _dialogCount++;
 
         RefreshText();
-        //SetCloseTextInButton();
     }
 
     private void RefreshText()
     {
         if(_dialogCount < _currentDialog.Length)
         _dialogText.text = _currentDialog[_dialogCount];
-    }
-
-    /// <summary>
-    /// Управление текстом кнопки
-    /// </summary>
-    private void SetCloseTextInButton()
-    {
-        if(_dialogCount == _currentDialog.Length-1)
-        {
-            _nextButton.GetComponentInChildren<TMP_Text>().text = closeText;           //куда то вынести надо  
-        }
-    }
-    /// <summary>
-    /// Позиция плашки окна с диалогом
-    /// </summary>
-    /// <param name="pos">1 - нижняя позиция,
-    /// 2 - верхняя позиция</param>
-    public void PlateMovement(int pos)
-    {
-        _pause.ResumeGame();
-        switch (pos)
-        {
-            case 1:
-                _dialogBox.DOAnchorPos(_secondDialogWindowPos.anchoredPosition, 1, false);
-                break;
-            case 2:
-                _dialogBox.DOAnchorPos(_firstDialogWindowPos.anchoredPosition, 1, false);
-                break;
-            case 3:
-                _dialogBox.DOAnchorPos(_thirdDialogWindowPos.anchoredPosition, 1, false);
-                break;
-        }
     }
 
     public void PanelIsActive(bool flag)

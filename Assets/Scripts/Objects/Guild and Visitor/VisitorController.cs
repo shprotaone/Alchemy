@@ -29,7 +29,7 @@ public class VisitorController : MonoBehaviour
       
         OnVisitorCall += CallVisitor;
         OnVisitorOut += VisitorGoOutSound;
-
+        
         ShopControl(_shopIsOpen);
 
     }

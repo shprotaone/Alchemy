@@ -108,10 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f5be6bc3e75ab44ac7faec62501b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: -2819906009747052319}
   _dragableImage: {fileID: 1021434656847022948}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _backSound: {fileID: 8300000, guid: 25174dd9cd1165244b33578190bd6c6b, type: 3}
-  _draggable: {fileID: -6870531906201209021}
 --- !u!114 &-6870531906201209021
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,9 +6,10 @@ using DG.Tweening;
 public class ShopController : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] private VisitorController _visitorController;
-    
+    [SerializeField] private Transform _plate;
 
-    private void Start()
+    public Transform Plate => _plate;
+    private void OnEnable()
     {
         GlobalTaskController.OnLevelComplete += ShopClose;           
     }
@@ -16,13 +17,13 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
     private void ShopOpen()
     {
         _visitorController.ShopControl(true);
-        transform.DORotate(new Vector3(0, 0, 0), 1);
+        _plate.transform.DORotate(new Vector3(0, 0, 0), 1);
     }
 
     private void ShopClose()
     {
         _visitorController.ShopControl(false);
-        transform.DORotate(new Vector3(0, 180, 0), 1);
+        _plate.transform.DORotate(new Vector3(0, 180, 0), 1);
     }
 
     private IEnumerator DelayShopControl()

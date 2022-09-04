@@ -6,13 +6,18 @@ public class Step1 : Step
 {
     [SerializeField] private UIController _uiController;
     [SerializeField] private RectTransform _dialogPos;
+    [SerializeField] private GameObject _panel;
+
+    private void Start()
+    {
+        _dialogView.NextButton.onClick.AddListener(_tutorialManager.NextStep);
+    }
 
     public override void StepAction()
     {
         _dialogView.MovementWindow(_dialogPos);
         _uiController.SetInterractButtons(false);
 
-        _blackBackground.enabled = true;
-        _dialogView.NextButton.onClick.AddListener(_tutorialManager.NextStep);
+        _panel.SetActive(true);        
     }
 }

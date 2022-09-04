@@ -42,7 +42,7 @@ public class PotionTaskSystem : MonoBehaviour
         _currentSizer = new PotionSizer();
        
         _rewardCalculator = new RewardCalculator();
-        _currentPotion = GetComponent<Potion>();
+        _currentPotion = new Potion();
     }
 
     public void SetPotionSizer(bool rare)
@@ -136,7 +136,7 @@ public class PotionTaskSystem : MonoBehaviour
 
     private int GetReward(Potion potion)
     {
-        _rewardCalculator.Calculate(potion.GuildsType, potion.Rarity);
+        _rewardCalculator.Calculate(_visitorController.CurrentVisitor.Guild, potion.Rarity);
         print(_rewardCalculator.Reward);
         return _rewardCalculator.Reward;
     }

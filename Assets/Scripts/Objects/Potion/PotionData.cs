@@ -18,6 +18,18 @@ public class PotionData
     public string guild;
     public string rarity;
 
+    public string[] ingredients;
     //здесь можно перенести в массив прям в этом FillIngredient переносим сюда
+
+    public void SetIngrediets()
+    {
+        ingredients = new string[5];
+
+        ingredients[0] = firstIngredient;
+        ingredients[1] = secondIngredient;
+        ingredients[2] = threeIngredient;
+        ingredients[3] = fourIngredient;
+        ingredients[4] = fiveIngredient;
+    }
 
 }

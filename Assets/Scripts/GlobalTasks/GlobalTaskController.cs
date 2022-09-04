@@ -47,7 +47,7 @@ public class GlobalTaskController : MonoBehaviour
 
     private void CheckLevelComplete()
     {
-        if (_taskValue < _money.CurrentMoney)
+        if (_taskValue <= _money.CurrentMoney)
         {
             _endGamePanel.SetActive(true);
             OnLevelComplete?.Invoke();

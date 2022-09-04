@@ -55,7 +55,7 @@ public class LevelInitializator : MonoBehaviour
         _money.SetStartMoney(_levelPreset.startMoney);
         _startCameraPos.SetStartPosition(_levelPreset.startWindow);
         _taskSystem.SetPotionSizer(_levelPreset.rareTask);
-       
+              
         LevelInitSelector();
 
         _visitorController.InitVisitorController();
@@ -81,6 +81,7 @@ public class LevelInitializator : MonoBehaviour
                 _globalTaskController.DisableTask();
 
                 _brightObjectSystem.BrightObjects(false);
+
                 break;
 
             case LevelNumber.Tutorial:
@@ -112,6 +113,7 @@ public class LevelInitializator : MonoBehaviour
                 _inventory.AddBottle(stockBottleAmount);
 
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal); //!!!
+
                 _brightObjectSystem.BrightObjects(false);
 
                 break;
@@ -129,11 +131,11 @@ public class LevelInitializator : MonoBehaviour
     {
         if (_levelPreset.ShopController)
         {
-            _shopController.gameObject.SetActive(true);
+            _shopController.Plate.gameObject.SetActive(true);
         }
         else
         {
-            _shopController.gameObject.SetActive(false);
+            _shopController.Plate.gameObject.SetActive(false);
         }
     }
 

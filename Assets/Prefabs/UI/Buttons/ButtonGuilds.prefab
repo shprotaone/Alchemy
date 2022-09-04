@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &700608626842865240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700608626842865243}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MainColor: {r: 0.7686275, g: 0.627451, b: 0.5254902, a: 1}
-  m_FillColor: {r: 0.47058827, g: 0.5764706, b: 0.3921569, a: 1}
+  m_FillColor: {r: 1, g: 0.90196085, b: 0.60784316, a: 1}
   m_NumberOfSegments: 1
   m_StartAngle: 0
   m_EndAngle: 90
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MainColor: {r: 0.7686275, g: 0.627451, b: 0.5254902, a: 1}
-  m_FillColor: {r: 0.6392157, g: 0.38823533, b: 0.38431376, a: 1}
+  m_FillColor: {r: 0, g: 0.8588236, b: 0.42352945, a: 1}
   m_NumberOfSegments: 1
   m_StartAngle: 270
   m_EndAngle: 360
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MainColor: {r: 0.7686275, g: 0.627451, b: 0.5254902, a: 1}
-  m_FillColor: {r: 0.65560013, g: 0.29622638, b: 1, a: 1}
+  m_FillColor: {r: 1, g: 0.47450984, b: 0.43921572, a: 1}
   m_NumberOfSegments: 1
   m_StartAngle: 90
   m_EndAngle: 180
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MainColor: {r: 0.7686275, g: 0.627451, b: 0.5254902, a: 1}
-  m_FillColor: {r: 0.8431373, g: 0.8117648, b: 0.5137255, a: 1}
+  m_FillColor: {r: 0.7803922, g: 0.5372549, b: 0.96470594, a: 1}
   m_NumberOfSegments: 1
   m_StartAngle: 180
   m_EndAngle: 270
