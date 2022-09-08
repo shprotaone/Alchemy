@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DragController : MonoBehaviour
@@ -17,7 +15,6 @@ public class DragController : MonoBehaviour
     private bool _interractive = true;
 
     private float delay;
-
     public Draggable LastDragged => _lastDragged;
     public bool IsDragActive => _isDragActive;
     public Vector3 WorldPosition => _worldPosition;
@@ -85,11 +82,10 @@ public class DragController : MonoBehaviour
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
-                        //_lastDragged.transform.SetParent(_draggableParent);
                     }
                     else if(bottle = draggable.GetComponentInChildren<Bottle>())
                     {
-                        bottle.transform.SetParent(_draggableParent);
+                        _lastDragged = bottle.GetComponent<Draggable>();
                     }
                 }            
             }

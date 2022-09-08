@@ -123,6 +123,7 @@ public class MixingSystemv2 : MonoBehaviour
         {
             bottle.FillWaterInBottle(_waterColor.ResultColor);
             bottle.FillPotionInBottle(_potionDetector.CurrentPotion);
+
             bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
 
             bottle.Movement();

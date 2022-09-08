@@ -16,22 +16,29 @@ public class Bottle : MonoBehaviour,IAction
     private Color _potionColor;
     private TableManager _tableManager;
     private Table _currentTable;
+    private BottleStorage _bottleStorage;
+
+    private Tween _tween;
 
     private bool _isFull;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
 
-    private void Start()        //убрать GetComponent
+    private void Start()
     {
-        _potionInBottle = new Potion();
-
         _currentTable = GetComponentInParent<Table>();
         _tableManager = GetComponentInParent<TableManager>();
     }
 
+    public void InitBottle(BottleStorage storage)
+    {
+        _potionInBottle = new Potion();
+        _bottleStorage = storage;
+    }
+
     public void Movement()
-    {               
-        transform.DOMove(_currentTable.transform.position, moveSpeed, false).OnStart(Test).OnComplete(EnableCollider);       
+    {
+        _tween = transform.DOMove(_currentTable.transform.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(ReturnToStorage);             
     }
 
     public void FillWaterInBottle(Color color)
@@ -67,25 +74,28 @@ public class Bottle : MonoBehaviour,IAction
             _currentTable = _tableManager.EmptyPotionTable;
     }
 
-    private void Test()
+    private void SortInFullTable()
     {
         transform.SetParent(_currentTable.transform);
-        _currentTable.SortBottlePosition();
+        _currentTable.SortBottlePosition();           
+            
+        _collider.enabled = true;
     }
 
-    private void EnableCollider()
+    private void ReturnToStorage()
     {
-        _collider.enabled = true;
+        if (!_isFull)
+        {
+            _bottleStorage.IncreaseAmount();
+            Destroy(gameObject);
+        }
     }
 
     public void ResetBottle()
     {
-        _isFull = false;
-        _fullBottle.enabled = false;
+        _tween.Kill(true);
 
-        SetTable();
-        EnableCollider();
-        Destroy(_effect);
+        Destroy(this.gameObject);
     }
 
     public void Action()

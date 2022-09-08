@@ -139,8 +139,8 @@ GameObject:
   - component: {fileID: 5975492717874033008}
   - component: {fileID: -8574785794516881806}
   - component: {fileID: 1826892289}
-  - component: {fileID: 7383387637611308367}
   - component: {fileID: 8089389689234083995}
+  - component: {fileID: 7383387637611308367}
   m_Layer: 12
   m_Name: Bottle
   m_TagString: Bottle
@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5975492717874033009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00018, y: 0.0024267, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.94}
   m_Children:
   - {fileID: 2233345837965744541}
@@ -212,20 +212,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7383387637611308367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5975492717874033009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _draggingObject: 1
-  IsDragging: 0
 --- !u!114 &8089389689234083995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +229,20 @@ MonoBehaviour:
   _effectTransform: {fileID: 7193668372587723891}
   _collider: {fileID: -8574785794516881806}
   _wobble: {fileID: 5975492717675343276}
+--- !u!114 &7383387637611308367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975492717874033009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fc919ff86aecb40806762989d30458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggingObject: 1
+  IsDragging: 0
 --- !u!1 &6855598961857188054
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -768495831
   m_SortingLayer: 4
-  m_SortingOrder: 16
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 4f2c384376ae9f0468a2bcb7b1550ac4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -34,14 +34,14 @@ public class Table : MonoBehaviour
                 _offset += sizeOffset;
             }
         }
-        else if (!_fullPotionTable)
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).position = transform.position - new Vector3(sizeOffset + _offset, 0, 0);
-                _offset += sizeOffset;
-            }
-        }
+        //else if (!_fullPotionTable)
+        //{
+        //    for (int i = 0; i < transform.childCount; i++)
+        //    {
+        //        transform.GetChild(i).position = transform.position - new Vector3(sizeOffset + _offset, 0, 0);
+        //        _offset += sizeOffset;
+        //    }
+        //}
 
         _offset = 0;
     }

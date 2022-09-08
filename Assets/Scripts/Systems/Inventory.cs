@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private IngredientData[] _ingredients;
     [SerializeField] private TableManager _tableManager;
+
     [SerializeField] private Shelf _commonShelf;
     [SerializeField] private Shelf _rareShelf;
 
@@ -42,18 +43,6 @@ public class Inventory : MonoBehaviour
         }
         
         RefreshInventory();
-    }
-
-    public void AddBottle(int value)
-    {
-        for (int i = 0; i < value; i++)
-        {
-            GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetStartPosition(i),Quaternion.identity);
-            bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);            
-        }
-
-        _tableManager.EmptyPotionTable.SortBottlePosition();
-        //_tableManager.EmptyPotionTable.SortBottlePosition();
     }
 
     private void RefreshInventory()
@@ -130,3 +119,16 @@ public class Inventory : MonoBehaviour
         _rareShelf.HideShelf();
     }
 }
+
+//Система при раздельных бутылка
+//public void AddBottle(int value)
+//{
+//    for (int i = 0; i < value; i++)
+//    {
+//        GameObject bottle = Instantiate(_prefabBottle, _tableManager.EmptyPotionTable.SetStartPosition(i), Quaternion.identity);
+//        bottle.transform.SetParent(_tableManager.EmptyPotionTable.transform);
+//    }
+
+//    _tableManager.EmptyPotionTable.SortBottlePosition();
+//    _tableManager.EmptyPotionTable.SortBottlePosition();
+//}

@@ -10,6 +10,7 @@ public class ShopSystem : MonoBehaviour
     private const int FuelCost = 150;
     private const int ClaudronUpgradeCost = 3000;
 
+    [SerializeField] private BottleStorage _bottleStorage;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Firewood _firewoodSystem;
     [SerializeField] private ClaudronQualityManager _claudronQualityManager;
@@ -64,7 +65,7 @@ public class ShopSystem : MonoBehaviour
         {
             if (Transaction(BottleCost))
             {
-                _inventory.AddBottle(1);
+                _bottleStorage.AddBottle(10);
             }
         }
         else

@@ -3,7 +3,6 @@ using UnityEngine;
 public class LevelInitializator : MonoBehaviour
 {
     public const int stockAmount = 5;
-    public const int stockBottleAmount = 2;
 
     [SerializeField] private bool _directLoad;
 
@@ -75,7 +74,6 @@ public class LevelInitializator : MonoBehaviour
                 _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
 
                 _inventory.FillClearInventory(stockAmount);
-                _inventory.AddBottle(stockBottleAmount);
 
                 _globalTaskController.SetTaskValue(100000); //!!!
                 _globalTaskController.DisableTask();
@@ -94,7 +92,6 @@ public class LevelInitializator : MonoBehaviour
                 _taskSystem.TutorialMode(true);
 
                 _inventory.FillClearInventory(0);
-                _inventory.AddBottle(stockBottleAmount);
                 _inventory.HideRareShelf();
 
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
@@ -110,7 +107,6 @@ public class LevelInitializator : MonoBehaviour
                 _taskSystem.TutorialMode(false);
 
                 _inventory.FillClearInventory(stockAmount);
-                _inventory.AddBottle(stockBottleAmount);
 
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal); //!!!
 
