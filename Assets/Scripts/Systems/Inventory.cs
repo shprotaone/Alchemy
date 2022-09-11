@@ -35,13 +35,30 @@ public class Inventory : MonoBehaviour
         InitSlots(_rareShelf);
     }
 
-    public void FillClearInventory(int amount)
+    public void FillFullInventory(int amount)
     {
         for (int i = 0; i < _ingredients.Length; i++)
         {
             _inventory.Add(_ingredients[i], amount);
         }
         
+        RefreshInventory();
+    }
+
+    public void FillCommonIngredients(int amount)
+    {
+        for (int i = 0; i < _ingredients.Length; i++)
+        {
+            if (i < 4)
+            {
+                _inventory.Add(_ingredients[i], amount);
+            }
+            else
+            {
+                _inventory.Add(_ingredients[i], 0);
+            }           
+        }
+
         RefreshInventory();
     }
 
@@ -61,7 +78,7 @@ public class Inventory : MonoBehaviour
         if (secondFilling)
         {
             _inventory.Clear();
-            FillClearInventory(0);
+            FillFullInventory(0);
 
             for (int i = 0; i < 4; i++)
             {

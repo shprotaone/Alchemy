@@ -18,6 +18,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;
+    [SerializeField] private GameTimer _gameTimer;
 
     [SerializeField] private LevelPreset _levelPresetDirect;
     
@@ -73,7 +74,7 @@ public class LevelInitializator : MonoBehaviour
 
                 _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
 
-                _inventory.FillClearInventory(stockAmount);
+                _inventory.FillFullInventory(stockAmount);
 
                 _globalTaskController.SetTaskValue(100000); //!!!
                 _globalTaskController.DisableTask();
@@ -91,7 +92,10 @@ public class LevelInitializator : MonoBehaviour
                 _taskSystem.SetTutorialMode();
                 _taskSystem.TutorialMode(true);
 
-                _inventory.FillClearInventory(0);
+                _shopSystem.HideForTutorial(true);
+                _gameTimer.InitTimer(1, false);
+
+                _inventory.FillFullInventory(0);
                 _inventory.HideRareShelf();
 
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
@@ -105,8 +109,9 @@ public class LevelInitializator : MonoBehaviour
                 _tutorialManager.gameObject.SetActive(false);
 
                 _taskSystem.TutorialMode(false);
+                _gameTimer.InitTimer(300, true);
 
-                _inventory.FillClearInventory(stockAmount);
+                _inventory.FillCommonIngredients(stockAmount);
 
                 _globalTaskController.SetTaskValue(_levelPreset.completeGoal); //!!!
 

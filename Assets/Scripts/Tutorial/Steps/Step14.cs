@@ -5,8 +5,9 @@ using UnityEngine;
 public class Step14 : Step
 {
     [SerializeField] private ShopSystem _shopSystem;
+
     public override void StepAction()
     {
-        _shopSystem.HideShopSlot(false);
+        _shopSystem.HideForTutorial(false);
     }
 }

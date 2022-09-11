@@ -9,16 +9,10 @@ public class GuildView : MonoBehaviour
     [SerializeField] private Slider _banditSlider;
     [SerializeField] private GuildSystem _guildSystem;
 
-    private void OnEnable()
+    private void Start()
     {
-        for (int i = 0; i < _guildSystem.GuildDictionary.Count; i++)
-        {
-            GuildsType guild = (GuildsType)i;
-
-            RefreshSlider(guild, _guildSystem.GuildDictionary[guild]);
-        }
+        InitSlider();
     }
-
     private void InitSlider()
     {
         _saintSlider.maxValue = _guildSystem.GuildMaxValue;

@@ -2,6 +2,8 @@
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 public class ShopSystem : MonoBehaviour
 {
@@ -17,21 +19,21 @@ public class ShopSystem : MonoBehaviour
 
     [SerializeField] private Money _currentMoney;
     [SerializeField] private TMP_Text _moneyText;
-    [SerializeField] private ShopSlot[] _shopSlots;
+    [SerializeField] private ShopShelf _commonShelf;
+    [SerializeField] private ShopShelf _rareShelf;
 
     [SerializeField] private Button _addBottleButton;
     [SerializeField] private Button _addFuelButton;
     [SerializeField] private Button _upgradeClaudronButton;
 
-    [SerializeField] private Button _backButton;
-
     private IngredientData[] _ingredientData;
 
+    public bool BlockRareSlots { get; set; }
     public Inventory Inventory => _inventory;
 
     private void Start()
     {
-        UIController.OnShopSlotDisabled += HideShopSlot;
+        UIController.OnShopSlotDisabled += HideForTutorial;
 
         _addBottleButton.onClick.AddListener(BuyBottle);
         _addFuelButton.onClick.AddListener(BuyFuel);
@@ -95,23 +97,29 @@ public class ShopSystem : MonoBehaviour
     {
         InitShopSystem();
 
-        for (int i = 0; i < _shopSlots.Length; i++)
+        IngredientData[] ingredientArray = new IngredientData[4];
+
+        Array.Copy(_ingredientData, 0, ingredientArray, 0, 4);
+        _commonShelf.FillSlots(ingredientArray);
+       
+        if (!BlockRareSlots)
         {
-            _shopSlots[i].FillSlot(_ingredientData[i]);            
+            Array.Copy(_ingredientData, 4, ingredientArray, 0, 4);
+            _rareShelf.FillSlots(ingredientArray);
         }
     }
 
-    public void HideShopSlot(bool flag)
+    public void HideForTutorial(bool flag)
     {
-        foreach (var item in _shopSlots)
-        {
-            item.HideSlot(flag);
-        }
-
         if (flag)
         {
-            _shopSlots[0].HideSlot(false);
-            _shopSlots[2].HideSlot(false);
+            _commonShelf.HideSlotToIndex(1, true);
+            _commonShelf.HideSlotToIndex(3, true);
+            _rareShelf.HideSlots(true);
+        }
+        else
+        {
+            _commonShelf.HideSlots(false);
         }
 
         HideAdditionalButton(true);
@@ -138,6 +146,6 @@ public class ShopSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        UIController.OnShopSlotDisabled -= HideShopSlot;
+        UIController.OnShopSlotDisabled -= HideForTutorial;
     }
 }

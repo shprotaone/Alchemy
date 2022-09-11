@@ -43,4 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d7ca5aa0b25b84f9e7a945d48af535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guildCircleView: {fileID: 0}
   _guildView: {fileID: 0}

@@ -110,7 +110,7 @@ public class PotionTaskSystem : MonoBehaviour
     public void TaskComplete(int reward, float rewardRep)
     {
         _moneySystem.Increase(reward);
-        _potionCyclopedia.FindPotion(_currentPotion.PotionName);
+        _potionCyclopedia.AddNewPotion(_currentPotion);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
 
         _visitorController.DisableVisitor();
