@@ -57,8 +57,7 @@ public class ShopSystem : MonoBehaviour
         {
             Debug.LogWarning("NotHaveMoney");
             return false;
-        }
-        
+        }        
     }
 
      public void BuyBottle()

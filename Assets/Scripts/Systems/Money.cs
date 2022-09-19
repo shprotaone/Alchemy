@@ -4,28 +4,34 @@ using UnityEngine;
 using TMPro;
 using System;
 
+/// <summary>
+/// Отвечает за монеты
+/// </summary>
 public class Money : MonoBehaviour
 {
     public static Action OnMoneyChanged;
 
     [SerializeField] private TMP_Text _moneyText;
-    private int _money;
 
+    private int _money;
+    private int _moneyMinRange;
     public int CurrentMoney => _money;
 
     private void Start()
     {
         OnMoneyChanged += RefreshMoneyText;
     }
-    public void SetStartMoney(int money)
+
+    public void SetStartMoney(int money,int moneyMinRange)
     {
         _money = money;
+        _moneyMinRange = moneyMinRange;
         RefreshMoneyText();
     }
 
     public bool Decrease(int value)
     {
-        if (_money >= value)
+        if (_moneyMinRange <= value)
         {
             _money -= value;
             OnMoneyChanged?.Invoke();

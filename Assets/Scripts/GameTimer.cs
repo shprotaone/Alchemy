@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,10 +6,23 @@ using UnityEngine;
 
 public class GameTimer : MonoBehaviour
 {
+    public static Action<float> OnSecondChange;
+
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private RentShop _rentShop;
     [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private Money _money;
     
     private float _gameTime;
+    private float _seconds;
 
+    public float Seconds => _seconds;
+
+    /// <summary>
+    /// Задает таймер
+    /// </summary>
+    /// <param name="seconds">общее время в секундах</param>
+    /// <param name="flag">включать или нет?</param>
     public void InitTimer(float seconds, bool flag)
     {
         if (flag)
@@ -26,12 +40,16 @@ public class GameTimer : MonoBehaviour
     {
         while(_gameTime > 0)
         {
-           _gameTime -=Time.deltaTime;
+           _gameTime--;
             UpdateTimeText();
-            yield return null;
+
+            if(_gameTime % 5 == 0)
+            OnSecondChange?.Invoke(_gameTime);
+
+            yield return new WaitForSeconds(1);
         }
 
-        Debug.LogWarning("LOOSE");
+        _gameManager.DefeatLevel();
     }
 
     private void UpdateTimeText()

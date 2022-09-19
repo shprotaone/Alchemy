@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class PotionTaskSystem : MonoBehaviour
 {    
@@ -11,7 +8,7 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private PotionCyclopedia _potionCyclopedia;
     [SerializeField] private Money _moneySystem;
     [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private PotionSizer _currentSizer;
+    [SerializeField] private PotionSizer _potionSizer;
     [SerializeField] private GuildSystem _guildSystem;
 
     [SerializeField] private GameObject _coinPrefab;
@@ -21,12 +18,10 @@ public class PotionTaskSystem : MonoBehaviour
     
     private RewardCalculator _rewardCalculator;
     
-    private PotionSizer _potionSizer;
-    private PotionSizer _basePotionSizer;
+
     private Potion _currentPotion;
 
     private int _numberTask;
-    private bool _rareTaskInclude;
     private bool _tutorialLevel;
     
     public Potion CurrentPotion => _currentPotion;
@@ -36,43 +31,15 @@ public class PotionTaskSystem : MonoBehaviour
     /// <summary>
     /// Инициализация текущего списка зелий
     /// </summary>
-    public void InitPotionSizer()
+    public void InitPotionSizer(LevelNumber levelNumber)
     {
         _potionSizer = _jsonReader.PotionSizer;
-        _currentSizer = new PotionSizer();
+        PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
+        _potionSizer = sizerSelector.SizerSelector(levelNumber);
        
         _rewardCalculator = new RewardCalculator();
         _currentPotion = new Potion();
-    }
-
-    public void SetPotionSizer(bool rare)
-    {
-        _rareTaskInclude = rare;
-
-        if (!_rareTaskInclude)
-        {
-            SetCommonPotionSizer();
-            _currentSizer = _basePotionSizer;
-        }
-        else
-        {
-            _currentSizer = _potionSizer;
-        }
-    }
-    private void SetCommonPotionSizer()
-    {
-        List<PotionData> result = new List<PotionData>();
-
-        foreach (var item in _potionSizer.Potions)
-        {
-            if (item.rarity == ResourceRarity.common.ToString())
-            {
-                result.Add(item);
-            }
-        }
-        _basePotionSizer = new PotionSizer();
-        _basePotionSizer.Potions = result.ToArray();
-    }
+    }        
 
     public void TakeTask(PotionTask task)
     {
@@ -91,11 +58,11 @@ public class PotionTaskSystem : MonoBehaviour
         
         if (_imageTask)
         {
-            Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Length];
+            Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Count];
 
             for (int i = 0; i < ingredientsSprite.Length; i++)
             {
-                if(_currentPotion.Ingredients[i] != "*")
+                if(_currentPotion.Ingredients[i] != null)
                 ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[i]);
             }
 
@@ -110,6 +77,7 @@ public class PotionTaskSystem : MonoBehaviour
     public void TaskComplete(int reward, float rewardRep)
     {
         _moneySystem.Increase(reward);
+        
         _potionCyclopedia.AddNewPotion(_currentPotion);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
 
@@ -124,29 +92,38 @@ public class PotionTaskSystem : MonoBehaviour
 
     private PotionData GetTaskPotion()
     {
-        _numberTask = Random.Range(0, _currentSizer.Potions.Length);
-        return _currentSizer.Potions[_numberTask];
+        _numberTask = Random.Range(0, _potionSizer.Potions.Length);
+        return _potionSizer.Potions[_numberTask];
     }    
 
     public PotionData GetFirstTaskPotion()
     {
         _tutorialLevel = false;
-        return _currentSizer.Potions[0];
+        return _potionSizer.Potions[0];
     }
 
     private int GetReward(Potion potion)
     {
+        int reward = 0;
+
         _rewardCalculator.Calculate(_visitorController.CurrentVisitor.Guild, potion.Rarity);
-        print(_rewardCalculator.Reward);
-        return _rewardCalculator.Reward;
+        reward = _rewardCalculator.Reward;
+
+        reward = LowRepReward(reward);
+        
+        print(reward);
+        return reward;
     }
 
-    public void SetTutorialMode()
+    private int LowRepReward(int stockReward)
     {
-        _tutorialLevel = true;
+        bool divideReward = _guildSystem.GuildDictionary[_visitorController.CurrentVisitor.Guild] < 60;
+
+        if (divideReward) return stockReward / 2;
+        else return stockReward;
     }
-    public void TutorialMode(bool value)
+    public void SetTutorialMode(bool value)   //проверить на использование
     {
-        SetPotionSizer(_rareTaskInclude);
+        _tutorialLevel = value;
     }
 }

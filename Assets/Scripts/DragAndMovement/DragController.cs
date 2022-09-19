@@ -5,16 +5,17 @@ public class DragController : MonoBehaviour
     public static DragController instance = null;
 
     [SerializeField] private Transform _draggableParent;
+    [SerializeField] private float _delta;
 
     private Camera _camera;
-    private Vector2 _screenPosition;
+    private Vector2 _dragScreenPosition;
     private Vector3 _worldPosition;
     private Draggable _lastDragged;
 
+    private float _clickDeltaTime;
     private bool _isDragActive = false;
     private bool _interractive = true;
 
-    private float delay;
     public Draggable LastDragged => _lastDragged;
     public bool IsDragActive => _isDragActive;
     public Vector3 WorldPosition => _worldPosition;
@@ -26,7 +27,7 @@ public class DragController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } 
+        }
         else if (instance == this)
         {
             Destroy(gameObject);
@@ -34,9 +35,17 @@ public class DragController : MonoBehaviour
     }
     private void Update()
     {
+        ResetDelay();
+
         if (_isDragActive)
         {
-            if (Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended))
+            if (Input.GetMouseButtonUp(0))
+            {
+                Drop();
+                return;
+            }
+
+            if ((Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended))
             {
                 Drop();
                 return;
@@ -46,18 +55,20 @@ public class DragController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = Input.mousePosition;
-            _screenPosition = new Vector2(mousePos.x, mousePos.y);
+            _dragScreenPosition = new Vector2(mousePos.x, mousePos.y);
         }
         else if (Input.touchCount > 0)
         {
-            _screenPosition = Input.GetTouch(0).position;
+            _dragScreenPosition = Input.GetTouch(0).position;
         }
         else
         {
             return;
         }
 
-        _worldPosition = _camera.ScreenToWorldPoint(_screenPosition);
+        _worldPosition = _camera.ScreenToWorldPoint(_dragScreenPosition);
+
+        CheckOneTouch();
 
         if (_isDragActive)
         {
@@ -69,7 +80,7 @@ public class DragController : MonoBehaviour
 
             if (hit.collider != null && _interractive)
             {
-                Draggable draggable = hit.transform.GetComponent<Draggable>();               
+                Draggable draggable = hit.transform.GetComponent<Draggable>();
 
                 Ingredient ingredient;
                 Bottle bottle;
@@ -77,45 +88,53 @@ public class DragController : MonoBehaviour
                 if (draggable != null && !_isDragActive)
                 {
                     _lastDragged = draggable;
+                   
                     InitDrag();
 
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
                     }
-                    else if(bottle = draggable.GetComponentInChildren<Bottle>())
+                    else if (bottle = draggable.GetComponentInChildren<Bottle>())
                     {
                         _lastDragged = bottle.GetComponent<Draggable>();
                     }
-                }            
+                }
             }
         }
     }
 
     public void InitDrag()
     {
-        if (delay < 1)
+        if (_clickDeltaTime > _delta)
         {
             UpdateDragStatus(true);
             _lastDragged.DraggableAction();
         }
     }
 
+    private void CheckOneTouch()
+    {
+        _clickDeltaTime += Time.deltaTime;
+
+    }
+
     private void Drag()
     {
-        if(_lastDragged.DraggingObject)
-        _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y);
+        if (_lastDragged.DraggingObject)
+            _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y);
     }
 
     private void Drop()
     {
-        UpdateDragStatus(false);       
+        _clickDeltaTime = 0;
+        UpdateDragStatus(false);
         DropAction();
     }
 
     private void UpdateDragStatus(bool isDragging)
     {
-        if(_lastDragged != null)
+        if (_lastDragged != null)
         {
             _isDragActive = _lastDragged.IsDragging = isDragging;
             _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
@@ -134,5 +153,13 @@ public class DragController : MonoBehaviour
     private void DropAction()
     {
         _lastDragged.DropMovementAction();
+    }
+
+    private void ResetDelay()
+    {
+        if(Input.GetMouseButtonUp(0) || Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            _clickDeltaTime = 0;
+        }
     }
 }

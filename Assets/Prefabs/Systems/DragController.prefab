@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggableParent: {fileID: 0}
+  _delta: 0.2
 --- !u!82 &7103408881170306464
 AudioSource:
   m_ObjectHideFlags: 0

@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class PotionDetector : MonoBehaviour
 {
-    private const int maxIngredients = 5;
-
     [SerializeField] private MixingSystemv2 _mixingSystem;
     [SerializeField] private JSONReader _jsonReader;
 
     private Potion _currentPotion;
     private PotionSizer _potionSizer;    
-    private Ingredient[] _currentIngredients;
 
     public Potion CurrentPotion => _currentPotion;
 
@@ -22,16 +19,10 @@ public class PotionDetector : MonoBehaviour
 
     public void FillCurrentPotion(List<Ingredient> ingredients)
     {
-        _currentIngredients = new Ingredient[maxIngredients];
-
-        for (int i = 0; i < ingredients.Count; i++)
-        {
-            _currentIngredients[i] = ingredients[i];
-        }
         
-        _currentPotion.FillPotion(_currentIngredients);
+        _currentPotion.FillPotion(ingredients);
         FindPotion();
-        _currentPotion.SetEffect(_currentIngredients);  //перенести в Potion
+        _currentPotion.SetEffect(ingredients);
 
     }
 

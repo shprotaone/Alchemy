@@ -78,8 +78,7 @@ public class Cook : MonoBehaviour
             _canFillBottle = true;
         }
         else
-        {
-            _crunchSprite.enabled = true;
+        {            
             _canFillBottle = false;
             StartCoroutine(FailedDelay());
         }
@@ -92,6 +91,7 @@ public class Cook : MonoBehaviour
 
         while (startTimer > 0)
         {
+            _crunchSprite.enabled = true;
             _cookButton.interactable = false;            
             _delayText.text = startTimer.ToString();
             startTimer--;
@@ -99,6 +99,7 @@ public class Cook : MonoBehaviour
         }
 
         _cookButton.interactable = true;
+        _crunchSprite.enabled=false;
         _delayText.gameObject.SetActive(false);
         startTimer = _delayTime;
 
@@ -182,7 +183,7 @@ public class Cook : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _mixingSystem.RefreshDelegate -= RefreshBar;
         _mixingSystem.RefreshDelegate -= CookButtonCheck;

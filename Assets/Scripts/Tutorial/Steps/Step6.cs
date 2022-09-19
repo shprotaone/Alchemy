@@ -14,8 +14,16 @@ public class Step6 : Step
     {
         _shopFrame.SetActive(false);
         _brightObject.BrightObjects(false);
-        _slotFrame.SetActive(true);
+        StartCoroutine(FrameDelay());
         _shopButton.interactable = false;
+    }
+
+    private IEnumerator FrameDelay()    //сомнительное решение
+    {
+        yield return new WaitForSeconds(0.9f);
+        _slotFrame.SetActive(true);
+
+        yield break;
     }
 }
 

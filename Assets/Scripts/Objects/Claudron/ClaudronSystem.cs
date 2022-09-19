@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ClaudronSystem : MonoBehaviour
@@ -19,7 +17,6 @@ public class ClaudronSystem : MonoBehaviour
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
         _mixingSystem.RefreshDelegate += ClaudronButtonState;
     }
-
 
     private void ClaudronButtonState()
     {
@@ -44,7 +41,7 @@ public class ClaudronSystem : MonoBehaviour
         _claudronSprite.sprite = claudron.image;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _mixingSystem.RefreshDelegate -= ClaudronButtonState;
     }

@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: EndlessLevel
   m_EditorClassIdentifier: 
   levelNumber: 0
-  startWindow: 0
   rareIngredientBlock: 0
   rareTask: 0
   ShopController: 1
-  eventCount: 
   startMoney: 1000
-  completeGoal: 100000
-  resourceCountAdd: 5
-  levelTaskText: "\u042D\u0442\u043E \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u044B\u0439
-    \u0443\u0440\u043E\u0432\u0435\u043D\u044C, \u0438\u0433\u0440\u0430\u0439 \u043F\u043E\u043A\u0430
-    \u043D\u0435 \u043D\u0430\u0434\u043E\u0435\u0441\u0442"
+  minRangeMoney: 0
+  MoneyGoal: 1000000
+  levelTimeInSeconds: 0
+  rent: 0
+  secondsForRent: 0
+  levelTaskText:
+  - "\u042D\u0442\u043E \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u044B\u0439
+    \u0443\u0440\u043E\u0432\u0435\u043D\u044C, \u0438\u0433\u0440\u0430\u0439 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
+    \u0445\u043E\u0447\u0435\u0448\u044C"
   backgroundSprite: {fileID: 21300000, guid: 1b3379cf51e86c04e92a370c69716afd, type: 3}

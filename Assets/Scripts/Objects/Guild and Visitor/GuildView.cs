@@ -18,7 +18,7 @@ public class GuildView : MonoBehaviour
         _saintSlider.maxValue = _guildSystem.GuildMaxValue;
         _banditSlider.maxValue = _guildSystem.GuildMaxValue;
         _knightSlider.maxValue = _guildSystem.GuildMaxValue;
-        _wizzardSlider.maxValue = _guildSystem.GuildMaxValue;
+        _wizzardSlider.maxValue = _guildSystem.GuildMaxValue;        
     }
 
     public void RefreshSlider(GuildsType type, float value)

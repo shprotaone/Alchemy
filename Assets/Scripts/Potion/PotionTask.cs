@@ -26,10 +26,12 @@ public class PotionTask : MonoBehaviour
     public void InitTask()
     {
         ResetIngredientImages();
+
         _taskSystem.TakeTask(this);
-        
-        _visitor = GetComponentInParent<Visitor>();
         _currentPotion = _taskSystem.CurrentPotion;
+
+        _visitor = GetComponentInParent<Visitor>();
+        
         RisingTask();
 
         SetGuild();
@@ -88,8 +90,7 @@ public class PotionTask : MonoBehaviour
     {
         if (_currentPotion.PotionName == potion.PotionName)
         {            
-            print("In Bottle " + potion.PotionName);
-            _taskSystem.TaskComplete(_rewardCoin,_reward);
+           _taskSystem.TaskComplete(_rewardCoin,_reward);
 
             GameObject curCoins = Instantiate(_taskSystem.CoinPrefab, transform.position, Quaternion.identity);
             
@@ -101,7 +102,6 @@ public class PotionTask : MonoBehaviour
         }
         else
         {
-            print("Wrong");
             print("Need " + _currentPotion.PotionName);
             print("In Bottle " + potion.PotionName);
             return false;

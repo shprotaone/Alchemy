@@ -1,21 +1,29 @@
+using System;
 using UnityEngine;
 
 public class LevelInitializator : MonoBehaviour
 {
+    public static Action<string[]> OnStartWindowInit;   //инициализирует стартовое диалоговое окно
+    public static Action<Sprite> OnBackGroundInit;
+
     public const int stockAmount = 5;
 
     [SerializeField] private bool _directLoad;
 
-    [SerializeField] private BackgroundLoader _backgroundLoader;
+    //[SerializeField] private BackgroundLoader _backgroundLoader;
     [SerializeField] private TutorialManager _tutorialManager;
     [SerializeField] private ShopSystem _shopSystem;
     [SerializeField] private CameraMovement _startCameraPos;    
     [SerializeField] private PotionTaskSystem _taskSystem;
-    [SerializeField] private GlobalTaskController _globalTaskController;
+    [SerializeField] private GlobalTask1 _globalTaskController;
     [SerializeField] private Inventory _inventory;
+
     [SerializeField] private ShopController _shopController;
+    [SerializeField] private RentShop _rentShop;
+
     [SerializeField] private Money _money;
     [SerializeField] private VisitorController _visitorController;
+    [SerializeField] private GuildSystem _guildSystem;
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;
     [SerializeField] private GameTimer _gameTimer;
@@ -23,10 +31,8 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private LevelPreset _levelPresetDirect;
     
     private LevelPreset _levelPreset;
-
     private LevelTask _levelTask;
 
-    public LevelTask LevelTask => _levelTask;
 
     private void Awake()
     {
@@ -48,16 +54,13 @@ public class LevelInitializator : MonoBehaviour
     private void Start()
     {        
         LevelTaskInit();
-        _taskSystem.InitPotionSizer();
+
         _inventory.InitInventory();
-        _backgroundLoader.InitBackground(_levelPreset.backgroundSprite);
-
-        _money.SetStartMoney(_levelPreset.startMoney);
-        _startCameraPos.SetStartPosition(_levelPreset.startWindow);
-        _taskSystem.SetPotionSizer(_levelPreset.rareTask);
+        OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);       
               
-        LevelInitSelector();
+        _guildSystem.InitGuildSystem();
 
+        LevelInitSelector();
         _visitorController.InitVisitorController();
 
         CheckShopController();
@@ -70,52 +73,70 @@ public class LevelInitializator : MonoBehaviour
         {
             case LevelNumber.EndlessLevel:
 
+                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _tutorialManager.gameObject.SetActive(false);
 
-                _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
+                _taskSystem.InitPotionSizer(LevelNumber.EndlessLevel);
+                _taskSystem.SetTutorialMode(false);
+
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
                 _inventory.FillFullInventory(stockAmount);
 
-                _globalTaskController.SetTaskValue(100000); //!!!
+                _globalTaskController.SetTaskValue(_levelPreset.MoneyGoal,_levelPreset.minRangeMoney); //!!!
                 _globalTaskController.DisableTask();
 
                 _brightObjectSystem.BrightObjects(false);
 
                 break;
 
-            case LevelNumber.Tutorial:
+            case LevelNumber.Level1:
 
                 DragController.instance.ObjectsInterractable(false);
+
+                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+
                 _tutorialManager.Init();
                 _tutorialManager.NextStep();
 
-                _taskSystem.SetTutorialMode();
-                _taskSystem.TutorialMode(true);
-
+                _taskSystem.SetTutorialMode(true);
+                _taskSystem.InitPotionSizer(LevelNumber.Level1);              
+                
                 _shopSystem.HideForTutorial(true);
-                _gameTimer.InitTimer(1, false);
+                _gameTimer.InitTimer(0, false);
 
                 _inventory.FillFullInventory(0);
                 _inventory.HideRareShelf();
 
-                _globalTaskController.SetTaskValue(_levelPreset.completeGoal);
+                _globalTaskController.SetTaskValue(_levelPreset.MoneyGoal,0);
 
                 break;
 
             case LevelNumber.Level2:
 
-                _globalTaskController.CallStartGlobalTaskViewer(_levelPreset.levelTaskText);
+                OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
+                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _tutorialManager.gameObject.SetActive(false);
 
-                _taskSystem.TutorialMode(false);
-                _gameTimer.InitTimer(300, true);
+                _taskSystem.InitPotionSizer(LevelNumber.Level2);
+                _taskSystem.SetTutorialMode(false);
 
+                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
+
+                _rentShop.InitRentSystem(_levelPreset.rent,_levelPreset.secondsForRent);
                 _inventory.FillCommonIngredients(stockAmount);
 
-                _globalTaskController.SetTaskValue(_levelPreset.completeGoal); //!!!
+                _globalTaskController.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
 
                 _brightObjectSystem.BrightObjects(false);
+
+                break;
+            case LevelNumber.Level3:
+
+                OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
                 break;
         }
@@ -125,7 +146,7 @@ public class LevelInitializator : MonoBehaviour
     {
         _levelTask = new LevelTask();
 
-        _levelTask.SetMoneyTask(_levelPreset.completeGoal);
+        _levelTask.SetMoneyTask(_levelPreset.MoneyGoal);
     }
 
     private void CheckShopController()
@@ -138,11 +159,5 @@ public class LevelInitializator : MonoBehaviour
         {
             _shopController.Plate.gameObject.SetActive(false);
         }
-    }
-
-    private void OnDestroy()
-    {
-        if(LevelPresetLoader.instance != null)
-        LevelPresetLoader.instance.ResetPreset();
     }
 }

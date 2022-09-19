@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GuildSystem : MonoBehaviour
 {
-    private const float guildMinValue = 15;
+    private const float gultStartValue = 100;
     private const float guildCount = 4;
     private float _guildMaxValue = 100;
     
@@ -15,15 +15,16 @@ public class GuildSystem : MonoBehaviour
     public float GuildMaxValue => _guildMaxValue;
     public Dictionary<GuildsType, float> GuildDictionary => _guildDictionary;
 
-    private void Start()
+    public void InitGuildSystem()
     {
         _guildDictionary = new Dictionary<GuildsType, float>();
 
         for (int i = 0; i < guildCount; i++)
         {
             GuildsType guild = (GuildsType)i;
-            _guildDictionary.Add(guild,guildMinValue);
-            _guildCircleView.RefreshSlider(guild, guildMinValue);
+            _guildDictionary.Add(guild,gultStartValue);
+            _guildCircleView.RefreshSlider(guild, gultStartValue);
+            _guildView.RefreshSlider(guild, gultStartValue);
         }
     }
 

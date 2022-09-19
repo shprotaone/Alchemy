@@ -18,7 +18,7 @@ public class PotionCyclopedia : MonoBehaviour
     private GuildChecker _guildChecker;
     private RarityChecker _rarityChecker;
 
-    private string[] _ingredients;
+    private List<string> _ingredients;
 
     private void Start()
     {
@@ -58,9 +58,9 @@ public class PotionCyclopedia : MonoBehaviour
     //    }
     //}
 
-    private Sprite[] GetImages(string[] value)
+    private Sprite[] GetImages(List<string> value)
     {
-        Sprite[] result = new Sprite[5];
+        Sprite[] result = new Sprite[value.Count];
 
         for (int i = 0; i < result.Length; i++)
         {

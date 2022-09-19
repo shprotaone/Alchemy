@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,34 +9,33 @@ public class Potion
     private ResourceRarity _rarityType;
     private string _name;
 
-    private string[] _ingredients;
+    private List<string> _ingredients;
 
     private GuildsType _guildType;
     public GuildsType GuildsType => _guildType;
     public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
-    public string[] Ingredients => _ingredients;
+    public List<string> Ingredients => _ingredients;
     public GameObject Effect => _effect;
 
     public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem
     {
-        _ingredients = new string[5];
+        _ingredients = new List<string>();
 
         _name = potionData.name;
         SetGuild(potionData.guild);
         SetRarity(potionData.rarity);
 
-        _ingredients = new string[5];
-        FillIngredients(potionData.firstIngredient, potionData.secondIngredient, potionData.threeIngredient, potionData.fourIngredient, potionData.fiveIngredient);
+        _ingredients = potionData.ingredients;
     }
 
-    public void FillPotion(Ingredient[] ingredients)        //посмотреть для чего перевод в массив string
+    public void FillPotion(List<Ingredient> ingredients)        //посмотреть для чего перевод в массив string
     {
-        _ingredients = new string[ingredients.Length];
+        _ingredients = new List<string>();
 
-        for (int i = 0; i < ingredients.Length; i++)
+        for (int i = 0; i < ingredients.Count; i++)
         {
-            _ingredients[i] = IngredientsToString(ingredients[i]);           
+            _ingredients.Add(IngredientsToString(ingredients[i]));           
         }
     }
 
@@ -44,19 +44,9 @@ public class Potion
         _name = name;
     }
 
-    public void FillIngredients(string firstIngredient,string secondIngredient,string thirdIngredient,
-                                string fourIngredient,string fiveIngredient)
+    public void SetEffect(List<Ingredient> ingredients)
     {
-        _ingredients[0] = firstIngredient;
-        _ingredients[1] = secondIngredient;
-        _ingredients[2] = thirdIngredient;
-        _ingredients[3] = fourIngredient;
-        _ingredients[4] = fiveIngredient;
-    }
-
-    public void SetEffect(Ingredient[] ingredients)
-    {
-        foreach (Ingredient item in ingredients)
+        foreach (var item in ingredients)
         {
             if (item != null)
             {
@@ -94,16 +84,17 @@ public class Potion
         }
         else
         {
-            return "*";
+            return null;
         }
     }
 
     public bool PotionEquals(PotionData potionData)
     {
-        Array.Sort(Ingredients);
+        //Array.Sort(Ingredients);
+        Ingredients.Sort();
 
-        potionData.SetIngrediets();
-        Array.Sort(potionData.ingredients);
+        //potionData.SetIngredients();
+        potionData.ingredients.Sort();
 
         return Enumerable.SequenceEqual(Ingredients, potionData.ingredients);
     }

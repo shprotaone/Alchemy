@@ -70,7 +70,8 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b2668361da9950408b2f949d24fbf58, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5134417324763962014, guid: 2b2668361da9950408b2f949d24fbf58,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -173,7 +174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.3, y: 3.06}
+  m_AnchoredPosition: {x: 1.3, y: 2.66}
   m_SizeDelta: {x: 395.3788, y: 324.2106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7789927884890556692
@@ -256,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7789927884961499839
 Transform:
   m_ObjectHideFlags: 0
@@ -309,8 +310,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 635694839
-  m_SortingLayer: 3
+  m_SortingLayerID: 1223403359
+  m_SortingLayer: 2
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 9667c1957202dac4ea5f8dbb744bd346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -546,6 +547,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 280460991966900782, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5134417324763962014, guid: 2b2668361da9950408b2f949d24fbf58,
+        type: 2}
+    - target: {fileID: 280460991966900782, guid: d745a99c28bb4454e934250a376edea7,
+        type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
@@ -554,6 +561,12 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 2b2668361da9950408b2f949d24fbf58,
+        type: 2}
+    - target: {fileID: 280460992425480227, guid: d745a99c28bb4454e934250a376edea7,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5134417324763962014, guid: 2b2668361da9950408b2f949d24fbf58,
         type: 2}
     - target: {fileID: 280460992425480227, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}

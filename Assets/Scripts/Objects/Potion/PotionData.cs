@@ -18,18 +18,35 @@ public class PotionData
     public string guild;
     public string rarity;
 
-    public string[] ingredients;
-    //здесь можно перенести в массив прям в этом FillIngredient переносим сюда
+    public List<string> ingredients;
 
-    public void SetIngrediets()
+    public void SetIngredients()
     {
-        ingredients = new string[5];
+        ingredients = new List<string>();
 
-        ingredients[0] = firstIngredient;
-        ingredients[1] = secondIngredient;
-        ingredients[2] = threeIngredient;
-        ingredients[3] = fourIngredient;
-        ingredients[4] = fiveIngredient;
+        if (firstIngredient != null)
+        {
+            ingredients.Add(firstIngredient);
+        }
+        
+        if (secondIngredient != null)
+        {
+            ingredients.Add(secondIngredient);
+        }
+        
+        if (threeIngredient != null)
+        {
+            ingredients.Add(threeIngredient);           
+        }
+        
+        if(fourIngredient != null)
+        {
+            ingredients.Add(fourIngredient);        
+        }
+        
+        if(fiveIngredient != null)
+        {
+            ingredients.Add(firstIngredient);
+        }     
     }
-
 }

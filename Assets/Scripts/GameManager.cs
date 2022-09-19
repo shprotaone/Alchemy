@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    [SerializeField] private InGameTimeController _gameTimeController;
+    [SerializeField] private GameObject _completeLevelPanel;
+    [SerializeField] private GameObject _defeatLevelPanel;
+
+    public void CompleteLevel()
+    {
+        _completeLevelPanel.SetActive(true);
+        _gameTimeController.PauseGame();
+    }
+
+    public void DefeatLevel()
+    {
+        _defeatLevelPanel.SetActive(true);
+        _gameTimeController.PauseGame();
+    }
+}

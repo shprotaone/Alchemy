@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Step3 : Step
 {
+    [SerializeField] private BrightObject _brightObject;
     [SerializeField] private RectTransform _dialogWindowPos;
     [SerializeField] private GameObject _frameSprite;
     [SerializeField] private GameObject _panel;
@@ -17,5 +18,7 @@ public class Step3 : Step
 
         _frameSprite.SetActive(true);
         _cameraMovementButton.interactable = true;
+
+        _tutorialManager.FirstVisitor.BrightVisitor(_brightObject.UILayerName);
     }
 }

@@ -5,9 +5,6 @@
       "name": "Золотой",
       "firstIngredient": "Yellow",
       "secondIngredient": "White",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -17,9 +14,7 @@
       "firstIngredient": "Yellow",
       "secondIngredient": "White",
       "threeIngredient": "Ladan",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "all",
+      "guild": "Saint",
       "rarity": "rare"
     },
     {
@@ -28,9 +23,7 @@
       "firstIngredient": "Yellow",
       "secondIngredient": "White",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "all",
+      "guild": "Knight",
       "rarity": "rare"
     },
     {
@@ -39,9 +32,7 @@
       "firstIngredient": "Yellow",
       "secondIngredient": "White",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "all",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -50,9 +41,7 @@
       "firstIngredient": "Yellow",
       "secondIngredient": "White",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "all",
+      "guild": "Bandit",
       "rarity": "rare"
     },
     {
@@ -60,9 +49,6 @@
       "name": "фиолетовый",
       "firstIngredient": "Red",
       "secondIngredient": "Blue",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -71,9 +57,6 @@
       "name": "оранжевый",
       "firstIngredient": "Red",
       "secondIngredient": "Yellow",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -83,8 +66,6 @@
       "firstIngredient": "Red",
       "secondIngredient": "Blue",
       "threeIngredient": "White",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -94,8 +75,6 @@
       "firstIngredient": "Red",
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -104,20 +83,16 @@
       "name": "розовый",
       "firstIngredient": "Red",
       "secondIngredient": "White",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "all",
-      "rarity": "common"
+      "threeIngredient": "Ladan",
+      "guild": "Saint",
+      "rarity": "rare"
     },
     {
       "number": 11,
       "name": "фиолетовый светящийся",
       "firstIngredient": "Red",
-      "secondIngredient": " Blue",
+      "secondIngredient": "Blue",
       "threeIngredient": "Ladan",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -125,10 +100,8 @@
       "number": 12,
       "name": "оранжевый светящийся",
       "firstIngredient": "Red",
-      "secondIngredient": " Yellow",
-      "threeIngredient": "White",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
+      "secondIngredient": "Yellow",
+      "threeIngredient": "Ladan",
       "guild": "all",
       "rarity": "common"
     },
@@ -139,7 +112,6 @@
       "secondIngredient": "Blue",
       "threeIngredient": "White",
       "fourIngredient": "Ladan",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -150,7 +122,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Ladan",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -160,8 +131,6 @@
       "firstIngredient": "Red",
       "secondIngredient": "White",
       "threeIngredient": "Ladan",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -169,22 +138,18 @@
       "number": 16,
       "name": "фиолетовый бурлящий",
       "firstIngredient": "Red",
-      "secondIngredient": " Blue",
+      "secondIngredient": "Blue",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Knight",
+      "guild": "all",
       "rarity": "rare"
     },
     {
       "number": 17,
       "name": "оранжевый бурлящий",
       "firstIngredient": "Red",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Knight",
+      "guild": "all",
       "rarity": "rare"
     },
     {
@@ -194,7 +159,6 @@
       "secondIngredient": "Blue",
       "threeIngredient": "White",
       "fourIngredient": "Eye",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -205,7 +169,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Eye",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -215,8 +178,6 @@
       "firstIngredient": "Red",
       "secondIngredient": "White",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -224,22 +185,18 @@
       "number": 21,
       "name": "фиолетовый горение",
       "firstIngredient": "Red",
-      "secondIngredient": " Blue",
+      "secondIngredient": "Blue",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
       "number": 22,
       "name": "оранжевый горение",
       "firstIngredient": "Red",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -249,8 +206,7 @@
       "secondIngredient": "Blue",
       "threeIngredient": "White",
       "fourIngredient": "Stone",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -260,8 +216,7 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Stone",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -270,19 +225,15 @@
       "firstIngredient": "Red",
       "secondIngredient": "White",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
       "number": 26,
       "name": "фиолетовый дым",
       "firstIngredient": "Red",
-      "secondIngredient": " Blue",
+      "secondIngredient": "Blue",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -290,10 +241,8 @@
       "number": 27,
       "name": "оранжевый дым",
       "firstIngredient": "Red",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -304,7 +253,6 @@
       "secondIngredient": "Blue",
       "threeIngredient": "White",
       "fourIngredient": "Sand",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -315,7 +263,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Sand",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -325,8 +272,6 @@
       "firstIngredient": "Red",
       "secondIngredient": "White",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -335,9 +280,6 @@
       "name": "зеленый",
       "firstIngredient": "Blue",
       "secondIngredient": "Yellow",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -347,8 +289,6 @@
       "firstIngredient": "Blue",
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -357,9 +297,6 @@
       "name": "голубой",
       "firstIngredient": "Blue",
       "secondIngredient": "White",
-      "threeIngredient": "*",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "all",
       "rarity": "common"
     },
@@ -367,10 +304,8 @@
       "number": 34,
       "name": "зеленый светящийся",
       "firstIngredient": "Blue",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Ladan",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -381,7 +316,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Ladan",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -391,8 +325,6 @@
       "firstIngredient": "Blue",
       "secondIngredient": "White",
       "threeIngredient": "Ladan",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Saint",
       "rarity": "rare"
     },
@@ -400,10 +332,8 @@
       "number": 37,
       "name": "зеленый бурлящий",
       "firstIngredient": "Blue",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -414,7 +344,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Eye",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -424,8 +353,6 @@
       "firstIngredient": "Blue",
       "secondIngredient": "White",
       "threeIngredient": "Eye",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Knight",
       "rarity": "rare"
     },
@@ -433,11 +360,9 @@
       "number": 40,
       "name": "зеленый горение",
       "firstIngredient": "Blue",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -447,8 +372,7 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Stone",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
@@ -457,19 +381,15 @@
       "firstIngredient": "Blue",
       "secondIngredient": "White",
       "threeIngredient": "Stone",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "Wizard",
+      "guild": "Wizzard",
       "rarity": "rare"
     },
     {
       "number": 43,
       "name": "зеленый дым",
       "firstIngredient": "Blue",
-      "secondIngredient": " Yellow",
+      "secondIngredient": "Yellow",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -480,7 +400,6 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "White",
       "fourIngredient": "Sand",
-      "fiveIngredient": "*",
       "guild": "Bandit",
       "rarity": "rare"
     },
@@ -490,119 +409,7 @@
       "firstIngredient": "Blue",
       "secondIngredient": "White",
       "threeIngredient": "Sand",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
       "guild": "Bandit",
-      "rarity": "rare"
-    },
-    {
-      "number": 46,
-      "name": "черный",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "*",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "common"
-    },
-    {
-      "number": 47,
-      "name": "серый",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Color",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "common"
-    },
-    {
-      "number": 48,
-      "name": "черный светящийся",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Ladan",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 49,
-      "name": "серый светящийся",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Color",
-      "fiveIngredient": "Ladan",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 50,
-      "name": "черный бурлящий",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Eye",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 51,
-      "name": "серый бурлящий",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Color",
-      "fiveIngredient": "Eye",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 52,
-      "name": "черный горение",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Stone",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 53,
-      "name": "серый горение",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Color",
-      "fiveIngredient": "Stone",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 54,
-      "name": "черный дым",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Sand",
-      "fiveIngredient": "*",
-      "guild": "",
-      "rarity": "rare"
-    },
-    {
-      "number": 55,
-      "name": "серый дым",
-      "firstIngredient": "Color",
-      "secondIngredient": "Color",
-      "threeIngredient": "Color",
-      "fourIngredient": "Color",
-      "fiveIngredient": "Sand",
-      "guild": "",
       "rarity": "rare"
     }
   ]

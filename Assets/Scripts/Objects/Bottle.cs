@@ -89,6 +89,10 @@ public class Bottle : MonoBehaviour,IAction
             _bottleStorage.IncreaseAmount();
             Destroy(gameObject);
         }
+        else
+        {
+            _collider.enabled = true;
+        }
     }
 
     public void ResetBottle()

@@ -2,39 +2,35 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class GlobalTaskController : MonoBehaviour
+public class GlobalTask1 : MonoBehaviour
 {
     public static Action OnLevelComplete;
 
-    [SerializeField] private GlobalTaskViewer _globalTaskViewer;
-    [SerializeField] private GameObject _endGamePanel;    
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private Money _money;
     [SerializeField] private GuildSystem _guildSystem;
     [SerializeField] private TMP_Text _taskText;
 
     private int _taskValue;
+    private int _minMoneyValue;
     private string _moneyTaskText = "Вам нужно набрать ";
 
     private void Start()
     {
         Money.OnMoneyChanged += CheckLevelComplete;
+        Money.OnMoneyChanged += CheckLevelDefeat;
     }
 
-    public void SetTaskValue(int value)
+    public void SetTaskValue(int value,int minValue)
     {
         _taskValue = value;
+        _minMoneyValue = minValue;
         SetLevelTask();
     }
 
     public void DisableTask()
     {
         _taskText.text = "";
-    }
-
-    public void CallStartGlobalTaskViewer(string text)
-    {
-        _globalTaskViewer.gameObject.SetActive(true);
-        _globalTaskViewer.SetGlobalTaskText(text);
     }
 
     private void SetLevelTask()
@@ -49,13 +45,22 @@ public class GlobalTaskController : MonoBehaviour
     {
         if (_taskValue <= _money.CurrentMoney)
         {
-            _endGamePanel.SetActive(true);
+            _gameManager.CompleteLevel();
             OnLevelComplete?.Invoke();
+        }
+    }
+
+    private void CheckLevelDefeat()
+    {
+        if(_minMoneyValue >= _money.CurrentMoney)
+        {
+            _gameManager.DefeatLevel();
         }
     }
 
     private void OnDisable()
     {
         Money.OnMoneyChanged -= CheckLevelComplete;
+        Money.OnMoneyChanged -= CheckLevelDefeat;
     }
 }

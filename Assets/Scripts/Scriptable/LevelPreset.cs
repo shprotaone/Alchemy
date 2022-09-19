@@ -6,15 +6,22 @@ using UnityEngine;
 public class LevelPreset : ScriptableObject
 {
     public LevelNumber levelNumber;
-    public bool startWindow;
     public bool rareIngredientBlock;
     public bool rareTask;
     public bool ShopController;
-    public int[] eventCount;
+
+    [Header("Настройки денег")]
     public int startMoney;
-    public int completeGoal;
-    public int resourceCountAdd;
+    public int minRangeMoney;
+    public int MoneyGoal;
+
+    [Header("Настройки условий игры")]
+    public int levelTimeInSeconds;
+    public int rent;
+    public int secondsForRent;
+
+    [Header("Вступительный текст")]
     [TextArea]
-    public string levelTaskText;
+    public string[] levelTaskText;
     public Sprite backgroundSprite;
 }
