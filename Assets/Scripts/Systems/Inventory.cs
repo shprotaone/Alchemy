@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
-{    
+{
+    public static Action OnItemValueChanged;
+
     [SerializeField] private GameObject _currentIngredientPrefab;
     [SerializeField] private GameObject _prefabBottle;
 
@@ -45,6 +48,10 @@ public class Inventory : MonoBehaviour
         RefreshInventory();
     }
 
+    /// <summary>
+    /// Раздача стартовых простых ресурсов
+    /// </summary>
+    /// <param name="amount"></param>
     public void FillCommonIngredients(int amount)
     {
         for (int i = 0; i < _ingredients.Length; i++)
@@ -71,6 +78,8 @@ public class Inventory : MonoBehaviour
             _slots[count].FillSlot(item.Key, item.Value);            
             count++;
         }
+
+        OnItemValueChanged?.Invoke();
     }
 
     public void StartGameFilling(bool secondFilling)
@@ -97,6 +106,12 @@ public class Inventory : MonoBehaviour
     public void AddIngredient(IngredientData ingredient)
     {
         _inventory[ingredient]++;
+        RefreshInventory();
+    }
+
+    public void AddIngredientWithIndex(int index,int value)
+    {
+        _inventory[_ingredients[index]] += value;
         RefreshInventory();
     }
 

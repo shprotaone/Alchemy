@@ -25,9 +25,13 @@ public class PotionSizerSelection
             SetSizerOnThirdIngredient();
             return _resultSizer;
         }
+        else if(levelNumber == LevelNumber.EndlessLevel)
+        {
+            SetFullSizer();
+            return _fullSizer;
+        }
         else
         {
-            SetCommonPotionSizer();
             return _fullSizer;
         }
     }
@@ -37,12 +41,11 @@ public class PotionSizerSelection
         List<PotionData> result = new List<PotionData>();
 
         foreach (var item in _fullSizer.Potions)
-        {
-            item.SetIngredients();
-
+        {            
             if (item.rarity == ResourceRarity.common.ToString())
             {
                 result.Add(item);
+                item.SetIngredients();
             }
         }
 
@@ -59,8 +62,20 @@ public class PotionSizerSelection
 
             if (item.ingredients.Count <= 3)
             {
-                result.Add(item);
+                result.Add(item);               
             }
+        }
+
+        _resultSizer.Potions = result.ToArray();
+    }
+
+    private void SetFullSizer()
+    {
+        List<PotionData> result = new List<PotionData>();
+
+        foreach (var item in _fullSizer.Potions)
+        {
+            item.SetIngredients();
         }
 
         _resultSizer.Potions = result.ToArray();

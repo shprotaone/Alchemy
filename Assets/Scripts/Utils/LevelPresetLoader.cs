@@ -10,8 +10,9 @@ public class LevelPresetLoader : MonoBehaviour
     [SerializeField] private LevelPreset _currentPreset;
 
     public LevelPreset LevelPreset => _currentPreset;
+    public bool MapIsOpen { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         if(instance == null)
         {

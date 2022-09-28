@@ -38,6 +38,8 @@ public class ShopSystem : MonoBehaviour
         _addBottleButton.onClick.AddListener(BuyBottle);
         _addFuelButton.onClick.AddListener(BuyFuel);
         _upgradeClaudronButton.onClick.AddListener(UpgradeClaudron);
+
+        RefreshMoneyCount();
     }
 
     private void InitShopSystem()
@@ -50,7 +52,7 @@ public class ShopSystem : MonoBehaviour
     {
         if(_currentMoney.Decrease(value))
         {
-            _moneyText.text = _currentMoney.CurrentMoney.ToString();
+            RefreshMoneyCount();
             return true;
         }
         else

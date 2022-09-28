@@ -73,6 +73,7 @@ public class PotionTask : MonoBehaviour
         foreach (var item in _ingredientImages)
         {
             item.enabled = true;
+            item.sprite = null;
         }
     }
 

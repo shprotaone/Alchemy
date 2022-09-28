@@ -14,9 +14,9 @@ public class RewardCalculator
     private int _saintCommonReward = 300;
     private int _saintRareReward = 600;
 
-    private int _reward;
+    private float _reward;
 
-    public int Reward => _reward;
+    public float Reward => _reward;
 
     public void Calculate(GuildsType guildType,ResourceRarity rarity)
     {

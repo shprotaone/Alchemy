@@ -38,7 +38,6 @@ public class TutorialManager : MonoBehaviour
             _currentStep.EnableStep();
         }
 
-        print(_currentStep);
         _prevStep = _steps[_stepCounter - 1];
 
         if (_stepCounter < _steps.Length)

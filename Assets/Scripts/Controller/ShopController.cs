@@ -11,7 +11,7 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
     public Transform Plate => _plate;
     private void OnEnable()
     {
-        GlobalTask1.OnLevelComplete += ShopClose;           
+        GlobalTask.OnLevelComplete += ShopClose;           
     }
 
     private void ShopOpen()

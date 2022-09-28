@@ -1,24 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System;
 
-public class GlobalTask1 : GlobalTask
+public class TutorialTask : GlobalTask
 {
     [SerializeField] private Money _money;
-    [SerializeField] private GuildSystem _guildSystem;
-
     private int _taskValue;
     private int _minMoneyValue;
 
     public override void Init()
     {
         Money.OnMoneyChanged += CheckMoneyTask;
-        Money.OnMoneyChanged += CheckLevelDefeat;
-    }
-
-    public override void SpecialSelection()
-    {
-        
     }
 
     public override void CheckMoneyTask()
@@ -30,25 +22,20 @@ public class GlobalTask1 : GlobalTask
         }
     }
 
-    public override void SetTaskValue(int value,int minValue)
+    public override void SetTaskValue(int value, int minValue)
     {
         _taskValue = value;
         _minMoneyValue = minValue;
         SetLevelTaskText();
     }
 
-    private void CheckLevelDefeat()
+    public override void SpecialSelection()
     {
-        if(_minMoneyValue >= _money.CurrentMoney)
-        {
-            _gameManager.DefeatLevel();
-        }
+        
     }
 
-    private void OnDisable()
+    public void OnDestroy()
     {
         Money.OnMoneyChanged -= CheckMoneyTask;
-        Money.OnMoneyChanged -= CheckLevelDefeat;
     }
-
 }

@@ -30,6 +30,7 @@ public class StartDialogViewer : MonoBehaviour
         _mainText.text = textArray[_dialogIndex];
 
         _nextButton.onClick.AddListener(NextText);
+        ButtonNaming();
 
         _gameTimeController.PauseGame();
     }

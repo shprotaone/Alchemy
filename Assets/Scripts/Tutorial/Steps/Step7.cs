@@ -30,10 +30,11 @@ public class Step7 : Step
        if(!_frameFirst.activeInHierarchy && !_frameSecond.activeInHierarchy)
         {
             _exitButton.gameObject.SetActive(true);
+
             _dialogView.EnableView(true);
             _dialogView.DialogText.text = _text;
             _dialogView.NextButton.gameObject.SetActive(false);
-
+            
             _tutorialManager.SkipStep();
             DragController.instance.ObjectsInterractable(true);
         }
@@ -55,11 +56,10 @@ public class Step7 : Step
     {
         _firstIngredientButton.onClick.RemoveListener(() => DisableFrame(0));
         _firstIngredientButton.onClick.RemoveListener(StepAction);
-
+       
         _secondIngredientButton.onClick.RemoveListener(() => DisableFrame(1));
         _secondIngredientButton.onClick.RemoveListener(StepAction);
 
         _exitButton.onClick.RemoveListener(_tutorialManager.NextStep);
     }
-
 }

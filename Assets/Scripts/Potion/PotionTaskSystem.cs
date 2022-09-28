@@ -17,8 +17,8 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private bool _imageTask;
     
     private RewardCalculator _rewardCalculator;
+    private float _rewardMultiply = 1f;
     
-
     private Potion _currentPotion;
 
     private int _numberTask;
@@ -105,10 +105,13 @@ public class PotionTaskSystem : MonoBehaviour
     private int GetReward(Potion potion)
     {
         int reward = 0;
+        float resultReward = 0;
 
         _rewardCalculator.Calculate(_visitorController.CurrentVisitor.Guild, potion.Rarity);
-        reward = _rewardCalculator.Reward;
 
+        resultReward = _rewardCalculator.Reward * _rewardMultiply;
+
+        reward = (int)resultReward;
         reward = LowRepReward(reward);
         
         print(reward);
@@ -122,8 +125,18 @@ public class PotionTaskSystem : MonoBehaviour
         if (divideReward) return stockReward / 2;
         else return stockReward;
     }
+
     public void SetTutorialMode(bool value)   //проверить на использование
     {
         _tutorialLevel = value;
+    }
+
+    /// <summary>
+    /// процентный множитель
+    /// </summary>
+    /// <param name="multiply"></param>
+    public void SetRewardMultiply(float multiply)
+    {
+        _rewardMultiply = multiply;
     }
 }

@@ -83,9 +83,8 @@
       "name": "розовый",
       "firstIngredient": "Red",
       "secondIngredient": "White",
-      "threeIngredient": "Ladan",
-      "guild": "Saint",
-      "rarity": "rare"
+      "guild": "all",
+      "rarity": "common"
     },
     {
       "number": 11,
@@ -103,7 +102,7 @@
       "secondIngredient": "Yellow",
       "threeIngredient": "Ladan",
       "guild": "all",
-      "rarity": "common"
+      "rarity": "rare"
     },
     {
       "number": 13,

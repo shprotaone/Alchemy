@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelButtonController : MonoBehaviour
+public class MapController : MonoBehaviour
 {
     [SerializeField] private Button[] _buttons;
 

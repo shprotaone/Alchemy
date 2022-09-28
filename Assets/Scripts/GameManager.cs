@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _completeLevelPanel;
     [SerializeField] private GameObject _defeatLevelPanel;
 
+    private void Start()
+    {
+        _gameTimeController.ResumeGame();
+    }
+
     public void CompleteLevel()
     {
         _completeLevelPanel.SetActive(true);
