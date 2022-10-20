@@ -11,7 +11,8 @@ public class PotionGarbage : MonoBehaviour
             Bottle bottle = collision.GetComponent<Bottle>();
 
             bottle.ResetBottle();
-            bottle.Movement();
+            
+            Debug.Log("Garbage");
         }
     }
 }

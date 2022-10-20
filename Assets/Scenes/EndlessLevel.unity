@@ -4402,7 +4402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 620007347}
   - component: {fileID: 620007348}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BottleBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5695,7 +5695,7 @@ GameObject:
   - component: {fileID: 1126632600}
   - component: {fileID: 1126632603}
   - component: {fileID: 1126632601}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ClearTable
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -7524,7 +7524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1762514638}
   - component: {fileID: 1762514637}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FullTable
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -7869,7 +7869,7 @@ GameObject:
   - component: {fileID: 2005633853}
   - component: {fileID: 2005633852}
   - component: {fileID: 2005633851}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8315,7 +8315,7 @@ GameObject:
   - component: {fileID: 2140879295}
   - component: {fileID: 2140879297}
   - component: {fileID: 2140879296}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12408,6 +12408,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3723511906039876457, guid: 3663283e8573a8044aeecfa1014500a6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723511906039876457, guid: 3663283e8573a8044aeecfa1014500a6,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723511906039876457, guid: 3663283e8573a8044aeecfa1014500a6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3723511906039876463, guid: 3663283e8573a8044aeecfa1014500a6,
         type: 3}
       propertyPath: m_Name
@@ -14410,11 +14425,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1404857698}
     m_Modifications:
-    - target: {fileID: 7103408881170306465, guid: 3a9bca28a88d93c4b9befa44f3a190ad,
-        type: 3}
-      propertyPath: _delta
-      value: 0.15
-      objectReference: {fileID: 0}
     - target: {fileID: 7103408881170306465, guid: 3a9bca28a88d93c4b9befa44f3a190ad,
         type: 3}
       propertyPath: _draggableParent

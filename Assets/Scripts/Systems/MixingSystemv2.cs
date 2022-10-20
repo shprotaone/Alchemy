@@ -115,15 +115,15 @@ public class MixingSystemv2 : MonoBehaviour
             _bottleFilled = true;
             print("GoodPotion");
         }
-    }
+    } 
 
     private void SetPotionInBottle(Bottle bottle)
     {
         if (!bottle.IsFull)
         {
-            bottle.FillWaterInBottle(_waterColor.ResultColor);
-            bottle.FillPotionInBottle(_potionDetector.CurrentPotion);
+            _potionDetector.CurrentPotion.SetContraband();
 
+            bottle.FillPotionInBottle(_potionDetector.CurrentPotion,_waterColor.ResultColor);       
             bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
 
             bottle.Movement();

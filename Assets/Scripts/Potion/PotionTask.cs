@@ -22,6 +22,8 @@ public class PotionTask : MonoBehaviour
     private float _reward;
     private float _penalty;
 
+    public Potion CurrentPotion => _currentPotion;
+
     public Visitor Visitor => _visitor;
     public void InitTask()
     {

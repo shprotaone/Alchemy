@@ -10,13 +10,16 @@ public class Potion
     private string _name;
 
     private List<string> _ingredients;
+    private bool _contraband;
 
     private GuildsType _guildType;
+
     public GuildsType GuildsType => _guildType;
     public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
     public List<string> Ingredients => _ingredients;
     public GameObject Effect => _effect;
+    public bool Contraband => _contraband;
 
     public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem
     {
@@ -90,12 +93,15 @@ public class Potion
 
     public bool PotionEquals(PotionData potionData)
     {
-        //Array.Sort(Ingredients);
         Ingredients.Sort();
 
-        //potionData.SetIngredients();
         potionData.ingredients.Sort();
 
         return Enumerable.SequenceEqual(Ingredients, potionData.ingredients);
+    }
+
+    public void SetContraband()
+    {
+        _contraband = true;
     }
 }

@@ -23,6 +23,7 @@ public class PotionTaskSystem : MonoBehaviour
 
     private int _numberTask;
     private bool _tutorialLevel;
+    private bool _contrabandLevel;
     
     public Potion CurrentPotion => _currentPotion;
     public GameObject CoinPrefab => _coinPrefab;
@@ -55,18 +56,34 @@ public class PotionTaskSystem : MonoBehaviour
         }
           
         _currentPotion.FillPotion(currentPotionData);
-        
+        FillViewPotion(task);
+
+        if (_contrabandLevel)
+        {
+            if (_numberTask == GetContrabandPotionIndex())
+            {
+                _currentPotion.SetContraband();
+            }
+        }       
+    }
+
+    /// <summary>
+    /// Заполняет изображение или название
+    /// </summary>
+    /// <param name="task"></param>
+    private void FillViewPotion(PotionTask task)
+    {
         if (_imageTask)
         {
             Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Count];
 
             for (int i = 0; i < ingredientsSprite.Length; i++)
             {
-                if(_currentPotion.Ingredients[i] != null)
-                ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[i]);
+                if (_currentPotion.Ingredients[i] != null)
+                    ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[i]);
             }
 
-            task.FillTask(ingredientsSprite,GetReward(_currentPotion));
+            task.FillTask(ingredientsSprite, GetReward(_currentPotion));
         }
         else
         {
@@ -138,5 +155,18 @@ public class PotionTaskSystem : MonoBehaviour
     public void SetRewardMultiply(float multiply)
     {
         _rewardMultiply = multiply;
+    }
+    /// <summary>
+    /// Присваивает рандомный индекс контрабандному зелью
+    /// </summary>
+    /// <returns></returns>
+    public int GetContrabandPotionIndex()
+    {
+        return Random.Range(0,_potionSizer.Potions.Length);
+    }
+
+    public void SetContrabandtLevel()
+    {
+        _contrabandLevel = true;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DragController : MonoBehaviour
@@ -129,7 +130,9 @@ public class DragController : MonoBehaviour
     {
         _clickDeltaTime = 0;
         UpdateDragStatus(false);
-        DropAction();
+
+        if(_lastDragged != null)
+        StartCoroutine(DropAction());
     }
 
     private void UpdateDragStatus(bool isDragging)
@@ -150,9 +153,12 @@ public class DragController : MonoBehaviour
         _interractive = flag;
     }
 
-    private void DropAction()
+    private IEnumerator DropAction()
     {
+        yield return new WaitForSeconds(0.1f);
         _lastDragged.DropMovementAction();
+      
+        yield break;
     }
 
     private void ResetDelay()

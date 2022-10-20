@@ -13,19 +13,20 @@ public class GlobalTask2a : GlobalTask
     public override void Init()
     {
         Money.OnMoneyChanged += CheckMoneyDefeat;
+        SpecialSelection();
     }
 
     public override void CheckMoneyTask() { }
 
     public override void SetTaskValue(int value, int minValue)
     {
-        _minMoneyValue = minValue;
-        
+        _minMoneyValue = minValue;       
     }
 
     public override void SpecialSelection()
     {
         ChangeLevelReward();
+        _taskSystem.SetContrabandtLevel();
     }
 
     private void CheckMoneyDefeat()

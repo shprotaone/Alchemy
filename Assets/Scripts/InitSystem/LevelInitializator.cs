@@ -170,8 +170,9 @@ public class LevelInitializator : MonoBehaviour
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level2);
+                _taskSystem.InitPotionSizer(LevelNumber.Level3a);
                 _taskSystem.SetTutorialMode(false);
+
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
                 _brightObjectSystem.BrightObjects(false);

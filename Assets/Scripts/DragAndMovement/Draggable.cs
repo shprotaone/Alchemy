@@ -28,10 +28,10 @@ public class Draggable : MonoBehaviour
     public void DropMovementAction()
     {
         _action.Movement();
-       StartCoroutine(DelayDisableCollider());
+       //StartCoroutine(DelayDisableCollider());
     }
 
-    private IEnumerator DelayDisableCollider()      //мешает при перетаскивании заново
+    private IEnumerator DelayDisableCollider()      //мешает при перетаскивании 
     {
         yield return new WaitForFixedUpdate();
         _collider.enabled = false;

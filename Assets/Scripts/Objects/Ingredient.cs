@@ -80,7 +80,7 @@ public class Ingredient : MonoBehaviour,IAction
             _collider.enabled = true;
             _slot.IncreaseAmount();
 
-            Destroy(this.gameObject);
+            Destroy(this.gameObject,0.05f);   //закешировать!
         }
     }
 

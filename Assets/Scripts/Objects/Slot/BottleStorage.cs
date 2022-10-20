@@ -48,7 +48,6 @@ public class BottleStorage : MonoBehaviour,IAction
     public void IncreaseAmount()
     {
         _amount++;
-        //_bottlePrefab.SetActive(true);
         _boxCollider.enabled = true;
 
         RefreshAmount();
