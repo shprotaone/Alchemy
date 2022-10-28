@@ -33,10 +33,4 @@ public class MenuPanelController : MonoBehaviour
         _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false)
                  .OnComplete(() => _panel.gameObject.SetActive(false));
     }
-
-    private void OnDestroy()
-    {
-        _openButton?.onClick.RemoveListener(Open);
-        _closeButton?.onClick.RemoveListener(Close);
-    }
 }

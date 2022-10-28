@@ -15,13 +15,13 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] private Button _buyButton;
 
     private Inventory _inventory;
-    private ShopSystem _shopSystem;
+    private Shop _shopSystem;
     private IngredientData _ingredient;    
     
     public IngredientData IngredienData => _ingredient;
     private void OnEnable()
     {
-        _shopSystem = GetComponentInParent<ShopSystem>();
+        _shopSystem = GetComponentInParent<Shop>();
 
         if(_ingredient == null)
         {

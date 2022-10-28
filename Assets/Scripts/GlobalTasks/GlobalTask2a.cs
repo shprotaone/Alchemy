@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GlobalTask2a : GlobalTask
@@ -8,25 +9,29 @@ public class GlobalTask2a : GlobalTask
 
     [SerializeField] private Money _money;
     [SerializeField] private PotionTaskSystem _taskSystem;
+    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
+    [SerializeField] private TMP_Text _contrabandCounter;
     
     private int _minMoneyValue;
+
     public override void Init()
     {
-        Money.OnMoneyChanged += CheckMoneyDefeat;
+        Money.OnMoneyChanged.AddListener(CheckMoneyDefeat);
         SpecialSelection();
+        SetGoalText();
     }
 
     public override void CheckMoneyTask() { }
 
     public override void SetTaskValue(int value, int minValue)
     {
-        _minMoneyValue = minValue;       
+        _minMoneyValue = minValue;
+        SetLevelTaskText();
     }
 
     public override void SpecialSelection()
     {
         ChangeLevelReward();
-        _taskSystem.SetContrabandtLevel();
     }
 
     private void CheckMoneyDefeat()
@@ -42,8 +47,10 @@ public class GlobalTask2a : GlobalTask
         _taskSystem.SetRewardMultiply(rewardMultiply);
     }
 
-    private void OnDisable()
+    private void SetGoalText()
     {
-        Money.OnMoneyChanged -= CheckMoneyDefeat;
+        string text = "\nКонтрабандное зелье - " + _contrabandPotionSystem.ContrabandPotion.PotionName;
+
+        _goalText += text;
     }
 }

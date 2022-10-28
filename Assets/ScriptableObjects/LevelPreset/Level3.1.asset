@@ -19,7 +19,7 @@ MonoBehaviour:
   startMoney: 2000
   minRangeMoney: -50000
   MoneyGoal: 0
-  levelTimeInSeconds: 180
+  levelTimeInSeconds: 30
   rent: 50
   secondsForRent: 20
   levelTaskText:
@@ -48,4 +48,4 @@ MonoBehaviour:
     \u0434\u043E\u043B\u0433\u043E, \u0435\u0441\u043B\u0438 \u0432\u0430\u0441 \u043F\u043E\u0439\u043C\u0430\u044E\u0442
     \u0441 \u043D\u0438\u043C, \u0432\u044B\u043F\u0438\u0448\u0443\u0442 \u0431\u043E\u043B\u044C\u0448\u043E\u0439
     \u0448\u0442\u0440\u0430\u0444"
-  backgroundSprite: {fileID: 21300000, guid: 3a665b9b6dc1f8a46b8272ba726fcae8, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 5b98b2ac3477f4e49bf786330b473532, type: 3}

@@ -6,6 +6,7 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private StringToSprite _stringToSprite;
 
     [SerializeField] private PotionCyclopedia _potionCyclopedia;
+    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private Money _moneySystem;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private PotionSizer _potionSizer;
@@ -23,11 +24,11 @@ public class PotionTaskSystem : MonoBehaviour
 
     private int _numberTask;
     private bool _tutorialLevel;
-    private bool _contrabandLevel;
     
     public Potion CurrentPotion => _currentPotion;
     public GameObject CoinPrefab => _coinPrefab;
     public Transform JarTransform => _jarTransform;
+    public PotionSizer PotionSizer => _potionSizer; 
 
     /// <summary>
     /// Инициализация текущего списка зелий
@@ -37,7 +38,7 @@ public class PotionTaskSystem : MonoBehaviour
         _potionSizer = _jsonReader.PotionSizer;
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
         _potionSizer = sizerSelector.SizerSelector(levelNumber);
-       
+
         _rewardCalculator = new RewardCalculator();
         _currentPotion = new Potion();
     }        
@@ -56,15 +57,7 @@ public class PotionTaskSystem : MonoBehaviour
         }
           
         _currentPotion.FillPotion(currentPotionData);
-        FillViewPotion(task);
-
-        if (_contrabandLevel)
-        {
-            if (_numberTask == GetContrabandPotionIndex())
-            {
-                _currentPotion.SetContraband();
-            }
-        }       
+        FillViewPotion(task);       
     }
 
     /// <summary>
@@ -73,6 +66,12 @@ public class PotionTaskSystem : MonoBehaviour
     /// <param name="task"></param>
     private void FillViewPotion(PotionTask task)
     {
+        if (_currentPotion.PotionName == _contrabandPotionSystem.ContrabandPotion.PotionName)
+        {
+            _currentPotion.SetContraband(true);
+        }
+        else _currentPotion.SetContraband(false);
+
         if (_imageTask)
         {
             Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Count];
@@ -99,6 +98,7 @@ public class PotionTaskSystem : MonoBehaviour
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
 
         _visitorController.DisableVisitor();
+        GetGemReward(_currentPotion);
     }
 
     public void TaskCanceled(float penaltyRep)
@@ -131,8 +131,15 @@ public class PotionTaskSystem : MonoBehaviour
         reward = (int)resultReward;
         reward = LowRepReward(reward);
         
-        print(reward);
         return reward;
+    }
+
+    private void GetGemReward(Potion potion)
+    {
+        if (potion.Contraband)
+        {
+            _contrabandPotionSystem.AddCounter();
+        }
     }
 
     private int LowRepReward(int stockReward)
@@ -155,18 +162,5 @@ public class PotionTaskSystem : MonoBehaviour
     public void SetRewardMultiply(float multiply)
     {
         _rewardMultiply = multiply;
-    }
-    /// <summary>
-    /// Присваивает рандомный индекс контрабандному зелью
-    /// </summary>
-    /// <returns></returns>
-    public int GetContrabandPotionIndex()
-    {
-        return Random.Range(0,_potionSizer.Potions.Length);
-    }
-
-    public void SetContrabandtLevel()
-    {
-        _contrabandLevel = true;
     }
 }

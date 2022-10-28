@@ -44,16 +44,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directLoad: 1
-  _backgroundLoader: {fileID: 0}
-  _tutorialManager: {fileID: 0}
+  _levelPresetDirect: {fileID: 11400000, guid: 70d141a467d92124eb8ca3bfca13e201, type: 2}
   _shopSystem: {fileID: 0}
-  _startCameraPos: {fileID: 0}
-  _taskSystem: {fileID: 0}
-  _globalTaskController: {fileID: 0}
   _inventory: {fileID: 0}
-  _shopController: {fileID: 0}
   _money: {fileID: 0}
+  _tutorialManager: {fileID: 0}
+  _levelTasks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _taskSystem: {fileID: 0}
+  _rentShop: {fileID: 0}
+  _guildSystem: {fileID: 0}
+  _gameTimer: {fileID: 0}
+  _startCameraPos: {fileID: 0}
+  _shopController: {fileID: 0}
   _visitorController: {fileID: 0}
   _brightObjectSystem: {fileID: 0}
   _UIController: {fileID: 0}
-  _levelPresetDirect: {fileID: 11400000, guid: 3e3e2d4db4aa70b4986a8abbdb6570d5, type: 2}

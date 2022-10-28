@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GuildSystem : MonoBehaviour
 {
-    private const float gultStartValue = 100;
+    private const float gultStartValue = 80;
     private const float guildCount = 4;
     private float _guildMaxValue = 100;
     
@@ -30,9 +30,12 @@ public class GuildSystem : MonoBehaviour
 
     public void AddRep(GuildsType type,float value)
     {
-        _guildDictionary[type] += value;
-        _guildCircleView.RefreshSlider(type, _guildDictionary[type]);
-        _guildView.RefreshSlider(type, _guildDictionary[type]);
+        if (_guildDictionary[type] < GuildMaxValue)
+        {
+            _guildDictionary[type] += value;
+            _guildCircleView.RefreshSlider(type, _guildDictionary[type]);
+            _guildView.RefreshSlider(type, _guildDictionary[type]);
+        }      
     }
 
     public void RemoveRep(GuildsType type, float value)

@@ -10,7 +10,7 @@ public class TutorialTask : GlobalTask
 
     public override void Init()
     {
-        Money.OnMoneyChanged += CheckMoneyTask;
+        Money.OnMoneyChanged.AddListener(CheckMoneyTask);
     }
 
     public override void CheckMoneyTask()
@@ -34,8 +34,8 @@ public class TutorialTask : GlobalTask
         
     }
 
-    public void OnDestroy()
-    {
-        Money.OnMoneyChanged -= CheckMoneyTask;
-    }
+    //public void OnDestroy()
+    //{
+    //    Money.OnMoneyChanged -= CheckMoneyTask;
+    //}
 }

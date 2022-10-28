@@ -8,31 +8,36 @@ public class LevelInitializator : MonoBehaviour
 
     public const int stockAmount = 5;
 
+    [Header("Настройки для запуска")]
     [SerializeField] private bool _directLoad;
+    [SerializeField] private LevelPreset _levelPresetDirect;
 
-    [SerializeField] private GlobalTask[] _levelTasks;
-    [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private ShopSystem _shopSystem;
-    [SerializeField] private CameraMovement _startCameraPos;    
-    [SerializeField] private PotionTaskSystem _taskSystem;
+    [Header("Глобальные объекты")]
+    [SerializeField] private Shop _shopSystem;
     [SerializeField] private Inventory _inventory;
-
-    [SerializeField] private ShopController _shopController;
-    [SerializeField] private RentShop _rentShop;
-
     [SerializeField] private Money _money;
-    [SerializeField] private VisitorController _visitorController;
+    
+    [Header("Менеджеры")]
+    [SerializeField] private TutorialManager _tutorialManager;
+    [SerializeField] private GlobalTask[] _levelTasks;
+    [SerializeField] private PotionTaskSystem _taskSystem;
+
+    [Header("Механики")]
+    [SerializeField] private RentCalculator _rentShop;
     [SerializeField] private GuildSystem _guildSystem;
+    [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
+
+    [Header("Вспомогательные системы")]
+    [SerializeField] private CameraMovement _startCameraPos;
+    [SerializeField] private ShopController _shopController;
+    [SerializeField] private VisitorController _visitorController;
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;
-    [SerializeField] private GameTimer _gameTimer;
-
-    [SerializeField] private LevelPreset _levelPresetDirect;
 
     private GlobalTask _currentGlobalTask;
     private LevelPreset _levelPreset;
     private LevelTask _levelTask;
-
 
     private void Awake()
     {
@@ -164,18 +169,19 @@ public class LevelInitializator : MonoBehaviour
 
                 _inventory.FillCommonIngredients(10);
 
-                _currentGlobalTask.Init();
-                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
-
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
                 _taskSystem.InitPotionSizer(LevelNumber.Level3a);
                 _taskSystem.SetTutorialMode(false);
+                _contrabandPotionSystem.InitContrabandPotion();
 
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
                 _brightObjectSystem.BrightObjects(false);
+
+                _currentGlobalTask.Init();
+                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
 
                 break;
         }

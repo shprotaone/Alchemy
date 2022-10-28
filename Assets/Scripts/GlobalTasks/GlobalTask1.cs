@@ -12,8 +12,8 @@ public class GlobalTask1 : GlobalTask
 
     public override void Init()
     {
-        Money.OnMoneyChanged += CheckMoneyTask;
-        Money.OnMoneyChanged += CheckLevelDefeat;
+        Money.OnMoneyChanged.AddListener(CheckMoneyTask);
+        Money.OnMoneyChanged.AddListener(CheckLevelDefeat);
     }
 
     public override void SpecialSelection()
@@ -45,10 +45,10 @@ public class GlobalTask1 : GlobalTask
         }
     }
 
-    private void OnDisable()
-    {
-        Money.OnMoneyChanged -= CheckMoneyTask;
-        Money.OnMoneyChanged -= CheckLevelDefeat;
-    }
+    //private void OnDisable()
+    //{
+    //    Money.OnMoneyChanged -= CheckMoneyTask;
+    //    Money.OnMoneyChanged -= CheckLevelDefeat;
+    //}
 
 }

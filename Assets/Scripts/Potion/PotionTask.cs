@@ -31,11 +31,10 @@ public class PotionTask : MonoBehaviour
 
         _taskSystem.TakeTask(this);
         _currentPotion = _taskSystem.CurrentPotion;
-
+     
         _visitor = GetComponentInParent<Visitor>();
         
         RisingTask();
-
         SetGuild();
         SetRewardAndPenalty();
 
@@ -77,11 +76,6 @@ public class PotionTask : MonoBehaviour
             item.enabled = true;
             item.sprite = null;
         }
-    }
-
-    public void SetCustomTask()
-    {
-
     }
 
     public void SetGuild()

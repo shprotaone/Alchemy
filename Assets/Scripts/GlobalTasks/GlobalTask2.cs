@@ -21,8 +21,8 @@ public class GlobalTask2 : GlobalTask
     {
         ChangeCostIngredient();
 
-        Money.OnMoneyChanged += CheckMoneyTask;
-        Money.OnMoneyChanged += CheckMoneyDefeat;
+        Money.OnMoneyChanged.AddListener(CheckMoneyTask);
+        Money.OnMoneyChanged.AddListener(CheckMoneyDefeat);
 
         Inventory.OnItemValueChanged += CheckInventory;
     }
@@ -84,9 +84,6 @@ public class GlobalTask2 : GlobalTask
 
     private void OnDisable()
     {
-        Money.OnMoneyChanged -= CheckMoneyTask;
-        Money.OnMoneyChanged -= CheckMoneyDefeat;
-
         _barkIngredient.cost = 50;
     }
 

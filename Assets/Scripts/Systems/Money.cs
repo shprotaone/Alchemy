@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine.Events;
 
 /// <summary>
 /// Отвечает за монеты
 /// </summary>
 public class Money : MonoBehaviour
 {
-    public static Action OnMoneyChanged;
+    public static UnityEvent OnMoneyChanged = new UnityEvent();
+
+    public static UnityEvent<int> OnDecreaseMoney = new UnityEvent<int>();
+    public static UnityEvent<int> OnIncreaseMoney =  new UnityEvent<int>();
 
     [SerializeField] private TMP_Text _moneyText;
+    [SerializeField] private TMP_Text _moneyTextInShop;
 
     private int _money;
     private int _moneyMinRange;
@@ -19,26 +21,34 @@ public class Money : MonoBehaviour
 
     private void Start()
     {
-        OnMoneyChanged += RefreshMoneyText;
+        OnMoneyChanged.AddListener(RefreshMoneyText);
+        OnDecreaseMoney.AddListener(CheckDecrease);
+        OnIncreaseMoney.AddListener(Increase);
     }
 
     public void SetStartMoney(int money,int moneyMinRange)
     {
         _money = money;
         _moneyMinRange = moneyMinRange;
-        RefreshMoneyText();
+        OnMoneyChanged?.Invoke();
+    }
+
+    public void CheckDecrease(int value)    //Сомнительно
+    {
+        Decrease(value);
     }
 
     public bool Decrease(int value)
     {
-        if (_moneyMinRange <= value)
+        if (_moneyMinRange<value)
         {
-            _money -= value;
+            _money -= value;           
             OnMoneyChanged?.Invoke();
             return true;
         }
         else
         {
+            Debug.LogWarning("NotHaveMoney");
             return false;
         }       
     }
@@ -52,10 +62,6 @@ public class Money : MonoBehaviour
     private void RefreshMoneyText()
     {
         _moneyText.text = _money.ToString();
-    }
-
-    private void OnDisable()
-    {
-        OnMoneyChanged -= RefreshMoneyText;
+        _moneyTextInShop.text = _money.ToString();
     }
 }

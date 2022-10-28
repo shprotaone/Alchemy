@@ -14,6 +14,7 @@ public class MixingSystemv2 : MonoBehaviour
     public FilledBottle FilledBottleDelegete;
 
     [SerializeField] private PotionDetector _potionDetector;
+    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
     [SerializeField] private TableManager _tableManager;
 
@@ -108,20 +109,31 @@ public class MixingSystemv2 : MonoBehaviour
         if (_potionDetector.CurrentPotion.PotionName == "")
         {
             _bottleFilled = false;  //ответсвенность заполнения перенести в бутылку
-            print("BadPotion");
         }
         else
         {
             _bottleFilled = true;
-            print("GoodPotion");
         }
     } 
+
+    private void CheckOnContraband()
+    {
+        if(_contrabandPotionSystem.ContrabandPotion != null)
+        {
+            if (_contrabandPotionSystem.ContrabandPotion.PotionName == _potionDetector.CurrentPotion.PotionName)
+            {
+                _potionDetector.CurrentPotion.SetContraband(true);
+            }
+
+            else _potionDetector.CurrentPotion.SetContraband(false);
+        }
+    }
 
     private void SetPotionInBottle(Bottle bottle)
     {
         if (!bottle.IsFull)
         {
-            _potionDetector.CurrentPotion.SetContraband();
+            CheckOnContraband();
 
             bottle.FillPotionInBottle(_potionDetector.CurrentPotion,_waterColor.ResultColor);       
             bottle.transform.SetParent(_tableManager.FullPotionTable.transform);

@@ -6,10 +6,10 @@ using UnityEngine;
 public class Potion
 {
     private GameObject _effect;
-    private ResourceRarity _rarityType;
-    private string _name;
+    private ResourceRarity _rarityType;   
 
     private List<string> _ingredients;
+    private string _name;
     private bool _contraband;
 
     private GuildsType _guildType;
@@ -21,7 +21,7 @@ public class Potion
     public GameObject Effect => _effect;
     public bool Contraband => _contraband;
 
-    public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem
+    public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem // добавить конструктор? 
     {
         _ingredients = new List<string>();
 
@@ -100,8 +100,8 @@ public class Potion
         return Enumerable.SequenceEqual(Ingredients, potionData.ingredients);
     }
 
-    public void SetContraband()
+    public void SetContraband(bool isContraband)
     {
-        _contraband = true;
+        _contraband = isContraband;
     }
 }

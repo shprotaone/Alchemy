@@ -1,13 +1,11 @@
 ﻿using DG.Tweening;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 public class Bottle : MonoBehaviour,IAction
 {
     private const float moveSpeed = 1;
-    private int _maxTimerValue = 15;
+    private int _maxTimerValue = 40;
 
     [SerializeField] private SpriteRenderer _fullBottle;
     [SerializeField] private SpriteRenderer _bottle;
@@ -18,15 +16,13 @@ public class Bottle : MonoBehaviour,IAction
 
     private Transform _destination;
     private GameObject _effect;
-    private GameObject _prefabBottle;
     private Potion _potionInBottle;
     private Color _potionColor;
-    private Color _contrabandColor = Color.black;
+    private Color _contrabandBottleColor = Color.black;
 
     private TableManager _tableManager;
     private BottleStorage _bottleStorage;
     private LocalTimer _timer;
-
 
     private Tween _tween;
     
@@ -48,14 +44,9 @@ public class Bottle : MonoBehaviour,IAction
 
     public void Movement()
     {
-        StartMove();
+        GetTable();
 
         _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(EndMove);
-    }
-
-    private void StartMove()
-    {
-        GetTable();        
     }
 
     private void EndMove()
@@ -77,9 +68,7 @@ public class Bottle : MonoBehaviour,IAction
     /// <param name="potion"></param>
     public void FillPotionInBottle(Potion potion,Color color)
     {
-        Potion testPot = potion;
-
-        _potionInBottle.SetNamePotion(potion.PotionName);
+        _potionInBottle = potion;
         _isFull = true;       
 
         if (potion.Rarity == ResourceRarity.rare)
@@ -91,13 +80,7 @@ public class Bottle : MonoBehaviour,IAction
         }
 
         FillWaterInBottle(color);
-
-        if (testPot.Contraband)
-        {
-            _bottle.color = _contrabandColor;
-            _timerText.gameObject.SetActive(true);
-            StartTimer();
-        }
+        CheckContraband(potion);
 
         print("From Bottle" + _potionInBottle.PotionName);
     }
@@ -111,6 +94,21 @@ public class Bottle : MonoBehaviour,IAction
         _potionColor = color;
         _fullBottle.enabled = true;
         _wobble.ChangeColor(_potionColor);
+    }
+
+    private void CheckContraband(Potion potion)
+    {
+        if (_potionInBottle.Contraband)      //не переносятся данные
+        {
+            _bottle.color = _contrabandBottleColor;
+            _timerText.gameObject.SetActive(true);
+            StartTimer();
+        }
+        else
+        {
+            _bottle.color = Color.white; 
+            _timerText.gameObject.SetActive(false);
+        }
     }
 
     private void GetTable()
@@ -170,16 +168,21 @@ public class Bottle : MonoBehaviour,IAction
     {
         _timerText.text = _timer.CurrentTime.ToString();
 
-        if (_timer.CurrentTime < 2)
+        if (_timer.CurrentTime < 1)
         {
             _timer.StoppedTimer();
-            print("StoppedTimerBotle");
+            Money.OnDecreaseMoney?.Invoke(3000);
+            Destroy(this.gameObject);
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        _timer.OnTimerUpdate -= UpdateTimer;
+        if (_timer != null)
+        {
+            StopCoroutine(_timer.Timer());
+            _timer.OnTimerUpdate -= UpdateTimer;
+        }       
     }
 }
 

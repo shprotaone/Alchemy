@@ -6,6 +6,7 @@ using System.Collections;
 public class Visitor : MonoBehaviour
 {
     private const float stockTime = 50;
+    private const float contrabandTime = 10;
 
     [SerializeField] private GuildsType _currentGuild;
     [SerializeField] private VisitorController _visitorController;
@@ -15,12 +16,14 @@ public class Visitor : MonoBehaviour
     private SpriteRenderer _visitorImage;
 
     private bool _firstTask = true;
+    private float _timeVisitor;
 
     public GuildsType Guild => _currentGuild;
 
     private void Awake()
     {
         _visitorController.OnVisitorOut += Fading;
+        _timeVisitor = stockTime;
     }
 
     private void OnEnable()
@@ -49,7 +52,7 @@ public class Visitor : MonoBehaviour
     {
         if (!_visitorController.FirstVisitor)
         {
-            float counter = stockTime;
+            float counter = _timeVisitor;
             _timerText.gameObject.SetActive(true);
             UpdateTimerDisplay(counter);
 
@@ -81,18 +84,29 @@ public class Visitor : MonoBehaviour
 
     public void Rising()
     {
-        StartCoroutine(Timer());
-        this.gameObject.SetActive(true);
-             
         _currentTask.InitTask();
+        SetTime();
+
+        StartCoroutine(Timer());
+        this.gameObject.SetActive(true);                 
         
         DOTween.ToAlpha(()=> _visitorImage.color, x => _visitorImage.color = x, 1, 1);
     }
 
+    private void SetTime()
+    {
+        if (_currentTask.CurrentPotion.Contraband)
+        {
+            _timeVisitor = contrabandTime;
+        }
+        else
+        {
+            _timeVisitor = stockTime;
+        }
+    }
+
     public void Fading()
     {        
-        //this.gameObject.SetActive(true);
-
         _currentTask.FadingTask();
         StopAllCoroutines();
 

@@ -57,4 +57,4 @@ MonoBehaviour:
     \u043F\u043E\u0431\u043E\u043B\u044C\u0448\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432
     \u0438 10 000 \u0437\u043E\u043B\u043E\u0442\u044B\u0445 \u0447\u0442\u043E\u0431\u044B
     \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u043F\u0443\u0442\u044C"
-  backgroundSprite: {fileID: 21300000, guid: 1e2ef0a28e60dcf469c76d49bda5102b, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}

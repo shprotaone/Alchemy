@@ -24,4 +24,5 @@ public class GameManager : MonoBehaviour
         _defeatLevelPanel.SetActive(true);
         _gameTimeController.PauseGame();
     }
+
 }

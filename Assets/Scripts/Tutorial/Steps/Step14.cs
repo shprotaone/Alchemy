@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Step14 : Step
 {
-    [SerializeField] private ShopSystem _shopSystem;
+    [SerializeField] private Shop _shopSystem;
 
     public override void StepAction()
     {

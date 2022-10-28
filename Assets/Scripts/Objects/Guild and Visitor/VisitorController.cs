@@ -63,8 +63,7 @@ public class VisitorController : MonoBehaviour
                 else
                 {
                     _currentVisitor = _visitors[visitorCount];
-                }
-                
+                }              
             }
 
             _currentVisitor.gameObject.SetActive(true);

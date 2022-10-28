@@ -9,7 +9,7 @@ public class GameTimer : MonoBehaviour
     public static Action<float> OnSecondChange;
 
     [SerializeField] private GameManager _gameManager;
-    [SerializeField] private RentShop _rentShop;
+    [SerializeField] private RentCalculator _rentShop;
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private Money _money;
     
