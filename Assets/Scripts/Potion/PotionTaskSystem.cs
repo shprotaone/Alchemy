@@ -39,6 +39,8 @@ public class PotionTaskSystem : MonoBehaviour
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
         _potionSizer = sizerSelector.SizerSelector(levelNumber);
 
+        _potionCyclopedia.InitPotionCyclopedia();
+
         _rewardCalculator = new RewardCalculator();
         _currentPotion = new Potion();
     }        
@@ -66,11 +68,8 @@ public class PotionTaskSystem : MonoBehaviour
     /// <param name="task"></param>
     private void FillViewPotion(PotionTask task)
     {
-        if (_currentPotion.PotionName == _contrabandPotionSystem.ContrabandPotion.PotionName)
-        {
-            _currentPotion.SetContraband(true);
-        }
-        else _currentPotion.SetContraband(false);
+
+        CheckContrabandPotion();
 
         if (_imageTask)
         {
@@ -90,11 +89,23 @@ public class PotionTaskSystem : MonoBehaviour
         }
     }
 
+    public void CheckContrabandPotion()
+    {
+        if(_contrabandPotionSystem.ContrabandPotion != null)
+        {
+            if (_currentPotion.PotionName == _contrabandPotionSystem.ContrabandPotion.PotionName)
+            {
+                _currentPotion.SetContraband(true);
+            }
+            else _currentPotion.SetContraband(false);
+        }
+    }
+
     public void TaskComplete(int reward, float rewardRep)
     {
         _moneySystem.Increase(reward);
         
-        _potionCyclopedia.AddNewPotion(_currentPotion);
+        //_potionCyclopedia.AddNewPotion(_currentPotion);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
 
         _visitorController.DisableVisitor();

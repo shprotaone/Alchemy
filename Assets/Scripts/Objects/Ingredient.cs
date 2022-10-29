@@ -11,7 +11,7 @@ public class Ingredient : MonoBehaviour,IAction
     [SerializeField] private Color _color;
     [SerializeField] private AudioClip _backSound;
 
-    private GameObject _effectPrefab;
+    //private GameObject _effectPrefab;
  
     private Slot _slot;
     private IngredientData _ingredientData;
@@ -23,7 +23,7 @@ public class Ingredient : MonoBehaviour,IAction
 
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor => _color;
-    public GameObject EffectPrefab => _effectPrefab;
+    //public GameObject EffectPrefab => _effectPrefab;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class Ingredient : MonoBehaviour,IAction
     public void Movement()
     {
         _myTween = transform.DOMove(_slot.transform.position, moveSpeed, false)
-                            .OnComplete(IngredientInClaudron);    
+                            .OnComplete(IngredientInClaudron).SetEase(Ease.Unset);    
         //_audioSource.PlayOneShot(_backSound);
     }
 
@@ -54,10 +54,10 @@ public class Ingredient : MonoBehaviour,IAction
     {
         _ingredientData = ingredient;
 
-        if(ingredient.effect != null)
-        {
-            _effectPrefab = ingredient.effect;      //почему эффекты тут? 
-        }
+        //if(ingredient.effect != null)
+        //{
+        //    _effectPrefab = ingredient.effect;      //почему эффекты тут? 
+        //}
 
         DrawIngredient();
     }
@@ -80,7 +80,7 @@ public class Ingredient : MonoBehaviour,IAction
             _collider.enabled = true;
             _slot.IncreaseAmount();
 
-            Destroy(this.gameObject,0.05f);   //закешировать!
+            Destroy(this.gameObject);   //закешировать!
         }
     }
 

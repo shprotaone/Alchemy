@@ -27,15 +27,15 @@ RectTransform:
   m_GameObject: {fileID: 7789927883510401807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999642, y: 0.9999642, z: 0.9999642}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7789927884890556713}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138, y: -520.99994}
-  m_SizeDelta: {x: 91.78, y: 50}
+  m_AnchoredPosition: {x: -140, y: -500}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7789927883510401802
 CanvasRenderer:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7789927884890556712
@@ -353,7 +353,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -364,7 +364,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.69, y: 6}
+  m_Size: {x: 4.6, y: 4.6}
   m_EdgeRadius: 0
 --- !u!50 &7789927884961499836
 Rigidbody2D:
@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 280460991966900782, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280460992425480227, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}
@@ -571,7 +571,7 @@ PrefabInstance:
     - target: {fileID: 280460992425480227, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1990493517683984607, guid: d745a99c28bb4454e934250a376edea7,
         type: 3}

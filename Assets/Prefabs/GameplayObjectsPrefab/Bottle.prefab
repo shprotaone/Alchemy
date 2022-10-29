@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxWobble: 0.02
   _wobbleSpeed: 1
-  _recovery: 1
+  _recovery: 3
 --- !u!1 &5975492717874033009
 GameObject:
   m_ObjectHideFlags: 0

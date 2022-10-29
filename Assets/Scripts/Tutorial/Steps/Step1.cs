@@ -16,7 +16,7 @@ public class Step1 : Step
     public override void StepAction()
     {
         _dialogView.MovementWindow(_dialogPos);
-        _uiController.SetInterractButtons(false);
+        _uiController.SetInterractAllButtons(false);
 
         _panel.SetActive(true);        
     }

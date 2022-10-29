@@ -25,17 +25,28 @@ public class Inventory : MonoBehaviour
     public Dictionary<IngredientData, int> InventoryAmount => _inventory;
     public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;
 
-    /// <summary>
-    /// Заполнение инвентаря
-    /// </summary>
-    public void InitInventory()
-    {     
+    private void Start()
+    {
         _inventory = new Dictionary<IngredientData, int>();
 
         _slots = new List<Slot>();
 
         InitSlots(_commonShelf);
         InitSlots(_rareShelf);
+    }
+
+
+    /// <summary>
+    /// Заполнение инвентаря
+    /// </summary>
+    public void InitInventory()
+    {
+        //_inventory = new Dictionary<IngredientData, int>();
+
+        //_slots = new List<Slot>();
+
+        //InitSlots(_commonShelf);
+        //InitSlots(_rareShelf);
     }
 
     public void FillFullInventory(int amount)

@@ -109,6 +109,7 @@ public class Cook : MonoBehaviour
     public void CleanClaudron()
     {
         _crunchSprite.enabled = false;
+        _canFillBottle = false;
     }
 
     private float CalcCookTime()

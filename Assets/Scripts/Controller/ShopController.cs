@@ -8,6 +8,8 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Transform _plate;
 
+    private bool _isWorked;
+
     public Transform Plate => _plate;
     private void OnEnable()
     {
@@ -37,9 +39,17 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
         StopAllCoroutines();
     }
 
+    public void SetDraggable(bool value)
+    {
+        _isWorked = value;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        StartCoroutine(DelayShopControl());
+        if (_isWorked)
+        {
+            StartCoroutine(DelayShopControl());
+        }           
     }
 
     private void OnDisable()

@@ -16,6 +16,9 @@ public class LocalTimer
 
     public int CurrentTime => _currentTime;
 
+    public bool Started => _started;
+    public bool Finished => _finished;
+
     public LocalTimer(int stockTime, bool started)
     {
         _stockTime = stockTime;

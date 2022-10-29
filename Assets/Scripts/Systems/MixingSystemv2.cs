@@ -17,6 +17,7 @@ public class MixingSystemv2 : MonoBehaviour
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
     [SerializeField] private TableManager _tableManager;
+    [SerializeField] private EffectHandler _effectHandler;
 
     private AudioSource _audioSource;
     private WaterColorv2 _waterColor;    
@@ -96,8 +97,7 @@ public class MixingSystemv2 : MonoBehaviour
     {        
         if (_cookSystem.CanFillBottle)
         {
-            Bottle bottle = currentObject.GetComponent<Bottle>();
-
+            Bottle bottle = currentObject.GetComponent<Bottle>();           
             SetPotionInBottle(bottle);                                          
         }
     }
@@ -116,16 +116,16 @@ public class MixingSystemv2 : MonoBehaviour
         }
     } 
 
-    private void CheckOnContraband()
+    private void CheckOnContraband(Potion potion)
     {
         if(_contrabandPotionSystem.ContrabandPotion != null)
         {
-            if (_contrabandPotionSystem.ContrabandPotion.PotionName == _potionDetector.CurrentPotion.PotionName)
+            if (_contrabandPotionSystem.ContrabandPotion.PotionName == potion.PotionName)
             {
-                _potionDetector.CurrentPotion.SetContraband(true);
+                potion.SetContraband(true);
             }
 
-            else _potionDetector.CurrentPotion.SetContraband(false);
+            else potion.SetContraband(false);
         }
     }
 
@@ -133,9 +133,11 @@ public class MixingSystemv2 : MonoBehaviour
     {
         if (!bottle.IsFull)
         {
-            CheckOnContraband();
+            Potion potion = _potionDetector.CurrentPotion;
 
-            bottle.FillPotionInBottle(_potionDetector.CurrentPotion,_waterColor.ResultColor);       
+            CheckOnContraband(potion);        
+
+            bottle.FillPotionInBottle(potion, _waterColor.ResultColor, _effectHandler.GetEffect(potion.ResourceType));       
             bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
 
             bottle.Movement();

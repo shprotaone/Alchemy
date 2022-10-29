@@ -6,14 +6,12 @@ public class DragController : MonoBehaviour
     public static DragController instance = null;
 
     [SerializeField] private Transform _draggableParent;
-    [SerializeField] private float _delta;
 
     private Camera _camera;
     private Vector2 _dragScreenPosition;
     private Vector3 _worldPosition;
     private Draggable _lastDragged;
 
-    private float _clickDeltaTime;
     private bool _isDragActive = false;
     private bool _interractive = true;
 
@@ -36,10 +34,9 @@ public class DragController : MonoBehaviour
     }
     private void Update()
     {
-        ResetDelay();
-
         if (_isDragActive)
         {
+
             if (Input.GetMouseButtonUp(0))
             {
                 Drop();
@@ -67,9 +64,7 @@ public class DragController : MonoBehaviour
             return;
         }
 
-        _worldPosition = _camera.ScreenToWorldPoint(_dragScreenPosition);
-
-        CheckOneTouch();
+        _worldPosition = _camera.ScreenToWorldPoint(_dragScreenPosition);        
 
         if (_isDragActive)
         {
@@ -89,8 +84,8 @@ public class DragController : MonoBehaviour
                 if (draggable != null && !_isDragActive)
                 {
                     _lastDragged = draggable;
-                   
-                    InitDrag();
+                        
+                    InitDrag();               
 
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
@@ -107,17 +102,8 @@ public class DragController : MonoBehaviour
 
     public void InitDrag()
     {
-        if (_clickDeltaTime > _delta)
-        {
-            UpdateDragStatus(true);
-            _lastDragged.DraggableAction();
-        }
-    }
-
-    private void CheckOneTouch()
-    {
-        _clickDeltaTime += Time.deltaTime;
-
+        UpdateDragStatus(true);
+        _lastDragged.StartDragAction();
     }
 
     private void Drag()
@@ -128,11 +114,10 @@ public class DragController : MonoBehaviour
 
     private void Drop()
     {
-        _clickDeltaTime = 0;
         UpdateDragStatus(false);
 
-        if(_lastDragged != null)
-        StartCoroutine(DropAction());
+        StartCoroutine(_lastDragged.DropAction());
+        Debug.Log(_lastDragged.name);
     }
 
     private void UpdateDragStatus(bool isDragging)
@@ -153,19 +138,4 @@ public class DragController : MonoBehaviour
         _interractive = flag;
     }
 
-    private IEnumerator DropAction()
-    {
-        yield return new WaitForSeconds(0.1f);
-        _lastDragged.DropMovementAction();
-      
-        yield break;
-    }
-
-    private void ResetDelay()
-    {
-        if(Input.GetMouseButtonUp(0) || Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            _clickDeltaTime = 0;
-        }
-    }
 }

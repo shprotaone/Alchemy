@@ -8,10 +8,12 @@ public class BottleStorage : MonoBehaviour,IAction
     [SerializeField] private Transform _parentBottle;
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private TMP_Text _amountText;
+    [SerializeField] private FloatTimer _timer;
 
     [SerializeField] private GameObject _bottlePrefab;
     [SerializeField] private Table _table;
 
+    [SerializeField] private float _delayDrag;
     private int _amount;
 
     private void OnEnable()
@@ -22,14 +24,14 @@ public class BottleStorage : MonoBehaviour,IAction
 
     private void StartDrag()
     {
-        if (_amount > 0)
-        {
+        if (_amount > 0 && !_timer.TimerIsRunning)
+        {          
             DecreaseAmount();
             GameObject bottleGO = Instantiate(_bottlePrefab,this.transform);
             Bottle bottle = bottleGO.GetComponent<Bottle>();
 
             bottle.InitBottle(this);
-            //bottle.SetTable();            
+            _timer.InitTimer(_delayDrag);
         }
     }
 

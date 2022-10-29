@@ -20,6 +20,8 @@ public class ContrabandPotionSystem : MonoBehaviour
         _contrabandPotion.FillPotion(SetPotion());
         _contrabandPotion.SetContraband(true);
 
+        _counterCompleteText.gameObject.SetActive(true);
+
         _isActive = true;
         print("Контрабанда " + _contrabandPotion.PotionName);
     }
@@ -40,6 +42,6 @@ public class ContrabandPotionSystem : MonoBehaviour
 
     private void RefreshCounterText()
     {
-        _counterCompleteText.text = "Вы отдали: " + _completeCounter;
+        _counterCompleteText.text += " " + _completeCounter;
     }
 }

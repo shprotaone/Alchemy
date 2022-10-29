@@ -20,22 +20,20 @@ public class Draggable : MonoBehaviour
         _collider = GetComponent<Collider2D>();        
     }
 
-    public void DraggableAction()
+    public void StartDragAction()
     {
-        _action.Action();        
+        _action.Action();
     }
 
-    public void DropMovementAction()
+    public IEnumerator DropAction()
     {
-        _action.Movement();
-       //StartCoroutine(DelayDisableCollider());
-    }
-
-    private IEnumerator DelayDisableCollider()      //мешает при перетаскивании 
-    {
-        yield return new WaitForFixedUpdate();
-        _collider.enabled = false;
-
-        yield return null;
+        yield return new WaitForEndOfFrame();       //Как можно еще задержать исполнение? 
+        
+        if(_action is Ingredient)
+        {
+            _action.Movement();
+            _collider.enabled = false;
+        }
+        yield break;
     }
 }

@@ -15,6 +15,8 @@ public class Bottle : MonoBehaviour,IAction
     [SerializeField] private TMP_Text _timerText;
 
     private Transform _destination;
+    private Transform _effectBaseTransform;
+
     private GameObject _effect;
     private Potion _potionInBottle;
     private Color _potionColor;
@@ -33,7 +35,6 @@ public class Bottle : MonoBehaviour,IAction
     private void Start()
     {        
         _tableManager = GetComponentInParent<TableManager>();
-        GetTable();
     }
 
     public void InitBottle(BottleStorage storage)
@@ -46,41 +47,21 @@ public class Bottle : MonoBehaviour,IAction
     {
         GetTable();
 
-        _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(EndMove);
-    }
-
-    private void EndMove()
-    {
-        if (IsFull)
-        {
-            //SortInFullTable();
-        }
-        else
-        {
-            Return();
-        }
-        _collider.enabled = true;
+        _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(Return);
     }
 
     /// <summary>
     /// Заполняет объект Potion
     /// </summary>
     /// <param name="potion"></param>
-    public void FillPotionInBottle(Potion potion,Color color)
+    public void FillPotionInBottle(Potion potion,Color color, GameObject effect)
     {
         _potionInBottle = potion;
-        _isFull = true;       
-
-        if (potion.Rarity == ResourceRarity.rare)
-        {
-            _effect = Instantiate(potion.Effect,_effectTransform.position, Quaternion.identity);
-            _effect.GetComponentInChildren<EffectChangeColor>().ChangeParticleColor(_potionColor);
-            _effect.transform.SetParent(transform);
-            _effect.transform.localScale = new Vector3(1, 1, 0);
-        }
+        _isFull = true;
 
         FillWaterInBottle(color);
-        CheckContraband(potion);
+        AddEffect(effect);     
+        CheckContraband();
 
         print("From Bottle" + _potionInBottle.PotionName);
     }
@@ -96,9 +77,26 @@ public class Bottle : MonoBehaviour,IAction
         _wobble.ChangeColor(_potionColor);
     }
 
-    private void CheckContraband(Potion potion)
+    private void AddEffect(GameObject effect)
     {
-        if (_potionInBottle.Contraband)      //не переносятся данные
+        if (_potionInBottle.Rarity == ResourceRarity.rare)
+        {
+            _effectBaseTransform = effect.transform.parent;
+
+            _effect = effect;
+            _effect.SetActive(true);
+
+            _effect.transform.position = transform.position;
+            _effect.transform.SetParent(transform);
+            _effect.transform.localScale = new Vector3(1, 1, 0);
+
+            _effect.GetComponentInChildren<EffectChangeColor>().ChangeParticleColor(_potionColor);
+        }
+    }
+
+    private void CheckContraband()
+    {
+        if (_potionInBottle.Contraband)      
         {
             _bottle.color = _contrabandBottleColor;
             _timerText.gameObject.SetActive(true);
@@ -111,7 +109,7 @@ public class Bottle : MonoBehaviour,IAction
         }
     }
 
-    private void GetTable()
+    public void GetTable()
     {        
         if (_isFull)
             _destination = _tableManager.FullPotionTable.transform;
@@ -120,7 +118,7 @@ public class Bottle : MonoBehaviour,IAction
     }
 
     private void SortInFullTable()
-    {       
+    {
         _tableManager.FullPotionTable.SortBottlePosition();
         transform.SetParent(_destination);              
     }
@@ -134,21 +132,30 @@ public class Bottle : MonoBehaviour,IAction
 
         if (!_isFull)
         {
+            _tween.Pause();
             _tween.Kill(true);
-            Destroy(gameObject);
-            _bottleStorage.IncreaseAmount();
+            Destroy(gameObject);           
         }
     }
 
     public void ResetBottle()
     {
-        Destroy(_effect);
+        ReturnEffect();
+
         _fullBottle.enabled = false;
         _isFull = false;
         _collider.enabled = false;
 
-        GetTable();
         _tween.Restart();
+    }
+
+    private void ReturnEffect()
+    {
+        if(gameObject != null)
+        {
+            _effect.transform.SetParent(_effectBaseTransform);
+            _effect.SetActive(false);
+        }
     }
 
     public void Action()
@@ -161,7 +168,6 @@ public class Bottle : MonoBehaviour,IAction
         StartCoroutine(_timer.Timer());
 
         _timer.OnTimerUpdate += UpdateTimer;
-
     } 
 
     private void UpdateTimer()
@@ -178,6 +184,9 @@ public class Bottle : MonoBehaviour,IAction
 
     private void OnDisable()
     {
+        _bottleStorage.IncreaseAmount();
+        ReturnEffect();
+
         if (_timer != null)
         {
             StopCoroutine(_timer.Timer());

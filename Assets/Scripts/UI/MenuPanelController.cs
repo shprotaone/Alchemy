@@ -23,14 +23,12 @@ public class MenuPanelController : MonoBehaviour
     private void Open()
     {
         _panel.gameObject.SetActive(true);
-        _panel.DOAnchorPos(_openPosition.anchoredPosition, _openDuration, false)
-                 .OnComplete(()=>_ingameTimeController.PauseGame());
+        _panel.DOAnchorPos(_openPosition.anchoredPosition, _openDuration, false);
     }
 
     private void Close()
     {
         _ingameTimeController.ResumeGame();
-        _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false)
-                 .OnComplete(() => _panel.gameObject.SetActive(false));
+        _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false);
     }
 }

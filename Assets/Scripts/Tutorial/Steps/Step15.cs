@@ -8,7 +8,7 @@ public class Step15 : Step
     public override void StepAction()
     {
         _dialogView.EnableView(false);
-        _UIController.SetInterractButtons(true);
+        _UIController.SetInterractAllButtons(true);
         _tutorialManager.gameObject.SetActive(false);
     }
 }

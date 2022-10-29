@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public static Action<bool> OnShopSlotDisabled;
+    public static event Action<bool> OnShopSlotDisabled;
 
     [SerializeField] private Button[] _UIButtons;
 
 
-    public void SetInterractButtons(bool flag)
+    public void SetInterractAllButtons(bool flag)
     {
         foreach (var item in _UIButtons)
         {

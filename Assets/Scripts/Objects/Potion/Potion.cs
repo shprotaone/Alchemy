@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Potion
 {
-    private GameObject _effect;
+    private ResourceType _resourceType;
     private ResourceRarity _rarityType;   
 
     private List<string> _ingredients;
@@ -18,10 +18,10 @@ public class Potion
     public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
     public List<string> Ingredients => _ingredients;
-    public GameObject Effect => _effect;
+    public ResourceType ResourceType => _resourceType;
     public bool Contraband => _contraband;
 
-    public void FillPotion(PotionData potionData)   ///заполнение из TaskSystem // добавить конструктор? 
+    public void FillPotion(PotionData potionData)
     {
         _ingredients = new List<string>();
 
@@ -55,7 +55,7 @@ public class Potion
             {
                 if (item.IngredientData.resourceRarity == ResourceRarity.rare)
                 {
-                    _effect = item.EffectPrefab;
+                    _resourceType = item.IngredientData.resourceType;
                     return;
                 }
             }

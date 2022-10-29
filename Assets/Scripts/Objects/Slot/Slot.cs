@@ -6,9 +6,12 @@ public class Slot : MonoBehaviour,IAction
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private SpriteRenderer _slotImage;
     [SerializeField] private TMP_Text _amountText;
+    [SerializeField] private FloatTimer _timer;
+    [SerializeField] private float _delay;
+    [SerializeField] private bool _isDraggable;
 
     private Inventory _inventory;
-    private IngredientData _ingredientData;   
+    private IngredientData _ingredientData;
          
     private GameObject _draggableIngredientPrefab;
     private float _amountInSlot;
@@ -19,7 +22,7 @@ public class Slot : MonoBehaviour,IAction
 
     private void OnEnable()
     {
-        _inventory = GetComponentInParent<Inventory>();        
+        _inventory = GetComponentInParent<Inventory>();
     }
 
     public void FillSlot(IngredientData ingredientData,int value)
@@ -32,13 +35,14 @@ public class Slot : MonoBehaviour,IAction
 
     public void StartDrag()
     {
-        if (_inventory.DragFromInventory(_ingredientData))
+        if (_inventory.DragFromInventory(_ingredientData) && !_timer.TimerIsRunning && _isDraggable)
         {                    
             GameObject ingredientGO = Instantiate(_draggableIngredientPrefab, this.transform);
             Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
-            ingredient.SetIngredientData(_ingredientData);
+            _timer.InitTimer(_delay);
 
+            ingredient.SetIngredientData(_ingredientData);
             ingredient.SetSlot(this);
 
             DecreaseAmount();
@@ -64,6 +68,11 @@ public class Slot : MonoBehaviour,IAction
         if (_amountInSlot > 0) _boxCollider.enabled = true;
         _amountText.text = _amountInSlot.ToString();
         
+    }
+
+    public void SetDraggable(bool value)
+    {
+        _isDraggable = value;
     }
 
     public void Action()

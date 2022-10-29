@@ -6,11 +6,10 @@ using UnityEngine.UI;
 
 public class PotionCyclopedia : MonoBehaviour
 {
-    public static Action<Potion> OnPotionCyclopediaAdded;
-
     [SerializeField] private JSONReader _jsonReader;
     [SerializeField] private StringToSprite _imageConverter;
     [SerializeField] private Transform _cyclopediaTransform;
+    [SerializeField] private PotionTaskSystem _potionTaskSystem;
     [SerializeField] private List<CyclopediaSlot> _cyclopediaSlots;
     [SerializeField] private GameObject _cyclopediaSlotPrefab;
 
@@ -20,15 +19,19 @@ public class PotionCyclopedia : MonoBehaviour
 
     private List<string> _ingredients;
 
-    private void Start()
+    public void InitPotionCyclopedia()
     {
-        _potionSizer = _jsonReader.PotionSizer;
+        _potionSizer = _potionTaskSystem.PotionSizer;
         _guildChecker = new GuildChecker();
         _rarityChecker = new RarityChecker();
 
-        _cyclopediaSlots = new List<CyclopediaSlot>();
+        FillCyclopediaInStart();
     }
 
+    /// <summary>
+    /// для добавления новых Зелий
+    /// </summary>
+    /// <param name="potion"></param>
     public void AddNewPotion(Potion potion)
     {
         GameObject slotGO = Instantiate(_cyclopediaSlotPrefab, _cyclopediaTransform);
@@ -41,22 +44,18 @@ public class PotionCyclopedia : MonoBehaviour
     }
 
 
-    //private void FillCyclopedia()
-    //{
-    //    for (int i = 0; i < _potionSizer.Potions.Length; i++)
-    //    {
-    //        _ingredients = _imageConverter.GetNameIngredients(_potionSizer.Potions[i].firstIngredient,
-    //                                                          _potionSizer.Potions[i].secondIngredient,
-    //                                                          _potionSizer.Potions[i].threeIngredient,
-    //                                                          _potionSizer.Potions[i].fourIngredient,
-    //                                                          _potionSizer.Potions[i].fiveIngredient);
+    private void FillCyclopediaInStart()
+    {
+        for (int i = 0; i < _potionSizer.Potions.Length; i++)
+        {
+            _ingredients = _potionSizer.Potions[i].ingredients;
 
-    //        _cyclopediaSlots[i].FillSlot(_potionSizer.Potions[i].name,
-    //                                _rarityChecker.RarityCheck(_potionSizer.Potions[i].rarity),
-    //                                _guildChecker.GuildCheck(_potionSizer.Potions[i].guild),
-    //                                GetImages(_ingredients));
-    //    }
-    //}
+            _cyclopediaSlots[i].gameObject.SetActive(true);
+
+            _cyclopediaSlots[i].FillSlot(_potionSizer.Potions[i],
+                                    GetImages(_ingredients));
+        }
+    }
 
     private Sprite[] GetImages(List<string> value)
     {
@@ -69,15 +68,4 @@ public class PotionCyclopedia : MonoBehaviour
 
         return result;
     }
-
-    //public void FindPotion(string name)
-    //{
-    //    for (int i = 0; i < _cyclopediaSlots.Length; i++)
-    //    {
-    //        if (_cyclopediaSlots[i].PotionName == name)
-    //        {
-    //            _cyclopediaSlots[i].OpenSlot();
-    //        }
-    //    }
-    //}
 }

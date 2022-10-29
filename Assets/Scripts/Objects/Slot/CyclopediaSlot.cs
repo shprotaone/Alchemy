@@ -29,4 +29,17 @@ public class CyclopediaSlot : MonoBehaviour
             }
         }
     }
+
+    public void FillSlot(PotionData potion, Sprite[] ingredientSprite)
+    {
+        _potionName.text = potion.name;
+        _potionRarity.text = potion.rarity;
+        _potionGuild.text = potion.guild;
+
+        for (int i = 0; i < ingredientSprite.Length; i++)
+        {
+            _ingredientImages[i].enabled = true;
+            _ingredientImages[i].sprite = ingredientSprite[i];
+        }
+    }
 }

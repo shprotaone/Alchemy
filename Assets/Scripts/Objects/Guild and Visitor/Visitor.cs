@@ -43,7 +43,8 @@ public class Visitor : MonoBehaviour
                     _firstTask = false;
                 }
 
-                bottle.ResetBottle();      
+                bottle.ResetBottle();
+                bottle.Movement();
             }
         }
     }

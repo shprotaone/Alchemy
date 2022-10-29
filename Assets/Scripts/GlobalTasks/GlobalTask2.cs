@@ -68,7 +68,6 @@ public class GlobalTask2 : GlobalTask
                 else
                 {
                     _inventoryComplete = false;
-                    print("inventory fail");
                 }
             }
         }
