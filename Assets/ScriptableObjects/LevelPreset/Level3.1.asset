@@ -19,7 +19,7 @@ MonoBehaviour:
   startMoney: 2000
   minRangeMoney: -50000
   MoneyGoal: 0
-  levelTimeInSeconds: 30
+  levelTimeInSeconds: 180
   rent: 50
   secondsForRent: 20
   levelTaskText:

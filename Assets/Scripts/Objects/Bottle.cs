@@ -151,7 +151,7 @@ public class Bottle : MonoBehaviour,IAction
 
     private void ReturnEffect()
     {
-        if(gameObject != null)
+        if(gameObject != null &&  _effect != null)
         {
             _effect.transform.SetParent(_effectBaseTransform);
             _effect.SetActive(false);

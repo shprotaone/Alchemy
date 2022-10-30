@@ -29658,9 +29658,19 @@ PrefabInstance:
       propertyPath: _delay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2419096416047601377, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2419096416418353675, guid: 46dba033974b75242a05a3fec1f5722c,
         type: 3}
       propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419096416418353675, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2419096416431749715, guid: 46dba033974b75242a05a3fec1f5722c,
@@ -29668,9 +29678,19 @@ PrefabInstance:
       propertyPath: _delay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2419096416431749715, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2419096416798732883, guid: 46dba033974b75242a05a3fec1f5722c,
         type: 3}
       propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419096416798732883, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2419096416825273275, guid: 46dba033974b75242a05a3fec1f5722c,
@@ -29678,9 +29698,19 @@ PrefabInstance:
       propertyPath: _delay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2419096416825273275, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2419096416903636241, guid: 46dba033974b75242a05a3fec1f5722c,
         type: 3}
       propertyPath: _delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419096416903636241, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2419096417253986681, guid: 46dba033974b75242a05a3fec1f5722c,
@@ -29693,6 +29723,11 @@ PrefabInstance:
       propertyPath: _timer
       value: 
       objectReference: {fileID: 4589102337589406636}
+    - target: {fileID: 2419096417253986681, guid: 46dba033974b75242a05a3fec1f5722c,
+        type: 3}
+      propertyPath: _isDraggable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2573813501021927193, guid: 46dba033974b75242a05a3fec1f5722c,
         type: 3}
       propertyPath: m_Camera
@@ -35042,7 +35077,7 @@ PrefabInstance:
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: _directLoad
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
@@ -35083,8 +35118,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _levelPresetDirect
       value: 
-      objectReference: {fileID: 11400000, guid: 17cecaefbd1482c4ea80be6de01afcba,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: _visitorController

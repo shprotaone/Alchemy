@@ -49,7 +49,7 @@ public class GlobalTask2a : GlobalTask
 
     private void SetGoalText()
     {
-        string text = "\nКонтрабандное зелье - " + _contrabandPotionSystem.ContrabandPotion.PotionName;
+        string text = "\n\nКОНТРАБАНДНОЕ ЗЕЛЬЕ - " + _contrabandPotionSystem.ContrabandPotion.PotionName;
 
         _goalText += text;
     }

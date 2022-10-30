@@ -30,10 +30,14 @@ public class Draggable : MonoBehaviour
         yield return new WaitForEndOfFrame();       //Как можно еще задержать исполнение? 
         
         if(_action is Ingredient)
-        {
-            _action.Movement();
-            _collider.enabled = false;
+        {           
+            _action.Movement();          
         }
+
+        yield return new WaitForSeconds(0.1f);
+
+        _collider.enabled = false;
+
         yield break;
     }
 }

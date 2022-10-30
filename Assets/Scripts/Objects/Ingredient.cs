@@ -10,8 +10,6 @@ public class Ingredient : MonoBehaviour,IAction
     [SerializeField] private SpriteRenderer _dragableImage;
     [SerializeField] private Color _color;
     [SerializeField] private AudioClip _backSound;
-
-    //private GameObject _effectPrefab;
  
     private Slot _slot;
     private IngredientData _ingredientData;
@@ -23,12 +21,11 @@ public class Ingredient : MonoBehaviour,IAction
 
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor => _color;
-    //public GameObject EffectPrefab => _effectPrefab;
 
     private void Start()
     {
         _dragableImage = GetComponent<SpriteRenderer>();
-
+        _collider.enabled = true;
         //_audioSource = GetComponent<AudioSource>();
         //_audioSource.PlayOneShot(_ingredientData.dragSound);
     }
@@ -53,12 +50,6 @@ public class Ingredient : MonoBehaviour,IAction
     public void SetIngredientData(IngredientData ingredient)
     {
         _ingredientData = ingredient;
-
-        //if(ingredient.effect != null)
-        //{
-        //    _effectPrefab = ingredient.effect;      //почему эффекты тут? 
-        //}
-
         DrawIngredient();
     }
 
