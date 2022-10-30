@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 3
+  _guild: Robbers
   _visitorController: {fileID: 0}
   _currentTask: {fileID: 8725476259586771908}
   _timerText: {fileID: 8859560839610094856}

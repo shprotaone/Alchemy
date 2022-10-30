@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3baab333-4bd7-451a-b4df-7308cbac1c02" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationControllerDebugger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttributeDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/Guild.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttribute.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/Visitor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationControllerDebugger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttributeDrawer.cs" />
+    </changedPaths>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+</project>
