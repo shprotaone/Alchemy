@@ -107,6 +107,7 @@ public class PotionTaskSystem : MonoBehaviour
         
         //_potionCyclopedia.AddNewPotion(_currentPotion);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
+        GuildReputationController.Instance.ChangeReputationOnSuccefullTaskExecution(_currentPotion.GuildsType);
 
         _visitorController.DisableVisitor();
         GetGemReward(_currentPotion);

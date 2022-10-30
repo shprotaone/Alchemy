@@ -8,19 +8,31 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttribute.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationControllerDebugger.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttributeDrawer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/JsonData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SavedData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/Guild.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttribute.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/Visitor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationControllerDebugger.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildKeyAttributeDrawer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/Visitor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/Guild.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guilds/GuildReputationControllerDebugger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controller/DataMainManager/DataMain.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Controller/SaveLoadController/SaveLoadController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/XMLData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SavedData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/JsonData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/PlayerPrefsData.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadRepository.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalTasks/GlobalTask2a.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Potion/PotionTaskSystem.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildReputationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadController.cs" />
     </changedPaths>
   </component>
   <component name="TaskManager">

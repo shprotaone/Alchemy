@@ -9,7 +9,6 @@ public class Visitor : MonoBehaviour
     private const float contrabandTime = 10;
 
     [SerializeField] private GuildsType _currentGuild;
-    [SerializeField, GuildKeyAttribute] private string _guild = "Warriors";
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private PotionTask _currentTask;
     [SerializeField] private TMP_Text _timerText;
