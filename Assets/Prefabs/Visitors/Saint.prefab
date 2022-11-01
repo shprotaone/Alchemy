@@ -337,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGuild: 0
+  _guild: Monks
   _visitorController: {fileID: 0}
   _currentTask: {fileID: 8070177760256509737}
   _timerText: {fileID: 7789927883510401801}
