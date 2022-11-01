@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelInitializator : MonoBehaviour
 {
     public static Action<string[]> OnStartWindowInit;   //инициализирует стартовое диалоговое окно
     public static Action<Sprite> OnBackGroundInit;
+
+    public static event Action OnInitComplete;
 
     public const int stockAmount = 5;
 
@@ -19,8 +22,9 @@ public class LevelInitializator : MonoBehaviour
     
     [Header("Менеджеры")]
     [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private GlobalTask[] _levelTasks;
+    [SerializeField] private List<GlobalTask> _levelTasks;
     [SerializeField] private PotionTaskSystem _taskSystem;
+    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
 
     [Header("Механики")]
     [SerializeField] private RentCalculator _rentShop;
@@ -74,44 +78,41 @@ public class LevelInitializator : MonoBehaviour
 
     private void LevelInitSelector()
     {
+        _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+
+        if(_currentGlobalTask != null)
+        {
+            _currentGlobalTask.Init();
+            _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
+        }
+
+        _taskSystem.Init();
+        _taskSystem.SetPotionSizer(_levelPreset.levelNumber);
+            
         switch (_levelPreset.levelNumber)
         {
             case LevelNumber.EndlessLevel:
 
                 OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
-
-                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
-                _tutorialManager.gameObject.SetActive(false);
-
-                _taskSystem.InitPotionSizer(LevelNumber.EndlessLevel,0);
-                _taskSystem.SetTutorialMode(false);
                 
                 _inventory.FillFullInventory(stockAmount);
                 _gameTimer.InitTimer(0, false);
-
-                _brightObjectSystem.BrightObjects(false);
 
                 break;
 
             case LevelNumber.Level1:
 
-                DragController.instance.ObjectsInterractable(false);
-
-                _currentGlobalTask.Init();
-                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, 0);
-
-                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+                DragController.instance.ObjectsInterractable(false);                
 
                 _tutorialManager.Init();
                 _tutorialManager.NextStep();
 
-                _taskSystem.SetTutorialMode(true);
-                _taskSystem.InitPotionSizer(LevelNumber.Level1,0);              
+                _taskSystem.SetTutorialMode(true);         
                 
                 _shopSystem.HideForTutorial(true);
                 _gameTimer.InitTimer(0, false);
 
-                _inventory.FillFullInventory(0);
+                _inventory.FillCommonIngredients(_levelTasks[0].CommonResourceCount);
                 _inventory.HideRareShelf();
                
                 break;
@@ -121,22 +122,10 @@ public class LevelInitializator : MonoBehaviour
                 OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
                 OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
-                _currentGlobalTask.Init();
-                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
-
-                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
-                _tutorialManager.gameObject.SetActive(false);
-
-                _taskSystem.InitPotionSizer(LevelNumber.Level2,0);
-                _taskSystem.SetTutorialMode(false);
-
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
                 _rentShop.InitRentSystem(_levelPreset.rent,_levelPreset.secondsForRent);
-                _inventory.FillCommonIngredients(5);
-                
-                
-                _brightObjectSystem.BrightObjects(false);
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
 
                 break;
 
@@ -145,21 +134,12 @@ public class LevelInitializator : MonoBehaviour
                 OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
                 OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
-                _inventory.FillCommonIngredients(3);
-                _inventory.AddIngredientWithIndex(UnityEngine.Random.Range(4, 7), 1);   //условие случайный редкий ресурс
-
-                _currentGlobalTask.Init();
-                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
-
-                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level2,0);
-                _taskSystem.SetTutorialMode(false);
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
+                _inventory.AddIngredientWithIndex(UnityEngine.Random.Range(4, 7), 1);   //условие случайный редкий ресурс
 
-                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
-
-                _brightObjectSystem.BrightObjects(false);
                 break;
 
             case LevelNumber.Level3a:
@@ -167,23 +147,54 @@ public class LevelInitializator : MonoBehaviour
                 OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
                 OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
 
-                _inventory.FillCommonIngredients(10);
-
-                _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level3a,2);
-                _taskSystem.SetTutorialMode(false);
-                
+                _taskSystem.SetPotionSizer(LevelNumber.Level3a, 2);
+
+                if (_currentGlobalTask is GlobalTask3a task)
+                    _contrabandPotionSystem.InitContrabandPotion(task.TimeToContrabandPotion);
+
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
-                _brightObjectSystem.BrightObjects(false);
+                break;
 
-                _currentGlobalTask.Init();
-                _currentGlobalTask.SetTaskValue(_levelPreset.MoneyGoal, _levelPreset.minRangeMoney);
+            case LevelNumber.Level4:
+
+                OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);     
+
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
+                _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
+
+                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
+
+                break;
+
+            case LevelNumber.Level5:
+
+                OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
+
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
+                _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
+
+                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
+
+                break;
+
+            case LevelNumber.Level6:
+                OnBackGroundInit?.Invoke(_levelPreset.backgroundSprite);
+                OnStartWindowInit?.Invoke(_levelPreset.levelTaskText);
+
+                _inventory.FillCommonIngredients(_currentGlobalTask.CommonResourceCount);
+                _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
+                _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
                 break;
         }
+
+        OnInitComplete?.Invoke();
     }
 
     private void LevelTaskInit()
@@ -195,23 +206,15 @@ public class LevelInitializator : MonoBehaviour
 
     private void GetGlobalTask()
     {
-        switch (_levelPreset.levelNumber)
+
+        foreach (var item in _levelTasks)
         {
-            case LevelNumber.Level1:
-                _currentGlobalTask = _levelTasks[0];
-                break;
-            case LevelNumber.Level2:
-                _currentGlobalTask = _levelTasks[1];
-                break;
-            case LevelNumber.Level3:
-                _currentGlobalTask = _levelTasks[2];
-                break;
-            case LevelNumber.Level3a:
-                _currentGlobalTask = _levelTasks[3];
-                break;
-            default:
-                break;
+            if (item.LevelNumber == _levelPreset.levelNumber)
+                _currentGlobalTask = item;            
         }
+       
+        if(_currentGlobalTask != null)
+           _currentGlobalTask.gameObject.SetActive(true);
     }
 
     private void CheckShopController()

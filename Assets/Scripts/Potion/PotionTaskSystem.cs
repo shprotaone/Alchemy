@@ -19,6 +19,7 @@ public class PotionTaskSystem : MonoBehaviour
     
     private RewardCalculator _rewardCalculator;
     private float _rewardMultiply = 1f;
+    private float _penaltyMultiply = 1f;
     
     private Potion _currentPotion;
 
@@ -33,17 +34,30 @@ public class PotionTaskSystem : MonoBehaviour
     /// <summary>
     /// Инициализация текущего списка зелий
     /// </summary>
-    public void InitPotionSizer(LevelNumber levelNumber, int countForCustomSizer)
+    /// 
+    public void Init()
+    {        
+        _rewardCalculator = new RewardCalculator();
+        _currentPotion = new Potion();
+    }
+
+    public void SetPotionSizer(LevelNumber levelNumber)
     {
         _potionSizer = _jsonReader.PotionSizer;
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
-        _potionSizer = sizerSelector.SizerSelector(levelNumber,countForCustomSizer);
+        _potionSizer = sizerSelector.SizerSelector(levelNumber,0);
 
         _potionCyclopedia.InitPotionCyclopedia();
-
-        _rewardCalculator = new RewardCalculator();
-        _currentPotion = new Potion();
     }        
+
+    public void SetPotionSizer(LevelNumber levelNumber, int countForCustomSizer)
+    {
+        _potionSizer = _jsonReader.PotionSizer;
+        PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
+        _potionSizer = sizerSelector.SizerSelector(levelNumber, countForCustomSizer);
+
+        _potionCyclopedia.InitPotionCyclopedia();
+    }
 
     public void TakeTask(PotionTask task)
     {
@@ -114,7 +128,7 @@ public class PotionTaskSystem : MonoBehaviour
 
     public void TaskCanceled(float penaltyRep)
     {
-        _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
+        _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep * _penaltyMultiply);
         _visitorController.DisableVisitor();
     }
 
@@ -173,5 +187,10 @@ public class PotionTaskSystem : MonoBehaviour
     public void SetRewardMultiply(float multiply)
     {
         _rewardMultiply = multiply;
+    }
+
+    public void SetPenaltyMultiply(float multiply)
+    {
+        _penaltyMultiply = multiply;
     }
 }

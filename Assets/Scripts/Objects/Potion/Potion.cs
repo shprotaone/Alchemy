@@ -72,6 +72,7 @@ public class Potion
             _ => ObjectType.EFFECT_SPARKS
         };
     }
+
     public void SetGuild(string guild)
     {
         GuildChecker guildChecker = new GuildChecker();

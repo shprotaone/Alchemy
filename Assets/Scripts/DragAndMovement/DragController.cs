@@ -117,7 +117,7 @@ public class DragController : MonoBehaviour
         UpdateDragStatus(false);
 
         _lastDragged.DropAction();
-        Debug.Log(_lastDragged.name);
+        
     }
 
     private void UpdateDragStatus(bool isDragging)

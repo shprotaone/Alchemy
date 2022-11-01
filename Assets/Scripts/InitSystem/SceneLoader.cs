@@ -25,5 +25,7 @@ public class SceneLoader : MonoBehaviour
 
         if(_loader != null)
         _loader.SetLevelPreset(_levelPreset);
+
+        LoadLevel(1);
     }
 }

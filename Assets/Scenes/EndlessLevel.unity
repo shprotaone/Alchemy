@@ -5489,6 +5489,87 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4036210574203509002}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &537297739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537297740}
+  - component: {fileID: 537297741}
+  m_Layer: 0
+  m_Name: Level6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &537297740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537297739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718466753}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &537297741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537297739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82b886f944033c4a8741387cea74035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goalText: "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u043F\u043E\u0431\u0435\u0434\u044B:\n\u041D\u0430\u043A\u043E\u043F\u0438\u0442\u044C
+    20000\n\u041F\u0440\u043E\u0441\u0442\u044B\u0435 \u0440\u0435\u0441\u0443\u0441\u044B
+    \u043F\u043E 15 \u0435\u0434\u0438\u043D\u0438\u0446 \u043A\u0430\u0436\u0434\u043E\u0433\u043E
+    \u0432\u0438\u0434\u0430\n\u0420\u0435\u0434\u043A\u0438\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B
+    \u043F\u043E 2 \u0435\u0434\u0438\u043D\u0438\u0446\u044B \u043A\u0430\u0436\u0434\u043E\u0433\u043E
+    \u0432\u0438\u0434\u0430\n\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u043F\u0440\u043E\u0438\u0433\u0440\u044B\u0448\u0430:\n\u041A\u043E\u043D\u0447\u0438\u043B\u043E\u0441\u044C
+    \u0432\u0440\u0435\u043C\u044F \u0438\u043B\u0438 \u0434\u043E\u043B\u0433 \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u043B
+    \u043B\u0438\u043C\u0438\u0442 \n\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F:
+    \n*\u0410\u0440\u0435\u043D\u0434\u0430 200 \u043A\u0430\u0436\u0434\u044B\u0435
+    20\u0441\u0435\u043A\n*\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C
+    \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432 -10%\n*\u041E\u043F\u043B\u0430\u0442\u0430
+    \u0437\u0430\u043A\u0430\u0437\u0430 +5%\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
+    \u0434\u043E\u043B\u0433 - 3000\n*\u041A\u0430\u0436\u0434\u044B\u0435 20 \u0441\u0435\u043A\u0443\u043D\u0434
+    \u0441\u043D\u0438\u043C\u0430\u044E\u0442\u0441\u044F 5 \u0435\u0434 \u0440\u0435\u043F\u0443\u0442\u0430\u0446\u0438\u0438"
+  _levelNumber: 7
+  commonResourceCount: 15
+  rareResourceCount: 0
+  _taskText: {fileID: 1596963761}
+  _gameManager: {fileID: 565235517}
+  _costMultiple: 0.9
+  _rewardMultiply: 1.05
+  _inventoryCommonTaskValue: 15
+  _inventoryRareTaskValue: 2
+  _timeDecreaseReputation: 0
+  _reduceValue: 5
+  _ingredientWithChangeCost:
+  - {fileID: 11400000, guid: e9a69a41ccde80a48ac0f2c3b6c41d94, type: 2}
+  - {fileID: 11400000, guid: 88cabeea81e06e746bc284cad1fa2789, type: 2}
+  - {fileID: 11400000, guid: 31054d959c014df45bc70cc49691862d, type: 2}
+  - {fileID: 11400000, guid: 83ab78e4d2e6e9a438c20026bf3c7e0c, type: 2}
+  - {fileID: 11400000, guid: a519cf1b0bc47b6488b21716b0344920, type: 2}
+  - {fileID: 11400000, guid: b23c482f531a58846981bb9c34d5caec, type: 2}
+  - {fileID: 11400000, guid: 75c3e5b4c6a362d43a4697d6ee5c753c, type: 2}
+  - {fileID: 11400000, guid: 482157571c105c540bea4fb0ac38f90a, type: 2}
+  _taskSystem: {fileID: 409848437}
+  _reputationReducer: {fileID: 803716271}
+  _inventory: {fileID: 1765153437}
+  _money: {fileID: 1313500667}
 --- !u!4 &550090479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1449810437584786447, guid: 62a108881eda6654fa78ca4f3510eedd,
@@ -5581,7 +5662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &569508451
 Transform:
   m_ObjectHideFlags: 0
@@ -5612,6 +5693,9 @@ MonoBehaviour:
     \n*\u0410\u0440\u0435\u043D\u0434\u0430 - 50 \u0437\u043E\u043B\u043E\u0442\u0430
     \u043A\u0430\u0436\u0434\u044B\u0435 20 \u0441\u0435\u043A\u0443\u043D\u0434\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
     \u0434\u043E\u043B\u0433 - 200\n"
+  _levelNumber: 2
+  commonResourceCount: 5
+  rareResourceCount: 0
   _taskText: {fileID: 1596963761}
   _gameManager: {fileID: 565235517}
   _money: {fileID: 1313500667}
@@ -8834,7 +8918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &687564764
 Transform:
   m_ObjectHideFlags: 0
@@ -8862,6 +8946,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalText: "\u041D\u0430\u0431\u0435\u0440\u0438 2500 \u043C\u043E\u043D\u0435\u0442"
+  _levelNumber: 1
+  commonResourceCount: 0
+  rareResourceCount: 0
   _taskText: {fileID: 1596963761}
   _gameManager: {fileID: 565235517}
   _money: {fileID: 1313500667}
@@ -9182,6 +9269,9 @@ Transform:
   - {fileID: 569508451}
   - {fileID: 889498770}
   - {fileID: 1341762123}
+  - {fileID: 1451998168}
+  - {fileID: 1436112165}
+  - {fileID: 537297740}
   m_Father: {fileID: 766706942}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10308,6 +10398,51 @@ Transform:
   m_Father: {fileID: 1361464932}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &803716269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803716270}
+  - component: {fileID: 803716271}
+  m_Layer: 0
+  m_Name: ReputationReducer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803716270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803716269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1438752457}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &803716271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803716269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6764f73aa5c3c734abd6314b79b5b38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guildSystem: {fileID: 1886605364}
+  _timer: {fileID: 2079202959}
 --- !u!114 &811947353 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1836184103573775530, guid: 5b87ee758e25ef044b433765aa350bdd,
@@ -11318,7 +11453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &889498770
 Transform:
   m_ObjectHideFlags: 0
@@ -11351,6 +11486,9 @@ MonoBehaviour:
     \n*\u0410\u0440\u0435\u043D\u0434\u0430 - 100\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
     \u0434\u043E\u043B\u0433 - 600\n*\u0414\u0440\u0435\u0432\u0435\u0441\u043D\u044B\u0439
     \u0433\u0440\u0438\u0431 2x \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C"
+  _levelNumber: 3
+  commonResourceCount: 3
+  rareResourceCount: 0
   _taskText: {fileID: 1596963761}
   _gameManager: {fileID: 565235517}
   _barkIngredient: {fileID: 11400000, guid: 88cabeea81e06e746bc284cad1fa2789, type: 2}
@@ -15093,7 +15231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1341762123
 Transform:
   m_ObjectHideFlags: 0
@@ -15123,6 +15261,9 @@ MonoBehaviour:
   _goalText: "\u041F\u0440\u043E\u0434\u0435\u0440\u0436\u0438\u0441\u044C \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0435
     \u0432\u0440\u0435\u043C\u044F\n\n\u0414\u043E\u043B\u0433 \u043D\u0435 \u0434\u043E\u043B\u0436\u0435
     \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u0442\u044C 50000 \u043C\u043E\u043D\u0435\u0442"
+  _levelNumber: 4
+  commonResourceCount: 10
+  rareResourceCount: 0
   _taskText: {fileID: 1596963761}
   _gameManager: {fileID: 565235517}
   _money: {fileID: 1313500667}
@@ -16014,6 +16155,77 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1436112164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1436112165}
+  - component: {fileID: 1436112166}
+  m_Layer: 0
+  m_Name: Level5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1436112165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436112164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718466753}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1436112166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436112164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b6454a49a3e7d4a8a850321173aff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goalText: "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u043F\u043E\u0431\u0435\u0434\u044B:
+    \n\u041D\u0430\u043A\u043E\u043F\u0438\u0442\u044C 20000\n\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F
+    \u043F\u0440\u043E\u0438\u0433\u0440\u044B\u0448\u0430:\n\u041A\u043E\u043D\u0447\u0438\u043B\u043E\u0441\u044C
+    \u0432\u0440\u0435\u043C\u044F \u0438\u043B\u0438 \u0434\u043E\u043B\u0433 \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u043B
+    \u043B\u0438\u043C\u0438\u0442 \n\n*\u0410\u0440\u0435\u043D\u0434\u0430 - 100\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
+    \u0434\u043E\u043B\u0433 - 1000\n*\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C
+    \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432 +15%\n*\u041E\u043F\u043B\u0430\u0442\u0430
+    \u0437\u0430\u043A\u0430\u0437\u043E\u0432 -10%\n\n"
+  _levelNumber: 6
+  commonResourceCount: 0
+  rareResourceCount: 0
+  _taskText: {fileID: 1596963761}
+  _gameManager: {fileID: 565235517}
+  _costMultiple: 1.15
+  _rewardMultiply: 0.9
+  _inventoryTaskValue: 15
+  _ingredientWithChangeCost:
+  - {fileID: 11400000, guid: e9a69a41ccde80a48ac0f2c3b6c41d94, type: 2}
+  - {fileID: 11400000, guid: 88cabeea81e06e746bc284cad1fa2789, type: 2}
+  - {fileID: 11400000, guid: 31054d959c014df45bc70cc49691862d, type: 2}
+  - {fileID: 11400000, guid: 83ab78e4d2e6e9a438c20026bf3c7e0c, type: 2}
+  - {fileID: 11400000, guid: a519cf1b0bc47b6488b21716b0344920, type: 2}
+  - {fileID: 11400000, guid: b23c482f531a58846981bb9c34d5caec, type: 2}
+  - {fileID: 11400000, guid: 75c3e5b4c6a362d43a4697d6ee5c753c, type: 2}
+  - {fileID: 11400000, guid: 482157571c105c540bea4fb0ac38f90a, type: 2}
+  _taskSystem: {fileID: 409848437}
+  _inventory: {fileID: 1765153437}
+  _money: {fileID: 1313500667}
 --- !u!1 &1438752456
 GameObject:
   m_ObjectHideFlags: 0
@@ -16049,6 +16261,7 @@ Transform:
   - {fileID: 409848436}
   - {fileID: 1886605365}
   - {fileID: 937557041}
+  - {fileID: 803716270}
   m_Father: {fileID: 1361464932}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16326,6 +16539,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b87ee758e25ef044b433765aa350bdd, type: 3}
+--- !u!1 &1451998167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1451998168}
+  - component: {fileID: 1451998169}
+  m_Layer: 0
+  m_Name: Level4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1451998168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451998167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718466753}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1451998169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451998167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05a6d3e4368c264e99e6f9ddb1df684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goalText: "\u0423\u0441\u043B\u043E\u0432\u0438\u044F \u043F\u043E\u0431\u0435\u0434\u044B:
+    \n\u041D\u0430\u043A\u043E\u043F\u0438\u0442\u044C 30000\n\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F
+    \u043F\u0440\u043E\u0438\u0433\u0440\u044B\u0448\u0430:\n\u041A\u043E\u043D\u0447\u0438\u043B\u043E\u0441\u044C
+    \u0432\u0440\u0435\u043C\u044F \u0438\u043B\u0438 \u0434\u043E\u043B\u0433 \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u043B
+    \u043B\u0438\u043C\u0438\u0442 \n\n*\u0410\u0440\u0435\u043D\u0434\u0430 - 150\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
+    \u0434\u043E\u043B\u0433 - 5000\n*\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C
+    \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432 - 20%\n*\u041E\u043F\u043B\u0430\u0442\u0430
+    \u0437\u0430\u043A\u0430\u0437\u043E\u0432 +50%\n*\u0428\u0442\u0440\u0430\u0444
+    \u0437\u0430 \u043D\u0435\u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435
+    \u0437\u0430\u043A\u0430\u0437\u0430 +50%\n\n"
+  _levelNumber: 5
+  commonResourceCount: 20
+  rareResourceCount: 0
+  _taskText: {fileID: 1596963761}
+  _gameManager: {fileID: 565235517}
+  _costMultiple: 0.75
+  _rewardMultiply: 1.5
+  _penaltyMultyply: 1.5
+  _ingredientWithChangeCost:
+  - {fileID: 11400000, guid: e9a69a41ccde80a48ac0f2c3b6c41d94, type: 2}
+  - {fileID: 11400000, guid: 88cabeea81e06e746bc284cad1fa2789, type: 2}
+  - {fileID: 11400000, guid: 31054d959c014df45bc70cc49691862d, type: 2}
+  - {fileID: 11400000, guid: 83ab78e4d2e6e9a438c20026bf3c7e0c, type: 2}
+  - {fileID: 11400000, guid: a519cf1b0bc47b6488b21716b0344920, type: 2}
+  - {fileID: 11400000, guid: b23c482f531a58846981bb9c34d5caec, type: 2}
+  - {fileID: 11400000, guid: 75c3e5b4c6a362d43a4697d6ee5c753c, type: 2}
+  - {fileID: 11400000, guid: 482157571c105c540bea4fb0ac38f90a, type: 2}
+  _taskSystem: {fileID: 409848437}
+  _money: {fileID: 1313500667}
 --- !u!1001 &1456935742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34806,7 +35091,7 @@ PrefabInstance:
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: _directLoad
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
@@ -34847,8 +35132,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _levelPresetDirect
       value: 
-      objectReference: {fileID: 11400000, guid: 5a826d0eb275ad342b787552d2cfb8af,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: _visitorController
@@ -34859,6 +35143,11 @@ PrefabInstance:
       propertyPath: _brightObjectSystem
       value: 
       objectReference: {fileID: 218885348}
+    - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
+        type: 3}
+      propertyPath: _levelTasks.Array.size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: _contrabandPotionSystem
@@ -34884,6 +35173,21 @@ PrefabInstance:
       propertyPath: _levelTasks.Array.data[3]
       value: 
       objectReference: {fileID: 1341762124}
+    - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
+        type: 3}
+      propertyPath: _levelTasks.Array.data[4]
+      value: 
+      objectReference: {fileID: 1451998169}
+    - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
+        type: 3}
+      propertyPath: _levelTasks.Array.data[5]
+      value: 
+      objectReference: {fileID: 1436112166}
+    - target: {fileID: 8905055718911620321, guid: a2417466508eac04e9092776f19aa874,
+        type: 3}
+      propertyPath: _levelTasks.Array.data[6]
+      value: 
+      objectReference: {fileID: 537297741}
     - target: {fileID: 8905055718911620326, guid: a2417466508eac04e9092776f19aa874,
         type: 3}
       propertyPath: m_RootOrder

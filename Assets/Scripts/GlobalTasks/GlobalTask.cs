@@ -10,9 +10,17 @@ public abstract class GlobalTask : MonoBehaviour
 
     [TextArea(5,10)]
     [SerializeField] protected string _goalText;
+    [SerializeField] protected LevelNumber _levelNumber;
+
+    [SerializeField] protected int commonResourceCount;
+    [SerializeField] protected int rareResourceCount;
 
     [SerializeField] protected TMP_Text _taskText;
     [SerializeField] protected GameManager _gameManager;
+
+    public int CommonResourceCount => commonResourceCount;
+    public int RareResourceCount => rareResourceCount;
+    public LevelNumber LevelNumber => _levelNumber; 
 
     public abstract void SetTaskValue(int value, int minValue);
     public abstract void Init();

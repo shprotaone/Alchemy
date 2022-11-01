@@ -14,29 +14,34 @@ public class PotionSizerSelection
 
     public PotionSizer SizerSelector(LevelNumber levelNumber, int valueForRangeSizer)
     {
-        if (levelNumber == LevelNumber.Level1)
+        switch (levelNumber)
         {
-            SetCommonPotionSizer();
-            return _resultSizer;
-        }
-        else if (levelNumber == LevelNumber.Level2)
-        {
-            SetSizerOnThirdIngredient();
-            return _resultSizer;
-        }
-        else if (levelNumber == LevelNumber.EndlessLevel)
-        {
-            SetFullSizer();
-            return _fullSizer;
-        }
-        else if(levelNumber == LevelNumber.Level3a)
-        {
-            SetRangeSizerWithRandom(valueForRangeSizer);
-            return _resultSizer;
-        }
-        else
-        {
-            return _fullSizer;
+            case LevelNumber.EndlessLevel:
+                SetFullSizer();
+                return _fullSizer;
+            case LevelNumber.Level1:
+                SetCommonPotionSizer();
+                return _resultSizer;
+            case LevelNumber.Level2:
+                SetSizerWithThirdIngredient();
+                return _resultSizer;
+            case LevelNumber.Level3:
+                SetFullSizer();
+                return _fullSizer;
+            case LevelNumber.Level3a:
+                SetRangeSizerWithRandom(valueForRangeSizer);
+                return _resultSizer;
+            case LevelNumber.Level4:
+                SetFullSizer();
+                return _resultSizer;
+            case LevelNumber.Level5:
+                SetFullSizer();
+                return _resultSizer;
+            case LevelNumber.Level6:
+                SetFullSizer();
+                return _resultSizer;
+            default:
+                return _fullSizer;
         }
     }
 
@@ -56,7 +61,7 @@ public class PotionSizerSelection
         _resultSizer.Potions = result.ToArray();
     }
 
-    private void SetSizerOnThirdIngredient()
+    private void SetSizerWithThirdIngredient()
     {
         List<PotionData> result = new List<PotionData>();
 
@@ -80,6 +85,7 @@ public class PotionSizerSelection
         foreach (var item in _fullSizer.Potions)
         {
             item.SetIngredients();
+            result.Add(item);
         }
 
         _resultSizer.Potions = result.ToArray();

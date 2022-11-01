@@ -16,13 +16,13 @@ public class GlobalTask3a : GlobalTask
 
     private int _minMoneyValue;
     public int CountToPotionSizer => _countToPotionSizer;
+    public int TimeToContrabandPotion => _timeToConrabandPotion;
 
     public override void Init()
     {
         Money.OnMoneyChanged.AddListener(CheckMoneyDefeat);
+        LevelInitializator.OnInitComplete += SetGoalText;
         SpecialSelection();     
-        _contrabandPotionSystem.InitContrabandPotion(_timeToConrabandPotion);
-        SetGoalText();
     }
 
     public override void CheckMoneyTask() { }
@@ -56,5 +56,6 @@ public class GlobalTask3a : GlobalTask
         string text = "\n\n ŒÕ“–¿¡¿ÕƒÕŒ≈ «≈À‹≈ - " + _contrabandPotionSystem.ContrabandPotion.PotionName;
 
         _goalText += text;
+        SetLevelTaskText();
     }
 }

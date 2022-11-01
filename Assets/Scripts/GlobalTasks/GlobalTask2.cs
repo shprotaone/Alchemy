@@ -1,35 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class GlobalTask2 : GlobalTask
 {
-    [SerializeField] private IngredientData _barkIngredient;
-    [SerializeField] private Inventory _inventory;
     [SerializeField] private Money _money;
+    [SerializeField] private GuildSystem _guildSystem;
 
     private int _taskValue;
     private int _minMoneyValue;
-    private float _inventoryTaskValue = 15;
-
-    private bool _moneyComplete;
-    private bool _inventoryComplete;
 
     public override void Init()
     {
-        ChangeCostIngredient();
-
         Money.OnMoneyChanged.AddListener(CheckMoneyTask);
-        Money.OnMoneyChanged.AddListener(CheckMoneyDefeat);
-
-        Inventory.OnItemValueChanged += CheckInventory;
+        Money.OnMoneyChanged.AddListener(CheckLevelDefeat);
     }
 
     public override void SpecialSelection()
     {
-        ChangeCostIngredient();
+        
     }
 
     public override void CheckMoneyTask()
@@ -41,49 +30,25 @@ public class GlobalTask2 : GlobalTask
         }
     }
 
-    public override void SetTaskValue(int value, int minValue)
+    public override void SetTaskValue(int value,int minValue)
     {
         _taskValue = value;
         _minMoneyValue = minValue;
         SetLevelTaskText();
     }
 
-    private void ChangeCostIngredient()
+    private void CheckLevelDefeat()
     {
-        _barkIngredient.cost *= 2;
-    }
-
-
-    private void CheckInventory()
-    {
-        foreach (KeyValuePair<IngredientData, int> item in _inventory.InventoryAmount)
-        {
-            if(item.Key.resourceRarity == ResourceRarity.rare)
-            {
-                if(item.Value >= _inventoryTaskValue)
-                {
-                    _inventoryComplete = true;
-                    print("inventory complete");
-                }
-                else
-                {
-                    _inventoryComplete = false;
-                }
-            }
-        }
-    }
-
-    private void CheckMoneyDefeat()
-    {
-        if (_minMoneyValue >= _money.CurrentMoney)
+        if(_minMoneyValue >= _money.CurrentMoney)
         {
             _gameManager.DefeatLevel();
         }
     }
 
-    private void OnDisable()
-    {
-        _barkIngredient.cost = 50;
-    }
+    //private void OnDisable()
+    //{
+    //    Money.OnMoneyChanged -= CheckMoneyTask;
+    //    Money.OnMoneyChanged -= CheckLevelDefeat;
+    //}
 
 }

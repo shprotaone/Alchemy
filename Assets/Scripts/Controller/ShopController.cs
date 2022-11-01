@@ -55,7 +55,7 @@ public class ShopController : MonoBehaviour,IPointerClickHandler,IInterract
 
     private void OnDisable()
     {
-        GlobalTask1.OnLevelComplete -= ShopClose;
+        GlobalTask2.OnLevelComplete -= ShopClose;
     }
 
     public void SetInterract(bool value)
