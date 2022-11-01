@@ -9,6 +9,7 @@ public class StartDialogViewer : MonoBehaviour
 {
     [SerializeField] private RectTransform _box;
     [SerializeField] private InGameTimeController _gameTimeController;
+    [SerializeField] private DraggableObjectController _draggableController;
     [SerializeField] private Button _nextButton;
     [SerializeField] private TMP_Text _buttonText;
     [SerializeField] private TMP_Text _mainText;
@@ -18,7 +19,7 @@ public class StartDialogViewer : MonoBehaviour
 
     private void Awake()
     {
-        LevelInitializator.OnStartWindowInit += InitDialog;
+        LevelInitializator.OnStartWindowInit += InitDialog;             
     }
 
     private void InitDialog(string[] textArray)
@@ -33,6 +34,7 @@ public class StartDialogViewer : MonoBehaviour
         ButtonNaming();
 
         _gameTimeController.PauseGame();
+        _draggableController.SetInterract(false);
     }
 
     private void NextText()
@@ -56,6 +58,7 @@ public class StartDialogViewer : MonoBehaviour
     private void DisableViewer()
     {
         _gameTimeController.ResumeGame();
+        _draggableController.SetInterract(true);
         _box.gameObject.SetActive(false);
     }
 

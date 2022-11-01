@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Action OnItemValueChanged;
+    public static event Action OnItemValueChanged;
 
-    [SerializeField] private GameObject _currentIngredientPrefab;
+    //[SerializeField] private GameObject _currentIngredientPrefab;
     [SerializeField] private GameObject _prefabBottle;
 
     [SerializeField] private IngredientData[] _ingredients;
@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
 
     private List<Slot> _slots;
 
-    public GameObject CurrentPrefab => _currentIngredientPrefab;
+    //public GameObject CurrentPrefab => _currentIngredientPrefab;
     public IngredientData[] Ingredients => _ingredients;
     public Dictionary<IngredientData, int> InventoryAmount => _inventory;
     public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;

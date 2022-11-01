@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ingredient : MonoBehaviour,IAction
+public class Ingredient : MonoBehaviour,IAction,IPooledObject
 {
     private const float moveSpeed = 1;
 
@@ -10,6 +10,7 @@ public class Ingredient : MonoBehaviour,IAction
     [SerializeField] private SpriteRenderer _dragableImage;
     [SerializeField] private Color _color;
     [SerializeField] private AudioClip _backSound;
+    [SerializeField] private ObjectType _type;
  
     private Slot _slot;
     private IngredientData _ingredientData;
@@ -21,19 +22,24 @@ public class Ingredient : MonoBehaviour,IAction
 
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor => _color;
+    public ObjectType Type => _type;
+    public Collider2D Collider => _collider;
 
-    private void Start()
+    private void OnEnable()
     {
         _dragableImage = GetComponent<SpriteRenderer>();
-        _collider.enabled = true;
+        
         //_audioSource = GetComponent<AudioSource>();
         //_audioSource.PlayOneShot(_ingredientData.dragSound);
     }
 
     public void Movement()
     {
-        _myTween = transform.DOMove(_slot.transform.position, moveSpeed, false)
-                            .OnComplete(IngredientInClaudron).SetEase(Ease.Unset);    
+        if(_slot != null)
+        {
+            _myTween = transform.DOMove(_slot.transform.position, moveSpeed, false)
+                            .OnComplete(ReturnToSlot).SetEase(Ease.Unset);
+        }    
         //_audioSource.PlayOneShot(_backSound);
     }
 
@@ -64,19 +70,25 @@ public class Ingredient : MonoBehaviour,IAction
         this.gameObject.SetActive(false);
     }
 
-    private void IngredientInClaudron()
+    private void ReturnToSlot()
     {
-        if (!_inClaudron && !_myTween.IsPlaying())
+        if (!_inClaudron)
         {
-            _collider.enabled = true;
             _slot.IncreaseAmount();
 
-            Destroy(this.gameObject);   //закешировать!
+            ObjectPool.SharedInstance.DestroyObject(gameObject);
         }
     }
 
     public void Action()
     {
         print("Iam DRAG");
+    }
+
+    private void OnDisable()
+    {
+        _collider.enabled = false;
+        _slot = null;
+        _inClaudron = false;
     }
 }

@@ -3,12 +3,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ShopController : MonoBehaviour,IPointerClickHandler
+public class ShopController : MonoBehaviour,IPointerClickHandler,IInterract
 {
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Transform _plate;
 
     private bool _isWorked;
+    private bool _interract;
 
     public Transform Plate => _plate;
     private void OnEnable()
@@ -46,7 +47,7 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_isWorked)
+        if (_interract)
         {
             StartCoroutine(DelayShopControl());
         }           
@@ -55,5 +56,10 @@ public class ShopController : MonoBehaviour,IPointerClickHandler
     private void OnDisable()
     {
         GlobalTask1.OnLevelComplete -= ShopClose;
+    }
+
+    public void SetInterract(bool value)
+    {
+        _interract = value;
     }
 }

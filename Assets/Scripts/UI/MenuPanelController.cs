@@ -1,9 +1,12 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuPanelController : MonoBehaviour
 {
+    public event Action<bool> OnInterract;
+
     [SerializeField] private InGameTimeController _ingameTimeController;
     [SerializeField] private RectTransform _panel;
 
@@ -22,13 +25,15 @@ public class MenuPanelController : MonoBehaviour
 
     private void Open()
     {
+        OnInterract?.Invoke(false);
         _panel.gameObject.SetActive(true);
         _panel.DOAnchorPos(_openPosition.anchoredPosition, _openDuration, false);
     }
 
     private void Close()
     {
+        OnInterract?.Invoke(true);
         _ingameTimeController.ResumeGame();
-        _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false);
+        _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false).OnComplete(() => _panel.gameObject.SetActive(false));
     }
 }

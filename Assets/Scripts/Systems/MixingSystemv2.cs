@@ -17,7 +17,6 @@ public class MixingSystemv2 : MonoBehaviour
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
     [SerializeField] private TableManager _tableManager;
-    [SerializeField] private EffectHandler _effectHandler;
 
     private AudioSource _audioSource;
     private WaterColorv2 _waterColor;    
@@ -137,7 +136,7 @@ public class MixingSystemv2 : MonoBehaviour
 
             CheckOnContraband(potion);        
 
-            bottle.FillPotionInBottle(potion, _waterColor.ResultColor, _effectHandler.GetEffect(potion.ResourceType));       
+            bottle.FillPotionInBottle(potion, _waterColor.ResultColor, potion.EffectType);       
             bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
 
             bottle.Movement();
@@ -152,7 +151,8 @@ public class MixingSystemv2 : MonoBehaviour
     {
         foreach (Ingredient item in _ingredients)
         {
-            Destroy(item.gameObject);
+            item.Collider.enabled = false;
+            ObjectPool.SharedInstance.DestroyObject(item.gameObject);
         }
 
         _cookSystem.CleanClaudron();

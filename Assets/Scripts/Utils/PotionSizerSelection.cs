@@ -12,7 +12,7 @@ public class PotionSizerSelection
         _resultSizer = new PotionSizer();
     }
 
-    public PotionSizer SizerSelector(LevelNumber levelNumber)
+    public PotionSizer SizerSelector(LevelNumber levelNumber, int valueForRangeSizer)
     {
         if (levelNumber == LevelNumber.Level1)
         {
@@ -31,7 +31,7 @@ public class PotionSizerSelection
         }
         else if(levelNumber == LevelNumber.Level3a)
         {
-            SetRangeSizerWithRandom(10);
+            SetRangeSizerWithRandom(valueForRangeSizer);
             return _resultSizer;
         }
         else

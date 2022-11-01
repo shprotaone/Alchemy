@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class Slot : MonoBehaviour,IAction
+public class Slot : MonoBehaviour,IAction,IInterract
 {
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private SpriteRenderer _slotImage;
     [SerializeField] private TMP_Text _amountText;
     [SerializeField] private FloatTimer _timer;
     [SerializeField] private float _delay;
-    [SerializeField] private bool _isDraggable;
+    [SerializeField] private bool _interactive;
 
     private Inventory _inventory;
     private IngredientData _ingredientData;
          
-    private GameObject _draggableIngredientPrefab;
     private float _amountInSlot;
 
     public SpriteRenderer SlotImage => _slotImage;
@@ -28,16 +27,16 @@ public class Slot : MonoBehaviour,IAction
     public void FillSlot(IngredientData ingredientData,int value)
     {       
         _ingredientData = ingredientData;
-        _draggableIngredientPrefab = _inventory.CurrentPrefab;
         _slotImage.sprite = ingredientData.mainSprite;
         RefreshAmount();
     }
 
     public void StartDrag()
     {
-        if (_inventory.DragFromInventory(_ingredientData) && !_timer.TimerIsRunning && _isDraggable)
-        {                    
-            GameObject ingredientGO = Instantiate(_draggableIngredientPrefab, this.transform);
+        if (_inventory.DragFromInventory(_ingredientData) && !_timer.TimerIsRunning && _interactive)
+        {
+            GameObject ingredientGO = ObjectPool.SharedInstance.GetObject(ObjectType.INGREDIENT);
+            ingredientGO.transform.SetParent(this.transform);
             Ingredient ingredient = ingredientGO.GetComponent<Ingredient>();
 
             _timer.InitTimer(_delay);
@@ -47,6 +46,8 @@ public class Slot : MonoBehaviour,IAction
 
             DecreaseAmount();
         }
+
+        RefreshAmount();
     }
 
     public void IncreaseAmount()
@@ -70,16 +71,16 @@ public class Slot : MonoBehaviour,IAction
         
     }
 
-    public void SetDraggable(bool value)
-    {
-        _isDraggable = value;
-    }
-
     public void Action()
     {
         StartDrag();
     }
 
-    public void Movement() { }
+    public void Movement() { print("Hey"); }
+
+    public void SetInterract(bool value)
+    {
+        _interactive = value;
+    }
 }
 

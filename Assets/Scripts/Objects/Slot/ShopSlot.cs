@@ -28,9 +28,7 @@ public class ShopSlot : MonoBehaviour
             _shopSystem.FillShop();
         }
 
-        _inventory = _shopSystem.Inventory;
-        _buyButton = GetComponentInChildren<Button>();        
-
+        _inventory = _shopSystem.Inventory;      
         ShowValueInInventory();
     }
 

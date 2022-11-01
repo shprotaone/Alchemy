@@ -87,3 +87,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 0}
   _light2d: {fileID: 7627892562164389110}
+  _type: 1

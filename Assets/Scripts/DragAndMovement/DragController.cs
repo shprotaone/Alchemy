@@ -116,17 +116,17 @@ public class DragController : MonoBehaviour
     {
         UpdateDragStatus(false);
 
-        StartCoroutine(_lastDragged.DropAction());
+        _lastDragged.DropAction();
         Debug.Log(_lastDragged.name);
     }
 
     private void UpdateDragStatus(bool isDragging)
     {
-        if (_lastDragged != null)
-        {
+        //if (_lastDragged != null)
+        //{
             _isDragActive = _lastDragged.IsDragging = isDragging;
             _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
-        }
+        //}
     }
 
     /// <summary>

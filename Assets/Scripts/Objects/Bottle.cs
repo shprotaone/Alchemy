@@ -2,10 +2,9 @@
 using TMPro;
 using UnityEngine;
 
-public class Bottle : MonoBehaviour,IAction
+public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
     private const float moveSpeed = 1;
-    private int _maxTimerValue = 40;
 
     [SerializeField] private SpriteRenderer _fullBottle;
     [SerializeField] private SpriteRenderer _bottle;
@@ -13,9 +12,9 @@ public class Bottle : MonoBehaviour,IAction
     [SerializeField] private BoxCollider2D _collider;
     [SerializeField] private Wobble _wobble;
     [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private ObjectType _type;
 
     private Transform _destination;
-    private Transform _effectBaseTransform;
 
     private GameObject _effect;
     private Potion _potionInBottle;
@@ -26,41 +25,50 @@ public class Bottle : MonoBehaviour,IAction
     private BottleStorage _bottleStorage;
     private LocalTimer _timer;
 
-    private Tween _tween;
-    
+    private Tween _tween;   
     private bool _isFull;
+
+    private int _contrabandTime;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
+
+    public ObjectType Type => _type;
 
     private void Start()
     {        
         _tableManager = GetComponentInParent<TableManager>();
     }
 
-    public void InitBottle(BottleStorage storage)
+    public void InitBottle(BottleStorage storage, int contrabandTime)
     {
         _potionInBottle = new Potion();       
         _bottleStorage = storage;
+        _contrabandTime = contrabandTime;
     }
 
     public void Movement()
     {
         GetTable();
+        _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(ReturnBottleToBox);             
+    }
 
-        _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable).OnComplete(Return);
+    public void MovementFromGarbage()   //без повторной ативации OnComplete, спорное решение
+    {
+        GetTable();
+        _tween = transform.DOMove(_destination.position, moveSpeed, false).OnStart(SortInFullTable);
     }
 
     /// <summary>
     /// Заполняет объект Potion
     /// </summary>
     /// <param name="potion"></param>
-    public void FillPotionInBottle(Potion potion,Color color, GameObject effect)
+    public void FillPotionInBottle(Potion potion,Color color, ObjectType effectType)
     {
         _potionInBottle = potion;
         _isFull = true;
 
         FillWaterInBottle(color);
-        AddEffect(effect);     
+        AddEffect(ObjectPool.SharedInstance.GetObject(effectType));     
         CheckContraband();
 
         print("From Bottle" + _potionInBottle.PotionName);
@@ -81,16 +89,12 @@ public class Bottle : MonoBehaviour,IAction
     {
         if (_potionInBottle.Rarity == ResourceRarity.rare)
         {
-            _effectBaseTransform = effect.transform.parent;
-
             _effect = effect;
-            _effect.SetActive(true);
-
             _effect.transform.position = transform.position;
             _effect.transform.SetParent(transform);
             _effect.transform.localScale = new Vector3(1, 1, 0);
 
-            _effect.GetComponentInChildren<EffectChangeColor>().ChangeParticleColor(_potionColor);
+            _effect.GetComponentInChildren<Effect>().ChangeParticleColor(_potionColor);
         }
     }
 
@@ -123,19 +127,25 @@ public class Bottle : MonoBehaviour,IAction
         transform.SetParent(_destination);              
     }
 
-    /// <summary>
-    /// Вызывается только при возвращении бутылки. 
-    /// </summary>
-    private void Return()
-    {
+    private void ReturnBottleToBox()
+    {       
         _collider.enabled = true;
 
-        if (!_isFull)
+        if (!IsFull)
         {
-            _tween.Pause();
-            _tween.Kill(true);
-            Destroy(gameObject);           
+            _bottleStorage.IncreaseAmount();
+            DestroyBottle();
         }
+    }
+
+    public void DestroyBottle()
+    {
+        _tween.Pause();
+        _tween.Kill(true);
+
+        ObjectPool.SharedInstance.DestroyObject(gameObject);
+
+        ReturnEffect();
     }
 
     public void ResetBottle()
@@ -149,12 +159,17 @@ public class Bottle : MonoBehaviour,IAction
         _tween.Restart();
     }
 
-    private void ReturnEffect()
+    public void ReturnEffect()
     {
-        if(gameObject != null &&  _effect != null)
+        if(_effect != null)
         {
-            _effect.transform.SetParent(_effectBaseTransform);
-            _effect.SetActive(false);
+            ObjectPool.SharedInstance.DestroyObject(_effect);
+        }
+
+        if (_timer != null)
+        {
+            StopCoroutine(_timer.Timer());
+            _timer.OnTimerUpdate -= UpdateTimer;
         }
     }
 
@@ -162,9 +177,10 @@ public class Bottle : MonoBehaviour,IAction
     {
        
     }
+
     private void StartTimer()
     {
-        _timer = new LocalTimer(_maxTimerValue, true);
+        _timer = new LocalTimer(_contrabandTime, true);
         StartCoroutine(_timer.Timer());
 
         _timer.OnTimerUpdate += UpdateTimer;
@@ -182,16 +198,5 @@ public class Bottle : MonoBehaviour,IAction
         }
     }
 
-    private void OnDisable()
-    {
-        _bottleStorage.IncreaseAmount();
-        ReturnEffect();
-
-        if (_timer != null)
-        {
-            StopCoroutine(_timer.Timer());
-            _timer.OnTimerUpdate -= UpdateTimer;
-        }       
-    }
 }
 
