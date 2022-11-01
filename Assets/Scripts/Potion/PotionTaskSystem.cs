@@ -33,11 +33,11 @@ public class PotionTaskSystem : MonoBehaviour
     /// <summary>
     /// Инициализация текущего списка зелий
     /// </summary>
-    public void InitPotionSizer(LevelNumber levelNumber)
+    public void InitPotionSizer(LevelNumber levelNumber, int countForCustomSizer)
     {
         _potionSizer = _jsonReader.PotionSizer;
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
-        _potionSizer = sizerSelector.SizerSelector(levelNumber);
+        _potionSizer = sizerSelector.SizerSelector(levelNumber,countForCustomSizer);
 
         _potionCyclopedia.InitPotionCyclopedia();
 

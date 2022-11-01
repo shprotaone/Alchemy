@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GlobalTask2a : GlobalTask
+public class GlobalTask3a : GlobalTask
 {
     private const float rewardMultiply = 0.8f;
 
     [SerializeField] private Money _money;
     [SerializeField] private PotionTaskSystem _taskSystem;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
-    [SerializeField] private TMP_Text _contrabandCounter;
-    
+
+    [SerializeField] private int _timeToConrabandPotion;
+    [SerializeField] private int _countToPotionSizer;
+
     private int _minMoneyValue;
+    public int CountToPotionSizer => _countToPotionSizer;
 
     public override void Init()
     {
         Money.OnMoneyChanged.AddListener(CheckMoneyDefeat);
-        SpecialSelection();
+        SpecialSelection();     
+        _contrabandPotionSystem.InitContrabandPotion(_timeToConrabandPotion);
         SetGoalText();
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Draggable : MonoBehaviour
@@ -23,21 +24,29 @@ public class Draggable : MonoBehaviour
     public void StartDragAction()
     {
         _action.Action();
+
+        if(_action is Ingredient)
+        {
+            _collider.enabled = false;
+        }      
     }
 
-    public IEnumerator DropAction()
+    public async void DropAction()
     {
-        yield return new WaitForEndOfFrame();       //Как можно еще задержать исполнение? 
-        
-        if(_action is Ingredient)
-        {           
-            _action.Movement();          
+        _collider.enabled = true;
+
+        if(_action is Ingredient || _action is Bottle)
+        {
+            await Task.Delay(30);
+
+            if (_collider != null)
+            {
+                _collider.enabled = false;
+            }
+
+            await Task.Delay(50);      //Как можно еще задержать исполнение? 
+
+            _action.Movement();
         }
-
-        yield return new WaitForSeconds(0.1f);
-
-        _collider.enabled = false;
-
-        yield break;
     }
 }

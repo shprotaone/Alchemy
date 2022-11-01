@@ -231,6 +231,7 @@ MonoBehaviour:
   _collider: {fileID: -8574785794516881806}
   _wobble: {fileID: 5975492717675343276}
   _timerText: {fileID: 4277615669358317568}
+  _type: 5
 --- !u!114 &7383387637611308367
 MonoBehaviour:
   m_ObjectHideFlags: 0

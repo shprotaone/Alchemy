@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class EffectChangeColor : MonoBehaviour
+public class Effect : MonoBehaviour,IPooledObject
 {
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private Light2D _light2d;
+    [SerializeField] private ObjectType _type;
+
+    public ObjectType Type => _type;
 
     public void ChangeParticleColor(Color color)
     {

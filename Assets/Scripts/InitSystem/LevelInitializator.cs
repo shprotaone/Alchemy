@@ -26,7 +26,6 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private RentCalculator _rentShop;
     [SerializeField] private GuildSystem _guildSystem;
     [SerializeField] private GameTimer _gameTimer;
-    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
 
     [Header("Вспомогательные системы")]
     [SerializeField] private CameraMovement _startCameraPos;
@@ -84,10 +83,11 @@ public class LevelInitializator : MonoBehaviour
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _tutorialManager.gameObject.SetActive(false);
 
-                _taskSystem.InitPotionSizer(LevelNumber.EndlessLevel);
+                _taskSystem.InitPotionSizer(LevelNumber.EndlessLevel,0);
                 _taskSystem.SetTutorialMode(false);
                 
                 _inventory.FillFullInventory(stockAmount);
+                _gameTimer.InitTimer(0, false);
 
                 _brightObjectSystem.BrightObjects(false);
 
@@ -106,7 +106,7 @@ public class LevelInitializator : MonoBehaviour
                 _tutorialManager.NextStep();
 
                 _taskSystem.SetTutorialMode(true);
-                _taskSystem.InitPotionSizer(LevelNumber.Level1);              
+                _taskSystem.InitPotionSizer(LevelNumber.Level1,0);              
                 
                 _shopSystem.HideForTutorial(true);
                 _gameTimer.InitTimer(0, false);
@@ -127,7 +127,7 @@ public class LevelInitializator : MonoBehaviour
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _tutorialManager.gameObject.SetActive(false);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level2);
+                _taskSystem.InitPotionSizer(LevelNumber.Level2,0);
                 _taskSystem.SetTutorialMode(false);
 
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
@@ -154,7 +154,7 @@ public class LevelInitializator : MonoBehaviour
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level2);
+                _taskSystem.InitPotionSizer(LevelNumber.Level2,0);
                 _taskSystem.SetTutorialMode(false);
 
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
@@ -172,10 +172,9 @@ public class LevelInitializator : MonoBehaviour
                 _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
                 _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
 
-                _taskSystem.InitPotionSizer(LevelNumber.Level3a);
+                _taskSystem.InitPotionSizer(LevelNumber.Level3a,2);
                 _taskSystem.SetTutorialMode(false);
-                _contrabandPotionSystem.InitContrabandPotion();
-
+                
                 _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, true);
 
                 _brightObjectSystem.BrightObjects(false);

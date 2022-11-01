@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Potion
 {
-    private ResourceType _resourceType;
+    private ObjectType _effectType;
     private ResourceRarity _rarityType;   
 
     private List<string> _ingredients;
@@ -18,7 +18,7 @@ public class Potion
     public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
     public List<string> Ingredients => _ingredients;
-    public ResourceType ResourceType => _resourceType;
+    public ObjectType EffectType => _effectType;
     public bool Contraband => _contraband;
 
     public void FillPotion(PotionData potionData)
@@ -55,13 +55,23 @@ public class Potion
             {
                 if (item.IngredientData.resourceRarity == ResourceRarity.rare)
                 {
-                    _resourceType = item.IngredientData.resourceType;
+                    _effectType = GetType(item.IngredientData.resourceType);
                     return;
                 }
             }
         }
     }
 
+    private ObjectType GetType(ResourceType resourceType)
+    {
+        return resourceType switch
+        {
+            ResourceType.Sand => ObjectType.EFFECT_SMOKE,
+            ResourceType.Stone => ObjectType.EFFECT_FIRE,
+            ResourceType.Ladan => ObjectType.EFFECT_BLINK,
+            _ => ObjectType.EFFECT_SPARKS
+        };
+    }
     public void SetGuild(string guild)
     {
         GuildChecker guildChecker = new GuildChecker();

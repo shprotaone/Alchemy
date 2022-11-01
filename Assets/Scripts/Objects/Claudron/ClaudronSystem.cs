@@ -8,19 +8,23 @@ public class ClaudronSystem : MonoBehaviour
 
     private Claudron _currentClaudron;
     private MixingSystemv2 _mixingSystem;
+    private bool _isTutorial;
+
+    public Button ClearClaudronButton => _clearClaudronButton;
     
     public float CookSpeed => _currentClaudron.speedMul;
 
     private void Start()
     {
         _mixingSystem = GetComponent<MixingSystemv2>();
+
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
         _mixingSystem.RefreshDelegate += ClaudronButtonState;
     }
 
     private void ClaudronButtonState()
     {
-        if (_mixingSystem.Ingredients.Count > 0)
+        if (_mixingSystem.Ingredients.Count > 0 && !_isTutorial)
         {
             _clearClaudronButton.interactable = true;
         }
@@ -39,6 +43,11 @@ public class ClaudronSystem : MonoBehaviour
     {
         _currentClaudron = claudron;
         _claudronSprite.sprite = claudron.image;
+    }
+
+    public void SetTutorial(bool value)
+    {
+        _isTutorial = value;
     }
 
     private void OnDestroy()

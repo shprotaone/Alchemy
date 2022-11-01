@@ -5,21 +5,24 @@ public class ContrabandPotionSystem : MonoBehaviour
 {
     [SerializeField] private PotionTaskSystem _potionTaskSystem;
     [SerializeField] private TMP_Text _counterCompleteText;
-    
+
+    private int _contrabandTimer;
     private int _completeCounter;
     private Potion _contrabandPotion;
     private bool _isActive;
 
+    public int ContrabandTimer => _contrabandTimer;
     public int CompleteCounter => _completeCounter;
     public Potion ContrabandPotion => _contrabandPotion;
     public bool IsActive => _isActive;
 
-    public void InitContrabandPotion()
+    public void InitContrabandPotion(int contrabandTimer)
     {
         _contrabandPotion = new Potion();
         _contrabandPotion.FillPotion(SetPotion());
         _contrabandPotion.SetContraband(true);
 
+        _contrabandTimer = contrabandTimer;
         _counterCompleteText.gameObject.SetActive(true);
 
         _isActive = true;
@@ -44,4 +47,6 @@ public class ContrabandPotionSystem : MonoBehaviour
     {
         _counterCompleteText.text += " " + _completeCounter;
     }
+
+
 }

@@ -6,10 +6,13 @@ using TMPro;
 public class Cook : MonoBehaviour
 {
     private const float cookingSpeed = 1f;
+    private const int minCookIngredientValue = 1;
     private float _delayTime = 5;
 
     [SerializeField] private Button _cookButton;
     [SerializeField] private Slider _boilProgress;
+
+    [Space]
     [SerializeField] private Settings _settings;
     [SerializeField] private AudioClip _brewSound;
     [SerializeField] private SpriteRenderer _crunchSprite;
@@ -52,8 +55,9 @@ public class Cook : MonoBehaviour
         float startTime = 0;
         float endTime = CalcCookTime();
 
-
         _boilProgress.maxValue = endTime;
+        _cookButton.interactable = false;
+        _claudron.ClearClaudronButton.interactable = false;
 
         while (startTime < _boilProgress.maxValue)
         {
@@ -64,10 +68,13 @@ public class Cook : MonoBehaviour
         }
 
         _mixingSystem.CheckPotion();
+
         CheckTruePotion(_mixingSystem.BottleFilled);
-        _waterColor.StopBoiled();
+        _waterColor.StopBoiled();                
+        _claudron.ClearClaudronButton.interactable = true;
+
         _audioSource.Stop();
-        
+
         _speed = 0;
     }
 
@@ -108,6 +115,7 @@ public class Cook : MonoBehaviour
 
     public void CleanClaudron()
     {
+        _cookButton.interactable = true;
         _crunchSprite.enabled = false;
         _canFillBottle = false;
     }
@@ -174,7 +182,7 @@ public class Cook : MonoBehaviour
 
     public void CookButtonCheck()
     {
-        if (_mixingSystem.Ingredients.Count > 0)
+        if (_mixingSystem.Ingredients.Count > minCookIngredientValue)
         {
             _cookButton.interactable = true;
         }
