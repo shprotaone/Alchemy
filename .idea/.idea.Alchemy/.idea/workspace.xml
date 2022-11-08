@@ -7,11 +7,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/JsonData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SavedData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildIndicatorSet.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/JsonData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SavedData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/WidgetGuildsReputation.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -30,14 +35,69 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/Data/PlayerPrefsData.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadRepository.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/GlobalTasks/GlobalTask2a.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Potion/PotionTaskSystem.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildReputationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoadController/SaveLoadController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/Guild.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildIndicatorSet.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/GuildCircleView.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/GuildsCircleView.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/UI/WidgetGuildsReputation.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalTasks/GlobalTask1.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildReputationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Potion/PotionTaskSystem.cs" />
     </changedPaths>
   </component>
+  <component name="ProjectId" id="2HHC8M6O1O7lCyprMF1FJXZItSm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3baab333-4bd7-451a-b4df-7308cbac1c02" name="Default Changelist" comment="" />
+      <created>1667932465215</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667932465215</updated>
+      <workItem from="1667932470897" duration="6923000" />
+    </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
 </project>

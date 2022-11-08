@@ -7,7 +7,7 @@ public class GuildSystem : MonoBehaviour
     private const float guildCount = 4;
     private float _guildMaxValue = 100;
     
-    [SerializeField] private GuildCircleView _guildCircleView;
+    [SerializeField] private GuildsCircleView guildsCircleView;
     [SerializeField] private GuildView _guildView;
 
     private Dictionary<GuildsType, float> _guildDictionary;
@@ -23,7 +23,7 @@ public class GuildSystem : MonoBehaviour
         {
             GuildsType guild = (GuildsType)i;
             _guildDictionary.Add(guild,gultStartValue);
-            _guildCircleView.RefreshSlider(guild, gultStartValue);
+            guildsCircleView.RefreshSlider(guild, gultStartValue);
             _guildView.RefreshSlider(guild, gultStartValue);
         }
     }
@@ -33,7 +33,7 @@ public class GuildSystem : MonoBehaviour
         if (_guildDictionary[type] < GuildMaxValue)
         {
             _guildDictionary[type] += value;
-            _guildCircleView.RefreshSlider(type, _guildDictionary[type]);
+            guildsCircleView.RefreshSlider(type, _guildDictionary[type]);
             _guildView.RefreshSlider(type, _guildDictionary[type]);
         }      
     }
@@ -41,7 +41,7 @@ public class GuildSystem : MonoBehaviour
     public void RemoveRep(GuildsType type, float value)
     {
         _guildDictionary[type] -= value;
-        _guildCircleView.RefreshSlider(type, _guildDictionary[type]);
+        guildsCircleView.RefreshSlider(type, _guildDictionary[type]);
         _guildView.RefreshSlider(type, _guildDictionary[type]);
     }
 }

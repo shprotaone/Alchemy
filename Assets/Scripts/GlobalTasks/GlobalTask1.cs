@@ -5,7 +5,7 @@ using System;
 public class GlobalTask1 : GlobalTask
 {
     [SerializeField] private Money _money;
-    [SerializeField] private GuildSystem _guildSystem;
+    //[SerializeField] private GuildSystem _guildSystem;
 
     private int _taskValue;
     private int _minMoneyValue;

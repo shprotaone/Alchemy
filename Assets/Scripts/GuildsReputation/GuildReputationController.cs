@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-//[ExecuteInEditMode]
 public sealed class GuildReputationController : Singleton<GuildReputationController>
 {
     public Action<GuildsType, int> OnGuildReputationChange;
     public Action<Dictionary<GuildsType, int>> OnGuildsReputationChange;
     [SerializeField] private Guild[] _guilds;
     [SerializeField] private int _guildRewardReputaion = 5;
+    [SerializeField] private int _guildPenaltyReputaion = 3;
     [SerializeField] private int _friendlyGuildRewardReputaion = 3;
     [SerializeField] private int _enemyGuildPenaltyReputaion = 2;
+    [SerializeField] private int _startReputation = 80;
     private Dictionary<GuildsType, int> _playerReputation;
     
     private void Awake()
@@ -23,7 +24,7 @@ public sealed class GuildReputationController : Singleton<GuildReputationControl
             _playerReputation = new Dictionary<GuildsType, int>();
             foreach (var guild in _guilds)
             {
-                _playerReputation[guild.CurrentGuild] = 80;
+                _playerReputation[guild.CurrentGuild] = _startReputation;
             }
         }
         else
@@ -93,5 +94,10 @@ public sealed class GuildReputationController : Singleton<GuildReputationControl
         
         OnGuildReputationChange?.Invoke(guild, newReputation);
         //Debug.Log($"Guild: {guild} reputation: {_playerReputation[guild]}");
+    }
+
+    public void ChangeReputationOnCancel(GuildsType guild)
+    {
+        DecreaseReputation(guild, _guildPenaltyReputaion);
     }
 }

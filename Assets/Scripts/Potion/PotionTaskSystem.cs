@@ -10,7 +10,7 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private Money _moneySystem;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private PotionSizer _potionSizer;
-    [SerializeField] private GuildSystem _guildSystem;
+    //[SerializeField] private GuildSystem _guildSystem;
 
     [SerializeField] private GameObject _coinPrefab;
     [SerializeField] private Transform _jarTransform;
@@ -106,7 +106,7 @@ public class PotionTaskSystem : MonoBehaviour
         _moneySystem.Increase(reward);
         
         //_potionCyclopedia.AddNewPotion(_currentPotion);
-        _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
+        //_guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
         GuildReputationController.Instance.ChangeReputationOnSuccefullTaskExecution(_currentPotion.GuildsType);
 
         _visitorController.DisableVisitor();
@@ -115,7 +115,8 @@ public class PotionTaskSystem : MonoBehaviour
 
     public void TaskCanceled(float penaltyRep)
     {
-        _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
+        //_guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep);
+        GuildReputationController.Instance.ChangeReputationOnCancel(_currentPotion.GuildsType);
         _visitorController.DisableVisitor();
     }
 
@@ -156,10 +157,24 @@ public class PotionTaskSystem : MonoBehaviour
 
     private int LowRepReward(int stockReward)
     {
-        bool divideReward = _guildSystem.GuildDictionary[_visitorController.CurrentVisitor.Guild] < 60;
+        /*bool divideReward = _guildSystem.GuildDictionary[_visitorController.CurrentVisitor.Guild] < 60;
+       
+       if (divideReward) return stockReward / 2;
+       else return stockReward;*/
+        
+        
+        var valueForReturn = stockReward;
+        
+        var visitorGuild = _visitorController.CurrentVisitor.Guild;
+        if (GuildReputationController.Instance.GetGuildReputation(visitorGuild, out int currentGuildReputation))
+        {
+            if (currentGuildReputation < 60)
+            {
+                valueForReturn  /= 2;
+            }
+        }
 
-        if (divideReward) return stockReward / 2;
-        else return stockReward;
+        return valueForReturn;
     }
 
     public void SetTutorialMode(bool value)   //проверить на использование
