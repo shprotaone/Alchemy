@@ -40,10 +40,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildIndicatorSet.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/GuildCircleView.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Objects/Guild and Visitor/GuildsCircleView.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/UI/WidgetGuildsReputation.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/GlobalTasks/GlobalTask1.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/GuildsReputation/GuildReputationController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Potion/PotionTaskSystem.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/UI/WidgetGuildsReputation.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2HHC8M6O1O7lCyprMF1FJXZItSm" />
@@ -88,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667932465215</updated>
-      <workItem from="1667932470897" duration="6923000" />
+      <workItem from="1667932470897" duration="7738000" />
     </task>
     <servers />
   </component>
