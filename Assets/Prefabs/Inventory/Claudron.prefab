@@ -177,8 +177,8 @@ GameObject:
   - component: {fileID: 5321411646154727581}
   - component: {fileID: 5321411646154727569}
   - component: {fileID: 5321411646154727570}
-  - component: {fileID: 5321411646154727571}
   - component: {fileID: 5321411646154727582}
+  - component: {fileID: 931180966}
   m_Layer: 0
   m_Name: Claudron
   m_TagString: Untagged
@@ -266,6 +266,8 @@ MonoBehaviour:
   _contrabandPotionSystem: {fileID: 0}
   _ingredients: []
   _tableManager: {fileID: 0}
+  _claudron: {fileID: 0}
+  _claudronSystem: {fileID: 5321411646154727570}
 --- !u!114 &5321411646154727570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,25 +282,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clearClaudronButton: {fileID: 0}
   _claudronSprite: {fileID: 5321411645335512986}
---- !u!114 &5321411646154727571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5321411646154727576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22efe36e48ae7643a8c2985d9ade83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cookButton: {fileID: 0}
-  _boilProgress: {fileID: 0}
-  _settings: {fileID: 11400000, guid: c07b99bbbca86234ea011dc966b22d2c, type: 2}
-  _brewSound: {fileID: 8300000, guid: 2cc0eb3290e641147a38f8be2c15c194, type: 3}
+  _mixingSystem: {fileID: 5321411646154727569}
+  _waterColor: {fileID: 5321411647208261119}
+  _cookSystem: {fileID: 931180966}
   _crunchSprite: {fileID: 5321411645564938215}
-  _delayText: {fileID: 0}
-  _firewood: {fileID: 0}
 --- !u!82 &5321411646154727582
 AudioSource:
   m_ObjectHideFlags: 0
@@ -396,6 +383,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &931180966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321411646154727576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183b3cb2ee2c2054db62c3ce2785f17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickController: {fileID: 0}
+  _mixingSystem: {fileID: 5321411646154727569}
+  _claudron: {fileID: 5321411646154727570}
 --- !u!1 &5321411647208261114
 GameObject:
   m_ObjectHideFlags: 0

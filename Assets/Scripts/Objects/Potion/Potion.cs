@@ -13,13 +13,17 @@ public class Potion
     private bool _contraband;
 
     private GuildsType _guildType;
+    private Color _color;
 
+    public string PotionName => _name;
+    public bool Contraband => _contraband;
+    public List<string> Ingredients => _ingredients;
     public GuildsType GuildsType => _guildType;
     public ResourceRarity Rarity => _rarityType;
-    public string PotionName => _name;
-    public List<string> Ingredients => _ingredients;
+    
+    
     public ObjectType EffectType => _effectType;
-    public bool Contraband => _contraband;
+    public Color ColorPotion => _color;
 
     public void FillPotion(PotionData potionData)
     {
@@ -45,6 +49,10 @@ public class Potion
     public void SetNamePotion(string name)
     {
         _name = name;
+    }
+    public void SetColor(Color color)
+    {
+        _color = color;
     }
 
     public void SetEffect(List<Ingredient> ingredients)

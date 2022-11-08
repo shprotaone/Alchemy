@@ -8,11 +8,11 @@ public class Step9 : Step
     public override void StepAction()
     {
         _claudronSystem.SetTutorial(false);
-        _mixingSystem.FilledBottleDelegete += _tutorialManager.NextStep;
+        _mixingSystem.FilledBottleDelegateForTutorial += _tutorialManager.NextStep;
     }
 
     private void OnDisable()
     {
-        _mixingSystem.FilledBottleDelegete -= _tutorialManager.NextStep;
+        _mixingSystem.FilledBottleDelegateForTutorial -= _tutorialManager.NextStep;
     }
 }

@@ -8,30 +8,32 @@ public class MixingSystemv2 : MonoBehaviour
     private const string ingredientTag = "Ingredient";
 
     public delegate void RefreshCountIngredient();
-    public RefreshCountIngredient RefreshDelegate;
+    public RefreshCountIngredient ActiveButtonBrewDelegate;
 
     public delegate void FilledBottle();
-    public FilledBottle FilledBottleDelegete;
+    public FilledBottle FilledBottleDelegateForTutorial;
 
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
     [SerializeField] private TableManager _tableManager;
+    [SerializeField] private Claudron _claudron;
+    [SerializeField] private ClaudronSystem _claudronSystem;
 
     private AudioSource _audioSource;
-    private WaterColorv2 _waterColor;    
-    private Cook _cookSystem;
+    private WaterColorv2 _waterColor;
+    private Cookv2 _cookSystem;
+    //private Cook _cookSystem;
 
-    private bool _bottleFilled;
+    private bool _isPotionApproved;
 
     public List<Ingredient> Ingredients => _ingredients;
-    public bool BottleFilled => _bottleFilled;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _waterColor = GetComponentInChildren<WaterColorv2>();
-        _cookSystem = GetComponent<Cook>();
+        _cookSystem = GetComponent<Cookv2>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,9 +42,20 @@ public class MixingSystemv2 : MonoBehaviour
         {
             CheckIngredientIn(collision.gameObject);
         }
-        else if (collision.CompareTag(bottleTag))
-        {            
-            MixingIngredient(collision.gameObject);
+
+        if (_isPotionApproved) 
+        {
+            if (collision.CompareTag(bottleTag))
+            {
+                Bottle bottle = collision.GetComponent<Bottle>();
+                _potionDetector.CurrentPotion.SetColor(_waterColor.ResultColor);
+
+                bottle.SetPotion(_potionDetector.CurrentPotion);
+                CheckOnContraband(bottle.PotionInBottle);
+                FilledBottleDelegateForTutorial?.Invoke();
+
+                _claudronSystem.ClearClaudron();
+            }
         }
     }
 
@@ -65,7 +78,7 @@ public class MixingSystemv2 : MonoBehaviour
             _ingredients.Add(ingredient);           
 
             _audioSource.Play();
-            RefreshDelegate.Invoke();
+            ActiveButtonBrewDelegate.Invoke();
             _waterColor.ColorWater(MixColor());
         }
         else
@@ -92,26 +105,21 @@ public class MixingSystemv2 : MonoBehaviour
         }
     }
 
-    private void MixingIngredient(GameObject currentObject)
-    {        
-        if (_cookSystem.CanFillBottle)
-        {
-            Bottle bottle = currentObject.GetComponent<Bottle>();           
-            SetPotionInBottle(bottle);                                          
-        }
-    }
-
     public void CheckPotion()
     {
         _potionDetector.FillCurrentPotion(_ingredients);
 
         if (_potionDetector.CurrentPotion.PotionName == "")
         {
-            _bottleFilled = false;  //ответсвенность заполнения перенести в бутылку
+            _isPotionApproved = false;
+            _claudronSystem.CrunchClaudron(true);
+            _claudronSystem.ClearClaudron();
+            Debug.LogWarning("Такого зелья не существует");
         }
         else
         {
-            _bottleFilled = true;
+            _isPotionApproved = true;
+            Debug.Log("Вы сварили " + _potionDetector.CurrentPotion.PotionName);
         }
     } 
 
@@ -128,25 +136,6 @@ public class MixingSystemv2 : MonoBehaviour
         }
     }
 
-    private void SetPotionInBottle(Bottle bottle)
-    {
-        if (!bottle.IsFull)
-        {
-            Potion potion = _potionDetector.CurrentPotion;
-
-            CheckOnContraband(potion);        
-
-            bottle.FillPotionInBottle(potion, _waterColor.ResultColor, potion.EffectType);       
-            bottle.transform.SetParent(_tableManager.FullPotionTable.transform);
-
-            bottle.Movement();
-
-            FilledBottleDelegete?.Invoke();
-
-            ClearMixSystem();
-        }
-    }
-
     public void ClearMixSystem()
     {
         foreach (Ingredient item in _ingredients)
@@ -155,9 +144,8 @@ public class MixingSystemv2 : MonoBehaviour
             ObjectPool.SharedInstance.DestroyObject(item.gameObject);
         }
 
-        _cookSystem.CleanClaudron();
         _ingredients.Clear();
-        RefreshDelegate.Invoke();
-        _waterColor.SetColor(Color.white);
+        ActiveButtonBrewDelegate.Invoke();
     }
 }
+ 

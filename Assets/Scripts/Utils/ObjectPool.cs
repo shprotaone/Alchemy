@@ -11,8 +11,7 @@ public class ObjectPool : MonoBehaviour
 
     [Serializable]
     public struct ObjectInfo
-    {
-        
+    {       
         public ObjectType type;
         public GameObject prefab;
         public int startCount;

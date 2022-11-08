@@ -40,10 +40,21 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     }
 
     public void InitBottle(BottleStorage storage, int contrabandTime)
-    {
-        _potionInBottle = new Potion();       
+    {             
         _bottleStorage = storage;
         _contrabandTime = contrabandTime;
+    }
+
+    public void SetPotion(Potion potion)
+    {
+        if (!_isFull)
+        {
+            _potionInBottle = new Potion(); 
+            FillPotionInBottle(potion, potion.ColorPotion, potion.EffectType);
+
+            transform.SetParent(_tableManager.FullPotionTable.transform);
+            Movement();
+        }
     }
 
     public void Movement()

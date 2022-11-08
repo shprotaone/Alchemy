@@ -15,7 +15,7 @@ public class Cook : MonoBehaviour
     [Space]
     [SerializeField] private Settings _settings;
     [SerializeField] private AudioClip _brewSound;
-    [SerializeField] private SpriteRenderer _crunchSprite;
+    
     [SerializeField] private TMP_Text _delayText;
     [SerializeField] private Firewood _firewood;
 
@@ -25,7 +25,7 @@ public class Cook : MonoBehaviour
     private AudioSource _audioSource;
 
     private bool _isRarePotion;
-    private float _speed = 0;   
+    private float _speed = 0;
     private bool _canFillBottle = false;
 
     public bool CanFillBottle => _canFillBottle;
@@ -37,15 +37,14 @@ public class Cook : MonoBehaviour
         _claudron = GetComponent<ClaudronSystem>();
         _audioSource = GetComponent<AudioSource>();
 
-        _mixingSystem.RefreshDelegate += RefreshBar;
-        _mixingSystem.RefreshDelegate += CookButtonCheck;
+        _mixingSystem.ActiveButtonBrewDelegate += RefreshBar;
+        _mixingSystem.ActiveButtonBrewDelegate += CookButtonCheck;
 
         _cookButton.onClick.AddListener(Brew);
     }
     public void Brew()
     {
         _speed = cookingSpeed;
-        _waterColor.Boiled();
         _audioSource.PlayOneShot(_brewSound);
         StartCoroutine(ProgressAnimation());
     }
@@ -69,7 +68,7 @@ public class Cook : MonoBehaviour
 
         _mixingSystem.CheckPotion();
 
-        CheckTruePotion(_mixingSystem.BottleFilled);
+        //CheckTruePotion(_mixingSystem.BottleFilled);
         _waterColor.StopBoiled();                
         _claudron.ClearClaudronButton.interactable = true;
 
@@ -93,31 +92,31 @@ public class Cook : MonoBehaviour
 
     private IEnumerator FailedDelay()
     {
-        float startTimer = _delayTime;
-        _delayText.gameObject.SetActive(true);
+        //float startTimer = _delayTime;
+        //_delayText.gameObject.SetActive(true);
 
-        while (startTimer > 0)
-        {
-            _crunchSprite.enabled = true;
-            _cookButton.interactable = false;            
-            _delayText.text = startTimer.ToString();
-            startTimer--;
-            yield return new WaitForSeconds(1f);
-        }
+        //while (startTimer > 0)
+        //{
+        //    _crunchSprite.enabled = true;
+        //    _cookButton.interactable = false;            
+        //    _delayText.text = startTimer.ToString();
+        //    startTimer--;
+        //    yield return new WaitForSeconds(1f);
+        //}
 
-        _cookButton.interactable = true;
-        _crunchSprite.enabled=false;
-        _delayText.gameObject.SetActive(false);
-        startTimer = _delayTime;
+        //_cookButton.interactable = true;
+        //_crunchSprite.enabled=false;
+        //_delayText.gameObject.SetActive(false);
+        //startTimer = _delayTime;
 
         yield return null;
     }
 
     public void CleanClaudron()
     {
-        _cookButton.interactable = true;
-        _crunchSprite.enabled = false;
-        _canFillBottle = false;
+        //_cookButton.interactable = true;
+        //_crunchSprite.enabled = false;
+        //_canFillBottle = false;
     }
 
     private float CalcCookTime()
@@ -194,7 +193,7 @@ public class Cook : MonoBehaviour
 
     private void OnDestroy()
     {
-        _mixingSystem.RefreshDelegate -= RefreshBar;
-        _mixingSystem.RefreshDelegate -= CookButtonCheck;
+        _mixingSystem.ActiveButtonBrewDelegate -= RefreshBar;
+        _mixingSystem.ActiveButtonBrewDelegate -= CookButtonCheck;
     }
 }

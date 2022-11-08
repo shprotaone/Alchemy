@@ -1,13 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ClaudronSystem : MonoBehaviour
 {
     [SerializeField] private Button _clearClaudronButton;
     [SerializeField] private SpriteRenderer _claudronSprite;
+    [SerializeField] private MixingSystemv2 _mixingSystem;
+    [SerializeField] private WaterColorv2 _waterColor;
+    [SerializeField] private Cookv2 _cookSystem;
+    [SerializeField] private ButtonEventCatcher _buttonEvent;
+
+    [SerializeField] private SpriteRenderer _crunchSprite;
 
     private Claudron _currentClaudron;
-    private MixingSystemv2 _mixingSystem;
+    
     private bool _isTutorial;
 
     public Button ClearClaudronButton => _clearClaudronButton;
@@ -19,7 +26,7 @@ public class ClaudronSystem : MonoBehaviour
         _mixingSystem = GetComponent<MixingSystemv2>();
 
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
-        _mixingSystem.RefreshDelegate += ClaudronButtonState;
+        _mixingSystem.ActiveButtonBrewDelegate += ClaudronButtonState;
     }
 
     private void ClaudronButtonState()
@@ -27,16 +34,19 @@ public class ClaudronSystem : MonoBehaviour
         if (_mixingSystem.Ingredients.Count > 0 && !_isTutorial)
         {
             _clearClaudronButton.interactable = true;
+            _buttonEvent.Button.interactable = true;
         }
         else
         {
             _clearClaudronButton.interactable = false;
+            _buttonEvent.Button.interactable = false;
         }
     }
 
     public void ClearClaudron()
     {
         _mixingSystem.ClearMixSystem();
+        _waterColor.SetColor(Color.white);
     }
 
     public void SetClaudron(Claudron claudron)
@@ -50,8 +60,16 @@ public class ClaudronSystem : MonoBehaviour
         _isTutorial = value;
     }
 
+    public void CrunchClaudron(bool value)
+    {
+        if (_crunchSprite.enabled == value)
+            return;
+
+        _crunchSprite.enabled = value;
+    }
+
     private void OnDestroy()
     {
-        _mixingSystem.RefreshDelegate -= ClaudronButtonState;
+        _mixingSystem.ActiveButtonBrewDelegate -= ClaudronButtonState;
     }
 }
