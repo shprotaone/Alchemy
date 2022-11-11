@@ -42,7 +42,7 @@ public sealed class ClickController : MonoBehaviour
     private bool _isPauseTimeBefore;
     private float _lastTimeButtonPressed;
 
-
+    public float ResetDelayTime => _resetDelayTime;
     private void OnEnable()
     {
         if (_buttonMode == PRESS_BUTTON)
@@ -198,7 +198,7 @@ public sealed class ClickController : MonoBehaviour
         Stop();
     }
 
-    private void Reset()
+    public void Reset()
     {
         DOVirtual.DelayedCall(0.5f, () =>
         {
@@ -252,6 +252,11 @@ public sealed class ClickController : MonoBehaviour
         var numberOfSegments = _progressbarParts.Length;
         var colors = _progressbarParts.Select(p => p.Color).ToArray();
         _widgetClicker.InitializeProgressBar(numberOfSegments, colors);
+    }
+
+    public void ChangeResetDelayTime(float numb)
+    {
+        _resetDelayTime = numb;
     }
 }
 

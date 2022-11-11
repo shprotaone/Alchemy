@@ -13,14 +13,40 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  rareIngredientBlock: 1
-  rareTask: 0
   ShopController: 0
+  backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
+  isTutorial: 1
+  addCommonResourceCount: 0
+  sizer: 3
+  countIngredientInPotionForSizer: 0
+  visitorTime: 50
   startMoney: 100
-  minRangeMoney: 0
+  minRangeMoney: -200
   MoneyGoal: 2500
+  timerIsActive: 0
   levelTimeInSeconds: 0
+  rentActive: 0
   rent: 0
   secondsForRent: 0
+  isCostMultiplayActive: 0
+  ingredientsForMultiplyCost: []
+  multiplyCostIngredient: 0
+  isRandomResourceAdd: 0
+  addCommonResource: 0
+  addRareResource: 0
+  countRandomResource: 0
+  countTryAddRandomResource: 0
+  isCollectIngredient: 0
+  collectCommonResourceCount: 0
+  collectRareResourceCount: 0
+  _rewardMultiply: 0
+  _penaltyMultyply: 0
+  timeDecreaseReputation: 0
+  reduceValue: 0
+  isContrabandLevel: 0
+  contrabadPotionChance: 0
+  contrabandTimer: 0
+  contrabandVisitorTimer: 0
   levelTaskText: []
-  backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
+  goalText: "\u041D\u0430\u0431\u0435\u0440\u0438 2500 \u043C\u043E\u043D\u0435\u0442"
+  DropDownMenu: 0

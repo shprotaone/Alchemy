@@ -6,21 +6,9 @@ public class BackgroundLoader : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _backgroundSprite;
 
-    private void Awake()
+    public void SetBackGround(Sprite sprite)
     {
-        LevelInitializator.OnBackGroundInit += InitBackground;
-    }
-    /// <summary>
-    /// Подгрузка заднего фона для конкретного уровня
-    /// </summary>
-    /// <param name="sprite"></param>
-    private void InitBackground(Sprite sprite)
-    {
-        _backgroundSprite.sprite = sprite;
-    }
-
-    private void OnDestroy()
-    {
-        LevelInitializator.OnBackGroundInit -= InitBackground;
+        if(sprite != null)
+            _backgroundSprite.sprite = sprite;
     }
 }

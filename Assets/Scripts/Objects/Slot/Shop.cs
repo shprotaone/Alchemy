@@ -84,6 +84,7 @@ public class Shop : MonoBehaviour
 
     }
 
+    //сделать блокировку и заполение магазина в зависимости от доступных ингредиентов
     public void FillShop()
     {
         InitShopSystem();

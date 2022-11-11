@@ -17,13 +17,12 @@ public class PotionDetector : MonoBehaviour
         _currentPotion = new Potion();
     }
 
-    public void FillCurrentPotion(List<Ingredient> ingredients)
-    {
-        
+    public Potion FillCurrentPotion(List<Ingredient> ingredients)
+    {        
         _currentPotion.FillPotion(ingredients);
         FindPotion();
         _currentPotion.SetEffect(ingredients);
-
+        return _currentPotion;
     }
 
     private void FindPotion()

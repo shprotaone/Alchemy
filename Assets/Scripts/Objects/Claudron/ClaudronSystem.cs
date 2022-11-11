@@ -17,8 +17,7 @@ public class ClaudronSystem : MonoBehaviour
     
     private bool _isTutorial;
 
-    public Button ClearClaudronButton => _clearClaudronButton;
-    
+    public Button ClearClaudronButton => _clearClaudronButton;  
     public float CookSpeed => _currentClaudron.speedMul;
 
     private void Start()
@@ -45,8 +44,11 @@ public class ClaudronSystem : MonoBehaviour
 
     public void ClearClaudron()
     {
-        _mixingSystem.ClearMixSystem();
-        _waterColor.SetColor(Color.white);
+        if (!_isTutorial)
+        {
+            _mixingSystem.ClearMixSystem();
+            _waterColor.SetColor(Color.white);
+        }
     }
 
     public void SetClaudron(Claudron claudron)

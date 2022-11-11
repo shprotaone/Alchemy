@@ -13,6 +13,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     [SerializeField] private Wobble _wobble;
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private ObjectType _type;
+    [SerializeField] private string _namePotionInBottle;
 
     private Transform _destination;
 
@@ -48,12 +49,13 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void SetPotion(Potion potion)
     {
         if (!_isFull)
-        {
-            _potionInBottle = new Potion(); 
+        {          
             FillPotionInBottle(potion, potion.ColorPotion, potion.EffectType);
 
             transform.SetParent(_tableManager.FullPotionTable.transform);
             Movement();
+
+            _namePotionInBottle = _potionInBottle.PotionName;
         }
     }
 
@@ -75,7 +77,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     /// <param name="potion"></param>
     public void FillPotionInBottle(Potion potion,Color color, ObjectType effectType)
     {
-        _potionInBottle = potion;
+        _potionInBottle = new Potion(potion);
         _isFull = true;
 
         FillWaterInBottle(color);

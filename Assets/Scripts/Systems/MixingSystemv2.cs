@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MixingSystemv2 : MonoBehaviour
@@ -13,6 +14,8 @@ public class MixingSystemv2 : MonoBehaviour
     public delegate void FilledBottle();
     public FilledBottle FilledBottleDelegateForTutorial;
 
+    public Action OnIngredientAdded;
+
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
@@ -22,6 +25,7 @@ public class MixingSystemv2 : MonoBehaviour
 
     private AudioSource _audioSource;
     private WaterColorv2 _waterColor;
+    private Potion _potionOnClaudron;
     private Cookv2 _cookSystem;
     //private Cook _cookSystem;
 
@@ -45,16 +49,21 @@ public class MixingSystemv2 : MonoBehaviour
 
         if (_isPotionApproved) 
         {
-            if (collision.CompareTag(bottleTag))
+            if (collision.CompareTag(bottleTag) && _potionOnClaudron != null)
             {
                 Bottle bottle = collision.GetComponent<Bottle>();
-                _potionDetector.CurrentPotion.SetColor(_waterColor.ResultColor);
+                _potionOnClaudron.SetColor(_waterColor.ResultColor);
 
-                bottle.SetPotion(_potionDetector.CurrentPotion);
-                CheckOnContraband(bottle.PotionInBottle);
+                CheckOnContraband(_potionOnClaudron);
+                bottle.SetPotion(_potionOnClaudron);
+                
                 FilledBottleDelegateForTutorial?.Invoke();
 
                 _claudronSystem.ClearClaudron();
+            }
+            else
+            {
+                Debug.LogWarning("Котел пустой");
             }
         }
     }
@@ -96,6 +105,7 @@ public class MixingSystemv2 : MonoBehaviour
             CheckFullColorCapacity(currentIngredient);
             currentIngredient.SetInClaudron(true);
             currentIngredient.DisableIngredient();
+            OnIngredientAdded?.Invoke();
             
             return true;
         }
@@ -118,6 +128,7 @@ public class MixingSystemv2 : MonoBehaviour
         }
         else
         {
+            _potionOnClaudron = _potionDetector.FillCurrentPotion(_ingredients);
             _isPotionApproved = true;
             Debug.Log("Вы сварили " + _potionDetector.CurrentPotion.PotionName);
         }
@@ -144,6 +155,7 @@ public class MixingSystemv2 : MonoBehaviour
             ObjectPool.SharedInstance.DestroyObject(item.gameObject);
         }
 
+        _potionOnClaudron = null;
         _ingredients.Clear();
         ActiveButtonBrewDelegate.Invoke();
     }

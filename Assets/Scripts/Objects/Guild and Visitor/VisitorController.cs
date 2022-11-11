@@ -6,23 +6,29 @@ public class VisitorController : MonoBehaviour
     public Action OnVisitorCall;
     public Action OnVisitorOut;
 
+
+
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private AudioClip _visitorFadingSound;
+    [SerializeField] private PotionTaskSystem _taskSystem;
     
     private Visitor _currentVisitor;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
 
+    private float _visitorTime;
+    private float _contrabandVisitorTime;
     private int _visitorCounter;
     private bool _firstVisitor = true;
     private bool _shopIsOpen;
 
     public Visitor CurrentVisitor => _currentVisitor;
+    public float VisitorTime => _visitorTime;
+    public float VisitorContrabandTime => _contrabandVisitorTime;
     public bool FirstVisitor => _firstVisitor;
-
     public bool ShopIsOpen => _shopIsOpen;
 
-    public void InitVisitorController()
+    public void InitVisitorController(float visitorTime, float visitorContrabandTime)
     {
         _audioSource = GetComponent<AudioSource>();
         _shopIsOpen = true;
@@ -32,6 +38,17 @@ public class VisitorController : MonoBehaviour
         
         ShopControl(_shopIsOpen);
 
+        if(visitorTime != 0)
+        {
+            _visitorTime = visitorTime;
+            _contrabandVisitorTime = visitorContrabandTime;
+        }     
+        else
+        {
+            Debug.LogWarning("Не установлено время, ставлю стандартное значение - 50");
+            _visitorTime = 50;
+            _contrabandVisitorTime = 10;
+        }       
     }
 
     public void ShopControl(bool flag)
@@ -67,7 +84,7 @@ public class VisitorController : MonoBehaviour
             }
 
             _currentVisitor.gameObject.SetActive(true);
-            _currentVisitor.Rising();
+            _currentVisitor.Rising(_taskSystem.GetTask());
             _audioSource.Play();
            
             _prevVisitor = _currentVisitor;           

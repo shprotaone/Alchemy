@@ -163,7 +163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 280460991773176298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d15a8baa14f05fd4ab14ce1dd32ae179, type: 3}
+  m_Script: {fileID: 11500000, guid: dacba0c6aaea16b44bcc73861942fa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _taskSystem: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   - {fileID: 4402160318858416389}
   - {fileID: 7166672809628269856}
   - {fileID: 2409878017292102856}
-  _taskImages:
+  _UIImages:
   - {fileID: 280460991773176296}
   - {fileID: 280460992275031958}
 --- !u!1 &280460991966900768

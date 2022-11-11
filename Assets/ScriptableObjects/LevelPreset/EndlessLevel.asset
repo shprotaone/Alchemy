@@ -13,17 +13,43 @@ MonoBehaviour:
   m_Name: EndlessLevel
   m_EditorClassIdentifier: 
   levelNumber: 0
-  rareIngredientBlock: 0
-  rareTask: 0
   ShopController: 1
+  backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
+  isTutorial: 0
+  addCommonResourceCount: 100
+  sizer: 0
+  countIngredientInPotionForSizer: 0
+  visitorTime: 0
   startMoney: 1000
   minRangeMoney: 0
   MoneyGoal: 1000000
+  timerIsActive: 0
   levelTimeInSeconds: 0
+  rentActive: 0
   rent: 0
   secondsForRent: 0
+  isCostMultiplayActive: 0
+  ingredientsForMultiplyCost: []
+  multiplyCostIngredient: 0
+  isRandomResourceAdd: 0
+  addCommonResource: 0
+  addRareResource: 0
+  countRandomResource: 0
+  countTryAddRandomResource: 0
+  isCollectIngredient: 0
+  collectCommonResourceCount: 0
+  collectRareResourceCount: 0
+  _rewardMultiply: 0
+  _penaltyMultyply: 0
+  timeDecreaseReputation: 0
+  reduceValue: 0
+  isContrabandLevel: 0
+  contrabadPotionChance: 0
+  contrabandTimer: 0
+  contrabandVisitorTimer: 0
   levelTaskText:
   - "\u042D\u0442\u043E \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u044B\u0439
     \u0443\u0440\u043E\u0432\u0435\u043D\u044C, \u0438\u0433\u0440\u0430\u0439 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
     \u0445\u043E\u0447\u0435\u0448\u044C"
-  backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
+  goalText: 
+  DropDownMenu: 0
