@@ -12,7 +12,7 @@ public sealed class GuildReputationController : Singleton<GuildReputationControl
     [SerializeField] private int _guildPenaltyReputaion = 3;
     [SerializeField] private int _friendlyGuildRewardReputaion = 3;
     [SerializeField] private int _enemyGuildPenaltyReputaion = 2;
-    [SerializeField] private int _startReputation = 80;
+    [SerializeField] private int _startReputation;
     private Dictionary<GuildsType, int> _playerReputation;
     
     private void Awake()

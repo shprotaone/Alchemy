@@ -7,4 +7,6 @@ public sealed class Guild : ScriptableObject
     public GuildsType CurrentGuild;
     public Guild[] EnemyGuilds;
     public Guild[] FriendlyGuilds;
+    public IngredientData PortionForGoodReputation;
+
 }

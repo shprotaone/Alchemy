@@ -18,3 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 02ed2c2030bdfa3448ac4f6b348651b7, type: 2}
   FriendlyGuilds:
   - {fileID: 11400000, guid: 5e83b678b938c4943aa0f1646e606536, type: 2}
+  PortionForGoodReputation: {fileID: 11400000, guid: 75c3e5b4c6a362d43a4697d6ee5c753c,
+    type: 2}
