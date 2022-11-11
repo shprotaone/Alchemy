@@ -35,13 +35,6 @@ public class WaterColorv2 : MonoBehaviour
         _waterImage.DOColor(_resultColor, 1);
     }
 
-    public void Boiled()
-    {
-        _waterImage.sprite = _boiledWaterSprite;
-        //_waterImage.color = _resultColor;
-        //_waterImage.material = _boilMaterial;        
-    }
-
     public void StopBoiled()
     {
         _waterImage.sprite = _waterSprite;

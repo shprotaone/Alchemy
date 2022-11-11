@@ -9,9 +9,11 @@ public class Step11 : Step
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private RectTransform _dialogWindowPos;
     [SerializeField] private Button _cameraMovementButton;
+    [SerializeField] private GameObject _frameSprite;
 
     public override void StepAction()
     {
+        _frameSprite.SetActive(false);
         _visitorController.OnVisitorOut += _tutorialManager.NextStep;
         _brightObject.BrightVisitors(false);
 

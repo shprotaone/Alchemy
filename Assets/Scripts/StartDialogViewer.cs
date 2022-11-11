@@ -17,12 +17,7 @@ public class StartDialogViewer : MonoBehaviour
     private string[] _dialogArray;
     private int _dialogIndex = 0;
 
-    private void Awake()
-    {
-        LevelInitializator.OnStartWindowInit += InitDialog;             
-    }
-
-    private void InitDialog(string[] textArray)
+    public void InitDialog(string[] textArray)
     {
         _box.gameObject.SetActive(true);
         _dialogArray = new string[textArray.Length];
@@ -65,6 +60,5 @@ public class StartDialogViewer : MonoBehaviour
     private void OnDisable()
     {
         _nextButton.onClick.RemoveListener(DisableViewer);
-        LevelInitializator.OnStartWindowInit -= InitDialog;
     }
 }

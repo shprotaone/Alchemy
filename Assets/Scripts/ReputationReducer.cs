@@ -14,7 +14,15 @@ public class ReputationReducer : MonoBehaviour
     {
         _valueRep = valueRep;
         _timerVal = timer;
-        GameTimer.OnSecondChange += Reduce;
+
+        if(_valueRep != 0 || _timerVal != 0)
+        {
+            GameTimer.OnSecondChange += Reduce;
+        }
+        else
+        {
+            Debug.LogWarning("не указано значение репутации или не указан интервал");
+        }      
     }
 
     public void Reduce(float time)

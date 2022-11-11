@@ -3,8 +3,8 @@
 public class PotionTaskSystem : MonoBehaviour
 {    
     [SerializeField] private JSONReader _jsonReader;
-    [SerializeField] private StringToSprite _stringToSprite;
 
+    [SerializeField] private StringToSprite _stringToSprite;
     [SerializeField] private PotionCyclopedia _potionCyclopedia;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private Money _moneySystem;
@@ -16,8 +16,8 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private Transform _jarTransform;
 
     [SerializeField] private bool _imageTask;
-    
-    private RewardCalculator _rewardCalculator;
+
+    private float _coinReward;
     private float _rewardMultiply = 1f;
     private float _penaltyMultiply = 1f;
     
@@ -29,39 +29,32 @@ public class PotionTaskSystem : MonoBehaviour
     public Potion CurrentPotion => _currentPotion;
     public GameObject CoinPrefab => _coinPrefab;
     public Transform JarTransform => _jarTransform;
-    public PotionSizer PotionSizer => _potionSizer; 
+    public PotionSizer PotionSizer => _potionSizer;
+    public bool ImageTask => _imageTask;
 
     /// <summary>
     /// Инициализация текущего списка зелий
     /// </summary>
     /// 
     public void Init()
-    {        
-        _rewardCalculator = new RewardCalculator();
-        _currentPotion = new Potion();
-    }
+    {                
+        _currentPotion = new Potion();       
+    }  
 
-    public void SetPotionSizer(LevelNumber levelNumber)
+    public void SetPotionSizer(SizerType sizer, int countForCustomSizer)
     {
         _potionSizer = _jsonReader.PotionSizer;
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
-        _potionSizer = sizerSelector.SizerSelector(levelNumber,0);
-
-        _potionCyclopedia.InitPotionCyclopedia();
-    }        
-
-    public void SetPotionSizer(LevelNumber levelNumber, int countForCustomSizer)
-    {
-        _potionSizer = _jsonReader.PotionSizer;
-        PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
-        _potionSizer = sizerSelector.SizerSelector(levelNumber, countForCustomSizer);
+        _potionSizer = sizerSelector.SizerSelector(sizer);
+        _potionSizer = sizerSelector.SetRangeSizerWithRandom(countForCustomSizer);
 
         _potionCyclopedia.InitPotionCyclopedia();
     }
 
-    public void TakeTask(PotionTask task)
+    public PotionTask GetTask()
     {
         PotionData currentPotionData;
+        PotionTask potionTask;
 
         if (_tutorialLevel)
         {
@@ -71,59 +64,40 @@ public class PotionTaskSystem : MonoBehaviour
         {
             currentPotionData = GetTaskPotion();
         }
-          
-        _currentPotion.FillPotion(currentPotionData);
-        FillViewPotion(task);       
-    }
 
-    /// <summary>
-    /// Заполняет изображение или название
-    /// </summary>
-    /// <param name="task"></param>
-    private void FillViewPotion(PotionTask task)
-    {
+        _currentPotion = new Potion(currentPotionData);
 
-        CheckContrabandPotion();
-
-        if (_imageTask)
-        {
-            Sprite[] ingredientsSprite = new Sprite[_currentPotion.Ingredients.Count];
-
-            for (int i = 0; i < ingredientsSprite.Length; i++)
-            {
-                if (_currentPotion.Ingredients[i] != null)
-                    ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(_currentPotion.Ingredients[i]);
-            }
-
-            task.FillTask(ingredientsSprite, GetReward(_currentPotion));
-        }
-        else
-        {
-            task.FillTask(_currentPotion.PotionName, GetReward(_currentPotion));
-        }
-    }
-
-    public void CheckContrabandPotion()
-    {
-        if(_contrabandPotionSystem.ContrabandPotion != null)
+        if (_contrabandPotionSystem.IsActive)
         {
             if (_currentPotion.PotionName == _contrabandPotionSystem.ContrabandPotion.PotionName)
             {
                 _currentPotion.SetContraband(true);
             }
-            else _currentPotion.SetContraband(false);
         }
+        
+
+        potionTask = new PotionTask(_currentPotion,_visitorController.CurrentVisitor.TaskView, _visitorController.CurrentVisitor);
+        _coinReward = potionTask.RewardCoin;
+        _coinReward = CalculateReward();
+
+        potionTask.SetReward((int)_coinReward);
+
+        return potionTask;
     }
 
-    public void TaskComplete(int reward, float rewardRep)
+    public void TaskComplete(float rewardRep)
     {
-        _moneySystem.Increase(reward);
+        _moneySystem.Increase((int)_coinReward);
         
         //_potionCyclopedia.AddNewPotion(_currentPotion);
         _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
 
         _visitorController.DisableVisitor();
-        GetGemReward(_currentPotion);
+
+        if (_currentPotion.Contraband)
+        {
+            GetGemReward(_currentPotion);
+        }
     }
 
     public void TaskCanceled(float penaltyRep)
@@ -134,7 +108,24 @@ public class PotionTaskSystem : MonoBehaviour
 
     private PotionData GetTaskPotion()
     {
-        _numberTask = Random.Range(0, _potionSizer.Potions.Length);
+        int digit  = Random.Range(0,101);
+
+        if (!_contrabandPotionSystem)
+        {
+            _numberTask = Random.Range(0, _potionSizer.Potions.Length);
+        }
+        else
+        {
+            if (digit <= _contrabandPotionSystem.ContrabandPotionChance)
+            {
+                return _contrabandPotionSystem.ContrabandPotion.PotionData;
+            }
+            else
+            {
+                _numberTask = Random.Range(0, _potionSizer.Potions.Length);
+            }
+        }
+        
         return _potionSizer.Potions[_numberTask];
     }    
 
@@ -144,30 +135,12 @@ public class PotionTaskSystem : MonoBehaviour
         return _potionSizer.Potions[0];
     }
 
-    private int GetReward(Potion potion)
-    {
-        int reward = 0;
-        float resultReward = 0;
-
-        _rewardCalculator.Calculate(_visitorController.CurrentVisitor.Guild, potion.Rarity);
-
-        resultReward = _rewardCalculator.Reward * _rewardMultiply;
-
-        reward = (int)resultReward;
-        reward = LowRepReward(reward);
-        
-        return reward;
-    }
-
     private void GetGemReward(Potion potion)
     {
-        if (potion.Contraband)
-        {
-            _contrabandPotionSystem.AddCounter();
-        }
+        _contrabandPotionSystem.AddCounter();
     }
 
-    private int LowRepReward(int stockReward)
+    public int LowRepReward(int stockReward)
     {
         bool divideReward = _guildSystem.GuildDictionary[_visitorController.CurrentVisitor.Guild] < 60;
 
@@ -186,11 +159,42 @@ public class PotionTaskSystem : MonoBehaviour
     /// <param name="multiply"></param>
     public void SetRewardMultiply(float multiply)
     {
-        _rewardMultiply = multiply;
+        if(multiply != 0)
+        {
+            _rewardMultiply = multiply;
+        }       
+    }
+
+    public int CalculateReward()
+    {
+        float result = _coinReward * _rewardMultiply;
+        result = LowRepReward((int)result);
+
+        return (int)result;
     }
 
     public void SetPenaltyMultiply(float multiply)
     {
-        _penaltyMultiply = multiply;
+        if (multiply != 0)
+        {
+            _penaltyMultiply = multiply;
+        }
+        else
+        {
+            Debug.LogWarning("Множитель равен 0, поэтому отключен");
+        }        
+    }
+
+    public Sprite[] GetIngredientSprites(PotionTask task)
+    {
+        Sprite[] ingredientsSprite = new Sprite[task.CurrentPotion.Ingredients.Count];
+
+        for (int i = 0; i < ingredientsSprite.Length; i++)
+        {
+            if (task.CurrentPotion.Ingredients[i] != null)
+                ingredientsSprite[i] = _stringToSprite.ParseStringToSprite(task.CurrentPotion.Ingredients[i]);
+        }
+
+        return ingredientsSprite;
     }
 }

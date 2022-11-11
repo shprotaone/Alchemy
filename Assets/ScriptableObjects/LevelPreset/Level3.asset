@@ -13,15 +13,39 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelNumber: 3
-  rareIngredientBlock: 0
-  rareTask: 1
   ShopController: 1
+  backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}
+  isTutorial: 0
+  addCommonResourceCount: 3
+  sizer: 0
+  countIngredientInPotionForSizer: 0
+  visitorTime: 50
   startMoney: 1000
   minRangeMoney: -600
   MoneyGoal: 10000
+  timerIsActive: 1
   levelTimeInSeconds: 300
+  rentActive: 1
   rent: 100
   secondsForRent: 20
+  isCostMultiplayActive: 0
+  ingredientsForMultiplyCost: []
+  multiplyCostIngredient: 0
+  isRandomResourceAdd: 0
+  addCommonResource: 0
+  addRareResource: 0
+  countRandomResource: 0
+  countTryAddRandomResource: 0
+  isCollectIngredient: 0
+  collectCommonResourceCount: 0
+  collectRareResourceCount: 0
+  _rewardMultiply: 0
+  _penaltyMultyply: 0
+  timeDecreaseReputation: 0
+  reduceValue: 0
+  isContrabandLevel: 0
+  contrabandTimer: 0
+  contrabandVisitorTimer: 0
   levelTaskText:
   - "\u0412\u044B \u0434\u043E\u0431\u0440\u0430\u043B\u0438\u0441\u044C \u0434\u043E
     \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0433\u043E \u043F\u043E\u0441\u0435\u043B\u043A\u0430,
@@ -57,4 +81,10 @@ MonoBehaviour:
     \u043F\u043E\u0431\u043E\u043B\u044C\u0448\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432
     \u0438 10 000 \u0437\u043E\u043B\u043E\u0442\u044B\u0445 \u0447\u0442\u043E\u0431\u044B
     \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u043F\u0443\u0442\u044C"
-  backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}
+  goalText: "\u041D\u0430\u0431\u0435\u0440\u0438 10000\r\n\u0412\u0441\u0435\u0445
+    \u0440\u0435\u0434\u043A\u0438\u0445 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432
+    \u043D\u0443\u0436\u043D\u043E \u043F\u043E 15 \u0435\u0434\u0438\u043D\u0438\u0446\r\n\r\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F:
+    \r\n*\u0410\u0440\u0435\u043D\u0434\u0430 - 100\r\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
+    \u0434\u043E\u043B\u0433 - 600\r\n*\u0414\u0440\u0435\u0432\u0435\u0441\u043D\u044B\u0439
+    \u0433\u0440\u0438\u0431 2x \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C\r\n"
+  DropDownMenu: 0

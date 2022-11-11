@@ -4,26 +4,26 @@ using DG.Tweening;
 using System.Collections;
 
 public class Visitor : MonoBehaviour
-{
-    private const float stockTime = 50;
-    private const float contrabandTime = 10;
-
+{  
     [SerializeField] private GuildsType _currentGuild;
     [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private PotionTask _currentTask;
+    [SerializeField] private PotionTaskView _currentTask;
     [SerializeField] private TMP_Text _timerText;
 
     private SpriteRenderer _visitorImage;
+    private PotionTask _task;
 
     private bool _firstTask = true;
     private float _timeVisitor;
 
+
     public GuildsType Guild => _currentGuild;
+    public PotionTaskView TaskView => _currentTask;
 
     private void Awake()
     {
         _visitorController.OnVisitorOut += Fading;
-        _timeVisitor = stockTime;
+        _timeVisitor = _visitorController.VisitorTime;
     }
 
     private void OnEnable()
@@ -36,15 +36,12 @@ public class Visitor : MonoBehaviour
         if (collision.CompareTag("Bottle"))
         {
             Bottle bottle = collision.GetComponent<Bottle>();
-            if (bottle.IsFull && _currentTask.ChekResult(bottle.PotionInBottle))
+            if (bottle.IsFull && _task.ChekResult(bottle.PotionInBottle))
             {
                 if (_firstTask)
                 {
                     _firstTask = false;
                 }
-
-                //bottle.ResetBottle();
-                //bottle.Movement();
 
                 bottle.ReturnEffect();
                 bottle.DestroyBottle();
@@ -86,9 +83,11 @@ public class Visitor : MonoBehaviour
         _timerText.text = seconds.ToString();
     }
 
-    public void Rising()
+    public void Rising(PotionTask task)
     {
-        _currentTask.InitTask();
+        _task = new PotionTask(task);
+        _currentTask.InitTask(_task);
+
         SetTime();
 
         StartCoroutine(Timer());
@@ -99,13 +98,13 @@ public class Visitor : MonoBehaviour
 
     private void SetTime()
     {
-        if (_currentTask.CurrentPotion.Contraband)
+        if (_task.CurrentPotion.Contraband)
         {
-            _timeVisitor = contrabandTime;
+            _timeVisitor = _visitorController.VisitorContrabandTime;
         }
         else
         {
-            _timeVisitor = stockTime;
+            _timeVisitor = _visitorController.VisitorTime;
         }
     }
 
@@ -129,5 +128,6 @@ public class Visitor : MonoBehaviour
     private void OnDisable()
     {
         _visitorController.OnVisitorOut -= Fading;
+        _task = null;
     }
 }

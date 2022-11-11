@@ -13,15 +13,40 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   levelNumber: 2
-  rareIngredientBlock: 0
-  rareTask: 1
   ShopController: 1
+  backgroundSprite: {fileID: 21300000, guid: 726ab7e9ccc7d8249b6dd20cf5160c9e, type: 3}
+  isTutorial: 0
+  addCommonResourceCount: 5
+  sizer: 2
+  countIngredientInPotionForSizer: 0
+  visitorTime: 50
   startMoney: 500
   minRangeMoney: -200
-  MoneyGoal: 10000
+  MoneyGoal: 7000
+  timerIsActive: 1
   levelTimeInSeconds: 300
+  rentActive: 1
   rent: 50
   secondsForRent: 20
+  isCostMultiplayActive: 0
+  ingredientsForMultiplyCost:
+  - {fileID: 11400000, guid: 88cabeea81e06e746bc284cad1fa2789, type: 2}
+  multiplyCostIngredient: 2
+  isRandomResourceAdd: 0
+  addCommonResource: 0
+  addRareResource: 0
+  countRandomResource: 0
+  countTryAddRandomResource: 0
+  isCollectIngredient: 1
+  collectCommonResourceCount: 1
+  collectRareResourceCount: 0
+  _rewardMultiply: 0
+  _penaltyMultyply: 0
+  timeDecreaseReputation: 0
+  reduceValue: 0
+  isContrabandLevel: 0
+  contrabandTimer: 0
+  contrabandVisitorTimer: 0
   levelTaskText:
   - "\u0412\u044B \u043F\u0440\u0438\u0435\u0445\u0430\u043B\u0438 \u0432 \u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0443\u044E
     \u0434\u0435\u0440\u0435\u0432\u0443\u0448\u043A\u0443, \u043D\u0435\u0434\u0430\u043B\u0435\u043A\u043E
@@ -49,4 +74,8 @@ MonoBehaviour:
     \u0440\u0435\u0434\u043A\u0438\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B
     \u0438 10 000 \u0437\u043E\u043B\u043E\u0442\u044B\u0445, \u043F\u0443\u0442\u044C
     \u043A \u0433\u043E\u0440\u043E\u0434\u0443 \u043D\u0435 \u0431\u043B\u0438\u0437\u043A\u0438\u0439"
-  backgroundSprite: {fileID: 21300000, guid: 726ab7e9ccc7d8249b6dd20cf5160c9e, type: 3}
+  goalText: "\u041D\u0430\u0431\u0435\u0440\u0438 7000\n\u0423\u0441\u043B\u043E\u0432\u0438\u044F:
+    \r\n*\u0410\u0440\u0435\u043D\u0434\u0430 - 50 \u0437\u043E\u043B\u043E\u0442\u0430
+    \u043A\u0430\u0436\u0434\u044B\u0435 20 \u0441\u0435\u043A\u0443\u043D\u0434\r\n*\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u044B\u0439
+    \u0434\u043E\u043B\u0433 - 200\r\n"
+  DropDownMenu: 0

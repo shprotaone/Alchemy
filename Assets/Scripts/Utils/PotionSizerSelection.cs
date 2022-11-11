@@ -12,36 +12,25 @@ public class PotionSizerSelection
         _resultSizer = new PotionSizer();
     }
 
-    public PotionSizer SizerSelector(LevelNumber levelNumber, int valueForRangeSizer)
+    public PotionSizer SizerSelector(SizerType sizer)
     {
-        switch (levelNumber)
+        switch (sizer)
         {
-            case LevelNumber.EndlessLevel:
+            case SizerType.FULL:
                 SetFullSizer();
-                return _fullSizer;
-            case LevelNumber.Level1:
+                return _resultSizer;
+            case SizerType.TWICEINGREDIENTS:
+                SetSizerWithIngredientCount(2);
+                return _resultSizer;
+            case SizerType.THIRDINGREDIENTS:
+                SetSizerWithIngredientCount(3);
+                return _resultSizer;
+            case SizerType.COMMONINGREDIENTS:
                 SetCommonPotionSizer();
                 return _resultSizer;
-            case LevelNumber.Level2:
-                SetSizerWithThirdIngredient();
-                return _resultSizer;
-            case LevelNumber.Level3:
-                SetFullSizer();
-                return _fullSizer;
-            case LevelNumber.Level3a:
-                SetRangeSizerWithRandom(valueForRangeSizer);
-                return _resultSizer;
-            case LevelNumber.Level4:
-                SetFullSizer();
-                return _resultSizer;
-            case LevelNumber.Level5:
-                SetFullSizer();
-                return _resultSizer;
-            case LevelNumber.Level6:
-                SetFullSizer();
-                return _resultSizer;
             default:
-                return _fullSizer;
+                Debug.LogWarning("“ип по количеству ингредиентов не выбран");
+                    return _fullSizer;
         }
     }
 
@@ -61,7 +50,7 @@ public class PotionSizerSelection
         _resultSizer.Potions = result.ToArray();
     }
 
-    private void SetSizerWithThirdIngredient()
+    private void SetSizerWithIngredientCount(int ingredientsCount)
     {
         List<PotionData> result = new List<PotionData>();
 
@@ -69,7 +58,7 @@ public class PotionSizerSelection
         {
             item.SetIngredients();
 
-            if (item.ingredients.Count <= 3)
+            if (item.ingredients.Count <= ingredientsCount)
             {
                 result.Add(item);               
             }
@@ -91,20 +80,28 @@ public class PotionSizerSelection
         _resultSizer.Potions = result.ToArray();
     }
 
-    private void SetRangeSizerWithRandom(int range)
+    public PotionSizer SetRangeSizerWithRandom(int range)
     {
         List<PotionData> result = new List<PotionData>();
         PotionData item;
 
-        for (int i = 0; i < range; i++)
+        if(range != 0)
         {
-            int numberPotion = Random.Range(0, _fullSizer.Potions.Length);
-            item = _fullSizer.Potions[numberPotion];
-            item.SetIngredients();  //возможно лишнее 
+            for (int i = 0; i < range; i++)
+            {
+                int numberPotion = Random.Range(0, _resultSizer.Potions.Length);
+                item = _resultSizer.Potions[numberPotion];
+                item.SetIngredients();  //возможно лишнее 
 
-            result.Add(item);
+                result.Add(item);
+            }
+            _resultSizer.Potions = result.ToArray();
         }
-
-        _resultSizer.Potions = result.ToArray();
+        else
+        {
+            Debug.LogWarning("”казан нулевой диапазон");
+        }
+       
+        return _resultSizer;
     }
 }

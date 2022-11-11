@@ -13,15 +13,40 @@ MonoBehaviour:
   m_Name: Level3.1
   m_EditorClassIdentifier: 
   levelNumber: 4
-  rareIngredientBlock: 0
-  rareTask: 1
   ShopController: 0
+  backgroundSprite: {fileID: 21300000, guid: 5b98b2ac3477f4e49bf786330b473532, type: 3}
+  isTutorial: 0
+  addCommonResourceCount: 10
+  sizer: 1
+  countIngredientInPotionForSizer: 5
+  visitorTime: 30
   startMoney: 2000
   minRangeMoney: -50000
-  MoneyGoal: 0
+  MoneyGoal: 100000
+  timerIsActive: 1
   levelTimeInSeconds: 180
+  rentActive: 0
   rent: 50
   secondsForRent: 20
+  isCostMultiplayActive: 0
+  ingredientsForMultiplyCost: []
+  multiplyCostIngredient: 0
+  isRandomResourceAdd: 0
+  addCommonResource: 0
+  addRareResource: 0
+  countRandomResource: 0
+  countTryAddRandomResource: 0
+  isCollectIngredient: 0
+  collectCommonResourceCount: 0
+  collectRareResourceCount: 0
+  _rewardMultiply: 0.8
+  _penaltyMultyply: 0
+  timeDecreaseReputation: 0
+  reduceValue: 0
+  isContrabandLevel: 1
+  contrabadPotionChance: 30
+  contrabandTimer: 10
+  contrabandVisitorTimer: 20
   levelTaskText:
   - "\u041B\u0430\u0433\u0435\u0440\u044C \u043A\u043E\u043D\u0442\u0440\u0430\u0431\u0430\u043D\u0434\u0438\u0441\u0442\u043E\u0432.
     \u041C\u0440\u0430\u0447\u043D\u043E\u0435 \u043C\u0435\u0441\u0442\u043E, \u0433\u0434\u0435
@@ -48,4 +73,7 @@ MonoBehaviour:
     \u0434\u043E\u043B\u0433\u043E, \u0435\u0441\u043B\u0438 \u0432\u0430\u0441 \u043F\u043E\u0439\u043C\u0430\u044E\u0442
     \u0441 \u043D\u0438\u043C, \u0432\u044B\u043F\u0438\u0448\u0443\u0442 \u0431\u043E\u043B\u044C\u0448\u043E\u0439
     \u0448\u0442\u0440\u0430\u0444"
-  backgroundSprite: {fileID: 21300000, guid: 5b98b2ac3477f4e49bf786330b473532, type: 3}
+  goalText: "\u041F\u0440\u043E\u0434\u0435\u0440\u0436\u0438\u0441\u044C \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0435
+    \u0432\u0440\u0435\u043C\u044F\r\n\r\n\u0414\u043E\u043B\u0433 \u043D\u0435 \u0434\u043E\u043B\u0436\u0435\u043D
+    \u043F\u0440\u0435\u0432\u044B\u0441\u0438\u0442\u044C 50000 \u043C\u043E\u043D\u0435\u0442\r\n"
+  DropDownMenu: 0

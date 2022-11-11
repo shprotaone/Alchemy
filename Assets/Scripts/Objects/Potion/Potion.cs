@@ -6,45 +6,62 @@ using UnityEngine;
 public class Potion
 {
     private ObjectType _effectType;
-    private ResourceRarity _rarityType;   
-
+    private ResourceRarity _rarityType;
+    private PotionData _potionData;
     private List<string> _ingredients;
     private string _name;
     private bool _contraband;
 
     private GuildsType _guildType;
+    private Color _color;
 
-    public GuildsType GuildsType => _guildType;
-    public ResourceRarity Rarity => _rarityType;
     public string PotionName => _name;
-    public List<string> Ingredients => _ingredients;
-    public ObjectType EffectType => _effectType;
     public bool Contraband => _contraband;
+    public List<string> Ingredients => _ingredients;
+    public GuildsType GuildsType => _guildType;
+    public ResourceRarity Rarity => _rarityType; 
+    public ObjectType EffectType => _effectType;
+    public Color ColorPotion => _color;
+    public PotionData PotionData => _potionData;
 
-    public void FillPotion(PotionData potionData)
+    public Potion() { }
+    public Potion(Potion potion)
     {
-        _ingredients = new List<string>();
-
-        _name = potionData.name;
-        SetGuild(potionData.guild);
-        SetRarity(potionData.rarity);
-
-        _ingredients = potionData.ingredients;
+        _name = potion.PotionName;
+        _contraband = potion.Contraband;
+        _ingredients = potion.Ingredients;
+        _guildType = potion.GuildsType;
+        _rarityType = potion.Rarity;
+        _effectType = potion.EffectType;
+        _color = potion.ColorPotion;
     }
 
-    public void FillPotion(List<Ingredient> ingredients)        //посмотреть для чего перевод в массив string
+    public Potion(PotionData potionData)
+    {
+        _potionData = potionData;
+        _name = potionData.name;
+        _ingredients = potionData.ingredients;
+        _guildType = SetGuild(potionData.guild);
+        _rarityType = SetRarity(potionData.rarity);
+    }
+
+    public void FillPotion(List<Ingredient> ingredients)        //заполнение для поиска
     {
         _ingredients = new List<string>();
 
         for (int i = 0; i < ingredients.Count; i++)
         {
-            _ingredients.Add(IngredientsToString(ingredients[i]));           
+            _ingredients.Add(IngredientsToString(ingredients[i]));
         }
     }
 
     public void SetNamePotion(string name)
     {
         _name = name;
+    }
+    public void SetColor(Color color)
+    {
+        _color = color;
     }
 
     public void SetEffect(List<Ingredient> ingredients)
@@ -73,10 +90,10 @@ public class Potion
         };
     }
 
-    public void SetGuild(string guild)
+    public GuildsType SetGuild(string guild)
     {
         GuildChecker guildChecker = new GuildChecker();
-        _guildType = guildChecker.GuildCheck(guild);
+        return guildChecker.GuildCheck(guild);
     }
 
     public void SetGuild(GuildsType guild)
@@ -84,10 +101,10 @@ public class Potion
         _guildType = guild;
     }
 
-    public void SetRarity(string rarity)
+    public ResourceRarity SetRarity(string rarity)
     {
         RarityChecker rarityChecker = new RarityChecker();
-        _rarityType = rarityChecker.RarityCheck(rarity);
+        return rarityChecker.RarityCheck(rarity);       
     }
 
     private string IngredientsToString(Ingredient ingredient)
