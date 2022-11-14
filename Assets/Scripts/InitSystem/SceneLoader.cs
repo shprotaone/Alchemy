@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static readonly int MenuScene = 0;
+    public static readonly int GameScene = 1;
+
     [SerializeField] private LevelPresetLoader _loader;
     private LevelPreset _levelPreset;
 
@@ -26,6 +29,6 @@ public class SceneLoader : MonoBehaviour
         if(_loader != null)
         _loader.SetLevelPreset(_levelPreset);
 
-        LoadLevel(1);
+        LoadLevel(GameScene);
     }
 }

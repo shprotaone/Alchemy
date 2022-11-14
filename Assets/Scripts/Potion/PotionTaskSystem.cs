@@ -110,7 +110,7 @@ public class PotionTaskSystem : MonoBehaviour
     {
         int digit  = Random.Range(0,101);
 
-        if (!_contrabandPotionSystem)
+        if (!_contrabandPotionSystem.IsActive)
         {
             _numberTask = Random.Range(0, _potionSizer.Potions.Length);
         }

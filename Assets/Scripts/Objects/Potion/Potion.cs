@@ -42,7 +42,8 @@ public class Potion
         _name = potionData.name;
         _ingredients = potionData.ingredients;
         _guildType = SetGuild(potionData.guild);
-        _rarityType = SetRarity(potionData.rarity);
+
+        SetRarity(potionData.rarity);
     }
 
     public void FillPotion(List<Ingredient> ingredients)        //заполнение для поиска
@@ -101,10 +102,10 @@ public class Potion
         _guildType = guild;
     }
 
-    public ResourceRarity SetRarity(string rarity)
+    public void SetRarity(string rarity)
     {
         RarityChecker rarityChecker = new RarityChecker();
-        return rarityChecker.RarityCheck(rarity);       
+        _rarityType = rarityChecker.RarityCheck(rarity);       
     }
 
     private string IngredientsToString(Ingredient ingredient)

@@ -40,7 +40,9 @@ public class Money : MonoBehaviour
 
     public bool Decrease(int value)
     {
-        if (_moneyMinRange<value)
+        bool canBuy = (_money - value) > _moneyMinRange;
+
+        if (_moneyMinRange < value && canBuy)
         {
             _money -= value;           
             OnMoneyChanged?.Invoke();

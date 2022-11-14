@@ -19,6 +19,12 @@ public class ShopSlot : MonoBehaviour
     private IngredientData _ingredient;    
     
     public IngredientData IngredienData => _ingredient;
+
+    private void Start()
+    {
+        _buyButton.onClick.AddListener(Buy);
+    }
+
     private void OnEnable()
     {
         _shopSystem = GetComponentInParent<Shop>();

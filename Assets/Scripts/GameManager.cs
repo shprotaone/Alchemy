@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private InGameTimeController _gameTimeController;
+
+    [SerializeField] private GameProgress _gameProgress;
     [SerializeField] private GameObject _completeLevelPanel;
     [SerializeField] private GameObject _defeatLevelPanel;
 
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
     {
         _completeLevelPanel.SetActive(true);
         _gameTimeController.PauseGame();
+        _gameProgress.SetReachedLevel(LevelPresetLoader.instance.LevelPreset.levelNumber);
     }
 
     public void DefeatLevel()

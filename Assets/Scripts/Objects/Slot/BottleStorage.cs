@@ -19,9 +19,9 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract
     private int _amount;
     private bool _interract;
 
-    private void OnEnable()
+    public void InitBottleStorage(int bottleCount)
     {
-        _amount = standartBottleCount;
+        _amount = bottleCount;
         RefreshAmount();
     }
 

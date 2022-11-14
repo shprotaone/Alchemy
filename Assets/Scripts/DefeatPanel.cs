@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DefeatPanel : MonoBehaviour
+public class DefeatPanel : MonoBehaviour,IMenu
 {
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _exitButton;
@@ -31,13 +31,13 @@ public class DefeatPanel : MonoBehaviour
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         //_levelInitializator.SetRestartLevel(true);
         SceneManager.LoadScene(1);
     }
 
-    private void Exit()
+    public void Exit()
     {
         //_levelInitializator.SetRestartLevel(false);
         SceneManager.LoadScene(0);

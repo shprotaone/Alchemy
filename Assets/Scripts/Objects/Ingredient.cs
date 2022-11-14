@@ -11,10 +11,10 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     [SerializeField] private Color _color;
     [SerializeField] private AudioClip _backSound;
     [SerializeField] private ObjectType _type;
+    [SerializeField] private AudioSource _audioSource;
  
     private Slot _slot;
     private IngredientData _ingredientData;
-    private AudioSource _audioSource;
    
     private Tween _myTween;
     
@@ -28,9 +28,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     private void OnEnable()
     {
         _dragableImage = GetComponent<SpriteRenderer>();
-        
-        //_audioSource = GetComponent<AudioSource>();
-        //_audioSource.PlayOneShot(_ingredientData.dragSound);
+   
     }
 
     public void Movement()
@@ -40,7 +38,8 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
             _myTween = transform.DOMove(_slot.transform.position, moveSpeed, false)
                             .OnComplete(ReturnToSlot).SetEase(Ease.Unset);
         }    
-        //_audioSource.PlayOneShot(_backSound);
+
+        _audioSource?.PlayOneShot(_backSound);
     }
 
     public void SetSlot(Slot slot)
@@ -57,6 +56,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     {
         _ingredientData = ingredient;
         DrawIngredient();
+        _audioSource.PlayOneShot(_ingredientData.dragSound);
     }
 
     private void DrawIngredient()

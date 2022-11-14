@@ -16,6 +16,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private Shop _shopSystem;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Money _money;
+    [SerializeField] private BottleStorage _bottleStorage;
     [SerializeField] private BackgroundLoader _backGroundLoader;
     [SerializeField] private StartDialogViewer _startDialogViewer;
     [SerializeField] private UniversalGlobalTask _universalGlobalTask;
@@ -56,32 +57,45 @@ public class LevelInitializator : MonoBehaviour
                 _levelPreset = LevelPresetLoader.instance.LevelPreset;
             }
         }
+
         _universalGlobalTask.SetLevelPreset(_levelPreset);
     }
 
     private void Start()
-    {        
-        LevelTaskInit();
-        _backGroundLoader.SetBackGround(_levelPreset.backgroundSprite);
-
+    {               
         if(_levelPreset.levelTaskText.Length != 0)
         {
             _startDialogViewer.InitDialog(_levelPreset.levelTaskText);
         }
-                    
-        _guildSystem.InitGuildSystem();
 
-        LevelInitSelector();
-
-        _visitorController.InitVisitorController(_levelPreset.visitorTime,_levelPreset.contrabandVisitorTimer);
-
-        CheckShopController();        
+        InitLevelSettings();
+        InitInventory();
+        InitSystems();
+        
     }  
 
-    private void LevelInitSelector()
+    private void InitLevelSettings()
     {
+        _levelTask = new LevelTask();
+        _levelTask.SetMoneyTask(_levelPreset.MoneyGoal);
+
         _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+
+        _backGroundLoader.SetBackGround(_levelPreset.backgroundSprite);
+
+        TutorialCheck();
+
+    }
+
+    private void InitInventory()
+    {
         _inventory.FillCommonIngredients(_levelPreset.addCommonResourceCount);
+        _bottleStorage.InitBottleStorage(_levelPreset.startBottleCount);
+    }
+
+    private void InitSystems()
+    {
+        _guildSystem.InitGuildSystem();
 
         if (_universalGlobalTask != null)
         {
@@ -93,30 +107,25 @@ public class LevelInitializator : MonoBehaviour
 
         if (_levelPreset.isContrabandLevel)
         {
-            _taskSystem.SetPotionSizer(_levelPreset.sizer, _levelPreset.countIngredientInPotionForSizer);
+            _taskSystem.SetPotionSizer(_levelPreset.sizer, _levelPreset.countPotionInSizer);
         }
         else
         {
-            _taskSystem.SetPotionSizer(_levelPreset.sizer,0);
+            _taskSystem.SetPotionSizer(_levelPreset.sizer, 0);
         }
-        
 
         _universalGlobalTask.CheckContrabandLevel();
-        TutorialCheck();
+        
+        _visitorController.InitVisitorController(_levelPreset.visitorTime, _levelPreset.contrabandVisitorTimer);
 
         _shopSystem.HideForTutorial(_levelPreset.isTutorial);
         _taskSystem.SetTutorialMode(_levelPreset.isTutorial);
         _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, _levelPreset.timerIsActive);
-        _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);       
+        _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
+
+        CheckShopController();
 
         OnInitComplete?.Invoke();
-    }
-
-    private void LevelTaskInit()
-    {
-        _levelTask = new LevelTask();
-
-        _levelTask.SetMoneyTask(_levelPreset.MoneyGoal);
     }
 
     private void CheckShopController()

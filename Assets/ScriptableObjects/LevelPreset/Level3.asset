@@ -17,9 +17,11 @@ MonoBehaviour:
   backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}
   isTutorial: 0
   addCommonResourceCount: 3
+  startBottleCount: 10
   sizer: 0
-  countIngredientInPotionForSizer: 0
+  countPotionInSizer: 0
   visitorTime: 50
+  islevelUnlocked: 0
   startMoney: 1000
   minRangeMoney: -600
   MoneyGoal: 10000
@@ -28,7 +30,7 @@ MonoBehaviour:
   rentActive: 1
   rent: 100
   secondsForRent: 20
-  isCostMultiplayActive: 0
+  isCostMultiplyActive: 0
   ingredientsForMultiplyCost: []
   multiplyCostIngredient: 0
   isRandomResourceAdd: 0
@@ -40,10 +42,11 @@ MonoBehaviour:
   collectCommonResourceCount: 0
   collectRareResourceCount: 0
   _rewardMultiply: 0
-  _penaltyMultyply: 0
+  _penaltyMultiply: 0
   timeDecreaseReputation: 0
   reduceValue: 0
   isContrabandLevel: 0
+  contrabadPotionChance: 0
   contrabandTimer: 0
   contrabandVisitorTimer: 0
   levelTaskText:

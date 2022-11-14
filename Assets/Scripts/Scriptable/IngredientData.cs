@@ -16,6 +16,4 @@ public class IngredientData : ScriptableObject
     public ResourceType resourceType;
     public ResourceRarity resourceRarity;
     public AudioClip dragSound;
-    public AudioClip dropSound;
-    public GameObject effect;
 }

@@ -40,7 +40,7 @@ public class UniversalGlobalTask : MonoBehaviour
             Inventory.OnItemValueChanged += CheckCompleteLevel;
         }
 
-        if (_currentLevelPreset.isCostMultiplayActive)
+        if (_currentLevelPreset.isCostMultiplyActive)
         {
             _priceSetter = new PriceSetter(_currentLevelPreset.ingredientsForMultiplyCost);
             _priceSetter.ChangeCost(_ingredientData, _currentLevelPreset.multiplyCostIngredient);

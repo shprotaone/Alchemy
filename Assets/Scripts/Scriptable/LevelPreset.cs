@@ -4,15 +4,17 @@ using UnityEngine;
 
 [CreateAssetMenu]
 public class LevelPreset : ScriptableObject
-{    
+{
     [Header("Стартовые настройки")]
 
+    public LevelNumber levelNumber;
     public bool ShopController;
     public Sprite backgroundSprite;
     public bool isTutorial;
     public int addCommonResourceCount;
+    public int startBottleCount;
     public SizerType sizer;
-    public int countIngredientInPotionForSizer;
+    public int countPotionInSizer;
     public float visitorTime;
     
     [Space]
@@ -36,7 +38,7 @@ public class LevelPreset : ScriptableObject
     [Space]
     [Header("Настройка множителя стоимости ингредиентов")]
     
-    public bool isCostMultiplayActive;
+    public bool isCostMultiplyActive;
     public IngredientData[] ingredientsForMultiplyCost;
     public int multiplyCostIngredient;
 
@@ -57,7 +59,7 @@ public class LevelPreset : ScriptableObject
     [Space]
     [Header("Настройка множителей награды и ошибки")]
     public float _rewardMultiply;
-    public float _penaltyMultyply;
+    public float _penaltyMultiply;
 
     [Space]
     [Header("Настройка штрафа гильдий")]

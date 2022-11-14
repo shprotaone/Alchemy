@@ -13,7 +13,7 @@ public class Cook : MonoBehaviour
     [SerializeField] private Slider _boilProgress;
 
     [Space]
-    [SerializeField] private Settings _settings;
+    [SerializeField] private OldSettings _settings;
     [SerializeField] private AudioClip _brewSound;
     
     [SerializeField] private TMP_Text _delayText;

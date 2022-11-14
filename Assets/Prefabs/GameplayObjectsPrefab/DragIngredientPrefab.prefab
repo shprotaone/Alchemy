@@ -112,6 +112,8 @@ MonoBehaviour:
   _dragableImage: {fileID: 1021434656847022948}
   _color: {r: 0, g: 0, b: 0, a: 0}
   _backSound: {fileID: 8300000, guid: 25174dd9cd1165244b33578190bd6c6b, type: 3}
+  _type: 0
+  _audioSource: {fileID: 414031061466515}
 --- !u!114 &-6870531906201209021
 MonoBehaviour:
   m_ObjectHideFlags: 0
