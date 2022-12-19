@@ -28,13 +28,13 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract
     private void StartDrag()
     {
         if (_amount > 0 && !_timer.TimerIsRunning && _interract)
-        {          
+        {
+            _timer.InitTimer(_delayDrag);
             DecreaseAmount();
-            GameObject bottleGO = Instantiate(_bottlePrefab,this.transform);
+            GameObject bottleGO = Instantiate(_bottlePrefab,this.transform); //переделать на Pool
             Bottle bottle = bottleGO.GetComponent<Bottle>();
 
-            bottle.InitBottle(this, _contrabandPotionSystem.ContrabandTimer);
-            _timer.InitTimer(_delayDrag);
+            bottle.InitBottle(this, _contrabandPotionSystem.ContrabandTimer);          
         }
     }
 

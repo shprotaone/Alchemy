@@ -21,7 +21,6 @@ MonoBehaviour:
   sizer: 0
   countPotionInSizer: 0
   visitorTime: 50
-  islevelUnlocked: 0
   startMoney: 1000
   minRangeMoney: -600
   MoneyGoal: 10000

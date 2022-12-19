@@ -102,7 +102,6 @@ public class DragController : MonoBehaviour
 
     public void InitDrag()
     {
-        Handheld.Vibrate();
         UpdateDragStatus(true);
         _lastDragged.StartDragAction();
     }

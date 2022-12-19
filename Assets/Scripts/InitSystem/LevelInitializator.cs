@@ -105,14 +105,7 @@ public class LevelInitializator : MonoBehaviour
 
         _taskSystem.Init();
 
-        if (_levelPreset.isContrabandLevel)
-        {
-            _taskSystem.SetPotionSizer(_levelPreset.sizer, _levelPreset.countPotionInSizer);
-        }
-        else
-        {
-            _taskSystem.SetPotionSizer(_levelPreset.sizer, 0);
-        }
+        _taskSystem.SetPotionSizer(_levelPreset.sizer, _levelPreset.countPotionInSizer);
 
         _universalGlobalTask.CheckContrabandLevel();
         
