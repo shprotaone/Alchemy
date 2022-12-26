@@ -19,6 +19,6 @@ public class Step3 : Step
         _frameSprite.SetActive(true);
         _cameraMovementButton.interactable = true;
 
-        _tutorialManager.FirstVisitor.BrightVisitor(_brightObject.UILayerName);
+        _tutorialManager.FirstVisitor.VisitorView.BrightVisitor(_brightObject.UILayerName);
     }
 }

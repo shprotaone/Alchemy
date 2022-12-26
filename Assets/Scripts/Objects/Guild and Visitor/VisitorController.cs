@@ -1,94 +1,100 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VisitorController : MonoBehaviour
-{    
-    public Action OnVisitorCall;
-    public Action OnVisitorOut;
-
-
-
+{
+    [SerializeField] private VisitorCountSystemView _countView;
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private AudioClip _visitorFadingSound;
-    [SerializeField] private PotionTaskSystem _taskSystem;
-    
-    private Visitor _currentVisitor;
+
+    private VisitorCountSystem _visitorCountSystem;
+    private PotionTaskSystem _taskSystem;
+    private PotionTask _currentTask;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
 
-    private float _visitorTime;
-    private float _contrabandVisitorTime;
     private int _visitorCounter;
     private bool _firstVisitor = true;
-    private bool _shopIsOpen;
 
-    public Visitor CurrentVisitor => _currentVisitor;
-    public float VisitorTime => _visitorTime;
-    public float VisitorContrabandTime => _contrabandVisitorTime;
-    public bool FirstVisitor => _firstVisitor;
-    public bool ShopIsOpen => _shopIsOpen;
+    public Visitor CurrentVisitor { get; private set; }
+    public int VisitorTime { get; private set; }
+    public float VisitorContrabandTime { get; private set; }
+    public bool FirstVisitor { get; private set; }
+    public bool IsActive { get; private set; }
 
-    public void InitVisitorController(float visitorTime, float visitorContrabandTime)
+    public void InitVisitorController(PotionTaskSystem taskSystem, int visitorTime, int visitorContrabandTime,int visitorCount)
     {
         _audioSource = GetComponent<AudioSource>();
-        _shopIsOpen = true;
-      
-        OnVisitorCall += CallVisitor;
-        OnVisitorOut += VisitorGoOutSound;
-        
-        ShopControl(_shopIsOpen);
+        _taskSystem = taskSystem;
+        IsActive = true;
+        _visitorCountSystem = new VisitorCountSystem(_countView,visitorCount);
 
-        if(visitorTime != 0)
-        {
-            _visitorTime = visitorTime;
-            _contrabandVisitorTime = visitorContrabandTime;
-        }     
-        else
-        {
-            Debug.LogWarning("Не установлено время, ставлю стандартное значение - 50");
-            _visitorTime = 50;
-            _contrabandVisitorTime = 10;
-        }       
+        VisitorChoice();
+        SetNextTask(_taskSystem.GetTask());
+        SetVisitorTime(visitorTime,visitorContrabandTime);
+        ShopControl(IsActive);
+    }
+
+    public void SetNextTask(PotionTask task)
+    {
+        _currentTask = task;
     }
 
     public void ShopControl(bool flag)
     {
-        _shopIsOpen = flag;
+        IsActive = flag;
 
-        if (_shopIsOpen)
-            OnVisitorCall?.Invoke();
+        if (IsActive)
+            CallVisitor(_currentTask);
         else
             DisableAllVisitors();
     }
 
-    public void CallVisitor()
+    public void CallVisitor(PotionTask task)
+    {       
+        if (IsActive)
+        {
+            CurrentVisitor.gameObject.SetActive(true);
+            CurrentVisitor.Init(this,task);
+            _audioSource.Play();
+           
+            _prevVisitor = CurrentVisitor;           
+        }        
+    }
+
+    private void SetVisitorTime(int visitorTime, int visitorContrabandTime)
+    {
+        if (visitorTime != 0)
+        {
+            VisitorTime = visitorTime;
+            VisitorContrabandTime = visitorContrabandTime;
+        }
+        else
+        {
+            Debug.LogWarning("Не установлено время, ставлю стандартное значение - 50");
+            VisitorTime = 50;
+            VisitorContrabandTime = 10;
+        }
+    }
+
+    private void VisitorChoice()
     {
         int visitorCount = UnityEngine.Random.Range(0, _visitors.Length);
 
-        if (_shopIsOpen)
+        CurrentVisitor = _visitors[visitorCount];
+
+        if (CurrentVisitor == _prevVisitor)
         {
-            _currentVisitor = _visitors[visitorCount];
+            visitorCount++;
 
-            if (_currentVisitor == _prevVisitor)
+            if (visitorCount == _visitors.Length)
             {
-                visitorCount++;
-
-                if(visitorCount == _visitors.Length)
-                {
-                    _currentVisitor = _visitors[0];
-                }
-                else
-                {
-                    _currentVisitor = _visitors[visitorCount];
-                }              
+                CurrentVisitor = _visitors[0];
             }
-
-            _currentVisitor.gameObject.SetActive(true);
-            _currentVisitor.Rising(_taskSystem.GetTask());
-            _audioSource.Play();
-           
-            _prevVisitor = _currentVisitor;           
-        }        
+            else
+            {
+                CurrentVisitor = _visitors[visitorCount];
+            }
+        }
     }
 
     public void VisitorGoOutSound()
@@ -98,13 +104,15 @@ public class VisitorController : MonoBehaviour
 
     public void DisableVisitor()
     {
-        if (_currentVisitor != null)
+        if (CurrentVisitor != null)
         {
-            OnVisitorOut?.Invoke();
+            VisitorGoOutSound();
             _firstVisitor = false;
 
-            _currentVisitor.Fading();
-            OnVisitorCall?.Invoke();
+            VisitorChoice();
+            SetNextTask(_taskSystem.GetTask());           
+            CallVisitor(_currentTask);
+            _visitorCountSystem.DecreaseVisitorCount();
         }
     }  
 
@@ -114,14 +122,8 @@ public class VisitorController : MonoBehaviour
         {
             if (visitor.gameObject.activeInHierarchy)
             {
-                visitor.Fading();
+                visitor.VisitorView.Fading();
             }
         }
-    }
-
-    private void OnDisable()
-    {        
-        OnVisitorCall -= CallVisitor;
-        OnVisitorOut -= VisitorGoOutSound;
     }
 }

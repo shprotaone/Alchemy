@@ -15,15 +15,15 @@ public class LevelInitializator : MonoBehaviour
     [Header("Глобальные объекты")]
     [SerializeField] private Shop _shopSystem;
     [SerializeField] private Inventory _inventory;
-    [SerializeField] private Money _money;
     [SerializeField] private BottleStorage _bottleStorage;
     [SerializeField] private BackgroundLoader _backGroundLoader;
     [SerializeField] private StartDialogViewer _startDialogViewer;
     [SerializeField] private UniversalGlobalTask _universalGlobalTask;
+    [SerializeField] private GameManager _gameManager;
     
     [Header("Менеджеры")]
     [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private PotionTaskSystem _taskSystem;
+    [SerializeField] private PotionTaskSystem _potionTaskSystem;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
 
     [Header("Механики")]
@@ -37,10 +37,12 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;
+    [SerializeField] private MoneyView _moneyView;
 
     //private GlobalTask _currentGlobalTask;
+    private Money _money;
     private LevelPreset _levelPreset;
-    private LevelTask _levelTask;
+    private LevelMoneyTask _levelMoneyTask;
 
     private void Awake()
     {
@@ -57,8 +59,6 @@ public class LevelInitializator : MonoBehaviour
                 _levelPreset = LevelPresetLoader.instance.LevelPreset;
             }
         }
-
-        _universalGlobalTask.SetLevelPreset(_levelPreset);
     }
 
     private void Start()
@@ -76,10 +76,8 @@ public class LevelInitializator : MonoBehaviour
 
     private void InitLevelSettings()
     {
-        _levelTask = new LevelTask();
-        _levelTask.SetMoneyTask(_levelPreset.MoneyGoal);
-
-        _money.SetStartMoney(_levelPreset.startMoney, _levelPreset.minRangeMoney);
+        _levelMoneyTask = new LevelMoneyTask(_levelPreset.MoneyGoal,_levelPreset.minRangeMoney);
+        _money = new Money(_moneyView,_levelPreset.startMoney, _levelPreset.minRangeMoney);    
 
         _backGroundLoader.SetBackGround(_levelPreset.backgroundSprite);
 
@@ -89,6 +87,7 @@ public class LevelInitializator : MonoBehaviour
 
     private void InitInventory()
     {
+        _inventory.InitInventory();
         _inventory.FillCommonIngredients(_levelPreset.addCommonResourceCount);
         _bottleStorage.InitBottleStorage(_levelPreset.startBottleCount);
     }
@@ -99,22 +98,21 @@ public class LevelInitializator : MonoBehaviour
 
         if (_universalGlobalTask != null)
         {
-            _universalGlobalTask.Init();
-            _universalGlobalTask.SetLevelTaskText(_levelPreset.goalText);
+            _universalGlobalTask.Init(_levelMoneyTask,_inventory, _gameManager,_levelPreset, _levelPreset.goalText);
         }
 
-        _taskSystem.Init();
-
-        _taskSystem.SetPotionSizer(_levelPreset.sizer, _levelPreset.countPotionInSizer);
+        _potionTaskSystem.SetTutorialMode(_levelPreset.isTutorial);
+        _potionTaskSystem.InitPotionSizer(_money,_levelPreset.sizer, _levelPreset.countPotionInSizer);
 
         _universalGlobalTask.CheckContrabandLevel();
         
-        _visitorController.InitVisitorController(_levelPreset.visitorTime, _levelPreset.contrabandVisitorTimer);
+        _visitorController.InitVisitorController(_potionTaskSystem, _levelPreset.visitorTime, _levelPreset.contrabandVisitorTimer,_levelPreset.visitorCount);
 
+        _shopSystem.InitShop(_money);
         _shopSystem.HideForTutorial(_levelPreset.isTutorial);
-        _taskSystem.SetTutorialMode(_levelPreset.isTutorial);
+        
         _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, _levelPreset.timerIsActive);
-        _rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent);
+        //_rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent, _levelPreset.rentActive);
 
         CheckShopController();
 

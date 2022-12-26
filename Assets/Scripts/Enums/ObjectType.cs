@@ -5,6 +5,7 @@
         EFFECT_FIRE,
         EFFECT_SMOKE,
         EFFECT_SPARKS,
-        BOTTLE
+        BOTTLE,
+        COINDROP
     }
 

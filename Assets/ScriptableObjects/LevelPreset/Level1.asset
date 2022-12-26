@@ -21,10 +21,9 @@ MonoBehaviour:
   sizer: 3
   countPotionInSizer: 0
   visitorTime: 50
-  islevelUnlocked: 1
   startMoney: 100
-  minRangeMoney: -200
-  MoneyGoal: 50
+  minRangeMoney: -1
+  MoneyGoal: 2500
   timerIsActive: 0
   levelTimeInSeconds: 0
   rentActive: 0
@@ -43,8 +42,6 @@ MonoBehaviour:
   collectRareResourceCount: 0
   _rewardMultiply: 0
   _penaltyMultiply: 0
-  timeDecreaseReputation: 0
-  reduceValue: 0
   isContrabandLevel: 0
   contrabadPotionChance: 0
   contrabandTimer: 0

@@ -14,7 +14,7 @@ public class Step11 : Step
     public override void StepAction()
     {
         _frameSprite.SetActive(false);
-        _visitorController.OnVisitorOut += _tutorialManager.NextStep;
+        //_visitorController.OnVisitorOut += _tutorialManager.NextStep;
         _brightObject.BrightVisitors(false);
 
         _dialogView.MovementWindow(_dialogWindowPos);
@@ -23,6 +23,6 @@ public class Step11 : Step
 
     private void OnDisable()
     {
-        _visitorController.OnVisitorOut -= _tutorialManager.NextStep;
+        //_visitorController.OnVisitorOut -= _tutorialManager.NextStep;
     }
 }

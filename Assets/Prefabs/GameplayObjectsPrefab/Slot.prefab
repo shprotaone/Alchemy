@@ -147,10 +147,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3265690884990992921}
   - component: {fileID: 7965716357834795658}
+  - component: {fileID: -7619155456469637651}
   - component: {fileID: 2179072740849935116}
   - component: {fileID: 212684160}
   - component: {fileID: -1244528406974802001}
-  - component: {fileID: 1690497733335988174}
   m_Layer: 0
   m_Name: Slot
   m_TagString: Untagged
@@ -200,6 +200,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3053784, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7619155456469637651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265690884990992922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd68aa7fe8e49c4294ad533ccd3bc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slotImage: {fileID: 7657957067675988637}
+  _amountText: {fileID: 8393229982775511352}
 --- !u!114 &2179072740849935116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,11 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cee6c7922f0454e90d56489a95ab90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slotView: {fileID: -7619155456469637651}
   _boxCollider: {fileID: 7965716357834795658}
-  _slotImage: {fileID: 7657957067675988637}
-  _amountText: {fileID: 8393229982775511352}
-  _timer: {fileID: 1690497733335988174}
-  _delay: 0
+  _delay: 1
+  _interactive: 0
 --- !u!50 &212684160
 Rigidbody2D:
   serializedVersion: 4
@@ -251,21 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggingObject: 0
-  IsDragging: 0
---- !u!114 &1690497733335988174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265690884990992922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b508ebbf7a33a43a2e98b958ee6904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerRemaining: 0
-  _timerIsRunning: 0
+  _collider: {fileID: 7965716357834795658}
 --- !u!1 &8229043669029254336
 GameObject:
   m_ObjectHideFlags: 0

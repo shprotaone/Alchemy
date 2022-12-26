@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RentCalculator : MonoBehaviour
@@ -10,21 +8,24 @@ public class RentCalculator : MonoBehaviour
     private int _rentCost;
     private int _rentTime;
 
-    public void InitRentSystem(int rentCost,int rentTime)
+    public void InitRentSystem(int rentCost,int rentTime, bool rentActive)
     {
-        _rentCost = rentCost;
-        _rentTime = rentTime;
-        GameTimer.OnSecondChange += Rent;
+        if (rentActive)
+        {
+            _rentCost = rentCost;
+            _rentTime = rentTime;
+            _timer.LocalTimer.OnTimerUpdate += () => Rent(_timer.LocalTimer.CurrentTime);
+        }      
     }
 
-    public void Rent(float time)
+    public void Rent(int time)
     {
         if(time % _rentTime == 0)
         _money.Decrease(_rentCost);
     }
 
     private void OnDisable()
-    {
-        GameTimer.OnSecondChange -= Rent;
+    {      
+        //_timer.LocalTimer.OnTimerUpdate -= () => Rent(_timer.LocalTimer.CurrentTime);
     }
 }

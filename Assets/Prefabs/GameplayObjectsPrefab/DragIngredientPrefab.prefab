@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _draggingObject: 1
-  IsDragging: 0
+  _collider: {fileID: -2819906009747052319}
 --- !u!61 &-2819906009747052319
 BoxCollider2D:
   m_ObjectHideFlags: 0

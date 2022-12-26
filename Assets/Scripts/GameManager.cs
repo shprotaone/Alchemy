@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     {
         _completeLevelPanel.SetActive(true);
         _gameTimeController.PauseGame();
-        _gameProgress.SetReachedLevel(LevelPresetLoader.instance.LevelPreset.levelNumber);
+        //_gameProgress.SetReachedLevel(LevelPresetLoader.instance.LevelPreset.levelNumber);
     }
 
     public void DefeatLevel()

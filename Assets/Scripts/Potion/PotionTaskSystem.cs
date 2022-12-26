@@ -7,7 +7,7 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private StringToSprite _stringToSprite;
     [SerializeField] private PotionCyclopedia _potionCyclopedia;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
-    [SerializeField] private Money _moneySystem;
+    
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private PotionSizer _potionSizer;
     [SerializeField] private GuildSystem _guildSystem;
@@ -17,33 +17,30 @@ public class PotionTaskSystem : MonoBehaviour
 
     [SerializeField] private bool _imageTask;
 
+    private Money _moneySystem;
+    private RewardCalculator _rewardCalculator;
+
     private float _coinReward;
     private float _rewardMultiply = 1f;
     private float _penaltyMultiply = 1f;
     
     private Potion _currentPotion;
+    private PotionTask _currentTask;
 
     private int _numberTask;
     private bool _tutorialLevel;
-    
-    public Potion CurrentPotion => _currentPotion;
-    public GameObject CoinPrefab => _coinPrefab;
-    public Transform JarTransform => _jarTransform;
+
     public PotionSizer PotionSizer => _potionSizer;
     public bool ImageTask => _imageTask;
 
-    /// <summary>
-    /// Инициализация текущего списка зелий
-    /// </summary>
-    /// 
-    public void Init()
-    {                
-        _currentPotion = new Potion();       
-    }  
-
-    public void SetPotionSizer(SizerType sizer, int countForCustomSizer)
+    public void InitPotionSizer(Money moneySystem,SizerType sizer, int countForCustomSizer)
     {
+        _currentPotion = new Potion();
+        _moneySystem = moneySystem;
         _potionSizer = _jsonReader.PotionSizer;
+
+        _rewardCalculator = new RewardCalculator();
+
         PotionSizerSelection sizerSelector = new PotionSizerSelection(_potionSizer);
         _potionSizer = sizerSelector.SizerSelector(sizer);
         _potionSizer = sizerSelector.SetRangeSizerWithRandom(countForCustomSizer);
@@ -75,34 +72,34 @@ public class PotionTaskSystem : MonoBehaviour
             }
         }
         
-
-        potionTask = new PotionTask(_currentPotion,_visitorController.CurrentVisitor.TaskView, _visitorController.CurrentVisitor);
-        _coinReward = potionTask.RewardCoin;
-        _coinReward = CalculateReward();
-
-        potionTask.SetReward((int)_coinReward);
+        potionTask = new PotionTask(_currentPotion,_visitorController,this);
+        
+        _currentTask = potionTask;
 
         return potionTask;
     }
 
-    public void TaskComplete(float rewardRep)
+    public void TaskComplete(Potion potionInBottle)
     {
+        int countMatch = MatchCalculate.IndexMatch(potionInBottle, _currentTask.CurrentPotion);
+        _coinReward = CalculateReward(countMatch);
+
         _moneySystem.Increase((int)_coinReward);
-        
-        //_potionCyclopedia.AddNewPotion(_currentPotion);
-        _guildSystem.AddRep(_currentPotion.GuildsType, rewardRep);
-
-        _visitorController.DisableVisitor();
-
-        if (_currentPotion.Contraband)
-        {
-            GetGemReward(_currentPotion);
-        }
+        StartCoinAnimation();
+        _visitorController.DisableVisitor();    
     }
 
-    public void TaskCanceled(float penaltyRep)
+    private void StartCoinAnimation()
     {
-        _guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep * _penaltyMultiply);
+        GameObject curCoin = ObjectPool.SharedInstance.GetObject(ObjectType.COINDROP);
+        curCoin.transform.position = _currentTask.CurrentTaskView.transform.position;
+        Coin coin = curCoin.GetComponent<Coin>();
+        coin.Movement(_jarTransform.position);
+    }
+
+    public void TaskCanceled()
+    {
+        //_guildSystem.RemoveRep(_currentPotion.GuildsType, penaltyRep * _penaltyMultiply);
         _visitorController.DisableVisitor();
     }
 
@@ -135,11 +132,6 @@ public class PotionTaskSystem : MonoBehaviour
         return _potionSizer.Potions[0];
     }
 
-    private void GetGemReward(Potion potion)
-    {
-        _contrabandPotionSystem.AddCounter();
-    }
-
     public int LowRepReward(int stockReward)
     {
         bool divideReward = _guildSystem.GuildDictionary[_visitorController.CurrentVisitor.Guild] < 60;
@@ -165,12 +157,17 @@ public class PotionTaskSystem : MonoBehaviour
         }       
     }
 
-    public int CalculateReward()
+    public int CalculateReward(int matchIndex)
     {
-        float result = _coinReward * _rewardMultiply;
-        result = LowRepReward((int)result);
+        float result = _rewardCalculator.CalculateResult(_currentTask.RewardCoin,
+                                                         _currentTask.CurrentPotion.Ingredients.Count, 
+                                                         matchIndex);
 
         return (int)result;
+        //float result = currentReward * _rewardMultiply;
+        //result = LowRepReward((int)result);
+
+        //return (int)result;
     }
 
     public void SetPenaltyMultiply(float multiply)

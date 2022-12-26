@@ -1,69 +1,47 @@
-﻿using UnityEngine;
-using TMPro;
-using UnityEngine.Events;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Отвечает за монеты
 /// </summary>
-public class Money : MonoBehaviour
+public class Money
 {
-    public static UnityEvent OnMoneyChanged = new UnityEvent();
-
-    public static UnityEvent<int> OnDecreaseMoney = new UnityEvent<int>();
-    public static UnityEvent<int> OnIncreaseMoney =  new UnityEvent<int>();
-
-    [SerializeField] private TMP_Text _moneyText;
-    [SerializeField] private TMP_Text _moneyTextInShop;
+    public static event Action<int> OnChangeMoney;
+    public static event Action OnChangeMoneyAction;
 
     private int _money;
     private int _moneyMinRange;
     public int CurrentMoney => _money;
+    public bool CanBuy { get; private set; }
 
-    private void Start()
+    public Money(MoneyView view,int startMoney, int moneyMinRange)
     {
-        OnMoneyChanged.AddListener(RefreshMoneyText);
-        OnDecreaseMoney.AddListener(CheckDecrease);
-        OnIncreaseMoney.AddListener(Increase);
-    }
-
-    public void SetStartMoney(int money,int moneyMinRange)
-    {
-        _money = money;
+        _money = startMoney;
         _moneyMinRange = moneyMinRange;
-        OnMoneyChanged?.Invoke();
+        view.Init();
+        OnChangeMoney?.Invoke(_money);
     }
 
-    public void CheckDecrease(int value)    //Сомнительно
+    public void Decrease(int value)
     {
-        Decrease(value);
-    }
+        CanBuy = (_money - value) > _moneyMinRange;
 
-    public bool Decrease(int value)
-    {
-        bool canBuy = (_money - value) > _moneyMinRange;
-
-        if (_moneyMinRange < value && canBuy)
+        if (_moneyMinRange < value && CanBuy)
         {
-            _money -= value;           
-            OnMoneyChanged?.Invoke();
-            return true;
+            _money -= value;
+            OnChangeMoney?.Invoke(_money);
+            OnChangeMoneyAction?.Invoke();
         }
         else
         {
             Debug.LogWarning("NotHaveMoney");
-            return false;
         }       
     }
 
     public void Increase(int value)
     {
         _money += value;
-        OnMoneyChanged?.Invoke();
-    }
-
-    private void RefreshMoneyText()
-    {
-        _moneyText.text = _money.ToString();
-        _moneyTextInShop.text = _money.ToString();
+        OnChangeMoney?.Invoke(_money);
+        OnChangeMoneyAction?.Invoke();
     }
 }

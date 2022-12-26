@@ -16,6 +16,7 @@ public class MixingSystemv2 : MonoBehaviour
 
     public Action OnIngredientAdded;
 
+    [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
@@ -47,7 +48,12 @@ public class MixingSystemv2 : MonoBehaviour
             CheckIngredientIn(collision.gameObject);
         }
 
-        if (_isPotionApproved) 
+        WithDraggableFill(collision);
+    }
+
+    private void WithDraggableFill(Collider2D collision)
+    {
+        if (_isPotionApproved)
         {
             if (collision.CompareTag(bottleTag) && _potionOnClaudron != null)
             {
@@ -56,7 +62,9 @@ public class MixingSystemv2 : MonoBehaviour
 
                 CheckOnContraband(_potionOnClaudron);
                 bottle.SetPotion(_potionOnClaudron);
-                
+                bottle.SetPosition(_bottleInventory.GetFreeSlot().transform);
+                _bottleInventory.AddPotionInInventory(_potionOnClaudron);
+
                 FilledBottleDelegateForTutorial?.Invoke();
 
                 _claudronSystem.ClearClaudron();
@@ -151,7 +159,6 @@ public class MixingSystemv2 : MonoBehaviour
     {
         foreach (Ingredient item in _ingredients)
         {
-            item.Collider.enabled = false;
             ObjectPool.SharedInstance.DestroyObject(item.gameObject);
         }
 

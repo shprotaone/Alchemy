@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RewardCalculator
+﻿public class RewardCalculator
 {    
     private int _allGuildsReward = 300;
     private int _knightCommonReward = 400;
@@ -18,7 +14,7 @@ public class RewardCalculator
 
     public float Reward => _reward;
 
-    public void Calculate(GuildsType guildType,ResourceRarity rarity)
+    public void CalculateBase(GuildsType guildType,ResourceRarity rarity)
     {
         if(guildType == GuildsType.All)
         {
@@ -57,4 +53,29 @@ public class RewardCalculator
             _reward = _knightRareReward;
         }
     }  
+
+    public float CalculateResult(int baseReward, int ingredientsInPotion,int matchIndex)
+    {
+        _reward = baseReward;
+        int delta = ingredientsInPotion - matchIndex;
+
+        if (delta == 0)
+        {
+            return Reward;
+        } 
+        else if(delta == 1)
+        {
+            return Reward / 0.3f;
+        }
+        else if(delta == 2)
+        {
+            return Reward / 0.5f;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+
 }

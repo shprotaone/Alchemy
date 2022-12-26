@@ -2,5 +2,5 @@
 public interface IAction
 {
     void Action();
-    void Movement();
+    void Drop();
 }

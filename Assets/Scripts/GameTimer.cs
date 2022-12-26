@@ -1,67 +1,49 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameTimer : MonoBehaviour
 {
-    public static Action<float> OnSecondChange;
-
+    [SerializeField] private GameTimeView _view;
     [SerializeField] private GameManager _gameManager;
-    [SerializeField] private RentCalculator _rentShop;
-    [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private RentCalculator _rentShop; 
     [SerializeField] private Money _money;
-    
-    private float _gameTime;
-    private float _seconds;
 
-    public float Seconds => _seconds;
+    private LocalTimer _localTimer;
+
+    public LocalTimer LocalTimer => _localTimer;
 
     /// <summary>
     /// Задает таймер
     /// </summary>
     /// <param name="seconds">общее время в секундах</param>
     /// <param name="flag">включать или нет?</param>
-    public void InitTimer(float seconds, bool flag)
+    public void InitTimer(int seconds, bool flag)
     {
         if (flag)
-        {
-            _gameTime = seconds;
-            StartCoroutine(StartTimer());
+        {         
+            _localTimer = new LocalTimer(seconds, flag);
+
+            _localTimer.OnTimerUpdate += () => _view.UpdateTimeText(_localTimer.CurrentTime);
+            _localTimer.OnTimerUpdate += CheckTimeDefeat;
+
+            StartCoroutine(_localTimer.StartTimer());
         }
         else
         {
-            _timerText.gameObject.SetActive(false);
+            _view.gameObject.SetActive(false);
         }
     }
 
-    private IEnumerator StartTimer()
+    private void CheckTimeDefeat()
     {
-        while(_gameTime > 0)
+        if(_localTimer.CurrentTime <= 0)
         {
-           _gameTime--;
-            UpdateTimeText();
-
-            if(_gameTime % 5 == 0)
-            OnSecondChange?.Invoke(_gameTime);
-
-            yield return new WaitForSeconds(1);
+            _gameManager.DefeatLevel();
         }
-
-        _gameManager.DefeatLevel();
-    }
-
-    private void UpdateTimeText()
-    {
-        float minutes = Mathf.FloorToInt(_gameTime / 60);
-        float seconds = Mathf.FloorToInt(_gameTime % 60);
-
-        _timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
-    }
+    }   
 
     private void OnDisable()
     {
-        StopCoroutine(StartTimer());
+        if(_localTimer != null)
+        StopCoroutine(_localTimer.StartTimer());
     }
 }

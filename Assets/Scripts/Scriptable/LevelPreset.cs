@@ -15,7 +15,7 @@ public class LevelPreset : ScriptableObject
     public int startBottleCount;
     public SizerType sizer;
     public int countPotionInSizer;
-    public float visitorTime;
+    public int visitorTime;
     
     [Space]
     [Header("Настройки денег")]
@@ -62,11 +62,6 @@ public class LevelPreset : ScriptableObject
     public float _penaltyMultiply;
 
     [Space]
-    [Header("Настройка штрафа гильдий")]
-    public int timeDecreaseReputation;
-    public int reduceValue;
-
-    [Space]
     [Header("Настройки для контрабандного уровня")]
     public bool isContrabandLevel;
     public int contrabadPotionChance;
@@ -82,4 +77,8 @@ public class LevelPreset : ScriptableObject
     [TextArea(5, 10)]
     public string goalText;
     public bool DropDownMenu;
+
+    [Header("Новое")]
+    public int visitorCount;
+
 }

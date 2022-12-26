@@ -1,49 +1,48 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LocalTimer
 {
-    public delegate void TimerUpdate();
-    public event TimerUpdate OnTimerUpdate;
+    public event Action OnTimerUpdate;
+    public event Action<bool> OnTimerEnded;
 
     private int _stockTime;
-    private int _currentTime;
+    private bool _stopped = false; // возможно лишн€€ проверка
 
-    private bool _started = false;
-    private bool _stopped = false;
-    private bool _finished = false;
-
-    public int CurrentTime => _currentTime;
-
-    public bool Started => _started;
-    public bool Finished => _finished;
+    public int CurrentTime { get; private set; }
+    public bool Started { get; private set; }
+    public bool Finished { get; private set; }
 
     public LocalTimer(int stockTime, bool started)
     {
         _stockTime = stockTime;
-        _started = started;
-        _currentTime = 0;
+        Started = started;
+        CurrentTime = 0;
     }
 
-    public IEnumerator Timer()
+    public IEnumerator StartTimer()
     {
-        _currentTime = _stockTime;
+        CurrentTime = _stockTime;
+        Started = true;
 
-        while (_currentTime > 0)
+        while (CurrentTime > 0)
         {
             if (!_stopped)
             {
                 yield return new WaitForSeconds(1);
-                _currentTime--;
+                CurrentTime--;
                 OnTimerUpdate?.Invoke();               
             }
             else
             {
-                _finished = true;                
+                Finished = true;                
                 yield break;
             }
         }
+
+        OnTimerEnded?.Invoke(true);
+        Started = false;
     }
 
     public void StoppedTimer()

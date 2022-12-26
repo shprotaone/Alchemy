@@ -1,133 +1,94 @@
-﻿using UnityEngine;
-using TMPro;
-using DG.Tweening;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
 public class Visitor : MonoBehaviour
-{  
-    [SerializeField] private GuildsType _currentGuild;
-    [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private PotionTaskView _currentTask;
-    [SerializeField] private TMP_Text _timerText;
+{
+    [SerializeField] private VisitorView _visitorView;
+    [SerializeField] private GuildsType _currentGuild;    
+    [SerializeField] private PotionTaskView _currentTaskView;
 
-    private SpriteRenderer _visitorImage;
     private PotionTask _task;
+    private VisitorController _visitorController;
+    private LocalTimer _timer;
 
     private bool _firstTask = true;
-    private float _timeVisitor;
+    private int _timeVisitor;
 
-
+    public VisitorView VisitorView => _visitorView;
     public GuildsType Guild => _currentGuild;
-    public PotionTaskView TaskView => _currentTask;
-
-    private void Awake()
-    {
-        _visitorController.OnVisitorOut += Fading;
-        _timeVisitor = _visitorController.VisitorTime;
-    }
-
-    private void OnEnable()
-    {
-        _visitorImage = GetComponentInChildren<SpriteRenderer>();       
-    }
+    public PotionTaskView TaskView => _currentTaskView;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bottle"))
         {
             Bottle bottle = collision.GetComponent<Bottle>();
-            if (bottle.IsFull && _task.ChekResult(bottle.PotionInBottle))
+            if (bottle.IsFull && ChekResult(bottle.PotionInBottle))
             {
                 if (_firstTask)
                 {
                     _firstTask = false;
                 }
 
-                bottle.ReturnEffect();
                 bottle.DestroyBottle();
             }
         }
     }
 
-    private IEnumerator Timer()
+    public void Init(VisitorController visitorController, PotionTask task)
     {
-        if (!_visitorController.FirstVisitor)
-        {
-            float counter = _timeVisitor;
-            _timerText.gameObject.SetActive(true);
-            UpdateTimerDisplay(counter);
-
-            while (counter > 0)
-            {
-                yield return new WaitForSeconds(1);
-                counter--;
-                UpdateTimerDisplay(counter);
-            }
-
-            if (counter == 0)
-            {
-                Fading();
-                _currentTask.TaskCanceled();
-            }
-            yield break;
-        }
-        else
-        {
-            _timerText.gameObject.SetActive(false);
-        }              
-    }
-
-    private void UpdateTimerDisplay(float value)
-    {
-        float seconds = Mathf.FloorToInt(value % 60);
-        _timerText.text = seconds.ToString();
-    }
-
-    public void Rising(PotionTask task)
-    {
-        _task = new PotionTask(task);
-        _currentTask.InitTask(_task);
-
-        SetTime();
-
-        StartCoroutine(Timer());
-        this.gameObject.SetActive(true);                 
         
-        DOTween.ToAlpha(()=> _visitorImage.color, x => _visitorImage.color = x, 1, 1);
-    }
 
-    private void SetTime()
+        _visitorController = visitorController;
+        _timeVisitor = _visitorController.VisitorTime;
+        _task = task;
+
+        TimerActivate();
+
+        _visitorView.Rising();
+    } 
+
+    private void TimerActivate()
     {
-        if (_task.CurrentPotion.Contraband)
-        {
-            _timeVisitor = _visitorController.VisitorContrabandTime;
-        }
-        else
-        {
-            _timeVisitor = _visitorController.VisitorTime;
-        }
+        _visitorView.UpdateTimerText(_timeVisitor);
+        _timer = new LocalTimer(_timeVisitor, true);
+        StartCoroutine(_timer.StartTimer());
+        _timer.OnTimerUpdate += () => _visitorView.UpdateTimerText(_timer.CurrentTime);
+        _timer.OnTimerEnded += CheckVisitorTime;
     }
 
-    public void Fading()
-    {        
-        _currentTask.FadingTask();
-        StopAllCoroutines();
+    public bool ChekResult(Potion potionInBottle)
+    {       
+        _task.TaskSystem.TaskComplete(potionInBottle);
+        _visitorView.Fading();
+        _currentTaskView.FadingTask();
+        //if (_task.CurrentPotion.PotionName == potionInBottle.PotionName)
+        //{
+        //    _task.TaskSystem.TaskComplete();
+        //    _visitorView.Fading();
+        //    _task.CurrentTaskView.FadingTask();
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
 
-        _timerText.gameObject.SetActive(false);
-
-        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, 1).OnComplete(() => this.gameObject.SetActive(false));
-              
+        return true;
     }
 
-    public void BrightVisitor(string sortingLayerName)
+    public void CheckVisitorTime(bool flag)
     {
-        _visitorImage.sortingLayerName = sortingLayerName;
-        this.GetComponentInChildren<Canvas>().sortingLayerName = sortingLayerName;
+        if (flag)
+        {
+            _visitorView.Fading();
+            _currentTaskView.FadingTask();
+            _task.TaskSystem.TaskCanceled();
+        }
     }
 
     private void OnDisable()
     {
-        _visitorController.OnVisitorOut -= Fading;
         _task = null;
     }
 }

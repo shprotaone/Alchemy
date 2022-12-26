@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CollectableIngredient
 {
@@ -29,6 +27,17 @@ public class CollectableIngredient
         _rareIngredientValue = levelPreset.collectRareResourceCount;
 
         SetProgressCount();
+
+        Inventory.OnItemValueChanged += CheckInventory;
+
+    }
+
+    private void SubscribeToSlots()
+    {
+        foreach (Slot slot in _inventory.Slots)
+        {
+            //slot.OnChangeValueWithIngredient += F;
+        }
     }
 
     private void SetProgressCount()
@@ -63,23 +72,25 @@ public class CollectableIngredient
 
     private void FindResourceComplete()
     {
-        foreach (KeyValuePair<IngredientData, int> item in _inventory.InventoryAmount)
+        foreach (Slot item in _inventory.Slots)
         {
-            if (item.Key.resourceRarity == ResourceRarity.common && _commonIngredientValue > 0)
-            {
-                if (item.Value >= _commonIngredientValue)
-                {
-                    _proggressInInventory.Remove(item.Key);
-                }
-            }
-            else if(item.Key.resourceRarity == ResourceRarity.rare && _rareIngredientValue > 0)
-            {
-                if(item.Value >= _rareIngredientValue)
-                {
-                    _proggressInInventory.Remove(item.Key);
-                    return;
-                }
-            }
+
+            //if (item.IngredientInSlot.resourceRarity == ResourceRarity.common && _commonIngredientValue > 0)
+            //{
+            //    if (item.AmountInSlot >= _commonIngredientValue)
+            //    {
+            //        _proggressInInventory.Remove(item.IngredientInSlot);
+            //        return;
+            //    }
+            //}
+            //else if(item.IngredientInSlot.resourceRarity == ResourceRarity.rare && _rareIngredientValue > 0)
+            //{
+            //    if(item.AmountInSlot >= _rareIngredientValue)
+            //    {
+            //        _proggressInInventory.Remove(item.IngredientInSlot);
+            //        return;
+            //    }
+            //}
         }
     }
 

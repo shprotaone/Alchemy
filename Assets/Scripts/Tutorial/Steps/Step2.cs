@@ -9,6 +9,6 @@ public class Step2 : Step
     public override void StepAction()
     {
         _tutorialManager.FirstVisitorInit();
-        _tutorialManager.FirstVisitor.BrightVisitor(_brightObject.DialogLayerName);
+        _tutorialManager.FirstVisitor.VisitorView.BrightVisitor(_brightObject.DialogLayerName);
     }
 }

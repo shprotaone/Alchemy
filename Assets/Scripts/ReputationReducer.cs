@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ReputationReducer : MonoBehaviour
+public class ReputationReducer : IDragTimer
 {
-    [SerializeField] private GuildSystem _guildSystem;
-    [SerializeField] private GameTimer _timer;
+    private GuildSystem _guildSystem;
+    private LocalTimer _timer;
 
     private int _valueRep;
-    private int _timerVal;
+    private int _intervaltime;
 
-    public void InitReducer(int valueRep, int timer)
+    public void InitReducer(GuildSystem guildSystem, int valueRep, int timer)
     {
         _valueRep = valueRep;
-        _timerVal = timer;
+        _intervaltime = timer;
+        _guildSystem = guildSystem;
+        
+        InitTimer(_intervaltime);
 
-        if(_valueRep != 0 || _timerVal != 0)
+        if(_valueRep != 0 || _intervaltime != 0)
         {
-            GameTimer.OnSecondChange += Reduce;
+            //GameTimer.OnSecondChange += Reduce;
         }
         else
         {
@@ -25,9 +26,14 @@ public class ReputationReducer : MonoBehaviour
         }      
     }
 
-    public void Reduce(float time)
+    public void InitTimer(int delayDrag)
     {
-        if (time % _timerVal == 0) 
+        _timer = new LocalTimer(_intervaltime, false);
+    }
+
+    public void Reduce(int time)
+    {
+        if (time % _intervaltime == 0) 
         {
             _guildSystem.RemoveRep(GuildsType.Saint, _valueRep);
             _guildSystem.RemoveRep(GuildsType.Knight, _valueRep);
@@ -36,8 +42,13 @@ public class ReputationReducer : MonoBehaviour
         }
     }
 
+    public void StartTimer()
+    {
+        _timer.StartTimer();
+    }
+
     private void OnDisable()
     {
-        GameTimer.OnSecondChange -= Reduce;
+        //GameTimer.OnSecondChange -= Reduce;
     }
 }
