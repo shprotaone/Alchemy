@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PotionCyclopedia : MonoBehaviour
+public class PotionTaskList : MonoBehaviour
 {
+    public static event Action OnPotionTaskListChanged;
+
     [SerializeField] private PotionTaskSystem _potionTaskSystem;
     [SerializeField] private BottleInventory _bottleInventory;
 
@@ -70,7 +70,7 @@ public class PotionCyclopedia : MonoBehaviour
             }    
         }
         Debug.Log("Все задания выполнены");
-        CyclopediaComplete = true;
+        OnPotionTaskListChanged?.Invoke();
     }
 
     private void FillCyclopediaInStart()

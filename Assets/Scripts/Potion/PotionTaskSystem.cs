@@ -5,7 +5,7 @@ public class PotionTaskSystem : MonoBehaviour
     [SerializeField] private JSONReader _jsonReader;
 
     [SerializeField] private StringToSprite _stringToSprite;
-    [SerializeField] private PotionCyclopedia _potionCyclopedia;
+    [SerializeField] private PotionTaskList _potionCyclopedia;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     
     [SerializeField] private VisitorController _visitorController;

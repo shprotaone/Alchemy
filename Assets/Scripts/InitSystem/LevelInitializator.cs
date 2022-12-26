@@ -38,6 +38,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;
     [SerializeField] private MoneyView _moneyView;
+    [SerializeField] private GameStateController _gameStateController;
 
     //private GlobalTask _currentGlobalTask;
     private Money _money;
@@ -113,6 +114,7 @@ public class LevelInitializator : MonoBehaviour
         
         _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, _levelPreset.timerIsActive);
         //_rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent, _levelPreset.rentActive);
+        _gameStateController.Init();
 
         CheckShopController();
 

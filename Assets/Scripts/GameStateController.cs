@@ -5,21 +5,32 @@ using UnityEngine.UI;
 
 public class GameStateController : MonoBehaviour
 {
-    [SerializeField] private PotionCyclopedia _potionCyclopedia;
+    [SerializeField] private PotionTaskList _potionTaskList;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Button _cameraMovementButton;
 
-    private LevelStateType levelState;
+    public void Init()
+    {
+        PotionTaskList.OnPotionTaskListChanged += CheckState;
+        _cameraMovementButton.interactable = false;
+    }
 
     public void CheckState()
     {
-        if (_potionCyclopedia.CyclopediaComplete)
+        if (_potionTaskList.CyclopediaComplete)
         {
-            levelState = LevelStateType.SELL;
+            _cameraMovementButton.interactable = true;
+            _visitorController.Activate();
         }
         else
         {
-            
+            _cameraMovementButton.interactable = false;
+            _visitorController.Deactivate();
         }
+    }
+
+    private void OnDisable()
+    {
+        PotionTaskList.OnPotionTaskListChanged -= CheckState;
     }
 }

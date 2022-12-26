@@ -17,7 +17,7 @@ public class VisitorController : MonoBehaviour
 
     public Visitor CurrentVisitor { get; private set; }
     public int VisitorTime { get; private set; }
-    public float VisitorContrabandTime { get; private set; }
+    public int VisitorContrabandTime { get; private set; }
     public bool FirstVisitor { get; private set; }
     public bool IsActive { get; private set; }
 
@@ -27,11 +27,21 @@ public class VisitorController : MonoBehaviour
         _taskSystem = taskSystem;
         IsActive = true;
         _visitorCountSystem = new VisitorCountSystem(_countView,visitorCount);
+        VisitorTime = visitorTime;
+        VisitorContrabandTime = VisitorContrabandTime;
+    }
 
+    public void Activate()
+    {
         VisitorChoice();
         SetNextTask(_taskSystem.GetTask());
-        SetVisitorTime(visitorTime,visitorContrabandTime);
+        SetVisitorTime(VisitorTime, VisitorContrabandTime);
         ShopControl(IsActive);
+    }
+
+    public void Deactivate()
+    {
+        ShopControl(false);
     }
 
     public void SetNextTask(PotionTask task)
