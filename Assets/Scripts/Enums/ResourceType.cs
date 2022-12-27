@@ -1,9 +1,9 @@
 ﻿public enum ResourceType
 {
-    Red,
-    Blue,
-    Yellow,
     White,
+    Red,
+    Yellow,
+    Blue,  
     Ladan,
     Eye,
     Stone,

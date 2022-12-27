@@ -16,12 +16,12 @@ MonoBehaviour:
   ShopController: 1
   backgroundSprite: {fileID: 21300000, guid: 726ab7e9ccc7d8249b6dd20cf5160c9e, type: 3}
   isTutorial: 0
-  addCommonResourceCount: 5
+  addCommonResourceCount: 2
   startBottleCount: 10
   sizer: 2
   countPotionInSizer: 2
   visitorTime: 50
-  startMoney: 500
+  startMoney: 0
   minRangeMoney: -200
   MoneyGoal: 10000
   timerIsActive: 0

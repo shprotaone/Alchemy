@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,55 +7,55 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
     private const float moveSpeed = 1;
 
-    [SerializeField] protected TMP_Text _timerText;
-
-    [SerializeField] private SpriteRenderer _waterInBottle;
-    [SerializeField] private SpriteRenderer _bottle;
-    [SerializeField] private BoxCollider2D _collider;
-    [SerializeField] private Wobble _wobble;
+    [SerializeField] private BottleView _bottleView;
+    [SerializeField] private BoxCollider2D _collider;  
     [SerializeField] private ObjectType _type;
     [SerializeField] private string _namePotionInBottle;
 
     private Transform _destination;
-
-    private GameObject _effectInBottle;
+    
     private Potion _potionInBottle;
-    private Color _potionColor;
-    private Color _contrabandBottleColor = Color.black;
-
     private TableManager _tableManager;
     private BottleStorage _bottleStorage;
 
     private bool _isFull;
 
+    public List<PotionLabelType> LabelList { get; private set; }
     private int _contrabandTime;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
     public ObjectType Type => _type;
 
-    public void InitBottle(BottleStorage storage,TableManager tableManager, int contrabandTime)
+    public void InitBottle(BottleStorage storage,TableManager tableManager)
     {             
         _bottleStorage = storage;
-        _contrabandTime = contrabandTime;
+        _contrabandTime = 10;
         _tableManager = tableManager;
+
+        LabelList = new List<PotionLabelType>();
     }
 
+    public void SetLabel(List<PotionLabelType> label)
+    {
+        _bottleView.AddLabels(_bottleStorage.LabelToSprite,label);
+        _isFull = true;
+    }
+
+    public void SetWaterColor(Color color)
+    {
+        _bottleView.FillColorWater(color);
+    }
     public void SetPotion(Potion potion)
     {
         if (!_isFull)
         {
             _potionInBottle = new Potion(potion);
-            _isFull = true;
-
-            FillColorWater(potion.ColorPotion);
-
-            AddEffect(ObjectPool.SharedInstance.GetObject(potion.EffectType));
-            CheckContraband();
+            _isFull = true;            
+            _bottleView.AddEffect(potion);                    
 
             print("From Bottle" + _potionInBottle.PotionName);
-
-            //transform.SetParent(_tableManager.FullPotionTable.transform);
-            _namePotionInBottle = _potionInBottle.PotionName;
+            //CheckContraband();
+            //_namePotionInBottle = _potionInBottle.PotionName;
         }
         else
         {
@@ -77,41 +78,21 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     {
         GetTable();
         transform.DOMove(_destination.position, moveSpeed, false);
-    }
-
-    private void FillColorWater(Color color)
-    {
-        _potionColor = color;
-        _waterInBottle.enabled = true;
-        _wobble.ChangeColor(_potionColor);
-    }
-
-    private void AddEffect(GameObject effect)
-    {
-        if (_potionInBottle.Rarity == ResourceRarity.rare)
-        {
-            _effectInBottle = effect;
-            _effectInBottle.transform.position = transform.position;
-            _effectInBottle.transform.SetParent(transform);
-            _effectInBottle.transform.localScale = new Vector3(1, 1, 0);
-
-            _effectInBottle.GetComponentInChildren<Effect>().ChangeParticleColor(_potionColor);
-        }
-    }
+    }  
 
     private void CheckContraband()
     {
-        if (_potionInBottle.Contraband)      
-        {
-            _bottle.color = _contrabandBottleColor;
-            _timerText.gameObject.SetActive(true);
-            //StartTimer();                         //вынести контрабадные зелья и наполнения в отдельные классы? 
-        }
-        else
-        {
-            _bottle.color = Color.white; 
-            _timerText.gameObject.SetActive(false);
-        }
+        //if (_potionInBottle.Contraband)
+        //{
+        //    _bottle.color = _contrabandBottleColor;
+        //    _timerText.gameObject.SetActive(true);
+        //    //StartTimer();                         //вынести контрабадные зелья и наполнения в отдельные классы? 
+        //}
+        //else
+        //{
+        //    _bottle.color = Color.white;
+        //    _timerText.gameObject.SetActive(false);
+        //}
     }
 
     private void GetTable()
@@ -124,8 +105,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         else
         {
             Debug.Log("Стол не указан");
-        }
-   
+        }  
     }
 
     private void SortInFullTable()
@@ -148,26 +128,15 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void DestroyBottle()
     {
         DOTween.Kill(true);
-        ObjectPool.SharedInstance.DestroyObject(gameObject);
-
-        ReturnEffect();
+        ResetBottle();
+        ObjectPool.SharedInstance.DestroyObject(gameObject);       
     }
 
     public void ResetBottle()
     {
-        ReturnEffect();
-
-        _waterInBottle.enabled = false;
+        _bottleView.ResetView();
         _isFull = false;
         _collider.enabled = false;
-    }
-
-    private void ReturnEffect()
-    {
-        if(_effectInBottle != null)
-        {
-            ObjectPool.SharedInstance.DestroyObject(_effectInBottle);
-        }
     }
 
     public void Action()

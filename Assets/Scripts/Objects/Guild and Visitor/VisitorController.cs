@@ -7,8 +7,8 @@ public class VisitorController : MonoBehaviour
     [SerializeField] private AudioClip _visitorFadingSound;
 
     private VisitorCountSystem _visitorCountSystem;
-    private PotionTaskSystem _taskSystem;
-    private PotionTask _currentTask;
+    private PotionTaskSystemv2 _taskSystem;
+    private PotionTaskv2 _currentTask;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
 
@@ -21,7 +21,7 @@ public class VisitorController : MonoBehaviour
     public bool FirstVisitor { get; private set; }
     public bool IsActive { get; private set; }
 
-    public void InitVisitorController(PotionTaskSystem taskSystem, int visitorTime, int visitorContrabandTime,int visitorCount)
+    public void InitVisitorController(PotionTaskSystemv2 taskSystem, int visitorTime, int visitorContrabandTime,int visitorCount)
     {
         _audioSource = GetComponent<AudioSource>();
         _taskSystem = taskSystem;
@@ -44,7 +44,7 @@ public class VisitorController : MonoBehaviour
         ShopControl(false);
     }
 
-    public void SetNextTask(PotionTask task)
+    public void SetNextTask(PotionTaskv2 task)
     {
         _currentTask = task;
     }
@@ -59,7 +59,7 @@ public class VisitorController : MonoBehaviour
             DisableAllVisitors();
     }
 
-    public void CallVisitor(PotionTask task)
+    public void CallVisitor(PotionTaskv2 task)
     {       
         if (IsActive)
         {

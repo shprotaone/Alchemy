@@ -6,7 +6,7 @@ public class ClaudronSystem : MonoBehaviour
 {
     [SerializeField] private Button _clearClaudronButton;
     [SerializeField] private SpriteRenderer _claudronSprite;
-    [SerializeField] private MixingSystemv2 _mixingSystem;
+    [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private WaterColorv2 _waterColor;
     [SerializeField] private Cookv2 _cookSystem;
     [SerializeField] private ButtonEventCatcher _buttonEvent;
@@ -22,7 +22,6 @@ public class ClaudronSystem : MonoBehaviour
 
     private void Start()
     {
-        _mixingSystem = GetComponent<MixingSystemv2>();
 
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
         _mixingSystem.ActiveButtonBrewDelegate += ClaudronButtonState;
@@ -30,7 +29,7 @@ public class ClaudronSystem : MonoBehaviour
 
     private void ClaudronButtonState()
     {
-        if (_mixingSystem.Ingredients.Count > 0 && !_isTutorial)
+        if (_mixingSystem.IngredientsInClaudron.Count > 0 && !_isTutorial)
         {
             _clearClaudronButton.interactable = true;
             _buttonEvent.Button.interactable = true;
@@ -47,7 +46,7 @@ public class ClaudronSystem : MonoBehaviour
         if (!_isTutorial)
         {
             _mixingSystem.ClearMixSystem();
-            _waterColor.SetColor(Color.white);
+            _waterColor.ResetWaterColor(Color.white);
         }
     }
 

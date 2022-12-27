@@ -102,19 +102,19 @@ public class LevelInitializator : MonoBehaviour
             _universalGlobalTask.Init(_levelMoneyTask,_inventory, _gameManager,_levelPreset, _levelPreset.goalText);
         }
 
-        _potionTaskSystem.SetTutorialMode(_levelPreset.isTutorial);
-        _potionTaskSystem.InitPotionSizer(_money,_levelPreset.sizer, _levelPreset.countPotionInSizer);
+        //_potionTaskSystem.SetTutorialMode(_levelPreset.isTutorial);
+        //_potionTaskSystem.InitPotionSizer(_money,_levelPreset.sizer, _levelPreset.countPotionInSizer);
 
         _universalGlobalTask.CheckContrabandLevel();
         
         _visitorController.InitVisitorController(_potionTaskSystem, _levelPreset.visitorTime, _levelPreset.contrabandVisitorTimer,_levelPreset.visitorCount);
 
-        _shopSystem.InitShop(_money);
-        _shopSystem.HideForTutorial(_levelPreset.isTutorial);
+        //_shopSystem.InitShop(_money);
+        //_shopSystem.HideForTutorial(_levelPreset.isTutorial);
         
         _gameTimer.InitTimer(_levelPreset.levelTimeInSeconds, _levelPreset.timerIsActive);
         //_rentShop.InitRentSystem(_levelPreset.rent, _levelPreset.secondsForRent, _levelPreset.rentActive);
-        _gameStateController.Init();
+        //_gameStateController.Init();
 
         CheckShopController();
 

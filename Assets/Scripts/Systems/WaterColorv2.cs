@@ -9,18 +9,29 @@ public class WaterColorv2 : MonoBehaviour
 
     [SerializeField] private Sprite _waterSprite;
     [SerializeField] private Sprite _boiledWaterSprite;
-    
+
+    private List<Color> _colors;
     private Color _resultColor;
 
     public Color ResultColor => _resultColor;
 
     private void Start()
     {
+        _colors = new List<Color>();
         _waterImage.material.color = Color.white;
         _waterImage.sprite = _waterSprite;
     }
 
-    public void ColorWater(List<Color> color)
+    public void AddColor(Color color)
+    {
+        _colors.Add(color);
+
+        _resultColor += color / _colors.Count;
+
+        _waterImage.DOColor(_resultColor, 1);
+    }
+
+    public void SetColorWater(List<Color> color)
     {
         Color resultSumColor = new Color();
 
@@ -41,8 +52,8 @@ public class WaterColorv2 : MonoBehaviour
         //_waterImage.material = null;
     }
 
-    public void SetColor(Color color)
+    public void ResetWaterColor(Color color)
     {
-        _waterImage.DOColor(color, 1);
+        _waterImage.DOColor(color, 1);    
     }    
 }

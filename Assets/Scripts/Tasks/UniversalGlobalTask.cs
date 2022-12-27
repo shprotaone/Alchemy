@@ -56,7 +56,7 @@ public class UniversalGlobalTask : MonoBehaviour
     
     private void SetMultiplyReward()
     {
-        _potionTaskSystem.SetRewardMultiply(_currentLevelPreset._rewardMultiply);
+        //_potionTaskSystem.SetRewardMultiply(_currentLevelPreset._rewardMultiply);
     }
     
     private void SetRandomResource()

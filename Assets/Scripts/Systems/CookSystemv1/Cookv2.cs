@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cookv2 : MonoBehaviour
@@ -24,7 +21,7 @@ public class Cookv2 : MonoBehaviour
     private void CookComplete()
     {
         _canFillBottle = true;
-        _mixingSystem.CheckPotion();
+        //_mixingSystem.CheckPotion();
     }
 
     private void CookFailed()

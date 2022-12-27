@@ -15,6 +15,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     
     private bool _inClaudron;
 
+    public ResourceType ResourceType { get; private set; }
     public IngredientData IngredientData => _ingredientData; 
     public Color IngredienColor { get; private set; }
     public ObjectType Type => _type;
@@ -41,6 +42,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     public void SetIngredientData(IngredientData ingredient)
     {
         _ingredientData = ingredient;
+        ResourceType = ingredient.resourceType;
         DrawIngredient();
         _audioSource.PlayOneShot(_ingredientData.dragSound);
     }

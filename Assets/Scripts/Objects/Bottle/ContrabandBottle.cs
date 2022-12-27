@@ -19,7 +19,7 @@ public class ContrabandBottle : Bottle
 
     private void UpdateTimer()
     {
-        _timerText.text = _timer.CurrentTime.ToString();
+        //_timerText.text = _timer.CurrentTime.ToString();
 
         if (_timer.CurrentTime < 1)
         {

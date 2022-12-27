@@ -20,15 +20,11 @@ public class MixingSystemv2 : MonoBehaviour
     [SerializeField] private PotionDetector _potionDetector;
     [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
     [SerializeField] private List<Ingredient> _ingredients;
-    [SerializeField] private TableManager _tableManager;
-    [SerializeField] private Claudron _claudron;
     [SerializeField] private ClaudronSystem _claudronSystem;
 
     private AudioSource _audioSource;
     private WaterColorv2 _waterColor;
     private Potion _potionOnClaudron;
-    private Cookv2 _cookSystem;
-    //private Cook _cookSystem;
 
     private bool _isPotionApproved;
 
@@ -38,7 +34,6 @@ public class MixingSystemv2 : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _waterColor = GetComponentInChildren<WaterColorv2>();
-        _cookSystem = GetComponent<Cookv2>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,7 +91,7 @@ public class MixingSystemv2 : MonoBehaviour
 
             _audioSource.Play();
             ActiveButtonBrewDelegate.Invoke();
-            _waterColor.ColorWater(MixColor());
+            _waterColor.SetColorWater(MixColor());
         }
         else
         {

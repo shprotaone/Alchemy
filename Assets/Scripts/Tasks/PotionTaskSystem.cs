@@ -45,7 +45,7 @@ public class PotionTaskSystem : MonoBehaviour
         _potionSizer = sizerSelector.SizerSelector(sizer);
         _potionSizer = sizerSelector.SetRangeSizerWithRandom(countForCustomSizer);
 
-        _potionCyclopedia.InitPotionCyclopedia();
+        //_potionCyclopedia.InitPotionCyclopedia();
     }
 
     public PotionTask GetTask()
