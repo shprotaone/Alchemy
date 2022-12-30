@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PausePanelController : MonoBehaviour
@@ -34,6 +35,6 @@ public class PausePanelController : MonoBehaviour
 
     private void Restart()
     {
-        _sceneLoader.LoadLevel(SceneLoader.GameScene);
+        _sceneLoader.LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 }

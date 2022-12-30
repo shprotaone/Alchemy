@@ -18,18 +18,18 @@ public class ContrabandPotionSystem : MonoBehaviour
     public Potion ContrabandPotion => _contrabandPotion;
     public bool IsActive => _isActive;
 
-    public void InitContrabandPotion(int contrabandTimer, int contrabandPotionChance)
-    {
-        _contrabandPotion = new Potion(SetPotion());
-        _contrabandPotion.SetContraband(true);
-        _conrabandPotionChance = contrabandPotionChance;
+    //public void InitContrabandPotion(int contrabandTimer, int contrabandPotionChance)
+    //{
+    //    _contrabandPotion = new Potion(SetPotion());
+    //    _contrabandPotion.SetContraband(true);
+    //    _conrabandPotionChance = contrabandPotionChance;
 
-        _contrabandTimer = contrabandTimer;
-        _counterCompleteText.gameObject.SetActive(true);
+    //    _contrabandTimer = contrabandTimer;
+    //    _counterCompleteText.gameObject.SetActive(true);
 
-        _isActive = true;
-        print("Контрабанда " + _contrabandPotion.PotionName);
-    }
+    //    _isActive = true;
+    //    print("Контрабанда " + _contrabandPotion.PotionName);
+    //}
 
     public void AddCounter()
     {
@@ -37,13 +37,13 @@ public class ContrabandPotionSystem : MonoBehaviour
         RefreshCounterText();
     }
 
-    private PotionData SetPotion()
-    {
-        int potionIndex = Random.Range(0, _potionTaskSystem.PotionSizer.Potions.Length - 1);
-        PotionData potion = _potionTaskSystem.PotionSizer.Potions[potionIndex];
+    //private PotionData SetPotion()
+    //{
+    //    //int potionIndex = Random.Range(0, _potionTaskSystem.PotionSizer.Potions.Length - 1);
+    //    //PotionData potion = _potionTaskSystem.PotionSizer.Potions[potionIndex];
 
-        return potion;
-    }
+    //    return potion;
+    //}
 
     private void RefreshCounterText()
     {

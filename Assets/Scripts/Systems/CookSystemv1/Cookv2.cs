@@ -3,7 +3,7 @@ using UnityEngine;
 public class Cookv2 : MonoBehaviour
 {
     [SerializeField] private ClickController _clickController;
-    [SerializeField] private MixingSystemv2 _mixingSystem;
+    [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private ClaudronSystem _claudron;
 
     private bool _canFillBottle = false;
@@ -15,13 +15,13 @@ public class Cookv2 : MonoBehaviour
         _clickController.OnGoodPotion += CookComplete;
         _clickController.OnNormalPotion += CookComplete;
         _clickController.OnBadPotion += CookFailed;
-        _clickController.OnResetClaudron += FillBottleReset;
+        //_clickController.OnResetClaudron += FillBottleReset;
     }
 
     private void CookComplete()
     {
         _canFillBottle = true;
-        //_mixingSystem.CheckPotion();
+        _mixingSystem.FillPotion();
     }
 
     private void CookFailed()
@@ -32,8 +32,7 @@ public class Cookv2 : MonoBehaviour
     public void FillBottleReset()
     {
         _canFillBottle = false;
-        _claudron.CrunchClaudron(false);
-        _claudron.ClearClaudron();
+        _clickController.Reset();
     }
 
     private void OnDisable()
@@ -41,6 +40,6 @@ public class Cookv2 : MonoBehaviour
         _clickController.OnGoodPotion -= CookComplete;
         _clickController.OnNormalPotion -= CookComplete;
         _clickController.OnBadPotion -= CookFailed;
-        _clickController.OnResetClaudron -= FillBottleReset;
+        //_clickController.OnResetClaudron -= FillBottleReset;
     }
 }

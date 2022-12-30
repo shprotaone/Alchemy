@@ -24,9 +24,14 @@ public class WaterColorv2 : MonoBehaviour
 
     public void AddColor(Color color)
     {
+        Color resultColor = new Color();
         _colors.Add(color);
 
-        _resultColor += color / _colors.Count;
+        foreach (var col in _colors)
+        {
+            resultColor += col;
+        }
+        _resultColor = resultColor / _colors.Count;
 
         _waterImage.DOColor(_resultColor, 1);
     }
@@ -55,5 +60,7 @@ public class WaterColorv2 : MonoBehaviour
     public void ResetWaterColor(Color color)
     {
         _waterImage.DOColor(color, 1);    
+        _colors.Clear();
+        _resultColor = Color.white;
     }    
 }

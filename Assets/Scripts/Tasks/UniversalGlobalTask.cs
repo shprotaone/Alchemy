@@ -112,7 +112,7 @@ public class UniversalGlobalTask : MonoBehaviour
     {
         if (_currentLevelPreset.isContrabandLevel)
         {
-            _contrabandSystem.InitContrabandPotion(_currentLevelPreset.contrabandTimer,_currentLevelPreset.contrabadPotionChance);
+            //_contrabandSystem.InitContrabandPotion(_currentLevelPreset.contrabandTimer,_currentLevelPreset.contrabadPotionChance);
             _globalTaskView.AddContrabandText(_contrabandSystem.ContrabandPotion.PotionName);
         }       
     }

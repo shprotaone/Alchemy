@@ -29,4 +29,35 @@ public class MatchCalculate
         Debug.Log("Совпало " + matchIndex + " ингредиентов");
         return matchIndex;
     }
+
+    public static int IndexMatchLabel(Potion inBottle, Potion inTask)
+    {
+        int matchIndex = 0;
+
+        inBottle.Labels.Sort();
+        inTask.Labels.Sort();
+
+        if(inBottle.Labels.Count > inTask.Labels.Count)
+        {
+            for (int i = 0; i < inTask.Labels.Count; i++)
+            {
+                if (inBottle.Labels[i] == inTask.Labels[i])
+                {
+                    matchIndex++;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < inBottle.Labels.Count; i++)
+            {
+                if (inBottle.Labels[i] == inTask.Labels[i])
+                {
+                    matchIndex++;
+                }
+            }
+        }     
+        
+        return matchIndex;
+    }
 }

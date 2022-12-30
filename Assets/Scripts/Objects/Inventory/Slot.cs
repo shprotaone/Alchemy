@@ -27,7 +27,7 @@ public class Slot : MonoBehaviour,IAction,IInterract,IDragTimer
 
     public void Action()
     {
-        if (!_timer.Started && _interactive)
+        if (!_timer.Started && _interactive && _amountInSlot > 0)
         {
             StartTimer();
             DecreaseAmount();

@@ -14,7 +14,9 @@ public class Potion
 
     private GuildsType _guildType;
     private Color _color;
+    private List<PotionLabelType> _label;
 
+    public List<PotionLabelType> Labels { get; private set; }
     public string PotionName => _name;
     public bool Contraband => _contraband;
     public List<string> Ingredients => _ingredients;
@@ -25,6 +27,12 @@ public class Potion
     public PotionData PotionData => _potionData;
 
     public Potion() { }
+
+    public Potion(List<PotionLabelType> labels)
+    {
+        Labels = labels;
+    }
+
     public Potion(Potion potion)
     {
         _name = potion.PotionName;

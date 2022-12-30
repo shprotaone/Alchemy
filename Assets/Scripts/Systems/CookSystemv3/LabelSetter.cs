@@ -58,8 +58,10 @@ public class LabelSetter
                 return PotionLabelType.ROCK;
             case ResourceType.Red when second == ResourceType.Blue:
                 return PotionLabelType.FIRE;
-            case ResourceType.Yellow when second == ResourceType.Yellow:
+            case ResourceType.Yellow when second == ResourceType.Blue:
                 return PotionLabelType.WATER;
+            case ResourceType.White when second == ResourceType.White:
+                return PotionLabelType.ROCK;
             case ResourceType.Red when second == ResourceType.Red:
                 return PotionLabelType.FIRE;
             case ResourceType.Yellow when second == ResourceType.Yellow:

@@ -19,6 +19,8 @@ public class Inventory : MonoBehaviour
     public IngredientData[] Ingredients => _ingredients;
     public int BottleCount => _tableManager.EmptyPotionTable.transform.childCount;
 
+    public bool InventoryIsEmpty { get; private set; }
+
     public void InitInventory()
     {
         _slots = new List<Slot>();
@@ -90,4 +92,6 @@ public class Inventory : MonoBehaviour
     {
         _rareShelf.HideShelf();
     }
+
+    
 }

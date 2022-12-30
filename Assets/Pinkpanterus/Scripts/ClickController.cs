@@ -184,7 +184,7 @@ public sealed class ClickController : MonoBehaviour
         }
         
 
-        DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
+        //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
 
     private void ShowMessage(string message)
@@ -200,15 +200,15 @@ public sealed class ClickController : MonoBehaviour
 
     public void Reset()
     {
-        DOVirtual.DelayedCall(0.5f, () =>
-        {
+        //DOVirtual.DelayedCall(0.5f, () =>
+        //{
             _counter.Setup(0, _maxClickCounterValue);
             _widgetClicker.ClearProgress();
             ShowMessage(String.Empty);
             _isPauseTimeBefore = false;
             _button.Button.interactable = true;
             OnResetClaudron?.Invoke();
-        });
+        //});
     }
 
     private void Stop()
@@ -220,7 +220,7 @@ public sealed class ClickController : MonoBehaviour
         _timer.Cancel();
         _button.Button.interactable = false;       
         
-        DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
+        //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
 
     private void Increment(int value)

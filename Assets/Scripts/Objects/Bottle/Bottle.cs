@@ -1,10 +1,10 @@
 ﻿using DG.Tweening;
-using System.Collections.Generic;
-using TMPro;
+using System;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
+    public event Action OnDropped;
     private const float moveSpeed = 1;
 
     [SerializeField] private BottleView _bottleView;
@@ -20,8 +20,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
     private bool _isFull;
 
-    public List<PotionLabelType> LabelList { get; private set; }
-    private int _contrabandTime;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
     public ObjectType Type => _type;
@@ -29,33 +27,22 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void InitBottle(BottleStorage storage,TableManager tableManager)
     {             
         _bottleStorage = storage;
-        _contrabandTime = 10;
         _tableManager = tableManager;
-
-        LabelList = new List<PotionLabelType>();
-    }
-
-    public void SetLabel(List<PotionLabelType> label)
-    {
-        _bottleView.AddLabels(_bottleStorage.LabelToSprite,label);
-        _isFull = true;
     }
 
     public void SetWaterColor(Color color)
     {
         _bottleView.FillColorWater(color);
     }
+
     public void SetPotion(Potion potion)
     {
         if (!_isFull)
         {
-            _potionInBottle = new Potion(potion);
-            _isFull = true;            
-            _bottleView.AddEffect(potion);                    
-
-            print("From Bottle" + _potionInBottle.PotionName);
-            //CheckContraband();
-            //_namePotionInBottle = _potionInBottle.PotionName;
+            _potionInBottle = new Potion(potion.Labels);
+            _isFull = true;                       
+            _bottleView.AddLabels(_bottleStorage.LabelToSprite, potion.Labels);
+            print("From Bottle" + _potionInBottle.Labels.Count);
         }
         else
         {
@@ -71,7 +58,8 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void Drop()
     {
         GetTable();
-        transform.DOMove(_destination.position, moveSpeed, false).OnComplete(ReturnBottleToBox);             
+        transform.DOMove(_destination.position, moveSpeed, false).OnComplete(ReturnBottleToBox);
+        OnDropped?.Invoke();   
     }
 
     public void DropFromGarbage()   //без повторной ативации OnComplete, спорное решение

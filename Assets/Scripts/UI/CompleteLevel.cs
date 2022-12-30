@@ -11,7 +11,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     private void Start()
     {
-        _exitButton.onClick.AddListener(Exit);
+        _exitButton?.onClick.AddListener(Exit);
         _restartButton?.onClick.AddListener(Restart);
     }
 
@@ -22,6 +22,6 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

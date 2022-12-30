@@ -7,7 +7,7 @@ public class Visitor : MonoBehaviour
     [SerializeField] private GuildsType _currentGuild;    
     [SerializeField] private PotionTaskView _currentTaskView;
 
-    private PotionTaskv2 _task;
+    private PotionTask _task;
     private VisitorController _visitorController;
     private LocalTimer _timer;
 
@@ -35,10 +35,8 @@ public class Visitor : MonoBehaviour
         }
     }
 
-    public void Init(VisitorController visitorController, PotionTaskv2 task)
-    {
-        
-
+    public void Init(VisitorController visitorController, PotionTask task)
+    {      
         _visitorController = visitorController;
         _timeVisitor = _visitorController.VisitorTime;
         _task = task;
@@ -57,12 +55,12 @@ public class Visitor : MonoBehaviour
         _timer.OnTimerEnded += CheckVisitorTime;
     }
 
-    public bool ChekResult(Potion task)
-    {       
-        //_task.TaskSystem.TaskComplete(potionInBottle);
+    public bool ChekResult(Potion inBottle)
+    {
+        _task.TaskSystem.TaskComplete(inBottle);
         _visitorView.Fading();
         _currentTaskView.FadingTask();
-        //if (_task.CurrentPotion.PotionName == potionInBottle.PotionName)
+        //if (_task.CurrentPotion.PotionName == task.PotionName)
         //{
         //    _task.TaskSystem.TaskComplete();
         //    _visitorView.Fading();

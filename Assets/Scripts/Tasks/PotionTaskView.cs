@@ -42,8 +42,7 @@ public class PotionTaskView : MonoBehaviour
         _potionNameText.gameObject.SetActive(true);
         _imagesObj.gameObject.SetActive(false);
 
-        _potionNameText.text = task.CurrentPotion.PotionName;
-        _rewardText.text = task.RewardCoin.ToString();
+        _potionNameText.text = task.CurrentPotion.PotionName;       
 
         if (isImageType)
         {
@@ -54,6 +53,11 @@ public class PotionTaskView : MonoBehaviour
         }
     }
 
+    public void SetRewardText(PotionTask task)
+    {
+        _rewardText.text = task.RewardCoin.ToString();
+    }
+
     /// <summary>
     /// Картиночная версия задания
     /// </summary>
@@ -61,7 +65,6 @@ public class PotionTaskView : MonoBehaviour
     /// <param name="reward"></param>
     private void FillImageTask(Sprite[] ingredientSprites)
     {
-
         for (int i = 0; i < ingredientSprites.Length; i++)
         {
             _ingredientImages[i].sprite = ingredientSprites[i];

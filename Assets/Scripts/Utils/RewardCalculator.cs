@@ -1,4 +1,6 @@
-﻿public class RewardCalculator
+﻿using UnityEngine;
+
+public class RewardCalculator
 {    
     private int _allGuildsReward = 300;
     private int _knightCommonReward = 400;
@@ -52,30 +54,59 @@
         {
             _reward = _knightRareReward;
         }
-    }  
+    }
 
-    public float CalculateResult(int baseReward, int ingredientsInPotion,int matchIndex)
+    public float GetReward(int count)
     {
-        _reward = baseReward;
-        int delta = ingredientsInPotion - matchIndex;
+        if (count == 1)
+        {
+            _reward = 100;
+        }
+        else if (count == 2)
+        {
+            _reward = 200;
+        }
+        else if (count == 3) 
+        { 
+            _reward = 300; 
+        } 
+        else
+        {
+            Debug.LogError("Значков нет");
+            _reward = 0;
+        }
 
+        return _reward;
+    }
+
+    public float CalculateResult(int labelsCount,int matchIndex)
+    {
+        int delta = 0;       
+
+        if(matchIndex != 0)
+        {
+            delta = labelsCount - matchIndex;
+        }
+        else
+        {
+            return 0;
+        }
+        
         if (delta == 0)
         {
             return Reward;
         } 
         else if(delta == 1)
         {
-            return Reward / 0.3f;
+            return Reward * 0.3f;
         }
         else if(delta == 2)
         {
-            return Reward / 0.5f;
+            return Reward * 0.5f;
         }
         else
         {
             return 0;
         }
     }
-
-
 }

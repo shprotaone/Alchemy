@@ -17,10 +17,10 @@ public class PotionTask
         TaskSystem = taskSystem;
         _currentPotion = potion;
 
-        SetGuild(potion.GuildsType);
-        SetReward();
+        //SetGuild(potion.GuildsType);
+        //SetReward();
        
-        Images = taskSystem.GetIngredientSprites(this);
+        Images = taskSystem.GetLabels(potion.Labels.Count);
 
         CurrentTaskView = visitorController.CurrentVisitor.TaskView;
         CurrentTaskView.InitTask(this, taskSystem.ImageTask);
@@ -29,6 +29,12 @@ public class PotionTask
     private void SetGuild(GuildsType guildType)
     {
         _currentPotion.SetGuild(guildType);
+    }
+
+    public void SetReward(int reward)
+    {
+        _rewardCoin = reward;
+        CurrentTaskView.SetRewardText(this);
     }
 
     private void SetReward()

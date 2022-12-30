@@ -1,5 +1,9 @@
+using System;
+
 public class VisitorCountSystem
 {
+    public event Action OnVisitorEnded;
+
     private VisitorCountSystemView _view;
     public int VisitorLeft { get; private set; }
     public int CurrentVisitorCount { get; private set; }
@@ -16,5 +20,9 @@ public class VisitorCountSystem
     {
         VisitorLeft--;
         _view.RefreshText(VisitorLeft);
+        if(VisitorLeft == 0)
+        {
+            OnVisitorEnded?.Invoke();
+        }
     }
 }

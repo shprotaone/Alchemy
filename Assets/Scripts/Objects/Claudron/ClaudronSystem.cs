@@ -44,9 +44,10 @@ public class ClaudronSystem : MonoBehaviour
     public void ClearClaudron()
     {
         if (!_isTutorial)
-        {
-            _mixingSystem.ClearMixSystem();
+        {           
             _waterColor.ResetWaterColor(Color.white);
+            CrunchClaudron(false);
+            _cookSystem.FillBottleReset();
         }
     }
 

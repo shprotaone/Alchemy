@@ -72,7 +72,7 @@ public class CollectableIngredient
 
     private void FindResourceComplete()
     {
-        foreach (Slot item in _inventory.Slots)
+        foreach (Slot slot in _inventory.Slots)
         {
 
             //if (item.IngredientInSlot.resourceRarity == ResourceRarity.common && _commonIngredientValue > 0)

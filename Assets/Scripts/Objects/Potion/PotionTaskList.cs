@@ -12,10 +12,10 @@ public class PotionTaskList : MonoBehaviour
     [SerializeField] private JSONReader _jsonReader;
     [SerializeField] private StringToSprite _imageConverter;
     
-    [SerializeField] private List<CyclopediaSlot> _cyclopediaSlots;
+    [SerializeField] private List<RecipeSlot> _cyclopediaSlots;
     [SerializeField] private GameObject _cyclopediaSlotPrefab;
 
-    private List<CyclopediaSlot> _activeSlots;
+    private List<RecipeSlot> _activeSlots;
     private PotionSizer _taskPotionSizer;
     private GuildChecker _guildChecker;
     private RarityChecker _rarityChecker;
@@ -25,18 +25,17 @@ public class PotionTaskList : MonoBehaviour
 
     public void InitPotionCyclopedia()
     {
-        _taskPotionSizer = _potionTaskSystem.PotionSizer;
+        //_taskPotionSizer = _potionTaskSystem.PotionSizer;
         _guildChecker = new GuildChecker();
         _rarityChecker = new RarityChecker();
 
         _bottleInventory.OnBottleAdded += SearchCompleteSlot;
-        FillCyclopediaInStart();
         SetActiveSlots();
     }
 
     private void SetActiveSlots()
     {
-        _activeSlots = new List<CyclopediaSlot>();
+        _activeSlots = new List<RecipeSlot>();
 
         foreach (var slot in _cyclopediaSlots)
         {
@@ -73,18 +72,18 @@ public class PotionTaskList : MonoBehaviour
         OnPotionTaskListChanged?.Invoke();
     }
 
-    private void FillCyclopediaInStart()
-    {
-        for (int i = 0; i < _taskPotionSizer.Potions.Length; i++)
-        {
-            _ingredients = _taskPotionSizer.Potions[i].ingredients;
+    //private void FillCyclopediaInStart()
+    //{
+    //    for (int i = 0; i < _taskPotionSizer.Potions.Length; i++)
+    //    {
+    //        _ingredients = _taskPotionSizer.Potions[i].ingredients;
 
-            _cyclopediaSlots[i].gameObject.SetActive(true);
+    //        _cyclopediaSlots[i].gameObject.SetActive(true);
 
-            _cyclopediaSlots[i].FillSlot(_taskPotionSizer.Potions[i],
-                                    GetImages(_ingredients));
-        }
-    }
+    //        _cyclopediaSlots[i].FillSlot(_taskPotionSizer.Potions[i],
+    //                                GetImages(_ingredients));
+    //    }
+    //}
 
     private Sprite[] GetImages(List<string> value)
     {

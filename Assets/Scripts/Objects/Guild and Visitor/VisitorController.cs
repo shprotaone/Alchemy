@@ -2,13 +2,14 @@
 
 public class VisitorController : MonoBehaviour
 {
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private VisitorCountSystemView _countView;
     [SerializeField] private Visitor[] _visitors;
     [SerializeField] private AudioClip _visitorFadingSound;
 
     private VisitorCountSystem _visitorCountSystem;
-    private PotionTaskSystemv2 _taskSystem;
-    private PotionTaskv2 _currentTask;
+    private PotionTaskSystem _taskSystem;
+    private PotionTask _currentTask;
     private Visitor _prevVisitor;
     private AudioSource _audioSource;
 
@@ -21,12 +22,14 @@ public class VisitorController : MonoBehaviour
     public bool FirstVisitor { get; private set; }
     public bool IsActive { get; private set; }
 
-    public void InitVisitorController(PotionTaskSystemv2 taskSystem, int visitorTime, int visitorContrabandTime,int visitorCount)
+    public void InitVisitorController(PotionTaskSystem taskSystem, int visitorTime, int visitorContrabandTime,int visitorCount)
     {
         _audioSource = GetComponent<AudioSource>();
         _taskSystem = taskSystem;
         IsActive = true;
         _visitorCountSystem = new VisitorCountSystem(_countView,visitorCount);
+        _visitorCountSystem.OnVisitorEnded += _gameManager.CompleteLevel;
+
         VisitorTime = visitorTime;
         VisitorContrabandTime = VisitorContrabandTime;
     }
@@ -34,7 +37,7 @@ public class VisitorController : MonoBehaviour
     public void Activate()
     {
         VisitorChoice();
-        SetNextTask(_taskSystem.GetTask());
+        SetNextTask(_taskSystem.GetTaskv2());
         SetVisitorTime(VisitorTime, VisitorContrabandTime);
         ShopControl(IsActive);
     }
@@ -44,7 +47,7 @@ public class VisitorController : MonoBehaviour
         ShopControl(false);
     }
 
-    public void SetNextTask(PotionTaskv2 task)
+    public void SetNextTask(PotionTask task)
     {
         _currentTask = task;
     }
@@ -59,7 +62,7 @@ public class VisitorController : MonoBehaviour
             DisableAllVisitors();
     }
 
-    public void CallVisitor(PotionTaskv2 task)
+    public void CallVisitor(PotionTask task)
     {       
         if (IsActive)
         {
@@ -120,7 +123,7 @@ public class VisitorController : MonoBehaviour
             _firstVisitor = false;
 
             VisitorChoice();
-            SetNextTask(_taskSystem.GetTask());           
+            SetNextTask(_taskSystem.GetTaskv2());           
             CallVisitor(_currentTask);
             _visitorCountSystem.DecreaseVisitorCount();
         }
