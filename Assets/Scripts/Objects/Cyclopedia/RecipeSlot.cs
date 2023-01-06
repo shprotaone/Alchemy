@@ -1,27 +1,50 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RecipeSlot : MonoBehaviour
 {
-    [SerializeField] private Image _firstIngredient;
-    [SerializeField] private Image _secondIngredient;
-    [SerializeField] private Image _resultImage;
-    [SerializeField] private Toggle _toggle;
+    [SerializeField] private List<Image> _images;
+    [SerializeField] private TMP_Text _countText;
 
     public Potion PotionInSlot { get; private set; }
-    public bool Complete { get; private set; }
-    public void SetComplete()
+    public bool IsFree { get; private set; }
+
+    public void SetSlot(FullBottleSlot slot)
     {
-        Complete = true;
-        _toggle.isOn = Complete;
+        IsFree = false;
+
+        if (slot.IsFree)
+        {
+            ClearSlot();
+        }
+        else
+        {
+            gameObject.SetActive(true);
+
+            for (int i = 0; i < _images.Count; i++)
+            {
+                if (i < slot.BottleInSlot.Labels.Count)
+                {
+                    _images[i].enabled = true;
+                    _images[i].sprite = slot.BottleInSlot.View.LabelSprites[i].sprite;
+                }
+                else
+                {
+                    _images[i].enabled = false;
+                }
+            }
+        }
+        
+
+        _countText.text = slot.Count.ToString();
     }
 
-   public void SetSlot(Sprite firstImage,Sprite secondImage,Sprite result)
+    public void ClearSlot()
     {
-        _firstIngredient.sprite = firstImage;
-        _secondIngredient.sprite = secondImage;
-        _resultImage.sprite = result;
+        IsFree = true;
+        gameObject.SetActive(false);
     }
 }
 

@@ -5,45 +5,62 @@ using UnityEngine;
 public class LabelSetter
 {
     private List<ResourceType> _types;
+    private List<PotionLabelType> _labels = new List<PotionLabelType>();
 
-    public LabelSetter(List<Ingredient> ingredients)
+    public List<PotionLabelType> Labels => _labels;
+    public void SetTypeFromIngredient(List<Ingredient> ingredients)
     {
         _types = new List<ResourceType>();
         foreach (var ingredient in ingredients)
         {
             _types.Add(ingredient.ResourceType);
         }
+    }
 
-        _types.Sort();
+    public void Clear()
+    {
+        _types.Clear();
+        _labels.Clear();
     }
 
     public List<PotionLabelType> GetCurrentLabels()
-     {
-         List<PotionLabelType> labels = new List<PotionLabelType>();
+     {      
+        List<ResourceType> tmpList = new List<ResourceType>();
 
         if (_types.Count == 2)
         {
-            labels.Add(GetPotionLabel(_types[0], _types[1]));
-        }
-        else if (_types.Count == 3)
-        {
-            labels.Add(GetPotionLabel(_types[0], _types[1]));
-            labels.Add(GetPotionLabel(_types[1], _types[2]));
-        }
-        else if (_types.Count == 4)
-        {
-            labels.Add(GetPotionLabel(_types[0], _types[1]));
-            labels.Add(GetPotionLabel(_types[1], _types[2]));
-            labels.Add(GetPotionLabel(_types[2], _types[3]));
-        }
-        else
-        {
-            Debug.LogError("Ќе хватает ингредиентов дл€ маркировки");
-            return null;
+            tmpList.Add(_types[0]);
+            tmpList.Add(_types[1]);
+            tmpList.Sort();
+
+            _labels.Add(GetPotionLabel(tmpList[0],tmpList[1]));
         }
 
-        return labels;
+        if(_types.Count == 3)
+        {
+            tmpList.Clear();
+
+            tmpList.Add(_types[1]);
+            tmpList.Add(_types[2]);
+            tmpList.Sort();
+
+            _labels.Add(GetPotionLabel(tmpList[0], tmpList[1]));
+        }
+
+        if (_types.Count == 4)
+        {
+            tmpList.Clear();
+
+            tmpList.Add(_types[2]);
+            tmpList.Add(_types[3]);
+            tmpList.Sort();
+
+            _labels.Add(GetPotionLabel(tmpList[0], tmpList[1]));
+        }
+
+        return _labels;
     }
+
     public  PotionLabelType GetPotionLabel(ResourceType first, ResourceType second)
     {
         switch (first)

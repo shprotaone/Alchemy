@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class LabelToSprite : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> _sprites;
+    [SerializeField] private Sprite _fireSprite;
+    [SerializeField] private Sprite _rockSprite;
+    [SerializeField] private Sprite _waterSprite;
 
     public Sprite GetSprite(PotionLabelType label)
     {
         if(label == PotionLabelType.ROCK)
         {
-            return _sprites[0];
+            return _rockSprite;
         }
         else if(label == PotionLabelType.FIRE)
         {
-            return _sprites[1];
+            return _fireSprite;
         }
         else if(label == PotionLabelType.WATER)
         {
-            return _sprites[2];
+            return _waterSprite;
         }
         else
         {

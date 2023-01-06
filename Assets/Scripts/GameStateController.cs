@@ -8,25 +8,30 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Button _cameraMovementButton;
+    [SerializeField] private CameraMovement _cameraMovement;
 
+    private MixingSystemv3 _mixingSystem;
     public bool InventoryIsEmpty { get; private set; }
 
-    public void Init()
+    public void Init(MixingSystemv3 mixingSystem)
     {
-        MixingSystemv3.OnIngredientAdded += CheckLeftIngredients;
-        _cameraMovementButton.interactable = false;
+        _mixingSystem = mixingSystem;
+        _mixingSystem.OnBottleFilled += CheckLeftIngredients;
+        
+        _cameraMovementButton.interactable = true;
     }
 
     public void CheckState()
     {
         if (InventoryIsEmpty)
         {
-            _cameraMovementButton.interactable = true;
+            //_cameraMovementButton.interactable = true;
+            _cameraMovement.Movement();
             _visitorController.Activate();
         }
         else
         {
-            _cameraMovementButton.interactable = false;
+            //_cameraMovementButton.interactable = false;
             _visitorController.Deactivate();
         }
     }
@@ -49,6 +54,6 @@ public class GameStateController : MonoBehaviour
 
     private void OnDisable()
     {
-        MixingSystemv3.OnIngredientAdded -= CheckLeftIngredients;
+        _mixingSystem.OnBottleFilled -= CheckLeftIngredients;
     }
 }

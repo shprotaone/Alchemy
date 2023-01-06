@@ -61,6 +61,8 @@ public sealed class ClickController : MonoBehaviour
         
         _counter.Setup(0, _maxClickCounterValue);
         _counter.OnValueChanged += IndicateCountChange;
+
+        OnBadPotion += FailCoocking;
     }
 
     private void OnDisable()
@@ -78,7 +80,8 @@ public sealed class ClickController : MonoBehaviour
 
         _timer.OnFinished -= FailCoocking;
         _counter.OnValueChanged -= IndicateCountChange;
-        
+
+        OnBadPotion -= FailCoocking;
         StopAllCoroutines();
     }
 
@@ -95,7 +98,6 @@ public sealed class ClickController : MonoBehaviour
 
     private void HandleButtonRelease()
     {
-
         CheckResult();
     }
 
@@ -180,7 +182,7 @@ public sealed class ClickController : MonoBehaviour
         }
         else
         {
-            OnBadPotion?.Invoke();
+            OnBadPotion?.Invoke();            
         }
         
 
@@ -196,11 +198,12 @@ public sealed class ClickController : MonoBehaviour
     private void FailCoocking()
     {      
         Stop();
+        Reset();
     }
 
     public void Reset()
     {
-        //DOVirtual.DelayedCall(0.5f, () =>
+        //DOVirtual.DelayedCall(_resetDelayTime, () =>
         //{
             _counter.Setup(0, _maxClickCounterValue);
             _widgetClicker.ClearProgress();
@@ -218,9 +221,9 @@ public sealed class ClickController : MonoBehaviour
         _isCooking = false;
         _isPauseTimeBefore = true;
         _timer.Cancel();
-        _button.Button.interactable = false;       
-        
-        //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
+        _button.Button.interactable = false;
+
+        DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
 
     private void Increment(int value)

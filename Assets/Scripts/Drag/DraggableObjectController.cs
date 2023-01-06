@@ -8,7 +8,7 @@ public class DraggableObjectController : MonoBehaviour
     [SerializeField] private GameObject[] _interractGo;
     [SerializeField] private List<IInterract> _interract;
 
-    private void Start()
+    private void Awake()
     {
         _interract = new List<IInterract>();
 
@@ -24,7 +24,7 @@ public class DraggableObjectController : MonoBehaviour
             _interract.Add(component);
         }
 
-        SetInterract(true);
+        //SetInterract(true);
     }
 
     public void SetInterract(bool flag)

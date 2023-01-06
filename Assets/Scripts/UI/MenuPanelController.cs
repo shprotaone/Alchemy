@@ -23,14 +23,14 @@ public class MenuPanelController : MonoBehaviour
         _closeButton.onClick.AddListener(Close);
     }
 
-    private void Open()
+    public void Open()
     {
         OnInterract?.Invoke(false);
         _panel.gameObject.SetActive(true);
         _panel.DOAnchorPos(_openPosition.anchoredPosition, _openDuration, false);
     }
 
-    private void Close()
+    public void Close()
     {
         OnInterract?.Invoke(true);
         _ingameTimeController.ResumeGame();

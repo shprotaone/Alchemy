@@ -50,7 +50,7 @@ public class StartDialogViewer : MonoBehaviour
         }
     }
 
-    private void DisableViewer()
+    public void DisableViewer()
     {
         _gameTimeController.ResumeGame();
         _draggableController.SetInterract(true);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class VisitorController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class VisitorController : MonoBehaviour
     private int _visitorCounter;
     private bool _firstVisitor = true;
 
+    public PotionTask CurrentTask => _currentTask;
     public Visitor CurrentVisitor { get; private set; }
     public int VisitorTime { get; private set; }
     public int VisitorContrabandTime { get; private set; }
@@ -31,13 +33,13 @@ public class VisitorController : MonoBehaviour
         _visitorCountSystem.OnVisitorEnded += _gameManager.CompleteLevel;
 
         VisitorTime = visitorTime;
-        VisitorContrabandTime = VisitorContrabandTime;
     }
 
     public void Activate()
     {
         VisitorChoice();
         SetNextTask(_taskSystem.GetTaskv2());
+        CallVisitor(_currentTask);
         SetVisitorTime(VisitorTime, VisitorContrabandTime);
         ShopControl(IsActive);
     }
@@ -54,12 +56,12 @@ public class VisitorController : MonoBehaviour
 
     public void ShopControl(bool flag)
     {
-        IsActive = flag;
+        //IsActive = flag;
 
-        if (IsActive)
-            CallVisitor(_currentTask);
-        else
-            DisableAllVisitors();
+        //if (IsActive)
+        //    CallVisitor(_currentTask);
+        //else
+        //    DisableAllVisitors();
     }
 
     public void CallVisitor(PotionTask task)
@@ -119,6 +121,9 @@ public class VisitorController : MonoBehaviour
     {
         if (CurrentVisitor != null)
         {
+            CurrentVisitor.VisitorView.Fading();
+            CurrentVisitor.TaskView.FadingTask();
+
             VisitorGoOutSound();
             _firstVisitor = false;
 

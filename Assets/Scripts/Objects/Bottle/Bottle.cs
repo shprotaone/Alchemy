@@ -1,86 +1,100 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
     public event Action OnDropped;
     private const float moveSpeed = 1;
+    private Vector3 standartScale = new Vector3(0.3f, 0.3f, 1);
+    private Vector3 increaseScale = new Vector3(0.4f, 0.4f, 1);
+    private Vector3 tradeScale = new Vector3(0.2f, 0.2f, 1);
 
     [SerializeField] private BottleView _bottleView;
-    [SerializeField] private BoxCollider2D _collider;  
+    [SerializeField] private BoxCollider2D _collider;
+    [SerializeField] private LabelPhysController _labelController;
     [SerializeField] private ObjectType _type;
-    [SerializeField] private string _namePotionInBottle;
+    [SerializeField] private FullBottleSlot _slot;
+    [SerializeField] private FullBottleSlot _prevSlot;
+    [SerializeField] private List<PotionLabelType> _labels;
 
     private Transform _destination;
     
     private Potion _potionInBottle;
     private TableManager _tableManager;
     private BottleStorage _bottleStorage;
+    private BottleInventory _bottleInventory;
 
     private bool _isFull;
 
+    public BottleView View => _bottleView;
+    public List<PotionLabelType> Labels => _labels;
     public bool IsFull => _isFull;
     public Potion PotionInBottle => _potionInBottle;
     public ObjectType Type => _type;
 
     public void InitBottle(BottleStorage storage,TableManager tableManager)
-    {             
+    {
         _bottleStorage = storage;
         _tableManager = tableManager;
     }
 
-    public void SetWaterColor(Color color)
-    {
-        _bottleView.FillColorWater(color);
-    }
 
-    public void SetPotion(Potion potion)
+    public void FillBottle(Potion potion, Color color)
     {
         if (!_isFull)
         {
             _potionInBottle = new Potion(potion.Labels);
+
+            SetWaterColor(color);
             _isFull = true;                       
             _bottleView.AddLabels(_bottleStorage.LabelToSprite, potion.Labels);
-            print("From Bottle" + _potionInBottle.Labels.Count);
+
+            _labels = new List<PotionLabelType>();
+            Labels.AddRange(potion.Labels);
         }
         else
         {
             Debug.LogWarning("Бутылка уже заполнена");
         }
     }
+
+    private void SetWaterColor(Color color)
+    {
+        _bottleView.FillColorWater(color);
+    }
+
     public void SetPosition(Transform slotTransform)
     {
+        slotTransform.TryGetComponent(out FullBottleSlot slot);
+        if(slot != null)
+        {          
+            _slot = slot;
+        }       
+
         _destination = slotTransform;
         transform.SetParent(slotTransform);
+
+        _slot.CheckChild();
     }
 
     public void Drop()
     {
+        DecreaseSize();
+        _labelController.Deactivate();
+
         GetTable();
-        transform.DOMove(_destination.position, moveSpeed, false).OnComplete(ReturnBottleToBox);
-        OnDropped?.Invoke();   
+        transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
+                                                                 .OnComplete(ReturnBottleToBox);
+        OnDropped?.Invoke();
     }
 
     public void DropFromGarbage()   //без повторной ативации OnComplete, спорное решение
     {
         GetTable();
         transform.DOMove(_destination.position, moveSpeed, false);
-    }  
-
-    private void CheckContraband()
-    {
-        //if (_potionInBottle.Contraband)
-        //{
-        //    _bottle.color = _contrabandBottleColor;
-        //    _timerText.gameObject.SetActive(true);
-        //    //StartTimer();                         //вынести контрабадные зелья и наполнения в отдельные классы? 
-        //}
-        //else
-        //{
-        //    _bottle.color = Color.white;
-        //    _timerText.gameObject.SetActive(false);
-        //}
     }
 
     private void GetTable()
@@ -96,16 +110,10 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         }  
     }
 
-    private void SortInFullTable()
-    {
-        _tableManager.FullPotionTable.SortBottlePosition();
-        transform.SetParent(_destination);              
-    }
-
     private void ReturnBottleToBox()
     {       
         _collider.enabled = true;
-
+        
         if (!IsFull)
         {
             _bottleStorage.ReturnBottle();
@@ -127,9 +135,28 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         _collider.enabled = false;
     }
 
-    public void Action()
+    public async void Action()
     {
-       
+        IncreaseSize();
+        _labelController.Activate();
+        _prevSlot = _slot;
+        await Task.Delay(50);
+        _prevSlot.CheckChild();
+    }
+
+    public void SetTradeScale()
+    {
+        transform.DOScale(tradeScale, 0.5f);
+    }
+
+    private void IncreaseSize()
+    {
+        transform.DOScale(increaseScale, 0.5f);
+    }
+
+    private void DecreaseSize()
+    {
+        transform.DOScale(standartScale, 0.5f);
     }
 }
 

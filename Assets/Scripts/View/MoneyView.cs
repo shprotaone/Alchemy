@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class MoneyView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _moneyText;
-    [SerializeField] private TMP_Text _moneyTextInShop;
+    [SerializeField] private TMP_Text _moneyText;   
 
     public void Init()
     {
@@ -12,7 +11,6 @@ public class MoneyView : MonoBehaviour
     }
     private void RefreshMoneyText(int value)
     {
-        _moneyText.text = value.ToString();
-        _moneyTextInShop.text = value.ToString();
+        _moneyText.text = value.ToString();       
     }
 }

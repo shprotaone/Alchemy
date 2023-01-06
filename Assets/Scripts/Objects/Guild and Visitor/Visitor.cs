@@ -18,30 +18,13 @@ public class Visitor : MonoBehaviour
     public GuildsType Guild => _currentGuild;
     public PotionTaskView TaskView => _currentTaskView;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Bottle"))
-        {
-            Bottle bottle = collision.GetComponent<Bottle>();
-            if (bottle.IsFull && ChekResult(bottle.PotionInBottle))
-            {
-                if (_firstTask)
-                {
-                    _firstTask = false;
-                }
-
-                bottle.DestroyBottle();
-            }
-        }
-    }
-
     public void Init(VisitorController visitorController, PotionTask task)
     {      
         _visitorController = visitorController;
         _timeVisitor = _visitorController.VisitorTime;
         _task = task;
 
-        TimerActivate();
+        //TimerActivate();
 
         _visitorView.Rising();
     } 
@@ -55,9 +38,8 @@ public class Visitor : MonoBehaviour
         _timer.OnTimerEnded += CheckVisitorTime;
     }
 
-    public bool ChekResult(Potion inBottle)
+    public bool ChekResult()
     {
-        _task.TaskSystem.TaskComplete(inBottle);
         _visitorView.Fading();
         _currentTaskView.FadingTask();
         //if (_task.CurrentPotion.PotionName == task.PotionName)

@@ -5,27 +5,24 @@ using UnityEngine;
 public class PotionTaskSystem : MonoBehaviour
 {
     public static event Action OnTaskComplete;
-  
+
+    [SerializeField] private TradeSystem _tradeSystem;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private LabelToSprite _labelToSprite;
+    [SerializeField] private TaskChance _chances;
     [SerializeField] private GameObject _coinPrefab;
     [SerializeField] private Transform _jarTransform;
 
     [SerializeField] private bool _imageTask;
 
-    private Money _moneySystem;
     private RewardCalculator _rewardCalculator;
     private List<PotionLabelType> _labels;
     
     private Potion _currentPotion;
-    private PotionTask _currentTask;
 
-    public bool ImageTask => _imageTask;
-
-    public void Init(Money moneySystem,SizerType sizer, int countForCustomSizer)
+    public void Init(Money moneySystem)
     {
         _currentPotion = new Potion();
-        _moneySystem = moneySystem;
         _rewardCalculator = new RewardCalculator();
     }
 
@@ -37,32 +34,11 @@ public class PotionTaskSystem : MonoBehaviour
 
         potionTask = new PotionTask(_currentPotion, _visitorController, this);
         potionTask.SetReward((int)_rewardCalculator.GetReward(_currentPotion.Labels.Count));
-        _currentTask = potionTask;
+
+        _tradeSystem.SetTask(potionTask);
 
         return potionTask;
-    }
-
-    public void TaskComplete(Potion bottlePotion)
-    {
-        int indexMatch = MatchCalculate.IndexMatchLabel(bottlePotion, _currentPotion);
-        float result = _rewardCalculator.CalculateResult(bottlePotion.Labels.Count,indexMatch);
-
-        _moneySystem.Increase((int)result);
-
-        Debug.Log("Получил " + result + "Совпадений " + indexMatch);
-        StartCoinAnimation();
-        _visitorController.DisableVisitor();
-
-        OnTaskComplete?.Invoke();
-    }
-
-    private void StartCoinAnimation()
-    {
-        GameObject curCoin = ObjectPool.SharedInstance.GetObject(ObjectType.COINDROP);
-        curCoin.transform.position = _currentTask.CurrentTaskView.transform.position;
-        Coin coin = curCoin.GetComponent<Coin>();
-        coin.Movement(_jarTransform.position);
-    }
+    }    
 
     public void TaskCanceled()
     {      
@@ -71,16 +47,14 @@ public class PotionTaskSystem : MonoBehaviour
 
     private Potion GetPotionForTask()
     {
-        int count = UnityEngine.Random.Range(1, 4);
+        //TODO: CLEAR
+        int count = _chances.GetTaskCount();
 
-        _labels = new List<PotionLabelType>();
-
-
-        int result = UnityEngine.Random.Range(0, (int)PotionLabelType.FIRE);
+        _labels = new List<PotionLabelType>();    
 
         for (int i = 0; i < count; i++)
         {
-            _labels.Add((PotionLabelType)result);
+            _labels.Add(_chances.GetRandomLabel());
         }
 
         return new Potion(_labels);
@@ -247,4 +221,19 @@ public class PotionTaskSystem : MonoBehaviour
 //        _rewardMultiply = multiply;
 //    }       
 //}
+
+//public void TaskComplete(Potion bottlePotion)
+//    {
+//        int indexMatch = MatchCalculate.IndexMatchLabel(bottlePotion.Labels, _currentPotion.Labels);
+//        float result = _rewardCalculator.CalculateResult(bottlePotion.Labels.Count,indexMatch);
+
+//        _moneySystem.Increase((int)result);
+
+//        Debug.Log("Получил " + result + "Совпадений " + indexMatch);
+////StartCoinAnimation();
+//        _visitorController.DisableVisitor();
+
+//        OnTaskComplete?.Invoke();
+//    }
+
 #endregion

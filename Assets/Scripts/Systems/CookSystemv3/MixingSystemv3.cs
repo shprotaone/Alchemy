@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class MixingSystemv3 : MonoBehaviour
 {
-    private const int maxMixColor = 4;
+    public static event Action OnIngredientAdded;
 
     public delegate void RefreshCountIngredient();
     public RefreshCountIngredient ActiveButtonBrewDelegate;
 
-    public delegate void FilledBottle();
-    public FilledBottle FilledBottleDelegateForTutorial;
-
-    public static event Action OnIngredientAdded;
+    public Action OnBottleFilled;
 
     [SerializeField] private BottleInventory _bottleInventory;
-    [SerializeField] private List<Ingredient> _ingredients;
     [SerializeField] private ClaudronSystem _claudronSystem;
     [SerializeField] private ClaudronLabelView _claudronLabelView;
     [SerializeField] private WaterColorv2 _waterColor;
@@ -23,11 +19,13 @@ public class MixingSystemv3 : MonoBehaviour
 
     private Potion _potionInClaudron;
     private LabelSetter _labelSetter;
-    public List<Ingredient> IngredientsInClaudron { get; private set; }
+
+    public List<Ingredient> IngredientsInClaudron; //get; private set;
 
     private void Start()
     {
-        IngredientsInClaudron = new List<Ingredient>();  
+        IngredientsInClaudron = new List<Ingredient>();
+        _labelSetter = new LabelSetter();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,14 +42,29 @@ public class MixingSystemv3 : MonoBehaviour
 
     private void FillBottle(Bottle bottle)
     {
-        if (!bottle.IsFull && IngredientsInClaudron.Count != 0 && _cook.CanFillBottle)
-        {
-            bottle.SetWaterColor(_waterColor.ResultColor);          
-            bottle.SetPotion(_potionInClaudron);
-            bottle.SetPosition(_bottleInventory.GetFreeSlot().transform);
+        Transform positionInInventory;
+
+        if (!bottle.IsFull && _labelSetter.Labels.Count != 0 && _cook.CanFillBottle)
+        {        
+            bottle.FillBottle(_potionInClaudron, _waterColor.ResultColor);
+
+            positionInInventory = _bottleInventory.GetSlot(bottle.PotionInBottle).transform;
+
+            if(positionInInventory!= null)
+            {
+                bottle.SetPosition(_bottleInventory.GetSlot(bottle.PotionInBottle).transform);
+                _bottleInventory.AddPotionInInventory(_potionInClaudron);
+                OnBottleFilled?.Invoke();
+            }
+            else
+            {
+                Debug.Log("Свободных мест нет, бутылка уничтожается");
+                bottle.DestroyBottle();
+            }
             
-            ClearMixSystem();
-            
+            _claudronSystem.ClearClaudron();
+            _labelSetter.Clear();
+            ClearMixSystem();            
         }
         else
         {
@@ -61,8 +74,8 @@ public class MixingSystemv3 : MonoBehaviour
 
     public void FillPotion()
     {
-        _labelSetter = new LabelSetter(IngredientsInClaudron);
-        _potionInClaudron = new Potion(_labelSetter.GetCurrentLabels());
+        _labelSetter.SetTypeFromIngredient(IngredientsInClaudron);
+        _potionInClaudron = new Potion(_labelSetter.Labels);
     }
 
     private void AddIngredientToClaudron(Ingredient ingredient)
@@ -71,19 +84,32 @@ public class MixingSystemv3 : MonoBehaviour
         {
             IngredientsInClaudron.Add(ingredient);
             ingredient.SetInClaudron(true);
-            ingredient.DisableIngredient();
 
             OnIngredientAdded?.Invoke();
             ActiveButtonBrewDelegate.Invoke();
+
             _waterColor.AddColor(ingredient.IngredienColor);
+            CheckLabelInClaudron();
+
         }
         else
         {
-            Debug.LogError("Котел переполнен, сбрасываю все");
+            Debug.LogError("Котел переполнен, сбрасываю все");  //TODO - ингредиенты должны возвращаться в свои ячейки
+            _labelSetter.Clear();
+            _claudronLabelView.Reset();
             IngredientsInClaudron.Clear();
             _waterColor.ResetWaterColor(Color.white);
         }
         
+    }
+
+    private void CheckLabelInClaudron()
+    {
+        if(IngredientsInClaudron.Count > 1)
+        {
+            _labelSetter.SetTypeFromIngredient(IngredientsInClaudron);
+            _claudronLabelView.SetLabel(_labelSetter.GetCurrentLabels());
+        }        
     }
 
     public void ClearMixSystem()
@@ -93,7 +119,8 @@ public class MixingSystemv3 : MonoBehaviour
             ObjectPool.SharedInstance.DestroyObject(item.gameObject);
         }
 
-        _claudronSystem.ClearClaudron();
+        _claudronLabelView.Reset();
+        _labelSetter.Clear();
         IngredientsInClaudron.Clear();
         ActiveButtonBrewDelegate.Invoke();
     }

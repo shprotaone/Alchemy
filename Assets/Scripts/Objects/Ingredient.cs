@@ -37,6 +37,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     public void SetInClaudron(bool flag)
     {
         _inClaudron = flag;
+        DisableIngredient();
     }
 
     public void SetIngredientData(IngredientData ingredient)

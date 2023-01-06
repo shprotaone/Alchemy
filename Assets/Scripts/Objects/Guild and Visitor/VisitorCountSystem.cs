@@ -12,7 +12,7 @@ public class VisitorCountSystem
     {
         _view = view;
         VisitorLeft = count;
-
+        _view.SetStartCountText(VisitorLeft);
         _view.RefreshText(VisitorLeft);
     }
 

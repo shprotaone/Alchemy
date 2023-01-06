@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Cookv2 : MonoBehaviour
@@ -15,7 +16,6 @@ public class Cookv2 : MonoBehaviour
         _clickController.OnGoodPotion += CookComplete;
         _clickController.OnNormalPotion += CookComplete;
         _clickController.OnBadPotion += CookFailed;
-        //_clickController.OnResetClaudron += FillBottleReset;
     }
 
     private void CookComplete()
@@ -27,12 +27,14 @@ public class Cookv2 : MonoBehaviour
     private void CookFailed()
     {
         _claudron.CrunchClaudron(true);
+        DOVirtual.DelayedCall(3, FillBottleReset);
     }
 
     public void FillBottleReset()
     {
-        _canFillBottle = false;
-        _clickController.Reset();
+            _canFillBottle = false;
+            _claudron.CrunchClaudron(false);
+            _clickController.Reset();        
     }
 
     private void OnDisable()

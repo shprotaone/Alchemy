@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PotionTaskView : MonoBehaviour
 {
-    private const float timeAlpha = 1;
+    private const float timeAlpha = 0.5f;
     
     [SerializeField] private TMP_Text _potionNameText;
     [SerializeField] private TMP_Text _rewardText;
@@ -17,19 +17,14 @@ public class PotionTaskView : MonoBehaviour
 
     private PotionTask _task;
 
-    public void InitTask(PotionTask task, bool isImageType)
+    public void InitTask(PotionTask task)
     {
+        ResetIngredientImages();
         _task = task;
-        if (isImageType)
-        {
-            FillTaskView(task, isImageType);
-        }
-        else
-        {
-            _potionInTask = _task.CurrentPotion.PotionName;
-        }       
+        FillTaskView(task);
+ 
 
-        RisingTask();
+         RisingTask();
     }
 
     /// <summary>
@@ -37,20 +32,12 @@ public class PotionTaskView : MonoBehaviour
     /// </summary>
     /// <param name="potionName"></param>
     /// <param name="reward"></param>
-    public void FillTaskView(PotionTask task,bool isImageType)
-    {
-        _potionNameText.gameObject.SetActive(true);
-        _imagesObj.gameObject.SetActive(false);
+    public void FillTaskView(PotionTask task)
+    {     
+        _potionNameText.gameObject.SetActive(false);
+        _imagesObj.gameObject.SetActive(true);
 
-        _potionNameText.text = task.CurrentPotion.PotionName;       
-
-        if (isImageType)
-        {
-            _potionNameText.gameObject.SetActive(false);
-            _imagesObj.gameObject.SetActive(true);
-
-            FillImageTask(task.Images);
-        }
+        FillImageTask(task.Images);      
     }
 
     public void SetRewardText(PotionTask task)
@@ -67,12 +54,8 @@ public class PotionTaskView : MonoBehaviour
     {
         for (int i = 0; i < ingredientSprites.Length; i++)
         {
-            _ingredientImages[i].sprite = ingredientSprites[i];
-
-            if (ingredientSprites[i] == null)
-            {
-                _ingredientImages[i].enabled = false;
-            }
+            _ingredientImages[i].enabled = true;
+            _ingredientImages[i].sprite = ingredientSprites[i];            
         }
     }
 
@@ -80,7 +63,7 @@ public class PotionTaskView : MonoBehaviour
     {
         foreach (var item in _ingredientImages)
         {
-            item.enabled = true;
+            item.enabled = false;
             item.sprite = null;
         }
     }

@@ -24,14 +24,14 @@ public class UniversalGlobalTask : MonoBehaviour
         _gameManager = gameManager;
         _currentLevelPreset = levelPreset;
         _moneyTask = moneyTask;
-        _globalTaskView.SetLevelTaskText(taskText);
+        //_globalTaskView.SetLevelTaskText(taskText);
 
         Inventory.OnItemValueChanged += CheckCompleteLevel;
         Money.OnChangeMoneyAction += CheckCompleteLevel;
 
         SetMultiplyReward();
         //SetCollectableLevel(); 
-        SetMultyplyCostIngredient();
+        //SetMultyplyCostIngredient();
         SetRandomResource();
        
     }
@@ -110,11 +110,11 @@ public class UniversalGlobalTask : MonoBehaviour
 
     public void CheckContrabandLevel()
     {
-        if (_currentLevelPreset.isContrabandLevel)
-        {
-            //_contrabandSystem.InitContrabandPotion(_currentLevelPreset.contrabandTimer,_currentLevelPreset.contrabadPotionChance);
-            _globalTaskView.AddContrabandText(_contrabandSystem.ContrabandPotion.PotionName);
-        }       
+        //if (_currentLevelPreset.isContrabandLevel)
+        //{
+        //    //_contrabandSystem.InitContrabandPotion(_currentLevelPreset.contrabandTimer,_currentLevelPreset.contrabadPotionChance);
+        //    _globalTaskView.AddContrabandText(_contrabandSystem.ContrabandPotion.PotionName);
+        //}       
     }
 
     private void OnDisable()

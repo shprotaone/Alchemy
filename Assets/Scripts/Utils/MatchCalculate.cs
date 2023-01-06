@@ -1,63 +1,62 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MatchCalculate
-{
-    /// <summary>
-    /// Выдает индекс совпадения с заданием
-    /// </summary>
-    /// <param name="inBottle"></param>
-    /// <param name="inTask"></param>
-    /// <returns></returns>
-   public static int IndexMatch(Potion inBottle,Potion inTask)
+{  
+    public int IndexMatchLabel(List<PotionLabelType> labelsInBottle, List<PotionLabelType> labelsInTask)
     {
         int matchIndex = 0;
 
-        inBottle.Ingredients.Sort();
-        inTask.Ingredients.Sort();
+        labelsInBottle.Sort();
+        labelsInTask.Sort();
 
-        for (int i = 0; i < inTask.Ingredients.Count; i++)
+        List<LabelsPair> inTask = FillDictionaryTask(labelsInTask);
+
+        for (int i = 0; i < labelsInBottle.Count; i++)
         {
-            for (int j = 0; j < inBottle.Ingredients.Count; j++)
-            {
-                if (inBottle.Ingredients[j] == inTask.Ingredients[i])
+            for (int j = 0; j < labelsInTask.Count; j++)
+            {               
+                if (inTask[j].Label == labelsInBottle[i] && !inTask[j].IsFound)
                 {
+                    inTask[j].SetFound();
                     matchIndex++;
+                    break;
                 }
-            }
-
+            }           
         }
-        Debug.Log("Совпало " + matchIndex + " ингредиентов");
+        
         return matchIndex;
     }
 
-    public static int IndexMatchLabel(Potion inBottle, Potion inTask)
+    private List<LabelsPair> FillDictionaryTask(List<PotionLabelType> labelsInTask)
     {
-        int matchIndex = 0;
+        List<LabelsPair> inTask = new List<LabelsPair>();
 
-        inBottle.Labels.Sort();
-        inTask.Labels.Sort();
-
-        if(inBottle.Labels.Count > inTask.Labels.Count)
+        for (int i = 0; i < labelsInTask.Count; i++)
         {
-            for (int i = 0; i < inTask.Labels.Count; i++)
-            {
-                if (inBottle.Labels[i] == inTask.Labels[i])
-                {
-                    matchIndex++;
-                }
-            }
+            inTask.Add(new LabelsPair(labelsInTask[i]));
         }
-        else
-        {
-            for (int i = 0; i < inBottle.Labels.Count; i++)
-            {
-                if (inBottle.Labels[i] == inTask.Labels[i])
-                {
-                    matchIndex++;
-                }
-            }
-        }     
-        
-        return matchIndex;
+
+        return inTask;
+    }
+}
+
+public class LabelsPair
+{
+    private PotionLabelType _label;
+    private bool _isFound;
+
+    public PotionLabelType Label => _label;
+    public bool IsFound => _isFound;
+
+    public LabelsPair(PotionLabelType label)
+    {
+        _label = label;
+        _isFound = false;
+    }
+
+    public void SetFound()
+    {
+        _isFound = true;
     }
 }

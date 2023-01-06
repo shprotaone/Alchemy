@@ -66,7 +66,7 @@ public class Cook : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        _mixingSystem.CheckPotion();
+        //_mixingSystem.CheckPotion();
 
         //CheckTruePotion(_mixingSystem.BottleFilled);
         _waterColor.StopBoiled();                

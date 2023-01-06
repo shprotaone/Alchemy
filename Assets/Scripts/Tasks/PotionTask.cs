@@ -2,7 +2,6 @@
 
 public class PotionTask
 {
-    private RewardCalculator _rewardCalculator;
     private Potion _currentPotion;
     private int _rewardCoin;
 
@@ -16,31 +15,16 @@ public class PotionTask
     {
         TaskSystem = taskSystem;
         _currentPotion = potion;
-
-        //SetGuild(potion.GuildsType);
-        //SetReward();
        
         Images = taskSystem.GetLabels(potion.Labels.Count);
 
         CurrentTaskView = visitorController.CurrentVisitor.TaskView;
-        CurrentTaskView.InitTask(this, taskSystem.ImageTask);
+        CurrentTaskView.InitTask(this);
     }   
-    
-    private void SetGuild(GuildsType guildType)
-    {
-        _currentPotion.SetGuild(guildType);
-    }
 
     public void SetReward(int reward)
     {
         _rewardCoin = reward;
         CurrentTaskView.SetRewardText(this);
-    }
-
-    private void SetReward()
-    {
-        _rewardCalculator = new RewardCalculator();
-        _rewardCalculator.CalculateBase(_currentPotion.GuildsType, _currentPotion.Rarity);
-        _rewardCoin = (int)_rewardCalculator.Reward;
     }
 }

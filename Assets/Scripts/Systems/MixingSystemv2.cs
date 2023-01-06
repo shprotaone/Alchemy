@@ -53,11 +53,11 @@ public class MixingSystemv2 : MonoBehaviour
             if (collision.CompareTag(bottleTag) && _potionOnClaudron != null)
             {
                 Bottle bottle = collision.GetComponent<Bottle>();
-                _potionOnClaudron.SetColor(_waterColor.ResultColor);
+                //_potionOnClaudron.SetColor(_waterColor.ResultColor);
 
-                CheckOnContraband(_potionOnClaudron);
-                bottle.SetPotion(_potionOnClaudron);
-                bottle.SetPosition(_bottleInventory.GetFreeSlot().transform);
+                //CheckOnContraband(_potionOnClaudron);
+                //bottle.FillBottle(_potionOnClaudron);
+                bottle.SetPosition(_bottleInventory.GetSlot(_potionOnClaudron).transform);
                 _bottleInventory.AddPotionInInventory(_potionOnClaudron);
 
                 FilledBottleDelegateForTutorial?.Invoke();
@@ -115,38 +115,6 @@ public class MixingSystemv2 : MonoBehaviour
         else
         {           
             return false;
-        }
-    }
-
-    public void CheckPotion()
-    {
-        _potionDetector.FillCurrentPotion(_ingredients);
-
-        if (_potionDetector.CurrentPotion.PotionName == "")
-        {
-            _isPotionApproved = false;
-            _claudronSystem.CrunchClaudron(true);
-            _claudronSystem.ClearClaudron();
-            Debug.LogWarning("Такого зелья не существует");
-        }
-        else
-        {
-            _potionOnClaudron = _potionDetector.FillCurrentPotion(_ingredients);
-            _isPotionApproved = true;
-            Debug.Log("Вы сварили " + _potionDetector.CurrentPotion.PotionName);
-        }
-    } 
-
-    private void CheckOnContraband(Potion potion)
-    {
-        if(_contrabandPotionSystem.ContrabandPotion != null)
-        {
-            if (_contrabandPotionSystem.ContrabandPotion.PotionName == potion.PotionName)
-            {
-                potion.SetContraband(true);
-            }
-
-            else potion.SetContraband(false);
         }
     }
 

@@ -5,9 +5,11 @@ public class DragController : MonoBehaviour
 {
     public static DragController instance = null;
 
+    [SerializeField] private Transform _draggableContainer;
     private Camera _camera;
     private Vector2 _dragScreenPosition;
     private Vector3 _worldPosition;
+    private Vector2 _offset = new Vector2(0.25f, 0.25f);
     private Draggable _lastDragged;
 
     private bool _isDragActive = false;
@@ -88,6 +90,7 @@ public class DragController : MonoBehaviour
                     else if (bottle = draggable.GetComponentInChildren<Bottle>())
                     {
                         _lastDragged = bottle.GetComponent<Draggable>();
+                        _lastDragged.transform.SetParent(_draggableContainer);
                     }
                 }
             }
@@ -103,7 +106,7 @@ public class DragController : MonoBehaviour
     private void Drag()
     {
         if (_lastDragged.DraggingObject)
-            _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y);
+            _lastDragged.transform.position = new Vector2(_worldPosition.x, _worldPosition.y) + _offset;
     }
 
     private void Drop()

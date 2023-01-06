@@ -1,35 +1,32 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipeSystem : MonoBehaviour
 {
-    [SerializeField] private ResourceToSprite _resourceToSprite;
-    [SerializeField] private RecipeSlot[] _slots;
-
-    private LabelSetter _labelSetter;
+    [SerializeField] private Button _openButton;
+    [SerializeField] private BottleInventory _bottleInventory;
+    [SerializeField] private List<RecipeSlot> _slots;
 
     private void Start()
     {
-        FillRecipes();
-        //_labelSetter = new LabelSetter();
+        _openButton.onClick.AddListener(FillCurrentBottles);
     }
 
-    private void FillRecipes()
+    private void FillCurrentBottles()
     {
-       // int count = 0;
-       //foreach (var slot in _slots)
-       // {
-       //     slot.SetSlot(GetSprites(count));
-       //     count++;
-       // }
+        for (int i = 0; i < _bottleInventory.Slots.Count; i++)
+        {
+            FullBottleSlot slot = _bottleInventory.Slots[i];
+
+            if (!slot.IsFree)
+            {
+                _slots[i].SetSlot(slot);
+            }
+            else
+            {
+                _slots[i].ClearSlot();
+            }
+        }
     }
-
-    //private Sprite[] GetSprites(int count)
-    //{
-    //    Sprite[] sprites = new Sprite[3];
-
-    //    sprites[0] = 
-    //}
 }

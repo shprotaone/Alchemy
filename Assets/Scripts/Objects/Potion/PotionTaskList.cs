@@ -48,28 +48,15 @@ public class PotionTaskList : MonoBehaviour
 
     private void SearchCompleteSlot(Potion potion)
     {
-        foreach (var slot in _activeSlots)
-        {
-            if(slot.PotionInSlot.PotionName == potion.PotionName)
-            {
-                slot.SetComplete();
-                CheckCyclopediaComplete();
-                return;
-            }
-        }
-    }
-
-    private void CheckCyclopediaComplete()
-    {
-        foreach (var slot in _activeSlots)
-        {
-            if (slot.Complete == false)
-            {
-                return;
-            }    
-        }
-        Debug.Log("Все задания выполнены");
-        OnPotionTaskListChanged?.Invoke();
+        //foreach (var slot in _activeSlots)
+        //{
+        //    if(slot.PotionInSlot.PotionName == potion.PotionName)
+        //    {
+        //        slot.SetComplete();
+        //        CheckCyclopediaComplete();
+        //        return;
+        //    }
+        //}
     }
 
     //private void FillCyclopediaInStart()
