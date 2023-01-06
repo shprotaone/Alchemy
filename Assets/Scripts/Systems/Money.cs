@@ -34,6 +34,8 @@ public class Money
         }
         else
         {
+            _money = 0;
+            OnChangeMoney?.Invoke(_money);
             Debug.LogWarning("NotHaveMoney");
         }       
     }

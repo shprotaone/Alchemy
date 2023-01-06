@@ -10,7 +10,7 @@ public sealed class ClickController : MonoBehaviour
 {
     public event Action OnGoodPotion;
     public event Action OnBadPotion;
-    public event Action OnNormalPotion;
+    //public event Action OnNormalPotion;
     public event Action OnResetClaudron;
 
     [SerializeField] private TimerScript _timer;

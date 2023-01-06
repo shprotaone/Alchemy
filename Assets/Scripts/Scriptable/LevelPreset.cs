@@ -8,77 +8,77 @@ public class LevelPreset : ScriptableObject
     [Header("Стартовые настройки")]
 
     public LevelNumber levelNumber;
-    public bool ShopController;
     public Sprite backgroundSprite;
-    public bool isTutorial;
     public int addCommonResourceCount;
-    public int startBottleCount;
-    public SizerType sizer;
-    public int countPotionInSizer;
-    public int visitorTime;
-    
+    [HideInInspector]
+    public int startBottleCount = 10000;
+    public int visitorCount;
+
+    public int chance1Label;
+    public int chance2Label;
+    public int chance3Label;
+
     [Space]
     [Header("Настройки денег")]
     public int startMoney;
     public int minRangeMoney;
-    public int MoneyGoal;
-
-    [Space]
-    [Header("Настройки условий игры")]
-    public bool timerIsActive;
-    public int levelTimeInSeconds;
-
-    [Space]
-    [Header("Настройка аренды")]
-    
-    public bool rentActive;
-    public int rent;
-    public int secondsForRent;
-
-    [Space]
-    [Header("Настройка множителя стоимости ингредиентов")]
-    
-    public bool isCostMultiplyActive;
-    public IngredientData[] ingredientsForMultiplyCost;
-    public int multiplyCostIngredient;
-
-    [Space]
-    [Header("Настройка для добавки ресурсов")]
-    public bool isRandomResourceAdd;
-    public bool addCommonResource;
-    public bool addRareResource;
-    public int countRandomResource;
-    public int countTryAddRandomResource;
-
-    [Space]
-    [Header("Настройка задания по накоплению ингредиентов")]
-    public bool isCollectIngredient;
-    public int collectCommonResourceCount;
-    public int collectRareResourceCount;
-
-    [Space]
-    [Header("Настройка множителей награды и ошибки")]
-    public float _rewardMultiply;
-    public float _penaltyMultiply;
-
-    [Space]
-    [Header("Настройки для контрабандного уровня")]
-    public bool isContrabandLevel;
-    public int contrabadPotionChance;
-    public int contrabandTimer;
-    public int contrabandVisitorTimer;
 
     [Header("Вступительный текст")]
     [TextArea]
     public string[] levelTaskText;
     
-
     [Header("Текст в заданиях")]
     [TextArea(5, 10)]
     public string goalText;
     public bool DropDownMenu;
 
-    [Header("Новое")]
-    public int visitorCount;
-
 }
+
+#region Old
+//public int MoneyGoal;
+
+//[Space]
+//[Header("Настройки условий игры")]
+//public bool timerIsActive;
+//public int levelTimeInSeconds;
+
+//[Space]
+//[Header("Настройка аренды")]
+
+//public bool rentActive;
+//public int rent;
+//public int secondsForRent;
+
+//[Space]
+//[Header("Настройка множителя стоимости ингредиентов")]
+
+//public bool isCostMultiplyActive;
+//public IngredientData[] ingredientsForMultiplyCost;
+//public int multiplyCostIngredient;
+
+//[Space]
+//[Header("Настройка для добавки ресурсов")]
+//public bool isRandomResourceAdd;
+//public bool addCommonResource;
+//public bool addRareResource;
+//public int countRandomResource;
+//public int countTryAddRandomResource;
+
+//[Space]
+//[Header("Настройка задания по накоплению ингредиентов")]
+//public bool isCollectIngredient;
+//public int collectCommonResourceCount;
+//public int collectRareResourceCount;
+
+//[Space]
+//[Header("Настройка множителей награды и ошибки")]
+//public float _rewardMultiply;
+//public float _penaltyMultiply;
+
+//[Space]
+//[Header("Настройки для контрабандного уровня")]
+//public bool isContrabandLevel;
+//public int contrabadPotionChance;
+//public int contrabandTimer;
+//public int contrabandVisitorTimer;
+#endregion

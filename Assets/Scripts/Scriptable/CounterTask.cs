@@ -1,8 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class CounterTask : ScriptableObject
+public class CounterTask
 {
-    public int count;
-    public int weight;
+    private int _count;
+    private int _weight;
+
+    public int Count => _count;
+    public int Weight => _weight;
+    public CounterTask(int count,int weight)
+    {
+        _count = count;
+        _weight = weight;
+    }
 }

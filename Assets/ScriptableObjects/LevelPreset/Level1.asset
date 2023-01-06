@@ -13,39 +13,15 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  ShopController: 0
-  backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
-  isTutorial: 1
-  addCommonResourceCount: 0
-  startBottleCount: 10
-  sizer: 3
-  countPotionInSizer: 0
-  visitorTime: 50
-  startMoney: 100
-  minRangeMoney: -1
-  MoneyGoal: 2500
-  timerIsActive: 0
-  levelTimeInSeconds: 0
-  rentActive: 0
-  rent: 0
-  secondsForRent: 0
-  isCostMultiplyActive: 0
-  ingredientsForMultiplyCost: []
-  multiplyCostIngredient: 0
-  isRandomResourceAdd: 0
-  addCommonResource: 0
-  addRareResource: 0
-  countRandomResource: 0
-  countTryAddRandomResource: 0
-  isCollectIngredient: 0
-  collectCommonResourceCount: 0
-  collectRareResourceCount: 0
-  _rewardMultiply: 0
-  _penaltyMultiply: 0
-  isContrabandLevel: 0
-  contrabadPotionChance: 0
-  contrabandTimer: 0
-  contrabandVisitorTimer: 0
+  backgroundSprite: {fileID: 21300000, guid: 5b98b2ac3477f4e49bf786330b473532, type: 3}
+  addCommonResourceCount: 7
+  startBottleCount: 1000
+  visitorCount: 10
+  chance1Label: 35
+  chance2Label: 45
+  chance3Label: 20
+  startMoney: 0
+  minRangeMoney: 0
   levelTaskText: []
-  goalText: "\u041D\u0430\u0431\u0435\u0440\u0438 2500 \u043C\u043E\u043D\u0435\u0442"
+  goalText: 
   DropDownMenu: 0

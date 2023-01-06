@@ -24,15 +24,9 @@ public class GameStateController : MonoBehaviour
     public void CheckState()
     {
         if (InventoryIsEmpty)
-        {
-            //_cameraMovementButton.interactable = true;
+        {          
             _cameraMovement.Movement();
             _visitorController.Activate();
-        }
-        else
-        {
-            //_cameraMovementButton.interactable = false;
-            _visitorController.Deactivate();
         }
     }
 

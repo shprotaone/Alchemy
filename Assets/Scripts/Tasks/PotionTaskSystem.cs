@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PotionTaskSystem : MonoBehaviour
 {
-    public static event Action OnTaskComplete;
-
     [SerializeField] private TradeSystem _tradeSystem;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private LabelToSprite _labelToSprite;
@@ -20,10 +18,11 @@ public class PotionTaskSystem : MonoBehaviour
     
     private Potion _currentPotion;
 
-    public void Init(Money moneySystem)
+    public void Init(List<CounterTask> chances, Money moneySystem)
     {
         _currentPotion = new Potion();
         _rewardCalculator = new RewardCalculator();
+        _chances = new TaskChance(chances);
     }
 
     public PotionTask GetTaskv2()
@@ -58,9 +57,7 @@ public class PotionTaskSystem : MonoBehaviour
         }
 
         return new Potion(_labels);
-    }
-
-   
+    }  
 
     public Sprite[] GetLabels(int count)
     {

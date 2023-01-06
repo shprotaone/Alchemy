@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class BottleInventory : MonoBehaviour
 {
-    public event Action<Potion> OnBottleAdded;
-
     [SerializeField] private TMP_Text _bottleCount;
     [SerializeField] private List<FullBottleSlot> _slots;
 

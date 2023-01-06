@@ -1,34 +1,36 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaskChance: MonoBehaviour
+public class TaskChance
 {
-    [SerializeField] private List<CounterTask> Chances;
+    private List<CounterTask> _chances;
 
-    public int digit;
-    public int totalWeight;
+    private int digit;
+    private int totalWeight;
 
-    private void Start()
+    public TaskChance (List<CounterTask> chances)
     {
-        foreach (var item in Chances)
+        _chances = chances;
+
+        foreach (var item in _chances)
         {
-            totalWeight += item.weight;
+            totalWeight += item.Weight;
         }
     }
+
     public int GetTaskCount()
     {
         digit = Random.Range(0, totalWeight);
 
-            for (int i = 0; i < Chances.Count; i++)
+            for (int i = 0; i < _chances.Count; i++)
             {
-                if (Chances[i].weight >= digit)
+                if (_chances[i].Weight >= digit)
                 {
-                    Debug.Log(Chances[i].count);
-                    return Chances[i].count;
+                    Debug.Log(_chances[i].Count);
+                    return _chances[i].Count;
                 }
 
-                digit -= Chances[i].weight;
+                digit -= _chances[i].Weight;
             }
 
         Debug.LogWarning("Шанс не рассчитался");

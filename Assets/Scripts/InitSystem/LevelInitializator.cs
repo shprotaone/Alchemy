@@ -6,39 +6,32 @@ public class LevelInitializator : MonoBehaviour
 {   
     public static event Action OnInitComplete;
 
-    public const int stockAmount = 5;
+    [SerializeField] private CameraMovement _startCameraPos;
 
     [Header("Настройки для запуска")]
     [SerializeField] private bool _directLoad;
     [SerializeField] private LevelPreset _levelPresetDirect;
-
-    [Header("Глобальные объекты")]
-    [SerializeField] private Inventory _inventory;
-    [SerializeField] private BottleStorage _bottleStorage;
     [SerializeField] private BackgroundLoader _backGroundLoader;
     [SerializeField] private StartDialogViewer _startDialogViewer;
-    [SerializeField] private UniversalGlobalTask _universalGlobalTask;
-    [SerializeField] private GameManager _gameManager;
-    
-    [Header("Менеджеры")]
-    [SerializeField] private TutorialManager _tutorialManager;
-    [SerializeField] private PotionTaskSystem _potionTaskSystem;
-    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
 
-    [Header("Вспомогательные системы")]
+    [Header("Системы")]
+    [SerializeField] private Inventory _inventory;
+    [SerializeField] private BottleStorage _bottleStorage;
+    [SerializeField] private PotionTaskSystem _potionTaskSystem;
     [SerializeField] private TradeSystem _tradeSystem;
-    [SerializeField] private CameraMovement _startCameraPos;
     [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private BrightObject _brightObjectSystem;
-    [SerializeField] private UIController _UIController;
-    [SerializeField] private MoneyView _moneyView;
-    [SerializeField] private GameStateController _gameStateController;
     [SerializeField] private MixingSystemv3 _mixingSystem;
+    
+    [Header("Подсветка и UI")]
+    [SerializeField] private MoneyView _moneyView;
+    [SerializeField] private BrightObject _brightObjectSystem;
+    [SerializeField] private UIController _UIController;    
+    [SerializeField] private GameStateController _gameStateController;
     [SerializeField] private CompleteLevel _levelCompletePanel;
 
     private Money _money;
     private LevelPreset _levelPreset;
-    private LevelMoneyTask _levelMoneyTask;
+    private List<CounterTask> _tasksChance;
 
     private void Awake()
     {
@@ -74,13 +67,10 @@ public class LevelInitializator : MonoBehaviour
 
     private void InitLevelSettings()
     {
-        _levelMoneyTask = new LevelMoneyTask(_levelPreset.MoneyGoal,_levelPreset.minRangeMoney);
         _money = new Money(_moneyView,_levelPreset.startMoney, _levelPreset.minRangeMoney);    
 
         _backGroundLoader.SetBackGround(_levelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money);
-        TutorialCheck();
-
     }
 
     private void InitInventory()
@@ -91,27 +81,23 @@ public class LevelInitializator : MonoBehaviour
     }
 
     private void InitSystems()
-    {      
-        _potionTaskSystem.Init(_money);
+    {
+        SetChances();
+        _potionTaskSystem.Init(_tasksChance, _money);
         
-        _visitorController.InitVisitorController(_potionTaskSystem, _levelPreset.visitorTime, _levelPreset.contrabandVisitorTimer,_levelPreset.visitorCount);
-
+        _visitorController.InitVisitorController(_potionTaskSystem,_levelPreset.visitorCount);
         _gameStateController.Init(_mixingSystem);
         _tradeSystem.Init(_visitorController,_money);
 
         OnInitComplete?.Invoke();
     }
 
-    private void TutorialCheck()
+    private void SetChances()
     {
-        if (_levelPreset.isTutorial)
-        {
-            DragController.instance.ObjectsInterractable(false);
+        _tasksChance = new List<CounterTask>();
 
-            _tutorialManager.Init();
-            _tutorialManager.NextStep();
-
-            _inventory.HideRareShelf();
-        }
+        _tasksChance.Add(new CounterTask(1, _levelPreset.chance1Label));
+        _tasksChance.Add(new CounterTask(2, _levelPreset.chance2Label));
+        _tasksChance.Add(new CounterTask(3, _levelPreset.chance3Label));
     }
 }
