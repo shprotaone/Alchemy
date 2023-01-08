@@ -18,7 +18,7 @@ public class DefeatPanel : MonoBehaviour,IMenu
     private void OnEnable()
     {
         _restartButton.onClick.AddListener(Restart);
-        _exitButton.onClick.AddListener(Exit);
+        _exitButton.onClick.AddListener(NextLevel);
 
         if (_contrabandPotionSystem.IsActive)
         {
@@ -37,7 +37,7 @@ public class DefeatPanel : MonoBehaviour,IMenu
         SceneManager.LoadScene(1);
     }
 
-    public void Exit()
+    public void NextLevel()
     {
         //_levelInitializator.SetRestartLevel(false);
         SceneManager.LoadScene(0);
@@ -46,6 +46,6 @@ public class DefeatPanel : MonoBehaviour,IMenu
     private void OnDisable()
     {
         _restartButton.onClick.RemoveListener(Restart);
-        _exitButton.onClick.RemoveListener(Exit);
+        _exitButton.onClick.RemoveListener(NextLevel);
     }
 }

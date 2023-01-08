@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IMenu 
 {
-    void Exit();
+    void NextLevel();
     void Restart();
 }

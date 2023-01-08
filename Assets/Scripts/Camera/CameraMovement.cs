@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
     
     private Direction _currentDirection;
 
-    private void Start()
+    public void Init()
     {
         _cam = Camera.main;
 

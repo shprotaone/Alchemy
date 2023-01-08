@@ -10,6 +10,7 @@ public class LevelPreset : ScriptableObject
     public LevelNumber levelNumber;
     public Sprite backgroundSprite;
     public int addCommonResourceCount;
+
     [HideInInspector]
     public int startBottleCount = 10000;
     public int visitorCount;
@@ -17,6 +18,7 @@ public class LevelPreset : ScriptableObject
     public int chance1Label;
     public int chance2Label;
     public int chance3Label;
+    public int moneyTaskComplete;
 
     [Space]
     [Header("Настройки денег")]

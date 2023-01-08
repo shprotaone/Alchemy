@@ -63,10 +63,25 @@ public class FullBottleSlot : MonoBehaviour
         {
             _bottleInSlot.OnDropped -= SetFreeSlot;
             _bottleInSlot.OnDropped -= CheckChild;
+            DeleteBottles();
         }  
     }
 
-    private void Reset()
+    private void DeleteBottles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Bottle bottle = GetComponentInChildren<Bottle>();
+
+            if(bottle != null)
+            {
+                bottle.DestroyBottle();
+                CheckChild();
+            }
+        }
+    }
+
+    public void Reset()
     {
         SetFreeSlot();
     }

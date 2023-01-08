@@ -1,54 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameProgress : MonoBehaviour
 {
-    private const string firstPlay = "FirstPlay";
-    private const string levelReachedPrefs = "levelUnlocked";
-   
-    [SerializeField] private List<LevelButton> _levels;
+    [SerializeField] private GameProgressSaver _progressSaver;
+    [SerializeField] private List<LevelPreset> _levels;
 
-    private int _levelReached = 3;
-    private int _firstPlayInt = 0;
+    private int _currentLevelIndex = 1;
+    private int _firstPlay;
+    public int FirstPlay => _firstPlay;
 
-    public int FirstPlay => _firstPlayInt;
-
-    public int LevelReached => PlayerPrefs.GetInt(levelReachedPrefs);
-
-    private void Awake()
+    private void Start()
     {
-        _firstPlayInt = PlayerPrefs.GetInt(firstPlay);
-
-        if(_firstPlayInt == 0)
+        if (_firstPlay == 0)
         {
-            _firstPlayInt = 1;
-            
-            PlayerPrefs.SetInt(firstPlay, _firstPlayInt);
-            PlayerPrefs.SetInt(levelReachedPrefs, _levelReached);
+            _firstPlay = 1;           //сохранение значения в гейм прогресс
         }
-        else
-        {
-            _levelReached = PlayerPrefs.GetInt(levelReachedPrefs, _levelReached);
-        }
-
-        if(_levels.Count != 0)
-        {
-            CheckLevelUnlocked();
-        }       
     }
 
-    public void SetReachedLevel(LevelNumber levelNumber)
+    public LevelPreset GetNextLevel()
     {
-        _levelReached = (int)levelNumber;
-        PlayerPrefs.SetInt(levelReachedPrefs, _levelReached);
-    }
-
-    private void CheckLevelUnlocked()
-    {
-        for (int i = 0; i < _levelReached + 1; i++)
-        {
-            _levels[i].UnlockLevel();
-        }
+        LevelPreset preset = _levels[_currentLevelIndex];
+        _currentLevelIndex++;
+        return preset;
     }
 }

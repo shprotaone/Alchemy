@@ -14,6 +14,25 @@ public class BottleInventory : MonoBehaviour
     private int _bottleInInventory = 0;
     public List<FullBottleSlot> Slots => _slots;
 
+    public void Start()
+    {
+        LevelInitializator.OnNewGameStarted += ResetInventory;
+    }
+
+    private void ResetInventory()
+    {
+        _bottleInInventory = 0;
+        RefreshText();
+
+        foreach (var slot in _slots)
+        {
+            if (!slot.IsFree)
+            {
+                slot.Reset();
+            }
+        }
+    }
+
     public FullBottleSlot GetSlot(Potion potionInBottle)
     {
         _currentSlot = FindSlotWithPotion(potionInBottle);
@@ -59,7 +78,6 @@ public class BottleInventory : MonoBehaviour
 
     public void AddPotionInInventory(Potion potion)
     {
-        //OnBottleAdded?.Invoke(potion);
         _bottleInInventory++;
         RefreshText();
     }
