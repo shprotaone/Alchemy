@@ -19,8 +19,8 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] private float _openDuration;
     private void Start()
     {
-        _openButton.onClick.AddListener(Open);
-        _closeButton.onClick.AddListener(Close);
+        _openButton?.onClick.AddListener(Open);
+        _closeButton?.onClick.AddListener(Close);
     }
 
     public void Open()

@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class LevelInitializator : MonoBehaviour
 {   
-    public static event Action OnInitComplete;
-    public static event Action OnNewGameStarted;
+    public static event Action OnLevelStarted;
+    public static event Action OnLevelEnded;
 
     [SerializeField] private CameraMovement _startCameraPos;
 
     [Header("Настройки для запуска")]
     [SerializeField] private bool _directLoad;
-    [SerializeField] private LevelPreset _levelPresetDirect;
     [SerializeField] private LevelPreset _currentLevelPreset;
 
     [SerializeField] private BackgroundLoader _backGroundLoader;
@@ -32,6 +31,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;    
     [SerializeField] private GameStateController _gameStateController;
+    [SerializeField] private GameProgress _gameProgress;
     [SerializeField] private CompleteLevel _levelCompletePanel;
 
     private Money _money;
@@ -39,26 +39,11 @@ public class LevelInitializator : MonoBehaviour
     
     private List<CounterTask> _tasksChance;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 75;
-
-        if (_directLoad)
-        {
-            _currentLevelPreset = _levelPresetDirect;
-        }
-        else
-        {
-            if (LevelPresetLoader.instance.LevelPreset != null)
-            {
-                _currentLevelPreset = LevelPresetLoader.instance.LevelPreset;
-            }
-        }
-    }
-
     private void Start()
     {
-        InitLevelSettings();      
+        _gameProgress.Init();
+        _currentLevelPreset = _gameProgress.CurrentLevel;
+        InitLevelSettings();     
     }  
 
     public void InitLevelSettings()
@@ -66,6 +51,7 @@ public class LevelInitializator : MonoBehaviour
         _startDialogViewer.DisableViewer();
 
         InitTask();
+
         if (_money == null)
         {
             _money = new Money(_moneyView, _currentLevelPreset.startMoney, _currentLevelPreset.minRangeMoney);
@@ -77,6 +63,11 @@ public class LevelInitializator : MonoBehaviour
 
         InitInventory();
         InitSystems();
+
+        _gameProgress.SaveCurrentLevelProgress(_money.CurrentMoney);
+
+        Debug.Log("Денег " + _money.CurrentMoney);
+        Debug.Log("Задание " + _moneyTask.TaskMoney);
     }
 
     private void InitInventory()
@@ -94,20 +85,19 @@ public class LevelInitializator : MonoBehaviour
         _visitorController.InitVisitorController(_potionTaskSystem,_currentLevelPreset.visitorCount);
         _gameStateController.Init(_mixingSystem);
         _tradeSystem.Init(_visitorController,_money);
-
-        OnInitComplete?.Invoke();
     }
 
     private void InitTask()
     {
         if (_moneyTask == null)
         {
-            _moneyTask = new MoneyTask(_levelPresetDirect.moneyTaskComplete);
+            _moneyTask = new MoneyTask(_currentLevelPreset.moneyTaskComplete);
         }
         else
         {
             _moneyTask.IncreaseTask(_money.CurrentMoney, _currentLevelPreset.moneyTaskComplete);
         }
+
         _moneyTaskView.SetTaskText(_moneyTask.TaskMoney);
     }
 
@@ -120,14 +110,35 @@ public class LevelInitializator : MonoBehaviour
         _tasksChance.Add(new CounterTask(3, _currentLevelPreset.chance3Label));
     }
 
-    public void SetPreset(LevelPreset preset)
+    public void DisableLevel()
     {
-        _visitorController.DisableVisitor();
+        _visitorController.Disable();
+        _tradeSystem.Disable();
+        _gameStateController.Disable();
+
+        OnLevelEnded?.Invoke();
+    }
+
+    public void SetPreset(LevelPreset preset,bool isRestart)
+    {
+        if (isRestart)
+        {
+            _money.SetMoney(_gameProgress.Saver.MoneyInPrevSession);
+        }
+        else if(isRestart && preset.levelNumber == LevelNumber.Level1)
+        {
+            _money.SetMoney(0);           
+        }
+
+        _moneyView.RefreshMoneyText(_money.CurrentMoney);
+
+        Debug.Log("Денег " + _money.CurrentMoney);
+        Debug.Log("Задание " + _moneyTask.TaskMoney);
+
         _currentLevelPreset = preset;
         _levelCompletePanel.Disable();
         _cameraMovement.Movement();
         InitLevelSettings();
-        OnNewGameStarted?.Invoke();
-        
+        OnLevelStarted?.Invoke();       
     }
 }

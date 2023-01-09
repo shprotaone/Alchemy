@@ -11,8 +11,8 @@ public class Step8b : Step
     public float StandartDelayTime { get; set; }
     public override void StepAction()
     {
-        StandartDelayTime = _cookButtonController.ResetDelayTime;
-        _cookButtonController.ChangeResetDelayTime(100);
+        //StandartDelayTime = _cookButtonController.ResetDelayTime;
+        //_cookButtonController.ChangeResetDelayTime(100);
         _cookButtonController.OnGoodPotion += _tutorialManager.NextStep;
         _cookButtonController.OnBadPotion += FailCoocked;
 
@@ -29,13 +29,13 @@ public class Step8b : Step
     private void ResetTry()
     {
         _dialogView.EnableView(false);
-        _cookButtonController.Reset();
+        //_cookButtonController.Reset();
     }
 
     private void OnDisable()
     {
-        _cookButtonController.OnGoodPotion -= _tutorialManager.NextStep;
-        _cookButtonController.OnBadPotion -= FailCoocked;
+        //_cookButtonController.OnGoodPotion -= _tutorialManager.NextStep;
+        //_cookButtonController.OnBadPotion -= FailCoocked;
         _dialogView.NextButton.onClick.RemoveListener(ResetTry);
         _dialogView.NextButton.onClick.AddListener(_tutorialManager.NextStep);
         _claudonSystem.SetTutorial(false);

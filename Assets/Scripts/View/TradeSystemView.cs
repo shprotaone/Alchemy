@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,22 @@ public class TradeSystemView : MonoBehaviour
     [SerializeField] private TMP_Text _multiplyText;
 
     public void Init(TradeSystem tradeSystem)
-    {
+    {    
+        _tradeButton.interactable = false;
         _tradeButton.onClick.AddListener(tradeSystem.Trade);
         _declineButton.onClick.AddListener(tradeSystem.DeclineTrade);
+    }
+
+    public void TradeButtoneControl(int reward)
+    {
+        if(reward == 0)
+        {
+            _tradeButton.interactable = false;
+        }
+        else
+        {
+            _tradeButton.interactable = true;
+        }
     }
 
     public void Refresh(int reward)
@@ -22,6 +36,12 @@ public class TradeSystemView : MonoBehaviour
 
     public void RefreshMultiply(float multiply)
     {
-        _multiplyText.text = multiply.ToString();
+        _multiplyText.text = Math.Round((double)multiply, 2).ToString(); ;
+    }
+
+    public void Disable()
+    {
+        _tradeButton.onClick.RemoveAllListeners();
+        _declineButton.onClick.RemoveAllListeners();
     }
 }

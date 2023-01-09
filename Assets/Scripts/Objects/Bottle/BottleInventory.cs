@@ -16,7 +16,7 @@ public class BottleInventory : MonoBehaviour
 
     public void Start()
     {
-        LevelInitializator.OnNewGameStarted += ResetInventory;
+        LevelInitializator.OnLevelStarted += ResetInventory;
     }
 
     private void ResetInventory()
@@ -28,7 +28,7 @@ public class BottleInventory : MonoBehaviour
         {
             if (!slot.IsFree)
             {
-                slot.Reset();
+                slot.ResetSlot();
             }
         }
     }
@@ -72,19 +72,12 @@ public class BottleInventory : MonoBehaviour
             }        
         }
 
-        Debug.Log("Похожий слот не найден");
         return null;
     }
 
     public void AddPotionInInventory(Potion potion)
     {
         _bottleInInventory++;
-        RefreshText();
-    }
-
-    public void Decrease()
-    {
-        _bottleInInventory--;
         RefreshText();
     }
 

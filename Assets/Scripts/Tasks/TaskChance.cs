@@ -26,14 +26,13 @@ public class TaskChance
             {
                 if (_chances[i].Weight >= digit)
                 {
-                    Debug.Log(_chances[i].Count);
+                    
                     return _chances[i].Count;
                 }
 
                 digit -= _chances[i].Weight;
             }
 
-        Debug.LogWarning("Шанс не рассчитался");
         return 1;
     }
 

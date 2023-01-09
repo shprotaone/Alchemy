@@ -73,7 +73,6 @@ public class MyCircularProgressBar360 : MonoBehaviour
 
 	private IEnumerator UpdateProgressbar() 
 	{
-		Debug.Log("Coroutine started");
 		
 		while (true)
 		{

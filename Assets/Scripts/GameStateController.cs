@@ -52,7 +52,7 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    public void Disable()
     {
         _mixingSystem.OnBottleFilled -= CheckLeftIngredients;
     }

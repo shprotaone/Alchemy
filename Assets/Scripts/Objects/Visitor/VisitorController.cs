@@ -23,15 +23,13 @@ public class VisitorController : MonoBehaviour
         _taskSystem = taskSystem;
         IsActive = true;
         _visitorCountSystem = new VisitorCountSystem(_countView,visitorCount);
-        _visitorCountSystem.OnVisitorEnded += _gameManager.CompleteLevel;
-
     }
 
     public void Activate()
     {
         VisitorChoice();
         SetNextTask(_taskSystem.GetTaskv2());
-        CallVisitor(_currentTask);
+        CallVisitor();
     }
 
     public void SetNextTask(PotionTask task)
@@ -39,16 +37,23 @@ public class VisitorController : MonoBehaviour
         _currentTask = task;
     }
 
-    public void CallVisitor(PotionTask task)
-    {       
-        if (IsActive)
+    public void CallVisitor()
+    {
+        if (_visitorCountSystem.VisitorLeft > 0)
         {
+            VisitorChoice();
+            SetNextTask(_taskSystem.GetTaskv2());
+
             CurrentVisitor.gameObject.SetActive(true);
-            CurrentVisitor.Init(task);
+            CurrentVisitor.Init(_currentTask);
             _audioSource.Play();
-           
-            _prevVisitor = CurrentVisitor;           
-        }        
+
+            _prevVisitor = CurrentVisitor;
+        }
+        else
+        {
+            _gameManager.CompleteLevel();
+        }            
     }
 
     private void VisitorChoice()
@@ -86,10 +91,12 @@ public class VisitorController : MonoBehaviour
 
             VisitorGoOutSound();
 
-            VisitorChoice();
-            SetNextTask(_taskSystem.GetTaskv2());           
-            CallVisitor(_currentTask);
             _visitorCountSystem.DecreaseVisitorCount();
         }
-    }  
+    }
+
+    public void Disable()
+    {        
+        //_visitorCountSystem.OnVisitorEnded -= _gameManager.CompleteLevel;
+    }
 }

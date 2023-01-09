@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564228740d25fe34181d692d1010233d, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
-  levelNumber: 1
+  levelNumber: 5
   backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
   addCommonResourceCount: 5
   startBottleCount: 1000

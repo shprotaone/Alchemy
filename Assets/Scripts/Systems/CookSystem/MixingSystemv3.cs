@@ -34,34 +34,35 @@ public class MixingSystemv3 : MonoBehaviour
         {
             AddIngredientToClaudron(ingredient);
         }
-        else if(collision.TryGetComponent(out Bottle bottle))
-        {
-            FillBottle(bottle);
-        }
+        //else if(collision.TryGetComponent(out Bottle bottle))
+        //{
+        //    FillBottle(bottle);
+        //}
     }
 
-    private void FillBottle(Bottle bottle)
+    public void FillBottle(Bottle bottle)
     {
-        Transform positionInInventory;
+        FullBottleSlot fullSlot;
 
         if (!bottle.IsFull && _labelSetter.Labels.Count != 0 && _cook.CanFillBottle)
         {        
             bottle.FillBottle(_potionInClaudron, _waterColor.ResultColor);
 
-            positionInInventory = _bottleInventory.GetSlot(bottle.PotionInBottle).transform;
+            fullSlot = _bottleInventory.GetSlot(bottle.PotionInBottle);
 
-            if(positionInInventory!= null)
+            if(fullSlot!= null)
             {
-                bottle.SetPosition(_bottleInventory.GetSlot(bottle.PotionInBottle).transform);
-                _bottleInventory.AddPotionInInventory(_potionInClaudron);
-                OnBottleFilled?.Invoke();
+                bottle.SetPosition(fullSlot.transform);
+                _bottleInventory.AddPotionInInventory(_potionInClaudron);               
             }
             else
             {
                 Debug.Log("Свободных мест нет, бутылка уничтожается");
                 bottle.DestroyBottle();
             }
-            
+
+            OnBottleFilled?.Invoke();
+
             _claudronSystem.ClearClaudron();
             _labelSetter.Clear();
             ClearMixSystem();            

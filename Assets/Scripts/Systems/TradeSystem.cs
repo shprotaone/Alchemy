@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -75,6 +76,7 @@ public class TradeSystem : MonoBehaviour
 
         _reward = (int)(result * _completeSeries.CurrentMultiply);
         _tradeView.Refresh(_reward);
+        _tradeView.TradeButtoneControl(_reward);
     }
 
     public void Trade()
@@ -83,8 +85,10 @@ public class TradeSystem : MonoBehaviour
 
         _money.Increase(_reward);
         _visitorController.DisableVisitor();
+        DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
         _completeSeries.IncreaseMultiply(_indexMatch);
         _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.TradeButtoneControl(0);
 
         ClearSlots();
     }
@@ -94,6 +98,7 @@ public class TradeSystem : MonoBehaviour
         ClearLabelList();
 
         _visitorController.DisableVisitor();
+        DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
         _money.Decrease(100);
         _completeSeries.ResetSeries();
 
@@ -104,10 +109,15 @@ public class TradeSystem : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            slot.Reset();
+            slot.ResetSlot();
         }
 
         _tradeView.Refresh(0);
+    }
+
+    public void Disable()
+    {
+        _tradeView.Disable();
     }
 
     private void StartCoinAnimation()

@@ -9,7 +9,7 @@ public class MoneyView : MonoBehaviour
     {
         Money.OnChangeMoney += RefreshMoneyText;
     }
-    private void RefreshMoneyText(int value)
+    public void RefreshMoneyText(int value)
     {
         _moneyText.text = value.ToString();       
     }

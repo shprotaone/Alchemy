@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     [SerializeField] private BoxCollider2D _collider;
     [SerializeField] private LabelPhysController _labelController;
     [SerializeField] private ObjectType _type;
-    [SerializeField] private FullBottleSlot _slot;
-    [SerializeField] private FullBottleSlot _prevSlot;
+    [SerializeField] private ISlot _slot;
+    [SerializeField] private ISlot _prevSlot;
     [SerializeField] private List<PotionLabelType> _labels;
 
     private Transform _destination;
@@ -53,12 +54,11 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
             _bottleView.AddLabels(_bottleStorage.LabelToSprite, potion.Labels);
 
             _labels = new List<PotionLabelType>();
-            Labels.AddRange(potion.Labels);
+            _labels.AddRange(potion.Labels);
+            _labels.Sort();
         }
-        else
-        {
-            Debug.LogWarning("Бутылка уже заполнена");
-        }
+
+        DOVirtual.DelayedCall(0.2f, Drop);
     }
 
     private void SetWaterColor(Color color)
@@ -68,7 +68,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
     public void SetPosition(Transform slotTransform)
     {
-        slotTransform.TryGetComponent(out FullBottleSlot slot);
+        slotTransform.TryGetComponent(out ISlot slot);
         if(slot != null)
         {          
             _slot = slot;
@@ -77,18 +77,19 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         _destination = slotTransform;
         transform.SetParent(slotTransform);
 
-        _slot.CheckChild();
+        StartCoroutine(CheckDelay());
     }
 
     public void Drop()
     {
-        DecreaseSize();
+        StandartSize();
         _labelController.Deactivate();
 
         GetTable();
         transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
-                                                                 .OnComplete(ReturnBottleToBox);
+                                                                 .OnComplete(ReturnBottleToSlot);                                                                     
         OnDropped?.Invoke();
+        _slot.SetSlot(this);
     }
 
     public void DropFromGarbage()   //без повторной ативации OnComplete, спорное решение
@@ -110,15 +111,9 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         }  
     }
 
-    private void ReturnBottleToBox()
-    {       
+    private void ReturnBottleToSlot()
+    {
         _collider.enabled = true;
-        
-        if (!IsFull)
-        {
-            _bottleStorage.ReturnBottle();
-            DestroyBottle();
-        }
     }
 
     public void DestroyBottle()
@@ -135,13 +130,28 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         _collider.enabled = false;
     }
 
-    public async void Action()
+    public void Action()
     {
         IncreaseSize();
         _labelController.Activate();
-        _prevSlot = _slot;
-        await Task.Delay(50);
-        _prevSlot.CheckChild();
+
+        StartCoroutine(CheckDelay());
+
+    }
+
+    private IEnumerator CheckDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        if (_slot is FullBottleSlot slot)
+        {
+            slot.CheckSlot();            
+        }
+        else if(_slot is TradeSlot tradeSlot)
+        {
+            tradeSlot.SetSlotFree();
+        }
+        
     }
 
     public void SetTradeScale()
@@ -149,12 +159,12 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         transform.DOScale(tradeScale, 0.5f);
     }
 
-    private void IncreaseSize()
+    public void IncreaseSize()
     {
         transform.DOScale(increaseScale, 0.5f);
     }
 
-    private void DecreaseSize()
+    public void StandartSize()
     {
         transform.DOScale(standartScale, 0.5f);
     }

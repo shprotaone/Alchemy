@@ -25,20 +25,22 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
         InitTimer(_delayDrag);
     }
 
-    private void StartDrag()
+    public Bottle CreateBottle()
     {
         if (_amount > 0 && !_timer.Started && _interract)
         {
-            StartTimer();
-            DecreaseAmount();
-
-            GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
-            bottleGO.transform.SetParent(this.transform);
-            Bottle bottle = bottleGO.GetComponent<Bottle>();
-
-            bottle.InitBottle(this,_tableManager);
-            _boxCollider.enabled = false;
+            //StartTimer();
+            //DecreaseAmount();           
         }
+
+        GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
+
+        Bottle bottle = bottleGO.GetComponent<Bottle>();
+
+        bottle.InitBottle(this, _tableManager);
+        _boxCollider.enabled = false;
+
+        return bottle;
     }
 
     public void AddBottle(int value)
@@ -68,7 +70,7 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
 
     public void Action()
     {
-        StartDrag();
+        //CreateBottle();
     }
 
     public void Drop()

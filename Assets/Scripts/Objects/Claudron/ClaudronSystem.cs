@@ -26,7 +26,7 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
         _mixingSystem.ActiveButtonBrewDelegate += ClaudronButtonState;
     }
 
-    private void ClaudronButtonState()
+    public void ClaudronButtonState()
     {
         if (_mixingSystem.IngredientsInClaudron.Count >= 2 && !_isTutorial)
         {

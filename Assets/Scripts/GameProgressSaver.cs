@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-public class GameProgressSaver : MonoBehaviour
+public class GameProgressSaver
 {
-    
-    private int _moneyInSession = 0;
+    private int _moneyInPrevSession = 0;
+    public int MoneyInPrevSession => _moneyInPrevSession;
 
     public void SetMoneyInSession(int value)
     {
-        _moneyInSession += value;
+        _moneyInPrevSession = value;
     }
 }

@@ -3,25 +3,37 @@ using UnityEngine;
 
 public class GameProgress : MonoBehaviour
 {
-    [SerializeField] private GameProgressSaver _progressSaver;
     [SerializeField] private List<LevelPreset> _levels;
 
-    private int _currentLevelIndex = 1;
+    private GameProgressSaver _saver;
+    private int _currentLevelIndex = 0;
     private int _firstPlay;
-    public int FirstPlay => _firstPlay;
 
-    private void Start()
+    public int FirstPlay => _firstPlay;
+    public LevelPreset CurrentLevel { get; private set; }
+    public GameProgressSaver Saver => _saver;
+
+    public void Init()
     {
         if (_firstPlay == 0)
         {
             _firstPlay = 1;           //сохранение значения в гейм прогресс
         }
+
+        _saver = new GameProgressSaver();
+        CurrentLevel = _levels[0];
+    }
+
+    public void SaveCurrentLevelProgress(int moneyOnSession)
+    {
+        _saver.SetMoneyInSession(moneyOnSession);
     }
 
     public LevelPreset GetNextLevel()
     {
-        LevelPreset preset = _levels[_currentLevelIndex];
         _currentLevelIndex++;
+        CurrentLevel = _levels[_currentLevelIndex];
+        LevelPreset preset = _levels[_currentLevelIndex];   
         return preset;
     }
 }

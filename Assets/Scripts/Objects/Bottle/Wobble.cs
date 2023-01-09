@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wobble : MonoBehaviour
 {
     private const float alfaValue = 0.8f;
-    private Renderer _renderer;
+    [SerializeField] private Renderer _renderer;
 
     private Vector3 _lastPos;
     private Vector3 _velocity;
@@ -22,11 +22,6 @@ public class Wobble : MonoBehaviour
     private float _wobbleAmountToAddZ;
     private float _pulse;
     private float _time = 0.5f;
-
-    private void Start()
-    {
-        _renderer = GetComponent<Renderer>();
-    }
 
     private void Update()
     {

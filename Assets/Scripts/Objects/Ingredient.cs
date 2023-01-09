@@ -24,9 +24,9 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     {
         if(_slot != null)
         {
-          transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(ReturnToSlot).SetEase(Ease.Unset);
-        }    
-        _audioSource?.PlayOneShot(_backSound);
+          transform.DOMove(_slot.transform.position, moveSpeed, false).OnStart(()=> _audioSource?.PlayOneShot(_backSound))
+                                                                      .OnComplete(ReturnToSlot).SetEase(Ease.Unset);
+        }         
     }
 
     public void SetSlot(Slot slot)

@@ -11,15 +11,16 @@ public sealed class ClickController : MonoBehaviour
     public event Action OnGoodPotion;
     public event Action OnBadPotion;
     //public event Action OnNormalPotion;
-    public event Action OnResetClaudron;
+    //public event Action OnResetClaudron;
 
     [SerializeField] private TimerScript _timer;
     [SerializeField] private MonoLimitedNumber _counter;
     [SerializeField] private ButtonEventCatcher _button;
     [SerializeField] private WidgetClicker _widgetClicker;
+    [SerializeField] private ClaudronSystem _claudronSystem;
 
     [Space] 
-    [SerializeField, ] private ButtonMode _buttonMode;
+    [SerializeField] private ButtonMode _buttonMode;
   
     [SerializeField] private float _maxCooldownTimeAllowed = 1.5f;
     [SerializeField] private int _decrementStep = 1;
@@ -31,7 +32,8 @@ public sealed class ClickController : MonoBehaviour
     [SerializeField] private int _incrementStep = 1;
     [SerializeField] private float _indicatorChangeTime = 0.5f;
     //[SerializeField] private AnimationCurve _animationCurve;
-    [SerializeField] private float _resetDelayTime = 5f;
+    [SerializeField] private float _resetFailDelayTime = 5f;
+    [SerializeField] private float _resetCompleteDelayTime;
     [SerializeField] private float _incrementPauseTime = 1f;
 
 
@@ -41,8 +43,9 @@ public sealed class ClickController : MonoBehaviour
     private bool _isCooking;
     private bool _isPauseTimeBefore;
     private float _lastTimeButtonPressed;
+    private float _delayTime;
 
-    public float ResetDelayTime => _resetDelayTime;
+    public float ResetDelayTime => _resetFailDelayTime;
     private void OnEnable()
     {
         if (_buttonMode == PRESS_BUTTON)
@@ -63,6 +66,7 @@ public sealed class ClickController : MonoBehaviour
         _counter.OnValueChanged += IndicateCountChange;
 
         OnBadPotion += FailCoocking;
+        OnGoodPotion += CompleteCoocking;
     }
 
     private void OnDisable()
@@ -82,6 +86,7 @@ public sealed class ClickController : MonoBehaviour
         _counter.OnValueChanged -= IndicateCountChange;
 
         OnBadPotion -= FailCoocking;
+        OnGoodPotion -= CompleteCoocking;
         StopAllCoroutines();
     }
 
@@ -170,7 +175,7 @@ public sealed class ClickController : MonoBehaviour
             
             DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
         });*/
-        
+
         var progressPerSegment = _maxClickCounterValue / _progressbarParts.Length;
         var currentPartNumber = (_counter.Value / progressPerSegment);
         var currentPart = _progressbarParts[currentPartNumber];
@@ -184,7 +189,6 @@ public sealed class ClickController : MonoBehaviour
         {
             OnBadPotion?.Invoke();            
         }
-        
 
         //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
@@ -196,9 +200,19 @@ public sealed class ClickController : MonoBehaviour
 
     /*[Button("Stop coocking"), GUIColor(0,1,0)]*/
     private void FailCoocking()
-    {      
+    {
+        _delayTime = _resetFailDelayTime;
         Stop();
-        Reset();
+
+        DOVirtual.DelayedCall(_delayTime, () => Reset());     
+    }
+
+    private void CompleteCoocking()
+    {
+        _delayTime = _resetCompleteDelayTime;
+        Stop();
+
+        DOVirtual.DelayedCall(_delayTime, () => Reset());
     }
 
     public void Reset()
@@ -207,10 +221,11 @@ public sealed class ClickController : MonoBehaviour
         //{
             _counter.Setup(0, _maxClickCounterValue);
             _widgetClicker.ClearProgress();
-            ShowMessage(String.Empty);
+            ShowMessage(String.Empty);  
             _isPauseTimeBefore = false;
-            _button.Button.interactable = true;
-            OnResetClaudron?.Invoke();
+
+        _claudronSystem.ClaudronButtonState();
+            //OnResetClaudron?.Invoke();
         //});
     }
 
@@ -222,8 +237,6 @@ public sealed class ClickController : MonoBehaviour
         _isPauseTimeBefore = true;
         _timer.Cancel();
         _button.Button.interactable = false;
-
-        DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
 
     private void Increment(int value)
@@ -259,12 +272,12 @@ public sealed class ClickController : MonoBehaviour
 
     public void ChangeResetDelayTime(float numb)
     {
-        _resetDelayTime = numb;
+        _resetFailDelayTime = numb;
     }
 }
 
 public enum ButtonMode
 {
-    HOLD_BUTTON =0,
+    HOLD_BUTTON = 0,
     PRESS_BUTTON = 1
 }

@@ -12,15 +12,15 @@ public class Step9 : Step
     {
         _standartDelayTime = _prevStep.StandartDelayTime;
         _dialogView.EnableView(false);
-        _mixingSystem.FilledBottleDelegateForTutorial += _tutorialManager.NextStep;
-        _mixingSystem.FilledBottleDelegateForTutorial += _cookButtonController.Reset;
-        _cookButtonController.ChangeResetDelayTime(_standartDelayTime);
+        //_mixingSystem.FilledBottleDelegateForTutorial += _tutorialManager.NextStep;
+        ////_mixingSystem.FilledBottleDelegateForTutorial += _cookButtonController.Reset;
+        //_cookButtonController.ChangeResetDelayTime(_standartDelayTime);
         
     }
 
     private void OnDisable()
     {
-        _mixingSystem.FilledBottleDelegateForTutorial -= _tutorialManager.NextStep;
-        _mixingSystem.FilledBottleDelegateForTutorial -= _cookButtonController.Reset;
+        //_mixingSystem.FilledBottleDelegateForTutorial -= _tutorialManager.NextStep;
+        //_mixingSystem.FilledBottleDelegateForTutorial -= _cookButtonController.Reset;
     }
 }

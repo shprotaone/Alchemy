@@ -22,7 +22,6 @@ public class PotionTaskView : MonoBehaviour
         ResetIngredientImages();
         _task = task;
         FillTaskView(task);
- 
 
          RisingTask();
     }

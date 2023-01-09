@@ -46,4 +46,10 @@ public class Money
         OnChangeMoney?.Invoke(_money);
         OnChangeMoneyAction?.Invoke();
     }
+
+    internal void SetMoney(int moneyInPrevSession)
+    {
+        _money = moneyInPrevSession;
+        OnChangeMoneyAction?.Invoke();
+    }
 }
