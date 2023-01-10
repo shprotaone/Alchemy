@@ -5,7 +5,7 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
 {
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private TMP_Text _amountText; //разделить на view?    
-    [SerializeField] private ContrabandPotionSystem _contrabandPotionSystem;
+    [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private TableManager _tableManager;
     [SerializeField] private LabelToSprite _labelToSprite;
 
@@ -37,7 +37,7 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
 
         Bottle bottle = bottleGO.GetComponent<Bottle>();
 
-        bottle.InitBottle(this, _tableManager);
+        bottle.InitBottle(this, _tableManager,_bottleInventory);
         _boxCollider.enabled = false;
 
         return bottle;

@@ -2,13 +2,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
     public event Action OnDropped;
-    private const float moveSpeed = 1;
+    private const float moveSpeed = 0.5f;
     private Vector3 standartScale = new Vector3(0.3f, 0.3f, 1);
     private Vector3 increaseScale = new Vector3(0.4f, 0.4f, 1);
     private Vector3 tradeScale = new Vector3(0.2f, 0.2f, 1);
@@ -36,10 +35,11 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public Potion PotionInBottle => _potionInBottle;
     public ObjectType Type => _type;
 
-    public void InitBottle(BottleStorage storage,TableManager tableManager)
+    public void InitBottle(BottleStorage storage,TableManager tableManager, BottleInventory inventory)
     {
         _bottleStorage = storage;
         _tableManager = tableManager;
+        _bottleInventory = inventory;
     }
 
 
@@ -47,6 +47,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     {
         if (!_isFull)
         {
+            potion.Labels.Sort();
             _potionInBottle = new Potion(potion.Labels);
 
             SetWaterColor(color);
@@ -55,7 +56,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
             _labels = new List<PotionLabelType>();
             _labels.AddRange(potion.Labels);
-            _labels.Sort();
         }
 
         DOVirtual.DelayedCall(0.2f, Drop);
@@ -98,6 +98,20 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         transform.DOMove(_destination.position, moveSpeed, false);
     }
 
+    public void ReturnToSlot()
+    {
+        if(_prevSlot is FullBottleSlot slot)
+        {
+            SetPosition(slot.transform);
+        }
+        else
+        {
+            SetPosition(_bottleInventory.GetSlot(PotionInBottle).transform);
+        }
+
+        DOVirtual.DelayedCall(0.1f, Drop);
+    }
+
     private void GetTable()
     {        
         if(_tableManager != null)
@@ -127,7 +141,8 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     {
         _bottleView.ResetView();
         _isFull = false;
-        _collider.enabled = false;
+        _labels.Clear();
+        _potionInBottle = null;
     }
 
     public void Action()
@@ -150,8 +165,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         else if(_slot is TradeSlot tradeSlot)
         {
             tradeSlot.SetSlotFree();
-        }
-        
+        }      
     }
 
     public void SetTradeScale()
@@ -167,6 +181,16 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void StandartSize()
     {
         transform.DOScale(standartScale, 0.5f);
+    }
+
+    public void HideBottle(bool flag)
+    {
+        gameObject.SetActive(!flag);
+    }
+
+    private void OnDisable()
+    {
+        ResetBottle();
     }
 }
 

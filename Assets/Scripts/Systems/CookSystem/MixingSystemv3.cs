@@ -32,12 +32,9 @@ public class MixingSystemv3 : MonoBehaviour
     {
         if(collision.TryGetComponent(out Ingredient ingredient))
         {
+            if(IngredientsInClaudron.Count<4)
             AddIngredientToClaudron(ingredient);
         }
-        //else if(collision.TryGetComponent(out Bottle bottle))
-        //{
-        //    FillBottle(bottle);
-        //}
     }
 
     public void FillBottle(Bottle bottle)
@@ -95,11 +92,8 @@ public class MixingSystemv3 : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Котел переполнен, сбрасываю все");  //TODO - ингредиенты должны возвращаться в свои ячейки
-            _labelSetter.Clear();
-            _claudronLabelView.Reset();
-            IngredientsInClaudron.Clear();
-            _waterColor.ResetWaterColor(Color.white);
+            Debug.LogError("Котел переполнен");  //TODO - ингредиенты должны возвращаться в свои ячейки
+
         }
         
     }

@@ -63,9 +63,9 @@ public class BottleInventory : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            if(slot.BottleInSlot != null)
+            if (slot.BottlesInSlot.Count != 0)
             {
-                if (Enumerable.SequenceEqual(slot.BottleInSlot.Labels, potion.Labels))
+                if (Enumerable.SequenceEqual(slot.BottlesInSlot[0].Labels, potion.Labels))
                 {                   
                     return slot;
                 }

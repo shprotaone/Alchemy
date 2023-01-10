@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -8,14 +9,15 @@ public class FullBottleSlot : MonoBehaviour,ISlot
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private bool _isFree;
 
-    private Bottle _bottleInSlot;
-    public Bottle BottleInSlot => _bottleInSlot;
+    private List<Bottle> _bottlesInSlot;
+    public List<Bottle> BottlesInSlot => _bottlesInSlot;
     public int Count { get; private set; }
     public bool IsFree => _isFree;
 
     private void Start()
     {
         _isFree = true;
+        _bottlesInSlot = new List<Bottle>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,10 +30,10 @@ public class FullBottleSlot : MonoBehaviour,ISlot
             }
             else
             {
-                if (Enumerable.SequenceEqual(_bottleInSlot.Labels, bottle.Labels))
+                if (Enumerable.SequenceEqual(_bottlesInSlot[0].Labels, bottle.Labels))
                 {
                     bottle.SetPosition(this.transform);
-                    
+                    _bottlesInSlot.Add(bottle);
                 }
             }
 
@@ -45,13 +47,15 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         bottle.SetPosition(this.transform);     //необходимо при отпускании между слотами        
 
         _isFree = false;
-        _bottleInSlot = bottle;
+        _bottlesInSlot.Add(bottle);     //бутылки не удал€ютс€ до конца уровн€
         CheckSlot();
+
+        //HidePrevBottle();
     }
 
     public void CheckSlot()
     {
-        Count = transform.childCount - 1;
+        Count = transform.childCount-1;
 
         if(Count <= 1)
         {
@@ -66,21 +70,35 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         {
             SetFreeSlot();
         }
+
+    }
+
+    private void HidePrevBottle()
+    {
+        if(transform.childCount > 2)
+        {
+            for (int i = 0; i < _bottlesInSlot.Count-1; i++)
+            {
+                _bottlesInSlot[i].HideBottle(true);
+            }
+        }
+        else
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }      
     }
 
     private void SetFreeSlot()
     {
-        _isFree = true; 
-        _bottleInSlot = null;
+        _isFree = true;
+        _bottlesInSlot.Clear();
     }
 
     public void ResetSlot()
     {
-        if(_bottleInSlot != null)
+        if(_bottlesInSlot != null)
         {
-            _isFree = true;
-
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < _bottlesInSlot.Count; i++)
             {
                 Bottle bottle = GetComponentInChildren<Bottle>();
 
@@ -91,6 +109,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
                 }
             }
         }
-       
+
+        SetFreeSlot();
     }
 }

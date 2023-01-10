@@ -43,16 +43,8 @@ public class TradeSystem : MonoBehaviour
 
     public void FillLabels(List<PotionLabelType> label)
     {
-        if (_labels.Count < 3)
-        {
-            _labels.AddRange(label);
-            CalculateReward();
-        }
-        else
-        {
-            Debug.Log("Переполнение");
-        }
-         
+        _labels.AddRange(label);
+        CalculateReward();
     }
 
     public void ClearLabelList()
@@ -101,8 +93,10 @@ public class TradeSystem : MonoBehaviour
         DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
         _money.Decrease(100);
         _completeSeries.ResetSeries();
+        _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
 
-        ClearSlots();
+        ReturnBottle();
+        DOVirtual.DelayedCall(1, ClearSlots);
     }
 
     private void ClearSlots()
@@ -113,6 +107,18 @@ public class TradeSystem : MonoBehaviour
         }
 
         _tradeView.Refresh(0);
+    }
+
+    private void ReturnBottle()
+    {
+        foreach (var slot in _slots)
+        {
+            if (!slot.IsFree)
+            {
+                slot.SetSlotFree();
+                slot.BottleInSlot.ReturnToSlot();                
+            }
+        }
     }
 
     public void Disable()

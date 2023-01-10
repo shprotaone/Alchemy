@@ -29,6 +29,13 @@ public class GameProgress : MonoBehaviour
         _saver.SetMoneyInSession(moneyOnSession);
     }
 
+    public LevelPreset LoadLevelFromIndex(int index)
+    {
+        CurrentLevel = _levels[index];
+
+        return CurrentLevel;
+    }
+
     public LevelPreset GetNextLevel()
     {
         _currentLevelIndex++;

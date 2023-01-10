@@ -36,8 +36,12 @@ public class BottleView : MonoBehaviour
     public void ResetView()
     {
         ReturnEffect();
-
         _waterInBottle.enabled = false;
+
+        foreach (var label in _labels)
+        {
+            label.sprite = null;
+        }
     }
 
     private void ReturnEffect()
@@ -47,6 +51,8 @@ public class BottleView : MonoBehaviour
             ObjectPool.SharedInstance.DestroyObject(_effectInBottle);
         }
     }
+
+    
 }
 
 #region

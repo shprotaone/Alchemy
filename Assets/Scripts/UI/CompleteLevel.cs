@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CompleteLevel : MonoBehaviour,IMenu
@@ -9,6 +10,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     [SerializeField] private MenuPanelController _menuPanelController;
     [SerializeField] private GameProgress _gameProgress;
     [SerializeField] private Button _nextLevelButton;
+    [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private TMP_Text _coinResult;
 
@@ -16,10 +18,11 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private MoneyTask _moneyTask;
 
 
-    private void Start()
+    private void OnEnable()
     {
-        _nextLevelButton?.onClick.AddListener(NextLevel);
-        _restartButton?.onClick.AddListener(Restart);
+        _mainMenuButton?.onClick.AddListener(MainMenu);
+        _restartButton.gameObject.SetActive(false);
+        _nextLevelButton.gameObject.SetActive(false);
     }
 
     public void Init(Money money,MoneyTask moneyTask)
@@ -32,13 +35,15 @@ public class CompleteLevel : MonoBehaviour,IMenu
     {
         _coinResult.text = _money.CurrentMoney.ToString();
 
-        if(_moneyTask.TaskMoney <= _money.CurrentMoney)
+        if(_moneyTask.TaskMoney < _money.CurrentMoney)
         {
-            _nextLevelButton.interactable = true;
+            _nextLevelButton.gameObject.SetActive(true);
+            _nextLevelButton?.onClick.AddListener(NextLevel);
         }
         else
         {
-            _nextLevelButton.interactable = false;
+            _restartButton.gameObject.SetActive(true);
+            _restartButton?.onClick.AddListener(Restart);          
         }
 
         _init.DisableLevel();
@@ -52,8 +57,14 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     public void Restart()
     {
-        _init.SetPreset(_gameProgress.CurrentLevel,true);
+        _init.SetPreset(_gameProgress.LoadLevelFromIndex(0), false);
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 
     public void Disable()
     {       
