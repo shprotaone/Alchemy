@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -11,7 +9,8 @@ public class AudioManager : MonoBehaviour
     
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private SettingsView _settingDisplay;
-    [SerializeField] private GameProgress _gameProgress;
+    
+    private GameProgressSaver _gameProgress;
 
     private bool _music;
     private bool _sfx;
@@ -20,21 +19,29 @@ public class AudioManager : MonoBehaviour
     public bool Music { get { return _music; } }
 
     private void Start()
-    {      
-        if(_gameProgress.FirstPlay == 0)
+    {
+        _gameProgress = new GameProgressSaver();
+        _gameProgress.OnSaveProgress += SaveSettings;
+        ReadSaveSettings();
+
+        LoadSettings();
+        _settingDisplay.LoadCurrentSettings();
+    }
+
+    private void ReadSaveSettings()
+    {
+        if (_gameProgress.IsFirstGame == 0)
         {
             _music = true;
             _sfx = true;
-            SaveSettings();            
+            _gameProgress.IsFirstGame = 1;
+            SaveSettings();
         }
         else
         {
             _music = Convert.ToBoolean(PlayerPrefs.GetInt(musicName));
-            _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName));                 
-        }      
-
-        LoadSettings();
-        _settingDisplay.LoadCurrentSettings();
+            _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName));
+        }
     }
 
     /// <summary>

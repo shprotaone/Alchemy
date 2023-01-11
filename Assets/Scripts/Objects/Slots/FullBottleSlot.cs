@@ -73,21 +73,6 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     }
 
-    private void HidePrevBottle()
-    {
-        if(transform.childCount > 2)
-        {
-            for (int i = 0; i < _bottlesInSlot.Count-1; i++)
-            {
-                _bottlesInSlot[i].HideBottle(true);
-            }
-        }
-        else
-        {
-            transform.GetChild(1).gameObject.SetActive(true);
-        }      
-    }
-
     private void SetFreeSlot()
     {
         _isFree = true;
@@ -96,7 +81,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     public void ResetSlot()
     {
-        if(_bottlesInSlot != null)
+        if(_bottlesInSlot.Count > 0)
         {
             for (int i = 0; i < _bottlesInSlot.Count; i++)
             {
@@ -109,7 +94,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
                 }
             }
         }
-
+        _bottlesInSlot.Clear();
         SetFreeSlot();
     }
 }

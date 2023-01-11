@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour,IAction,IPooledObject
 {
-    private const float moveSpeed = 1;
+    private const float moveSpeed = 0.5f;
 
     [SerializeField] private SpriteRenderer _dragableImage;
     [SerializeField] private AudioClip _backSound;
@@ -25,7 +25,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
         if(_slot != null)
         {
           transform.DOMove(_slot.transform.position, moveSpeed, false).OnStart(()=> _audioSource?.PlayOneShot(_backSound))
-                                                                      .OnComplete(ReturnToSlot).SetEase(Ease.Unset);
+                                                                      .OnComplete(ReturnToSlot).SetEase(Ease.Linear);
         }         
     }
 

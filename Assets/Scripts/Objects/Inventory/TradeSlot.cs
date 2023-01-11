@@ -73,6 +73,8 @@ public class TradeSlot : MonoBehaviour,ISlot
         }
 
         _bottleInSlot?.SetTradeScale();
+
+        yield return null;
     }
 
     private void DelayCollider()

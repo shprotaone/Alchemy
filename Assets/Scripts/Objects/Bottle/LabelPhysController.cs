@@ -17,10 +17,7 @@ public class LabelPhysController : MonoBehaviour
     {
         _collider.enabled = false;
         _rigid.bodyType = RigidbodyType2D.Kinematic;
-        DOVirtual.DelayedCall(1, () =>
-        {
-            transform.DOLocalMove(stablePos, 0.5f);
-            transform.DOLocalRotate(Vector3.zero, 0.5f);
-        });                      
+        transform.DOLocalMove(stablePos, 0.2f);
+        transform.DOLocalRotate(Vector3.zero, 0.2f);
     }
 }

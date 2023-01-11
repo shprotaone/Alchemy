@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JournalController : MonoBehaviour
 {
-    [SerializeField] private GameProgress _gameProgress;
+    [SerializeField] private LevelSelector _gameProgress;
     [SerializeField] private List<StoryContent> _contents;
 
     //private void Start()

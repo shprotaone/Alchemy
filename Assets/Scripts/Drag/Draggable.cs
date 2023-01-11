@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using UnityEngine;
+using System.Collections;
 
 public class Draggable : MonoBehaviour
 {
@@ -15,32 +15,44 @@ public class Draggable : MonoBehaviour
         _action = GetComponent<IAction>();
     }
 
-    public void StartDragAction()
+    private void OnEnable()
     {
-        _action.Action();
-
-        if(_action is Ingredient)
+        if (_action is Ingredient)
         {
             _collider.enabled = false;
-        }      
+        }
     }
 
-    public async void DropAction()
+    public void StartDragAction()
+    {
+        _action.Action();   
+    }
+
+    public void DropAction()
     {
         _collider.enabled = true;
 
-        if(_action is Ingredient || _action is Bottle)
+        StartCoroutine(DropActionWithDelay());
+    }
+
+    private IEnumerator DropActionWithDelay()
+    {
+        //_collider.enabled = true;      
+
+        if (_action is Ingredient || _action is Bottle)
         {
-            await Task.Delay(30);
+            yield return new WaitForSeconds(0.1f);
 
             if (_collider != null)
             {
                 _collider.enabled = false;
             }
 
-            await Task.Delay(50);      //Как можно еще задержать исполнение? 
+            yield return new WaitForSeconds(0.1f);     //Как можно еще задержать исполнение? 
 
             _action.Drop();
         }
+
+        yield return null;
     }
 }

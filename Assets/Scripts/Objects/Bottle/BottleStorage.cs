@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -27,15 +28,10 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
 
     public Bottle CreateBottle()
     {
-        if (_amount > 0 && !_timer.Started && _interract)
-        {
-            //StartTimer();
-            //DecreaseAmount();           
-        }
-
         GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
 
         Bottle bottle = bottleGO.GetComponent<Bottle>();
+        bottle.ResetBottle();
 
         bottle.InitBottle(this, _tableManager,_bottleInventory);
         _boxCollider.enabled = false;

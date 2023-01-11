@@ -19,6 +19,12 @@ public class Visitor : MonoBehaviour
         _visitorView.Rising();
     }
 
+    public void Disable()
+    {
+        _visitorView.Fading();
+        _currentTaskView.FadingTask();
+    }
+
     private void OnDisable()
     {
         _task = null;

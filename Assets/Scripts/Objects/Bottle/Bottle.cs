@@ -7,6 +7,7 @@ using UnityEngine;
 public class Bottle : MonoBehaviour,IAction,IPooledObject
 {
     public event Action OnDropped;
+
     private const float moveSpeed = 0.5f;
     private Vector3 standartScale = new Vector3(0.3f, 0.3f, 1);
     private Vector3 increaseScale = new Vector3(0.4f, 0.4f, 1);
@@ -18,7 +19,10 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     [SerializeField] private ObjectType _type;
     [SerializeField] private ISlot _slot;
     [SerializeField] private ISlot _prevSlot;
+
     [SerializeField] private List<PotionLabelType> _labels;
+    [SerializeField] private List<PotionLabelType> _labelsInPotion;
+    [SerializeField] private bool _isFull;
 
     private Transform _destination;
     
@@ -26,8 +30,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     private TableManager _tableManager;
     private BottleStorage _bottleStorage;
     private BottleInventory _bottleInventory;
-
-    private bool _isFull;
 
     public BottleView View => _bottleView;
     public List<PotionLabelType> Labels => _labels;
@@ -48,7 +50,9 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         if (!_isFull)
         {
             potion.Labels.Sort();
+
             _potionInBottle = new Potion(potion.Labels);
+            _labelsInPotion = _potionInBottle.Labels;
 
             SetWaterColor(color);
             _isFull = true;                       
@@ -56,6 +60,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
             _labels = new List<PotionLabelType>();
             _labels.AddRange(potion.Labels);
+            _collider.enabled = false;
         }
 
         DOVirtual.DelayedCall(0.2f, Drop);
@@ -85,7 +90,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         StandartSize();
         _labelController.Deactivate();
 
-        GetTable();
         transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
                                                                  .OnComplete(ReturnBottleToSlot);                                                                     
         OnDropped?.Invoke();
@@ -94,7 +98,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
     public void DropFromGarbage()   //без повторной ативации OnComplete, спорное решение
     {
-        GetTable();
         transform.DOMove(_destination.position, moveSpeed, false);
     }
 
@@ -109,20 +112,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
             SetPosition(_bottleInventory.GetSlot(PotionInBottle).transform);
         }
 
-        DOVirtual.DelayedCall(0.1f, Drop);
-    }
-
-    private void GetTable()
-    {        
-        if(_tableManager != null)
-        {
-            if (!_isFull)
-                _destination = _tableManager.EmptyPotionTable.transform;         
-        }
-        else
-        {
-            Debug.Log("Стол не указан");
-        }  
+        DOVirtual.DelayedCall(0.2f, Drop);
     }
 
     private void ReturnBottleToSlot()
@@ -133,7 +123,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void DestroyBottle()
     {
         DOTween.Kill(true);
-        ResetBottle();
         ObjectPool.SharedInstance.DestroyObject(gameObject);       
     }
 
@@ -143,6 +132,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
         _isFull = false;
         _labels.Clear();
         _potionInBottle = null;
+        _labelsInPotion.Clear();
     }
 
     public void Action()
@@ -170,7 +160,7 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
 
     public void SetTradeScale()
     {
-        transform.DOScale(tradeScale, 0.5f);
+        transform.DOScale(standartScale, 0.5f);
     }
 
     public void IncreaseSize()
@@ -186,11 +176,6 @@ public class Bottle : MonoBehaviour,IAction,IPooledObject
     public void HideBottle(bool flag)
     {
         gameObject.SetActive(!flag);
-    }
-
-    private void OnDisable()
-    {
-        ResetBottle();
     }
 }
 

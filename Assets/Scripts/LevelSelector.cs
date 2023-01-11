@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameProgress : MonoBehaviour
+public class LevelSelector : MonoBehaviour
 {
     [SerializeField] private List<LevelPreset> _levels;
 
-    private GameProgressSaver _saver;
     private int _currentLevelIndex = 0;
     private int _firstPlay;
 
-    public int FirstPlay => _firstPlay;
     public LevelPreset CurrentLevel { get; private set; }
-    public GameProgressSaver Saver => _saver;
 
     public void Init()
     {
@@ -20,18 +17,12 @@ public class GameProgress : MonoBehaviour
             _firstPlay = 1;           //сохранение значения в гейм прогресс
         }
 
-        _saver = new GameProgressSaver();
         CurrentLevel = _levels[0];
     }
 
-    public void SaveCurrentLevelProgress(int moneyOnSession)
+    public LevelPreset LoadLevelFromIndex(LevelNumber level)
     {
-        _saver.SetMoneyInSession(moneyOnSession);
-    }
-
-    public LevelPreset LoadLevelFromIndex(int index)
-    {
-        CurrentLevel = _levels[index];
+        CurrentLevel = _levels[(int)level - 1];
 
         return CurrentLevel;
     }

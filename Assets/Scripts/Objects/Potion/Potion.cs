@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Potion
 {
-
     private Color _color;
 
     public List<PotionLabelType> Labels { get; private set; }
@@ -12,7 +11,8 @@ public class Potion
 
     public Potion(List<PotionLabelType> labels)
     {
-        Labels = labels;
+        Labels = new List<PotionLabelType>();
+        Labels.AddRange(labels);
     }
 
     #region old

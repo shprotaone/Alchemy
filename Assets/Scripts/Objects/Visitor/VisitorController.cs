@@ -86,17 +86,17 @@ public class VisitorController : MonoBehaviour
     {
         if (CurrentVisitor != null)
         {
-            CurrentVisitor.VisitorView.Fading();
-            CurrentVisitor.TaskView.FadingTask();
-
+            CurrentVisitor.Disable();
             VisitorGoOutSound();
-
             _visitorCountSystem.DecreaseVisitorCount();
         }
     }
 
     public void Disable()
-    {        
-        //_visitorCountSystem.OnVisitorEnded -= _gameManager.CompleteLevel;
+    {
+        foreach (Visitor visitor in _visitors)
+        {
+            visitor.Disable();
+        }
     }
 }

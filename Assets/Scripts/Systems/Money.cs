@@ -14,11 +14,11 @@ public class Money
     public int CurrentMoney => _money;
     public bool CanBuy { get; private set; }
 
-    public Money(MoneyView view,int startMoney, int moneyMinRange)
+    public Money(MoneyView view,int startMoney, int moneyTask, int moneyMinRange)
     {
         _money = startMoney;
         _moneyMinRange = moneyMinRange;
-        view.Init();
+        view.Init(startMoney,moneyTask);
         OnChangeMoney?.Invoke(_money);
     }
 

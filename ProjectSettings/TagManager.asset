@@ -6,28 +6,8 @@ TagManager:
   tags:
   - Bottle
   - Ingredient
-  - Bottle5
   - BottleSpawner
-  - Bottle3
-  - Bottle7
-  - Bottle6
-  - Priest
-  - Magician
   - TouchDetect
-  - Warrior
-  - Bottle8
-  - Bandit
-  - Bottle1
-  - Bottle4
-  - Bottle2
-  - ResourceRed
-  - ResourceBlue
-  - ResourceYellow
-  - ResourceWhite
-  - ResourceLadan
-  - ResourceEye
-  - ResourceStone
-  - ResourceSand
   layers:
   - Default
   - TransparentFX
@@ -37,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - DropValid
+  - UIParticle
   - DropInvalid
   - 
   - 

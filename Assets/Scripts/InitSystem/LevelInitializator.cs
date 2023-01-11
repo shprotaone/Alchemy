@@ -27,23 +27,27 @@ public class LevelInitializator : MonoBehaviour
 
     [Header("Подсветка и UI")]
     [SerializeField] private MoneyView _moneyView;
-    [SerializeField] private MoneyTaskView _moneyTaskView;
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;    
     [SerializeField] private GameStateController _gameStateController;
-    [SerializeField] private GameProgress _gameProgress;
+    [SerializeField] private LevelSelector _gameProgress;
     [SerializeField] private CompleteLevel _levelCompletePanel;
+    [SerializeField] private DayEntryController _dayEntryController;
 
     private Money _money;
     private MoneyTask _moneyTask;
+    private GameProgressSaver _gameSaver;
     
     private List<CounterTask> _tasksChance;
 
     private void Start()
     {
+        Application.targetFrameRate = 75;
+
         _gameProgress.Init();
         _currentLevelPreset = _gameProgress.CurrentLevel;
-        InitLevelSettings();     
+        InitLevelSettings();
+        _dayEntryController.CallNextDay(1);
     }  
 
     public void InitLevelSettings()
@@ -54,17 +58,19 @@ public class LevelInitializator : MonoBehaviour
 
         if (_money == null)
         {
-            _money = new Money(_moneyView, _currentLevelPreset.startMoney, _currentLevelPreset.minRangeMoney);
+            _money = new Money(_moneyView, _currentLevelPreset.startMoney,_moneyTask.TaskMoney,_currentLevelPreset.minRangeMoney);
         }
 
+        _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money,_moneyTask);
         _cameraMovement.Init();
 
         InitInventory();
         InitSystems();
+        
 
-        _gameProgress.SaveCurrentLevelProgress(_money.CurrentMoney);
+        //_gameProgress.SaveCurrentLevelProgress(_money.CurrentMoney);
 
         Debug.Log("Денег " + _money.CurrentMoney);
         Debug.Log("Задание " + _moneyTask.TaskMoney);
@@ -98,7 +104,7 @@ public class LevelInitializator : MonoBehaviour
             _moneyTask.IncreaseTask(_money.CurrentMoney, _currentLevelPreset.moneyTaskComplete);
         }
 
-        _moneyTaskView.SetTaskText(_moneyTask.TaskMoney);
+        _moneyView.RefreshMoneyTaskText(_moneyTask.TaskMoney);
     }
 
     private void SetChances()
@@ -123,17 +129,10 @@ public class LevelInitializator : MonoBehaviour
     {
         if (isRestart)
         {
-            _money.SetMoney(_gameProgress.Saver.MoneyInPrevSession);
-        }
-        else if(isRestart && preset.levelNumber == LevelNumber.Level1)
-        {
-            _money.SetMoney(0);           
+            _money.SetMoney(0);
         }
 
         _moneyView.RefreshMoneyText(_money.CurrentMoney);
-
-        Debug.Log("Денег " + _money.CurrentMoney);
-        Debug.Log("Задание " + _moneyTask.TaskMoney);
 
         _currentLevelPreset = preset;
         _levelCompletePanel.Disable();

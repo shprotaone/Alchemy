@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,11 +27,6 @@ public class GameStateController : MonoBehaviour
             _cameraMovement.Movement();
             _visitorController.Activate();
         }
-    }
-
-    public void CheckTaskComplete()
-    {
-
     }
 
     public void CheckLeftIngredients()

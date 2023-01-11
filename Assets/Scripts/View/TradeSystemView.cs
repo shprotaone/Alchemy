@@ -7,8 +7,8 @@ public class TradeSystemView : MonoBehaviour
 {
     [SerializeField] private Button _tradeButton;
     [SerializeField] private Button _declineButton;
-    [SerializeField] private TMP_Text _rewardText;
     [SerializeField] private TMP_Text _multiplyText;
+    [SerializeField] private TMP_Text _rewardText;
 
     public void Init(TradeSystem tradeSystem)
     {    

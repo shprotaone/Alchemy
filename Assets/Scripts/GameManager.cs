@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,14 +14,11 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         _completeLevelPanel.Activated();
-        //_gameTimeController.PauseGame();
-        //_gameProgress.SetReachedLevel(LevelPresetLoader.instance.LevelPreset.levelNumber);
     }
 
     public void DefeatLevel()
     {
         _defeatLevelPanel.SetActive(true);
-        //_gameTimeController.PauseGame();
     }
 
 }
