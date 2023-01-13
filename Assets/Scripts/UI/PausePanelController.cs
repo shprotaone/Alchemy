@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,7 +6,7 @@ public class PausePanelController : MonoBehaviour
 {
     [SerializeField] private InGameTimeController _timeController;
     [SerializeField] private DraggableObjectController _draggableObjectController;
-    [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private CompleteLevel _completeLevel;
 
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _exitButton;
@@ -30,11 +28,11 @@ public class PausePanelController : MonoBehaviour
 
     private void Exit()
     {
-        _sceneLoader.LoadLevel(SceneLoader.MenuScene);
+        SceneManager.LoadScene(MainMenu.mainMenuSceneName);
     }
 
     private void Restart()
     {
-        _sceneLoader.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        _completeLevel.Restart();
     }
 }

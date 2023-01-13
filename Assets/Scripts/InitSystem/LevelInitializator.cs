@@ -17,6 +17,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private StartDialogViewer _startDialogViewer;
 
     [Header("Системы")]
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private BottleStorage _bottleStorage;
     [SerializeField] private PotionTaskSystem _potionTaskSystem;
@@ -61,6 +62,7 @@ public class LevelInitializator : MonoBehaviour
             _money = new Money(_moneyView, _currentLevelPreset.startMoney,_moneyTask.TaskMoney,_currentLevelPreset.minRangeMoney);
         }
 
+        _gameManager.Init(_money);
         _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money,_moneyTask);

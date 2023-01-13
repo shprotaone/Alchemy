@@ -4,21 +4,27 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private InGameTimeController _gameTimeController;
     [SerializeField] private CompleteLevel _completeLevelPanel;
-    [SerializeField] private GameObject _defeatLevelPanel;
 
-    private void Start()
+    private Money _money;
+    public void Init(Money money)
     {
-        _gameTimeController.ResumeGame();
+        _money = money;
     }
 
     public void CompleteLevel()
     {
         _completeLevelPanel.Activated();
+        SaveRecord();
     }
 
-    public void DefeatLevel()
+    private void SaveRecord()
     {
-        _defeatLevelPanel.SetActive(true);
-    }
+        int currentRecord = PlayerPrefs.GetInt(RecordLoader.RecordName, 0);
 
+        if(currentRecord < _money.CurrentMoney)
+        {
+            PlayerPrefs.SetInt(RecordLoader.RecordName, _money.CurrentMoney);
+            PlayerPrefs.Save();
+        }
+    }
 }

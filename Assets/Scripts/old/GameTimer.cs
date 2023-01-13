@@ -23,7 +23,6 @@ public class GameTimer : MonoBehaviour
             _localTimer = new LocalTimer(seconds, flag);
 
             _localTimer.OnTimerUpdate += () => _view.UpdateTimeText(_localTimer.CurrentTime);
-            _localTimer.OnTimerUpdate += CheckTimeDefeat;
 
             StartCoroutine(_localTimer.StartTimer());
         }
@@ -31,15 +30,7 @@ public class GameTimer : MonoBehaviour
         {
             _view.gameObject.SetActive(false);
         }
-    }
-
-    private void CheckTimeDefeat()
-    {
-        if(_localTimer.CurrentTime <= 0)
-        {
-            _gameManager.DefeatLevel();
-        }
-    }   
+    } 
 
     private void OnDisable()
     {

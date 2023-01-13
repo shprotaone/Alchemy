@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CompleteLevel : MonoBehaviour,IMenu
-{
+{   
     private const string defeatText = "ƒневна€ цель не достигнута";
 
     [SerializeField] private LevelInitializator _init;
@@ -28,7 +28,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     {
         _nextLevelButton?.onClick.AddListener(NextLevel);
         _restartButton?.onClick.AddListener(Restart);
-        _mainMenuButton?.onClick.AddListener(MainMenu);
+        _mainMenuButton?.onClick.AddListener(MainMenuLoad);
     }
 
     public void Init(Money money,MoneyTask moneyTask)
@@ -76,9 +76,9 @@ public class CompleteLevel : MonoBehaviour,IMenu
         _init.SetPreset(_gameProgress.LoadLevelFromIndex(LevelNumber.Level1), true);
     }
 
-    public void MainMenu()
+    public void MainMenuLoad()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MainMenu.mainMenuSceneName);
     }
 
     public void Disable()

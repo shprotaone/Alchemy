@@ -9,13 +9,8 @@ public class CompleteLevelPanelController : MonoBehaviour
     [SerializeField] private Transform _resultCoinGroup;
     [SerializeField] private TMP_Text _titleText;
 
-    private float _alpha;
     private int _day;
-    private void OnEnable()
-    {
-        _alpha = 1;
-        //Enable();
-    }
+
     public void Disable()
     {
         _dayEntryController.CallNextDay(_day);

@@ -22,7 +22,7 @@ public class TestSystem : MonoBehaviour
     [SerializeField] private TMP_Text _prevWeight;
 
     [SerializeField] private LevelPreset _preset;
-    [SerializeField] private SceneLoader _loader;
+    [SerializeField] private CompleteLevel _loader;
 
     [SerializeField] private Button _button;
     private void Start()
@@ -60,7 +60,7 @@ public class TestSystem : MonoBehaviour
             _preset.chance2Label = int.Parse(_chance2Field.text);
             _preset.chance3Label = int.Parse(_chance3Field.text);
 
-            _loader.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+            _loader.Restart();
         }
         else
         {

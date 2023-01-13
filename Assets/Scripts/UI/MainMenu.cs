@@ -1,36 +1,34 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Button _startGameButton;
-    [SerializeField] private Button _settingsOpenButton;
-    [SerializeField] private Button _closeButton;
+    public static readonly string mainMenuSceneName = "Menu";
+    public static readonly string GameSceneName = "DevelopSimpleVersion";
 
-    [SerializeField] private GameObject _mapPanel;
+    [SerializeField] private Button _startGameButton;
+    [SerializeField] private Button _guideButton;
+    [SerializeField] private Button _settingsOpenButton;
+
+    [SerializeField] private GameObject _guidePanel;
     [SerializeField] private GameObject _settingPanel;
 
     private void Start()
     {
-        _startGameButton.onClick.AddListener(MapController);
-        _closeButton.onClick.AddListener(MapController);
+        _startGameButton.onClick.AddListener(StartGame);
+        _guideButton.onClick.AddListener(Guide);
         _settingsOpenButton.onClick.AddListener(SettingController);
-
-        _mapPanel.SetActive(LevelPresetLoader.instance.MapIsOpen);
     }
 
-    private void MapController()
+    private void StartGame()
     {
-        if (_mapPanel.activeInHierarchy)
-        {
-            _mapPanel.SetActive(false);
-            LevelPresetLoader.instance.MapIsOpen = false;
-        }
-        else
-        {
-            _mapPanel.SetActive(true);
-            LevelPresetLoader.instance.MapIsOpen = true;
-        }
+        SceneManager.LoadScene(GameSceneName);
+    }
+
+    private void Guide()
+    {
+        _guidePanel.gameObject.SetActive(true);
     }
 
     private void SettingController()
