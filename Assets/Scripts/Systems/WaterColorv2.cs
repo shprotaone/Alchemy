@@ -4,11 +4,10 @@ using DG.Tweening;
 
 public class WaterColorv2 : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _waterImage;
-    [SerializeField] private Material _boilMaterial;
-
-    [SerializeField] private Sprite _waterSprite;
-    [SerializeField] private Sprite _boiledWaterSprite;
+    [SerializeField] private ClaudronEffectController _effectController;
+    [SerializeField] private SpriteRenderer _waterUpSprite;
+    [SerializeField] private SpriteRenderer _waterDownSprite;
+    [SerializeField] private Color _resetColor;
 
     private List<Color> _colors;
     private Color _resultColor;
@@ -18,8 +17,7 @@ public class WaterColorv2 : MonoBehaviour
     private void Start()
     {
         _colors = new List<Color>();
-        _waterImage.material.color = Color.white;
-        _waterImage.sprite = _waterSprite;
+        _waterUpSprite.material.color = Color.white;
     }
 
     public void AddColor(Color color)
@@ -33,7 +31,10 @@ public class WaterColorv2 : MonoBehaviour
         }
         _resultColor = resultColor / _colors.Count;
 
-        _waterImage.DOColor(_resultColor, 1);
+        _waterUpSprite.DOColor(_resultColor, 1);
+        _waterDownSprite.DOColor(_resultColor, 1);
+
+        _effectController.IngredientBulk(_resultColor);
     }
 
     public void SetColorWater(List<Color> color)
@@ -48,18 +49,14 @@ public class WaterColorv2 : MonoBehaviour
         resultSumColor = resultSumColor / color.Count;
 
         _resultColor = resultSumColor;
-        _waterImage.DOColor(_resultColor, 1);
+        _waterUpSprite.DOColor(_resultColor, 1);
+        _waterDownSprite.DOColor(_resultColor, 1);
     }
 
-    public void StopBoiled()
+    public void ResetWaterColor()
     {
-        _waterImage.sprite = _waterSprite;
-        //_waterImage.material = null;
-    }
-
-    public void ResetWaterColor(Color color)
-    {
-        _waterImage.DOColor(color, 1);    
+        _waterUpSprite.DOColor(_resetColor, 1);
+        _waterDownSprite.DOColor(_resetColor, 1);
         _colors.Clear();
         _resultColor = Color.white;
     }    

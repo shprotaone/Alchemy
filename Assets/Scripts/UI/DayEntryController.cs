@@ -26,6 +26,5 @@ public class DayEntryController : MonoBehaviour
     public void DisablePanel()
     {
         _group.DOFade(0, 2).OnComplete(()=> _group.gameObject.SetActive(false));
-
     }
 }

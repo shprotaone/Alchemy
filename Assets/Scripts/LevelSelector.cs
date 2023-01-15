@@ -20,9 +20,9 @@ public class LevelSelector : MonoBehaviour
         CurrentLevel = _levels[0];
     }
 
-    public LevelPreset LoadLevelFromIndex(LevelNumber level)
+    public LevelPreset GetFirstLevel()
     {
-        CurrentLevel = _levels[(int)level - 1];
+        CurrentLevel = _levels[0];
 
         return CurrentLevel;
     }

@@ -66,14 +66,13 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     public void NextLevel()
     {
-        _init.SetPreset(_gameProgress.GetNextLevel(),false);      
+        _init.LoadNextLevel(_gameProgress.GetNextLevel());      
         //TODO затемнение? 
     }
 
     public void Restart()
     {
-        _currentDay = (int)LevelNumber.Level1;
-        _init.SetPreset(_gameProgress.LoadLevelFromIndex(LevelNumber.Level1), true);
+        _init.RestartGame();
     }
 
     public void MainMenuLoad()
@@ -92,7 +91,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     {
         _backGroundPanel.SetActive(true);
         CheckResult();
-        _controller.Enable(_currentDay);
+        _controller.Enable();
         _controller.SetText(_resultText);
     }
 }

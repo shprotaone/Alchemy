@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +5,7 @@ public sealed class WidgetClicker : MonoBehaviour
 {
     [SerializeField] private MyCircularProgressBar360 _circularProgressBar;
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private EdgeExtensionForBar _edge;
 
     public MyCircularProgressBar360 CircularProgressBar => _circularProgressBar;
     public TextMeshProUGUI Text => _text;
@@ -20,10 +19,12 @@ public sealed class WidgetClicker : MonoBehaviour
     public void IndicateProgress(float progress)
     {
         _circularProgressBar.FillAmount = progress;
+        _edge.MoveImage(progress);
     }
 
     public void ClearProgress()
     {
         _circularProgressBar.FillAmount = 0f;
+        _edge.MoveImage(0);
     }
 }

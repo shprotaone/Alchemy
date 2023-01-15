@@ -9,8 +9,10 @@ public class Money
     public static event Action<int> OnChangeMoney;
     public static event Action OnChangeMoneyAction;
 
+    private MoneyView _view;
     private int _money;
     private int _moneyMinRange;
+    private int _moneyTask;
     public int CurrentMoney => _money;
     public bool CanBuy { get; private set; }
 
@@ -18,7 +20,10 @@ public class Money
     {
         _money = startMoney;
         _moneyMinRange = moneyMinRange;
-        view.Init(startMoney,moneyTask);
+        _view = view;
+        _moneyTask = moneyTask;
+
+        _view.Init(startMoney, moneyTask);
         OnChangeMoney?.Invoke(_money);
     }
 
@@ -50,6 +55,8 @@ public class Money
     internal void SetMoney(int moneyInPrevSession)
     {
         _money = moneyInPrevSession;
+        _view.Init(_money, _moneyTask);
         OnChangeMoneyAction?.Invoke();
+        OnChangeMoney(_money);
     }
 }

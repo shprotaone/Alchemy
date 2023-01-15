@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientName: IronBark
   cost: 50
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 1, g: 0, b: 0, a: 0.6666667}
   mainSprite: {fileID: 21300000, guid: 8c8256e7b1c192548b53fab0eed191d4, type: 3}
   emptySprite: {fileID: 21300000, guid: c904cb4a496ee36448c3f3915ced559f, type: 3}
   dragableSprite: {fileID: 21300000, guid: e27a1dcb508f6cb4b9170ba95af69664, type: 3}

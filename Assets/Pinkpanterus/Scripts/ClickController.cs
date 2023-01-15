@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using LimitedNumbers;
@@ -10,18 +11,18 @@ public sealed class ClickController : MonoBehaviour
 {
     public event Action OnGoodPotion;
     public event Action OnBadPotion;
-    //public event Action OnNormalPotion;
-    //public event Action OnResetClaudron;
 
     [SerializeField] private TimerScript _timer;
     [SerializeField] private MonoLimitedNumber _counter;
     [SerializeField] private ButtonEventCatcher _button;
     [SerializeField] private WidgetClicker _widgetClicker;
     [SerializeField] private ClaudronSystem _claudronSystem;
+    [SerializeField] private CookButton _cookButton;
+    [SerializeField] private ClaudronEffectController _claudronEffectController;
 
-    [Space] 
+    [Space]
     [SerializeField] private ButtonMode _buttonMode;
-  
+
     [SerializeField] private float _maxCooldownTimeAllowed = 1.5f;
     [SerializeField] private int _decrementStep = 1;
     [SerializeField] private float _decrementTimeDelay = 0.5f;
@@ -37,9 +38,13 @@ public sealed class ClickController : MonoBehaviour
     [SerializeField] private float _incrementPauseTime = 1f;
 
 
-    [Space] 
-    [SerializeField] private ProgressbarPart[] _progressbarParts;
+    [Space]
+    [SerializeField] private int _countParts;
+    [SerializeField] private List<ProgressbarPart> _currentParts;
+    [SerializeField] private ProgressbarPart _badPart;
+    [SerializeField] private ProgressbarPart _goodPart;
 
+    private Tween _incrementTween;
     private bool _isCooking;
     private bool _isPauseTimeBefore;
     private float _lastTimeButtonPressed;
@@ -50,7 +55,7 @@ public sealed class ClickController : MonoBehaviour
     {
         if (_buttonMode == PRESS_BUTTON)
         {
-            _button.OnButtonPressed += HandleButtonPress;          
+            _button.OnButtonPressed += HandleButtonPress;
         }
 
         if (_buttonMode == HOLD_BUTTON)
@@ -61,7 +66,7 @@ public sealed class ClickController : MonoBehaviour
 
         _timer.Duration = _timerDuration;
         _timer.OnFinished += FailCoocking;
-        
+
         _counter.Setup(0, _maxClickCounterValue);
         _counter.OnValueChanged += IndicateCountChange;
 
@@ -87,13 +92,16 @@ public sealed class ClickController : MonoBehaviour
 
         OnBadPotion -= FailCoocking;
         OnGoodPotion -= CompleteCoocking;
+
         StopAllCoroutines();
     }
 
     private void HandleButtonHold()
     {
+        _claudronEffectController.Boil();
         PrepareCooking();
-        InvokeRepeating(nameof(IncrementWhileHold), 0, _incrementPauseTime);
+        //InvokeRepeating(nameof(IncrementWhileHold), 0, _incrementPauseTime);
+        _incrementTween = DOVirtual.DelayedCall(0f, IncrementWhileHold).SetLoops(-1);
     }
 
     private void IncrementWhileHold()
@@ -104,11 +112,8 @@ public sealed class ClickController : MonoBehaviour
     private void HandleButtonRelease()
     {
         CheckResult();
-    }
-
-    private void Awake()
-    {
-        InitializeProgressBar();
+        _incrementTween.Kill();
+        _claudronEffectController.StopBoil();
     }
 
     private IEnumerator DecrementTillZero()
@@ -137,7 +142,7 @@ public sealed class ClickController : MonoBehaviour
     {
         if (_isPauseTimeBefore) return;
         if (!_isCooking) StartCooking();
-        
+
         Increment(_incrementStep);
         _lastTimeButtonPressed = Time.time;
     }
@@ -176,18 +181,18 @@ public sealed class ClickController : MonoBehaviour
             DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
         });*/
 
-        var progressPerSegment = _maxClickCounterValue / _progressbarParts.Length;
+        var progressPerSegment = _maxClickCounterValue / (_currentParts.Count);
         var currentPartNumber = (_counter.Value / progressPerSegment);
-        var currentPart = _progressbarParts[currentPartNumber];
-
-        if(currentPart.PotionState == PotionState.NORMAL ||
-           currentPart.PotionState ==  PotionState.GOOD)
+        var currentPart = _currentParts[currentPartNumber];
+        Debug.Log("Part " + currentPart.InfoText + "Number " + currentPartNumber);
+        if (currentPart.PotionState == PotionState.NORMAL ||
+           currentPart.PotionState == PotionState.GOOD)
         {
             OnGoodPotion?.Invoke();
         }
         else
         {
-            OnBadPotion?.Invoke();            
+            OnBadPotion?.Invoke();
         }
 
         //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
@@ -202,9 +207,10 @@ public sealed class ClickController : MonoBehaviour
     private void FailCoocking()
     {
         _delayTime = _resetFailDelayTime;
+        _cookButton.ResetButtonImage(_delayTime);
         Stop();
 
-        DOVirtual.DelayedCall(_delayTime, () => Reset());     
+        DOVirtual.DelayedCall(_delayTime, () => Reset());
     }
 
     private void CompleteCoocking()
@@ -217,16 +223,12 @@ public sealed class ClickController : MonoBehaviour
 
     public void Reset()
     {
-        //DOVirtual.DelayedCall(_resetDelayTime, () =>
-        //{
-            _counter.Setup(0, _maxClickCounterValue);
-            _widgetClicker.ClearProgress();
-            ShowMessage(String.Empty);  
-            _isPauseTimeBefore = false;
+        _counter.Setup(0, _maxClickCounterValue);
+        _widgetClicker.ClearProgress();
+        ShowMessage(String.Empty);
+        _isPauseTimeBefore = false;
 
         _claudronSystem.ClaudronButtonState();
-            //OnResetClaudron?.Invoke();
-        //});
     }
 
     private void Stop()
@@ -235,7 +237,7 @@ public sealed class ClickController : MonoBehaviour
         CancelInvoke();
         _isCooking = false;
         _isPauseTimeBefore = true;
-        _timer.Cancel();
+        _timer.Cancel();       
         _button.Button.interactable = false;
     }
 
@@ -260,19 +262,34 @@ public sealed class ClickController : MonoBehaviour
 
     private void UpdateProgressBar(float progress)
     {
-       _widgetClicker.IndicateProgress(progress);
+        _widgetClicker.IndicateProgress(progress);
     }
 
-    private void InitializeProgressBar()
+    public void InitializeProgressBar()
     {
-        var numberOfSegments = _progressbarParts.Length;
-        var colors = _progressbarParts.Select(p => p.Color).ToArray();
+        ProgressBarRandomize();
+
+        var numberOfSegments = _currentParts.Count;
+        var colors = _currentParts.Select(p => p.Color).ToArray();
         _widgetClicker.InitializeProgressBar(numberOfSegments, colors);
     }
 
-    public void ChangeResetDelayTime(float numb)
+    private void ProgressBarRandomize()
     {
-        _resetFailDelayTime = numb;
+        _currentParts = new List<ProgressbarPart>();
+        for (int i = 1; i < _countParts; i++)
+        {
+            _currentParts.Add(_badPart);
+        }
+
+        int goodIndexPart = UnityEngine.Random.Range(_currentParts.Count / 2, _currentParts.Count);
+        _currentParts.Insert(goodIndexPart, _goodPart);
+    }
+
+    public void Disable()
+    {
+        _currentParts.Clear();
+        InitializeProgressBar();
     }
 }
 

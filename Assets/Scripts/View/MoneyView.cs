@@ -25,15 +25,15 @@ public class MoneyView : MonoBehaviour
 
         _isComplete = false;
         
-        InitSlider(min, max);
-        _fillImage.color = _standartColorSlider;
+        InitSlider(min, max);        
     }
 
     public void InitSlider(float min,float max)
     {
         _taskSlider.minValue = min;
         _taskSlider.maxValue = max;
-        _particleCompleteTask.Stop();
+        _fillImage.color = _standartColorSlider;
+        //_particleCompleteTask.Stop();
     }
 
     private void RefreshSliderValue(int value)
@@ -60,6 +60,6 @@ public class MoneyView : MonoBehaviour
     private void CompleteTaskState()
     {
         _fillImage.color = _winColorSlider;
-        _particleCompleteTask.Play();
+       //_particleCompleteTask.Play();
     }
 }

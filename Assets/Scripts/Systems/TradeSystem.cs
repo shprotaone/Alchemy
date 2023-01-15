@@ -5,7 +5,8 @@ using UnityEngine;
 public class TradeSystem : MonoBehaviour
 {
     [SerializeField] private List<TradeSlot> _slots;
-    [SerializeField] private List<PotionLabelType> _labels;
+    [SerializeField] private List<PotionLabelType> _labelsIn;
+    [SerializeField] private List<PotionLabelType> _labelInTask;
     [SerializeField] private TradeSystemView _tradeView;
     
     private VisitorController _visitorController;  
@@ -25,7 +26,7 @@ public class TradeSystem : MonoBehaviour
 
         _rewardCalculator = new RewardCalculator();
         _matchCalculate = new MatchCalculate();
-        _labels = new List<PotionLabelType>();
+        _labelsIn = new List<PotionLabelType>();
 
         _completeSeries = new CompleteSeries();
         _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
@@ -36,31 +37,32 @@ public class TradeSystem : MonoBehaviour
     public void SetTask(PotionTask task)
     {
         _task = task;
+        _labelInTask = _task.CurrentPotion.Labels;
     }
 
     public void FillLabels(List<PotionLabelType> label)
     {
-        _labels.AddRange(label);
+        _labelsIn.AddRange(label);
         CalculateReward();
     }
 
     public void ClearLabelList()
     {
-        _labels.Clear();
+        _labelsIn.Clear();
     }
 
     public void DeleteLabel(PotionLabelType label)
     {
-        if(_labels.Count != 0)
+        if(_labelsIn.Count != 0)
         {
-            _labels.Remove(label);
+            _labelsIn.Remove(label);
             CalculateReward();
         }
     }
 
     public void CalculateReward()
     {
-        _indexMatch = _matchCalculate.IndexMatchLabel(_labels, _task.CurrentPotion.Labels);
+        _indexMatch = _matchCalculate.IndexMatchLabel(_labelsIn, _task.CurrentPotion.Labels);
         float result = _rewardCalculator.GetReward(_indexMatch);
 
         _reward = (int)(result * _completeSeries.CurrentMultiply);
@@ -121,6 +123,8 @@ public class TradeSystem : MonoBehaviour
     public void Disable()
     {
         _tradeView.Disable();
+        _task = null;
+        _labelInTask.Clear();
     }
 
     private void StartCoinAnimation()

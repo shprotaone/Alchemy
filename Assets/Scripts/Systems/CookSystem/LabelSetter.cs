@@ -19,8 +19,8 @@ public class LabelSetter
 
     public void Clear()
     {
-        _types.Clear();
-        _labels.Clear();
+        _types?.Clear();
+        _labels?.Clear();
     }
 
     public List<PotionLabelType> GetCurrentLabels()

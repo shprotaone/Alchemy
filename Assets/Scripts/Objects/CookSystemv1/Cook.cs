@@ -65,8 +65,7 @@ public class Cook : MonoBehaviour
 
         //_mixingSystem.CheckPotion();
 
-        //CheckTruePotion(_mixingSystem.BottleFilled);
-        _waterColor.StopBoiled();                
+        //CheckTruePotion(_mixingSystem.BottleFilled);                
         _claudron.ClearClaudronButton.interactable = true;
 
         _audioSource.Stop();

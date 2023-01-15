@@ -24,6 +24,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private TradeSystem _tradeSystem;
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private MixingSystemv3 _mixingSystem;
+    [SerializeField] private ClickController _clickController;
     [SerializeField] private CameraMovement _cameraMovement;
 
     [Header("Подсветка и UI")]
@@ -31,7 +32,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private BrightObject _brightObjectSystem;
     [SerializeField] private UIController _UIController;    
     [SerializeField] private GameStateController _gameStateController;
-    [SerializeField] private LevelSelector _gameProgress;
+    [SerializeField] private LevelSelector _levelSelector;
     [SerializeField] private CompleteLevel _levelCompletePanel;
     [SerializeField] private DayEntryController _dayEntryController;
 
@@ -45,8 +46,8 @@ public class LevelInitializator : MonoBehaviour
     {
         Application.targetFrameRate = 75;
 
-        _gameProgress.Init();
-        _currentLevelPreset = _gameProgress.CurrentLevel;
+        _levelSelector.Init();
+        _currentLevelPreset = _levelSelector.CurrentLevel;
         InitLevelSettings();
         _dayEntryController.CallNextDay(1);
     }  
@@ -67,6 +68,7 @@ public class LevelInitializator : MonoBehaviour
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money,_moneyTask);
         _cameraMovement.Init();
+        _clickController.InitializeProgressBar();
 
         InitInventory();
         InitSystems();
@@ -123,23 +125,35 @@ public class LevelInitializator : MonoBehaviour
         _visitorController.Disable();
         _tradeSystem.Disable();
         _gameStateController.Disable();
+        _clickController.Disable();
 
         OnLevelEnded?.Invoke();
     }
 
-    public void SetPreset(LevelPreset preset,bool isRestart)
+    public void LoadNextLevel(LevelPreset preset)
     {
-        if (isRestart)
-        {
-            _money.SetMoney(0);
-        }
-
         _moneyView.RefreshMoneyText(_money.CurrentMoney);
-
         _currentLevelPreset = preset;
+
         _levelCompletePanel.Disable();
         _cameraMovement.Movement();
         InitLevelSettings();
+        _dayEntryController.CallNextDay((int)_currentLevelPreset.levelNumber);
         OnLevelStarted?.Invoke();       
+    }
+
+    public void RestartGame()
+    {
+        DisableLevel();
+        _money.SetMoney(0);
+        _moneyView.RefreshMoneyTaskText(_money.CurrentMoney);
+
+        _currentLevelPreset = _levelSelector.GetFirstLevel();
+        _levelCompletePanel.Disable();
+        _dayEntryController.CallNextDay((int)_currentLevelPreset.levelNumber);
+        _cameraMovement.Movement();
+        InitLevelSettings();
+        OnLevelStarted?.Invoke();
+
     }
 }

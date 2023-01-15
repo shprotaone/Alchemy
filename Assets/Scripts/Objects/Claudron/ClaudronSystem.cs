@@ -11,8 +11,6 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
     [SerializeField] private Cookv2 _cookSystem;
     [SerializeField] private ButtonEventCatcher _buttonEvent;
 
-    [SerializeField] private SpriteRenderer _crunchSprite;
-
     private Claudron _currentClaudron;   
     private bool _isTutorial;
 
@@ -24,6 +22,8 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
         _clearClaudronButton.onClick.AddListener(ClearClaudron);
         _clearClaudronButton.onClick.AddListener(_mixingSystem.ClearMixSystem);
         _mixingSystem.ActiveButtonBrewDelegate += ClaudronButtonState;
+
+        LevelInitializator.OnLevelStarted += ClearClaudron;
     }
 
     public void ClaudronButtonState()
@@ -44,7 +44,7 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
     {
         if (!_isTutorial)
         {
-            _waterColor.ResetWaterColor(Color.white);
+            _waterColor.ResetWaterColor();
             _cookSystem.FillBottleReset();
             _mixingSystem.ClearMixSystem();
             CrunchClaudron(false);           
@@ -64,14 +64,15 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
 
     public void CrunchClaudron(bool value)
     {
-        if (_crunchSprite.enabled == value)
-            return;
+        //if (_crunchSprite.enabled == value)
+        //    return;
 
-        _crunchSprite.enabled = value;
+        //_crunchSprite.enabled = value;
     }
 
     private void OnDestroy()
     {
         _mixingSystem.ActiveButtonBrewDelegate -= ClaudronButtonState;
+        LevelInitializator.OnLevelStarted -= ClearClaudron;
     }
 }

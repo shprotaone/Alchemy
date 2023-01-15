@@ -6,7 +6,7 @@ public class PausePanelController : MonoBehaviour
 {
     [SerializeField] private InGameTimeController _timeController;
     [SerializeField] private DraggableObjectController _draggableObjectController;
-    [SerializeField] private CompleteLevel _completeLevel;
+    [SerializeField] private LevelInitializator _init;
 
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _exitButton;
@@ -33,6 +33,7 @@ public class PausePanelController : MonoBehaviour
 
     private void Restart()
     {
-        _completeLevel.Restart();
+        _init.RestartGame();
+        Close();
     }
 }
