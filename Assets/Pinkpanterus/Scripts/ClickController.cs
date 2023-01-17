@@ -183,18 +183,25 @@ public sealed class ClickController : MonoBehaviour
 
         var progressPerSegment = _maxClickCounterValue / (_currentParts.Count);
         var currentPartNumber = (_counter.Value / progressPerSegment);
-        var currentPart = _currentParts[currentPartNumber];
-        Debug.Log("Part " + currentPart.InfoText + "Number " + currentPartNumber);
-        if (currentPart.PotionState == PotionState.NORMAL ||
-           currentPart.PotionState == PotionState.GOOD)
+
+        if (currentPartNumber < _currentParts.Count)
         {
-            OnGoodPotion?.Invoke();
+            var currentPart = _currentParts[currentPartNumber];
+            if (currentPart.PotionState == PotionState.NORMAL ||
+               currentPart.PotionState == PotionState.GOOD)
+            {
+                OnGoodPotion?.Invoke();
+            }
+            else
+            {
+                OnBadPotion?.Invoke();
+            }
         }
         else
         {
-            OnBadPotion?.Invoke();
+            FailCoocking();
         }
-
+   
         //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
     }
 

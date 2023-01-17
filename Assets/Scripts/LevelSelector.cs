@@ -23,7 +23,7 @@ public class LevelSelector : MonoBehaviour
     public LevelPreset GetFirstLevel()
     {
         CurrentLevel = _levels[0];
-
+        _currentLevelIndex = 0;
         return CurrentLevel;
     }
 

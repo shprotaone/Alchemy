@@ -75,7 +75,7 @@ public class DragController : MonoBehaviour
                 Draggable draggable = hit.transform.GetComponent<Draggable>();
 
                 Ingredient ingredient;
-                Bottle bottle;
+                BottleModel bottle;
 
                 if (draggable != null && !_isDragActive)
                 {
@@ -87,7 +87,7 @@ public class DragController : MonoBehaviour
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
                     }
-                    else if (bottle = draggable.GetComponentInChildren<Bottle>())
+                    else if (bottle = draggable.GetComponentInChildren<BottleModel>())
                     {
                         _lastDragged = bottle.GetComponent<Draggable>();
                         _lastDragged.transform.SetParent(_draggableContainer);
@@ -99,8 +99,7 @@ public class DragController : MonoBehaviour
 
     public void InitDrag()
     {
-        UpdateDragStatus(true);
-        _lastDragged.StartDragAction();
+        UpdateDragStatus(true);     
     }
 
     private void Drag()
@@ -111,10 +110,7 @@ public class DragController : MonoBehaviour
 
     private void Drop()
     {
-        UpdateDragStatus(false);
-
-        _lastDragged.DropAction();
-        
+        UpdateDragStatus(false);           
     }
 
     private void UpdateDragStatus(bool isDragging)
@@ -122,7 +118,16 @@ public class DragController : MonoBehaviour
         if (_lastDragged != null)
         {
             _isDragActive = _lastDragged.IsDragging = isDragging;
-            _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Default;
+            _lastDragged.gameObject.layer = isDragging ? Layer.Dragging : Layer.Bottle;
+        }
+
+        if (isDragging)
+        {
+            _lastDragged.StartDragAction();
+        }
+        else
+        {
+            _lastDragged.DropAction();
         }
     }
 

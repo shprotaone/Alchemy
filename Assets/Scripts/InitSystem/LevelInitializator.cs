@@ -72,12 +72,6 @@ public class LevelInitializator : MonoBehaviour
 
         InitInventory();
         InitSystems();
-        
-
-        //_gameProgress.SaveCurrentLevelProgress(_money.CurrentMoney);
-
-        Debug.Log("Денег " + _money.CurrentMoney);
-        Debug.Log("Задание " + _moneyTask.TaskMoney);
     }
 
     private void InitInventory()
@@ -138,7 +132,7 @@ public class LevelInitializator : MonoBehaviour
         _levelCompletePanel.Disable();
         _cameraMovement.Movement();
         InitLevelSettings();
-        _dayEntryController.CallNextDay((int)_currentLevelPreset.levelNumber);
+        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber + 1);
         OnLevelStarted?.Invoke();       
     }
 
@@ -150,7 +144,7 @@ public class LevelInitializator : MonoBehaviour
 
         _currentLevelPreset = _levelSelector.GetFirstLevel();
         _levelCompletePanel.Disable();
-        _dayEntryController.CallNextDay((int)_currentLevelPreset.levelNumber);
+        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber + 1 );
         _cameraMovement.Movement();
         InitLevelSettings();
         OnLevelStarted?.Invoke();

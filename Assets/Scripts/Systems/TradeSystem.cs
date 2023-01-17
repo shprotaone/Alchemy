@@ -8,6 +8,7 @@ public class TradeSystem : MonoBehaviour
     [SerializeField] private List<PotionLabelType> _labelsIn;
     [SerializeField] private List<PotionLabelType> _labelInTask;
     [SerializeField] private TradeSystemView _tradeView;
+    [SerializeField] private LibraVisual _libraVisual;
     
     private VisitorController _visitorController;  
     private Money _money;
@@ -43,6 +44,7 @@ public class TradeSystem : MonoBehaviour
     public void FillLabels(List<PotionLabelType> label)
     {
         _labelsIn.AddRange(label);
+        _libraVisual.RightPos();
         CalculateReward();
     }
 
@@ -51,13 +53,15 @@ public class TradeSystem : MonoBehaviour
         _labelsIn.Clear();
     }
 
-    public void DeleteLabel(PotionLabelType label)
+    public void DeleteLabel(List<PotionLabelType> labels)
     {
-        if(_labelsIn.Count != 0)
+        foreach (var item in labels)
         {
-            _labelsIn.Remove(label);
-            CalculateReward();
+            _labelsIn.Remove(item);
         }
+
+        CalculateReward();
+        _libraVisual.ResetPos();
     }
 
     public void CalculateReward()
@@ -87,10 +91,10 @@ public class TradeSystem : MonoBehaviour
     public void DeclineTrade()
     {
         ClearLabelList();
-
+        _money.Decrease(100);
         _visitorController.DisableVisitor();
         DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
-        _money.Decrease(100);
+        
         _completeSeries.ResetSeries();
         _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
 
@@ -102,10 +106,14 @@ public class TradeSystem : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            slot.ResetSlot();
+            if (!slot.IsFree)
+            {
+                slot.ResetSlot();
+            }           
         }
 
         _tradeView.Refresh(0);
+        _libraVisual.ResetPos();
     }
 
     private void ReturnBottle()
@@ -114,7 +122,6 @@ public class TradeSystem : MonoBehaviour
         {
             if (!slot.IsFree)
             {
-                slot.SetSlotFree();
                 slot.BottleInSlot.ReturnToSlot();                
             }
         }

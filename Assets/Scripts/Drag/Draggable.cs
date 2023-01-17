@@ -25,7 +25,8 @@ public class Draggable : MonoBehaviour
 
     public void StartDragAction()
     {
-        _action.Action();   
+        _action.Action();
+        gameObject.layer = Layer.Dragging;
     }
 
     public void DropAction()
@@ -39,16 +40,9 @@ public class Draggable : MonoBehaviour
     {
         //_collider.enabled = true;      
 
-        if (_action is Ingredient || _action is Bottle)
+        if (_action is Ingredient || _action is BottleModel)
         {
-            yield return new WaitForSeconds(0.1f);
-
-            if (_collider != null)
-            {
-                _collider.enabled = false;
-            }
-
-            yield return new WaitForSeconds(0.1f);     //Как можно еще задержать исполнение? 
+            yield return new WaitForSeconds(0.2f);     //Как можно еще задержать исполнение? 
 
             _action.Drop();
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4722579840883899169}
   - component: {fileID: 3525310017537107589}
   - component: {fileID: 5029609196458833351}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LabelContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193668372587723891}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: EffectTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7570146590568218147}
   - component: {fileID: 7386810982512116998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3241208924864703127}
   - component: {fileID: 1353289732945467316}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 1978859527022972209}
   - component: {fileID: 8923578668759686147}
   - component: {fileID: 7913342541532121656}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 5975492717675343278}
   - component: {fileID: 5975492717675343277}
   - component: {fileID: 5975492717675343276}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 8089389689234083995}
   - component: {fileID: 7383387637611308367}
   - component: {fileID: 2167547526069231167}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Bottle
   m_TagString: Bottle
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.43}
+  m_Offset: {x: -0.35162055, y: -0.5124111}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -629,7 +629,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.56, y: 2.6}
+  m_Size: {x: 2.263241, y: 3.995494}
   m_EdgeRadius: 0
 --- !u!50 &1826892289
 Rigidbody2D:
@@ -668,9 +668,7 @@ MonoBehaviour:
   _collider: {fileID: -8574785794516881806}
   _labelController: {fileID: 5029609196458833351}
   _type: 5
-  _labels: 
-  _labelsInPotion: 
-  _isFull: 0
+  _layer: 0
 --- !u!114 &7383387637611308367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2233345837965744541}
   - component: {fileID: 3765002039082025305}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: BottleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679892167472120243}
   - component: {fileID: 3966709684036512564}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Label3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2515949618519052893}
   - component: {fileID: 4336830987589980849}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: Label2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

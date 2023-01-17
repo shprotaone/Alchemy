@@ -22,8 +22,6 @@ public class MoneyView : MonoBehaviour
     {
         Money.OnChangeMoney += RefreshMoneyText;
         Money.OnChangeMoney += RefreshSliderValue;
-
-        _isComplete = false;
         
         InitSlider(min, max);        
     }
@@ -33,6 +31,7 @@ public class MoneyView : MonoBehaviour
         _taskSlider.minValue = min;
         _taskSlider.maxValue = max;
         _fillImage.color = _standartColorSlider;
+        _isComplete = false;
         //_particleCompleteTask.Stop();
     }
 

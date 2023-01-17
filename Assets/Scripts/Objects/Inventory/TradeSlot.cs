@@ -8,95 +8,97 @@ public class TradeSlot : MonoBehaviour,ISlot
     [SerializeField] private Collider2D _collider;
     [SerializeField] private bool _isFree;
 
-    private List<PotionLabelType> _labels;
+    //private List<PotionLabelType> _labels;
     private TradeSystem _tradeSystem;
-    private Bottle _bottleInSlot;
+    private BottleModel _bottleInSlot;
+    private bool _isAdded = false;
+    private bool _slotIsChanged = false;
 
-    public Bottle BottleInSlot => _bottleInSlot;
+    public BottleModel BottleInSlot => _bottleInSlot;
     public bool IsFree => _isFree;
+    
 
     private void Start()
     {
         _isFree = true;
         _tradeSystem = GetComponentInParent<TradeSystem>();
-        _labels = new List<PotionLabelType>();
+        //_labels = new List<PotionLabelType>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Bottle bottle) )
+        if (collision.TryGetComponent(out BottleModel bottle))
         {
-            if (IsFree)
+            if(_bottleInSlot == bottle)
             {
-                bottle.SetPosition(this.transform);
-                CheckSlot();
+                _slotIsChanged = false;
+                _bottleInSlot = bottle;
+                bottle.transform.SetParent(this.transform);
             }
-            else if (bottle == BottleInSlot)
+            else
             {
-                return;
-            }
-            
+                _slotIsChanged = true;
+                
+                if (IsFree)
+                {
+                    SetSlot(bottle, true);
+                    _isAdded = true;
+                }
+            }          
         }
     }
 
-    public void SetSlot(Bottle bottle)
+    public void SetSlot(BottleModel bottle, bool IsDraggable)
     {
-        _labels.AddRange(bottle.Labels);
-        
-        _tradeSystem.FillLabels(_labels);
-        _bottleInSlot = bottle;
-        _isFree = false;
-        _collider.enabled = false;
-        DelayCollider();
+        if (!_isAdded)  //вторая проверка
+        {
+            bottle.SetPosition(this.transform);
+            _isFree = false;
+
+            _tradeSystem.FillLabels(bottle.BottleData.Labels);
+            _bottleInSlot = bottle;           
+        }
+
+        SlotBehaviour(bottle._prevSlot);
+        CheckSlot();
+    }
+
+    private void SlotBehaviour(ISlot slot)
+    {
+        if (slot is TradeSlot trade)
+        {
+            trade.SetSlotFree();
+            trade.CheckSlot();
+        }
+        else
+        {
+            slot?.CheckSlot();
+        }
     }
 
     public void CheckSlot()
-    {     
-       StartCoroutine(CheckDelay());
-    }
-
-    private IEnumerator CheckDelay()
     {
-        yield return new WaitForSeconds(0.3f);
-
-        if (transform.childCount == 0)
-        {           
-            _isFree = true;
-
-            foreach (var labelType in _labels)
-            {
-                _tradeSystem.DeleteLabel(labelType);
-            }
-
-            _labels.Clear();
-            _bottleInSlot = null;
-        }
-
-        _bottleInSlot?.SetTradeScale();
-
-        yield return null;
-    }
-
-    private void DelayCollider()
-    {
-        DOVirtual.DelayedCall(1, () => _collider.enabled = true);
-    }
-
-    public void ResetSlot()
-    {
-        _isFree = true;      
-        _labels.Clear();
-        BottleInSlot?.DestroyBottle();
+        CheckFreeSlot();      
     }
 
     public void SetSlotFree()
     {
-        if(_bottleInSlot == null)
-        {
-            _isFree = true;           
-        }
-
-        CheckSlot();
+        _tradeSystem.DeleteLabel(_bottleInSlot.BottleData.Labels);
         _tradeSystem.CalculateReward();
+        _isAdded = false;
+        _isFree = true;
+        _bottleInSlot = null;
     }
+
+    public void ResetSlot()
+    {
+        _isFree = true;
+        _isAdded = false;
+        BottleInSlot.DestroyBottle();
+    }
+
+    public void CheckFreeSlot()
+    {
+           
+    }   
 }

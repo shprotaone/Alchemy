@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564228740d25fe34181d692d1010233d, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
-  levelNumber: 5
+  levelNumber: 3
   backgroundSprite: {fileID: 21300000, guid: bb5dd5fbddbe4394dbb3d8bbbe1f404c, type: 3}
   addCommonResourceCount: 5
   startBottleCount: 1000
   visitorCount: 6
   chance1Label: 30
   chance2Label: 40
-  chance3Label: 30
+  chance3Label: 31
   moneyTaskComplete: 1150
   startMoney: 0
   minRangeMoney: 0

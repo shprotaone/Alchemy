@@ -6,7 +6,7 @@ public class Table : MonoBehaviour
     private const float sizeOffset = 0.8f;
 
     [SerializeField] private bool _fullPotionTable;
-    private Bottle _bottle;
+    private BottleModel _bottle;
 
     private float _offset;
     private float[] _startPositions;

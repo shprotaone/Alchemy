@@ -24,9 +24,7 @@ public class Cookv2 : MonoBehaviour
         if(_mixingSystem.IngredientsInClaudron.Count != 0)
         {
             _canFillBottle = true;
-            _mixingSystem.FillPotion();
-            Bottle bottle = _bottleStorage.CreateBottle();
-            bottle.transform.position = this.transform.position;
+            BottleModel bottle = _bottleStorage.CreateBottle();
 
             _mixingSystem.FillBottle(bottle);
             //TODO Создание бутылки

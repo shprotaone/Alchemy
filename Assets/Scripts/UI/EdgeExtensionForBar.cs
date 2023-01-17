@@ -11,7 +11,7 @@ public class EdgeExtensionForBar : MonoBehaviour
 
     public void MoveImage(float value)
     {
-        float amount = value / 2;
+        float amount = value / 2.5f;
         _bar.fillAmount = amount;
         float bottleAngle = amount * 360;
         _bottleContainer.localEulerAngles = new Vector3(0, 0, -bottleAngle);

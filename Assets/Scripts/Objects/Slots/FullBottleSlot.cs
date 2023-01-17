@@ -8,49 +8,67 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 {
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private bool _isFree;
+    [SerializeField] private bool isCheck = false;
 
-    private List<Bottle> _bottlesInSlot;
-    public List<Bottle> BottlesInSlot => _bottlesInSlot;
+    [SerializeField] private BottleModel _bottlesInSlot;
+
+    private int _calls;
+    public BottleModel BottlesInSlot => _bottlesInSlot;
     public int Count { get; private set; }
     public bool IsFree => _isFree;
 
     private void Start()
     {
         _isFree = true;
-        _bottlesInSlot = new List<Bottle>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out Bottle bottle))
-        {
-            if (IsFree)
-            {
-                SetSlot(bottle);
-            }
-            else
-            {
-                if (Enumerable.SequenceEqual(_bottlesInSlot[0].Labels, bottle.Labels))
+        if(collision.TryGetComponent(out BottleModel bottle))
+        {           
+                if (IsFree)
+                {
+                    SetSlot(bottle,true);
+                }
+                else if(Enumerable.SequenceEqual(_bottlesInSlot.BottleData.Labels, bottle.BottleData.Labels))
                 {
                     bottle.SetPosition(this.transform);
-                    _bottlesInSlot.Add(bottle);
+                    _bottlesInSlot = bottle;
+                    CheckSlot();
                 }
-            }
-
-            bottle.OnDropped += CheckSlot;
-            bottle.StandartSize();
         }
     }
 
-    public void SetSlot(Bottle bottle)
+    public void SetSlot(BottleModel bottle,bool IsDraggable)
     {
-        bottle.SetPosition(this.transform);     //необходимо при отпускании между слотами        
+        if (IsDraggable)
+        {
+            bottle.SetPosition(this.transform);            
+        }
 
         _isFree = false;
-        _bottlesInSlot.Add(bottle);     //бутылки не удал€ютс€ до конца уровн€
-        CheckSlot();
 
+        if (_bottlesInSlot == null)
+        {
+            _bottlesInSlot = bottle;
+        }
+        //бутылки не удал€ютс€ до конца уровн€
+        SlotBehaviour(bottle._prevSlot);
+        CheckSlot();
         //HidePrevBottle();
+    }
+
+    private void SlotBehaviour(ISlot slot)
+    {
+        if (slot is TradeSlot trade)
+        {
+            trade.SetSlotFree();
+            trade.CheckSlot();
+        }
+        else
+        {
+            slot?.CheckSlot();
+        }
     }
 
     public void CheckSlot()
@@ -64,37 +82,37 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         else
         {
             _countText.text = Count.ToString();
-        }       
-
-        if(transform.childCount == 1)
-        {
-            SetFreeSlot();
         }
 
+        if (transform.childCount == 1)
+        {
+            SetFreeSlot();           
+        }
     }
 
     private void SetFreeSlot()
     {
         _isFree = true;
-        _bottlesInSlot.Clear();
+        _bottlesInSlot = null;
     }
 
     public void ResetSlot()
     {
-        if(_bottlesInSlot.Count > 0)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            for (int i = 0; i < _bottlesInSlot.Count; i++)
-            {
-                Bottle bottle = GetComponentInChildren<Bottle>();
+            BottleModel bottle = GetComponentInChildren<BottleModel>();
 
-                if (bottle != null)
-                {
-                    bottle.DestroyBottle();
-                    CheckSlot();
-                }
+            if (bottle != null)
+            {
+                bottle.DestroyBottle();
+                CheckSlot();
             }
         }
-        _bottlesInSlot.Clear();
         SetFreeSlot();
+    }
+
+    public void SetSlot(BottleModel bottle)
+    {
+        //throw new NotImplementedException();
     }
 }

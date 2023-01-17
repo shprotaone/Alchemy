@@ -16,7 +16,6 @@ public class GameStateController : MonoBehaviour
         _mixingSystem = mixingSystem;
         InventoryIsEmpty = false;
         _mixingSystem.OnBottleFilled += CheckLeftIngredients;
-        
         _cameraMovementButton.interactable = true;
     }
 

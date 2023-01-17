@@ -9,7 +9,7 @@ public class LabelPhysController : MonoBehaviour
 
     public void Activate()
     {
-        _collider.enabled = true;
+        _collider.enabled = false;
         _rigid.bodyType = RigidbodyType2D.Dynamic;
     }
 

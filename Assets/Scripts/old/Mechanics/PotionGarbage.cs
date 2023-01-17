@@ -8,10 +8,10 @@ public class PotionGarbage : MonoBehaviour
     {
         if (collision.CompareTag("Bottle"))
         {
-            Bottle bottle = collision.GetComponent<Bottle>();
+            //Bottle bottle = collision.GetComponent<Bottle>();
 
-            bottle.ResetBottle();
-            bottle.DropFromGarbage();
+            //bottle.ResetBottle();
+            //bottle.DropFromGarbage();
             
             Debug.Log("Garbage");
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 492423964819005885}
   - component: {fileID: 8833077648063220612}
   - component: {fileID: 1423012276832285987}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4365038598604986828}
   - component: {fileID: 2088492202596150868}
   - component: {fileID: 5173092444878240614}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BottleSlot
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -193,7 +193,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2088492202596150868
 MonoBehaviour:
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countText: {fileID: 1423012276832285987}
   _isFree: 0
+  isCheck: 0
+  _bottlesInSlot: {fileID: 0}
 --- !u!212 &5173092444878240614
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -272,7 +274,7 @@ GameObject:
   - component: {fileID: 3786345356916336337}
   - component: {fileID: 1820486786826273648}
   - component: {fileID: 4403384664279026265}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

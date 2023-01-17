@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class Visitor : MonoBehaviour
 {
@@ -28,5 +29,6 @@ public class Visitor : MonoBehaviour
     private void OnDisable()
     {
         _task = null;
+        _visitorView.RefreshView();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PotionTaskView : MonoBehaviour
 {
-    private const float timeAlpha = 0.5f;
+    private const float timeAlpha = 2f;
     
     [SerializeField] private TMP_Text _potionNameText;
     [SerializeField] private TMP_Text _rewardText;
@@ -68,19 +68,19 @@ public class PotionTaskView : MonoBehaviour
     }
 
     private void RisingTask()
-    {
+    {       
         foreach (var item in _UIImages)
         {
-            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha);
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
         }
 
         foreach (var item in _ingredientImages)
         {
-            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha);
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
         }
 
-        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 1, timeAlpha);
-        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 1, timeAlpha);
+        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
+        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
     }
 
     public void FadingTask()

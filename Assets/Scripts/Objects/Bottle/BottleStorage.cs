@@ -9,6 +9,8 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private TableManager _tableManager;
     [SerializeField] private LabelToSprite _labelToSprite;
+    [SerializeField] private Transform _uprisePos;
+    [SerializeField] private ParticleSystem _upriseParticle;
 
     [SerializeField] private int _delayDrag;
 
@@ -26,12 +28,13 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
         InitTimer(_delayDrag);
     }
 
-    public Bottle CreateBottle()
+    public BottleModel CreateBottle()
     {
         GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
 
-        Bottle bottle = bottleGO.GetComponent<Bottle>();
-        bottle.ResetBottle();
+        BottleModel bottle = bottleGO.GetComponent<BottleModel>();
+        bottle.transform.position = _uprisePos.position;
+        _upriseParticle.Play();
 
         bottle.InitBottle(this, _tableManager,_bottleInventory);
         _boxCollider.enabled = false;

@@ -52,7 +52,7 @@ public class MixingSystemv2 : MonoBehaviour
         {
             if (collision.CompareTag(bottleTag) && _potionOnClaudron != null)
             {
-                Bottle bottle = collision.GetComponent<Bottle>();
+                BottleModel bottle = collision.GetComponent<BottleModel>();
                 //_potionOnClaudron.SetColor(_waterColor.ResultColor);
 
                 //CheckOnContraband(_potionOnClaudron);

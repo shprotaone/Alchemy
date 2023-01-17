@@ -37,31 +37,19 @@ public class MixingSystemv3 : MonoBehaviour
         }
     }
 
-    public void FillBottle(Bottle bottle)
-    {
-        FullBottleSlot fullSlot;
+    public void FillBottle(BottleModel bottle)
+    {      
+        bool checkFilling = _labelSetter.Labels.Count != 0 && _cook.CanFillBottle;
 
-        if (!bottle.IsFull && _labelSetter.Labels.Count != 0 && _cook.CanFillBottle)
-        {        
+        if (checkFilling)
+        {
+            CreatePotionForBottle();
             bottle.FillBottle(_potionInClaudron, _waterColor.ResultColor);
 
-            fullSlot = _bottleInventory.GetSlot(bottle.PotionInBottle);
-
-            if(fullSlot!= null)
-            {
-                bottle.SetPosition(fullSlot.transform);
-                _bottleInventory.AddPotionInInventory(_potionInClaudron);               
-            }
-            else
-            {
-                Debug.Log("Свободных мест нет, бутылка уничтожается");
-                bottle.DestroyBottle();
-            }
+            SetPositionBottle(bottle);
 
             OnBottleFilled?.Invoke();
-
             _claudronSystem.ClearClaudron();
-            _labelSetter.Clear();
             ClearMixSystem();            
         }
         else
@@ -70,7 +58,25 @@ public class MixingSystemv3 : MonoBehaviour
         }
     }
 
-    public void FillPotion()
+    private void SetPositionBottle(BottleModel bottle)
+    {
+        FullBottleSlot fullSlot;
+
+        fullSlot = _bottleInventory.GetSlot(bottle.BottleData.PotionInBottle);
+
+        if (fullSlot != null)
+        {
+            bottle.SetPosition(fullSlot.transform);
+            _bottleInventory.AddPotionInInventory(_potionInClaudron);
+        }
+        else
+        {
+            Debug.Log("Свободных мест нет, бутылка уничтожается");
+            bottle.DestroyBottle();
+        }
+    }
+
+    private void CreatePotionForBottle()
     {
         _labelSetter.SetTypeFromIngredient(IngredientsInClaudron);
         _potionInClaudron = new Potion(_labelSetter.Labels);
