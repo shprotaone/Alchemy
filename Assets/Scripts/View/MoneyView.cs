@@ -41,9 +41,10 @@ public class MoneyView : MonoBehaviour
 
         if(value > _taskSlider.maxValue && !_isComplete)
         {
-            _isComplete = true;
-            CompleteTaskState();
+            _isComplete = true;            
         }
+
+        CheckTaskState();
     }
     public void RefreshMoneyText(int value)
     {
@@ -56,9 +57,15 @@ public class MoneyView : MonoBehaviour
         _moneyTaskText.text = reward.ToString();
     }
 
-    private void CompleteTaskState()
+    private void CheckTaskState()
     {
-        _fillImage.color = _winColorSlider;
-       //_particleCompleteTask.Play();
+        if (_isComplete)
+        {
+            _fillImage.color = _winColorSlider;
+        }
+        else
+        {
+            _fillImage.color = _standartColorSlider;
+        }
     }
 }

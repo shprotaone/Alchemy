@@ -9,8 +9,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private const string defeatText = "Дневная цель не достигнута";
 
     [SerializeField] private LevelInitializator _init;
-    [SerializeField] private CompleteLevelPanelController _controller;
-    [SerializeField] private LevelSelector _gameProgress;
+    [SerializeField] private CompleteLevelPanelController _controller; 
     [SerializeField] private GameObject _backGroundPanel;
     [SerializeField] private ParticleSystem _completeParticle;
     [SerializeField] private Button _nextLevelButton;
@@ -20,9 +19,8 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     private Money _money;
     private MoneyTask _moneyTask;
+    private LevelSelector _levelSelector;
     private string _resultText;
-
-    private int _currentDay;
 
     private void Start()
     {
@@ -31,11 +29,11 @@ public class CompleteLevel : MonoBehaviour,IMenu
         _mainMenuButton?.onClick.AddListener(MainMenuLoad);
     }
 
-    public void Init(Money money,MoneyTask moneyTask)
+    public void Init(Money money,MoneyTask moneyTask,LevelSelector levelSelector)
     {
+        _levelSelector = levelSelector;
         _money = money;
-        _moneyTask = moneyTask;
-        _currentDay = (int)_gameProgress.CurrentLevel.levelNumber;       
+        _moneyTask = moneyTask;      
     }
 
     private void CheckResult()
@@ -47,8 +45,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
             _nextLevelButton.gameObject.SetActive(true);
             _restartButton.gameObject.SetActive(false);
             
-            _resultText = "День " + _currentDay + " пройден";
-            _currentDay++;
+            _resultText = "День " + (int)_levelSelector.CurrentLevel.levelNumber + " пройден";
             _completeParticle.gameObject.SetActive(true);
             _completeParticle.Play();
         }
@@ -56,8 +53,6 @@ public class CompleteLevel : MonoBehaviour,IMenu
         {
             _restartButton.gameObject.SetActive(true);
             _nextLevelButton.gameObject.SetActive(false);
-
-            _currentDay = 1;
             _resultText = defeatText;
         }
 
@@ -66,7 +61,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     public void NextLevel()
     {
-        _init.LoadNextLevel(_gameProgress.GetNextLevel());      
+        _init.LoadNextLevel(_levelSelector.GetNextLevel());      
         //TODO затемнение? 
     }
 

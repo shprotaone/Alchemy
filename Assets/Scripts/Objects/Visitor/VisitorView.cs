@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class VisitorView : MonoBehaviour
 {
-    private const float duration = 0.5f;
+    private const float RisingDuration = 0.5f;
+    private const float FadingDuration = 2f;
+
     private Vector3 _startScale = new Vector3(0.5f, 0.5f, 0.5f);
     private Vector3 _downPos = new Vector3(5,4,0);
     private Vector3 _forwardPos = new Vector3(6, -4, 0);
     private Vector3 _upPose = new Vector3(-3, -1.6f, 0);
     private Vector3 _rotate = new Vector3(0, 0, 12);
-
 
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private SpriteRenderer _visitorImage;
@@ -26,7 +27,7 @@ public class VisitorView : MonoBehaviour
             .SetLoops(6, LoopType.Yoyo)
             .SetEase(Ease.Linear);
 
-        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, duration);
+        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, RisingDuration);
     }
 
     public void Fading()
@@ -36,7 +37,7 @@ public class VisitorView : MonoBehaviour
         _timerText.gameObject.SetActive(false);
 
         _visitorImage.transform.DOScale(0.5f, 2);
-        _visitorImage.transform.DOMove(_forwardPos, 3).OnComplete(() => _visitorImage.transform.position = -_downPos);
+        _visitorImage.transform.DOMove(_forwardPos, FadingDuration).OnComplete(() => _visitorImage.transform.position = -_downPos);
         _visitorImage.transform.DOLocalRotate(new Vector3(0, 0, 12), 0.3f)
             .SetLoops(4, LoopType.Yoyo);
 

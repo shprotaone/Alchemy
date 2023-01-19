@@ -98,10 +98,11 @@ public sealed class ClickController : MonoBehaviour
 
     private void HandleButtonHold()
     {
+        
         _claudronEffectController.Boil();
         PrepareCooking();
         //InvokeRepeating(nameof(IncrementWhileHold), 0, _incrementPauseTime);
-        _incrementTween = DOVirtual.DelayedCall(0f, IncrementWhileHold).SetLoops(-1);
+        _incrementTween = DOVirtual.DelayedCall(0, IncrementWhileHold,false).SetLoops(-1).SetUpdate(UpdateType.Fixed);
     }
 
     private void IncrementWhileHold()
@@ -112,7 +113,9 @@ public sealed class ClickController : MonoBehaviour
     private void HandleButtonRelease()
     {
         CheckResult();
+        
         _incrementTween.Kill();
+        _incrementTween.Rewind();
         _claudronEffectController.StopBoil();
     }
 

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TradeSystem : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class TradeSystem : MonoBehaviour
     public void FillLabels(List<PotionLabelType> label)
     {
         _labelsIn.AddRange(label);
-        _libraVisual.RightPos();
+        _libraVisual.CheckPosition(label.Count);
         CalculateReward();
     }
 
@@ -60,8 +61,7 @@ public class TradeSystem : MonoBehaviour
             _labelsIn.Remove(item);
         }
 
-        CalculateReward();
-        _libraVisual.ResetPos();
+        CalculateReward();       
     }
 
     public void CalculateReward()
@@ -72,6 +72,7 @@ public class TradeSystem : MonoBehaviour
         _reward = (int)(result * _completeSeries.CurrentMultiply);
         _tradeView.Refresh(_reward);
         _tradeView.TradeButtoneControl(_reward);
+        _libraVisual.CheckPosition(_labelsIn.Count);
     }
 
     public void Trade()
@@ -80,12 +81,12 @@ public class TradeSystem : MonoBehaviour
 
         _money.Increase(_reward);
         _visitorController.DisableVisitor();
-        DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
+        DOVirtual.DelayedCall(0.5f, _visitorController.CallVisitor);
         _completeSeries.IncreaseMultiply(_indexMatch);
         _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
         _tradeView.TradeButtoneControl(0);
 
-        ClearSlots();
+        ClearSlots(false);
     }
 
     public void DeclineTrade()
@@ -93,25 +94,40 @@ public class TradeSystem : MonoBehaviour
         ClearLabelList();
         _money.Decrease(100);
         _visitorController.DisableVisitor();
-        DOVirtual.DelayedCall(0.1f, _visitorController.CallVisitor);
+        DOVirtual.DelayedCall(0.5f, _visitorController.CallVisitor);
         
         _completeSeries.ResetSeries();
         _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
 
         ReturnBottle();
-        DOVirtual.DelayedCall(1, ClearSlots);
+        ClearSlots(true);
+               
     }
 
-    private void ClearSlots()
+    private void ClearSlots(bool decline)
     {
-        foreach (var slot in _slots)
+        if (decline)
         {
-            if (!slot.IsFree)
+            foreach (var slot in _slots)
             {
-                slot.ResetSlot();
-            }           
+                if (!slot.IsFree)
+                {
+                    slot.SetSlotFree();
+                }
+            }
+        }
+        else
+        {
+            foreach (var slot in _slots)
+            {
+                if (!slot.IsFree)
+                {
+                    slot.ResetSlot();
+                }
+            }
         }
 
+        CalculateReward();
         _tradeView.Refresh(0);
         _libraVisual.ResetPos();
     }
@@ -125,6 +141,8 @@ public class TradeSystem : MonoBehaviour
                 slot.BottleInSlot.ReturnToSlot();                
             }
         }
+
+        //DOVirtual.DelayedCall(1f, ClearSlots);
     }
 
     public void Disable()
@@ -133,6 +151,8 @@ public class TradeSystem : MonoBehaviour
         _task = null;
         _labelInTask.Clear();
     }
+
+   
 
     private void StartCoinAnimation()
     {

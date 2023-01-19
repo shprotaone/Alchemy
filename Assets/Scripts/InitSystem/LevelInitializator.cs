@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,12 +45,13 @@ public class LevelInitializator : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 75;
+        Application.targetFrameRate = -1;
+        DOTween.SetTweensCapacity(500,50);
 
         _levelSelector.Init();
         _currentLevelPreset = _levelSelector.CurrentLevel;
         InitLevelSettings();
-        _dayEntryController.CallNextDay(1);
+        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
     }  
 
     public void InitLevelSettings()
@@ -66,7 +68,7 @@ public class LevelInitializator : MonoBehaviour
         _gameManager.Init(_money);
         _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
-        _levelCompletePanel.Init(_money,_moneyTask);
+        _levelCompletePanel.Init(_money, _moneyTask,_levelSelector);
         _cameraMovement.Init();
         _clickController.InitializeProgressBar();
 
@@ -132,7 +134,7 @@ public class LevelInitializator : MonoBehaviour
         _levelCompletePanel.Disable();
         _cameraMovement.Movement();
         InitLevelSettings();
-        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber + 1);
+        _dayEntryController.CallNextDay((int)preset.levelNumber);
         OnLevelStarted?.Invoke();       
     }
 
@@ -144,7 +146,7 @@ public class LevelInitializator : MonoBehaviour
 
         _currentLevelPreset = _levelSelector.GetFirstLevel();
         _levelCompletePanel.Disable();
-        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber + 1 );
+        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
         _cameraMovement.Movement();
         InitLevelSettings();
         OnLevelStarted?.Invoke();

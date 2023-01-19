@@ -6,7 +6,9 @@ public class AudioManager : MonoBehaviour
 {    
     private const string musicName = "Music";
     private const string sfxName = "Effects";
-    
+
+    [SerializeField] private AudioSource _mainMusicSource;
+    [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private SettingsView _settingDisplay;
     
@@ -26,6 +28,7 @@ public class AudioManager : MonoBehaviour
 
         LoadSettings();
         _settingDisplay.LoadCurrentSettings();
+        _mainMusicSource?.Play();
     }
 
     private void ReadSaveSettings()

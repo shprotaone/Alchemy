@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,20 +74,30 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     public void CheckSlot()
     {
-        Count = transform.childCount-1;
+        CheckCountSlot();
 
-        if(Count <= 1)
+        DOVirtual.DelayedCall(0.5f, () =>
+        {
+            if (transform.childCount == 1)
+            {
+                SetFreeSlot();
+            }
+
+        });
+        
+    }
+
+    public void CheckCountSlot()
+    {
+        Count = transform.childCount - 1;
+
+        if (Count <= 1)
         {
             _countText.text = " ";
         }
         else
         {
             _countText.text = Count.ToString();
-        }
-
-        if (transform.childCount == 1)
-        {
-            SetFreeSlot();           
         }
     }
 

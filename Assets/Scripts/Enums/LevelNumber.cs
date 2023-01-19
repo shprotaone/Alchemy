@@ -1,6 +1,7 @@
 
 public enum LevelNumber
 {
+    Level0,
     Level1,
     Level2,
     Level3,

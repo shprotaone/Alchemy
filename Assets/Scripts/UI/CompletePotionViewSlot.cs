@@ -10,10 +10,26 @@ public class CompletePotionViewSlot : MonoBehaviour
 
     public bool IsFree { get; private set; }
 
+    public void SetSlot(BottleModel bottle)
+    {
+        for (int i = 0; i < _images.Count; i++)
+        {
+            if (i < bottle.BottleData.Labels.Count)
+            {
+                _images[i].enabled = true;
+                _images[i].sprite = bottle.View.LabelSprites[i].sprite;
+            }
+            else
+            {
+                _images[i].enabled = false;
+            }
+        }
+    }
+
     public void SetSlot(FullBottleSlot slot)
     {
         IsFree = false;
-
+        
         if (slot.IsFree)
         {
             ClearSlot();
@@ -43,7 +59,11 @@ public class CompletePotionViewSlot : MonoBehaviour
     public void ClearSlot()
     {
         IsFree = true;
-        gameObject.SetActive(false);
+
+        foreach (var image in _images)
+        {
+            image.enabled = false;
+        }
     }
 }
 

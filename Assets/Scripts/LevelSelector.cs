@@ -17,13 +17,13 @@ public class LevelSelector : MonoBehaviour
             _firstPlay = 1;           //сохранение значения в гейм прогресс
         }
 
-        CurrentLevel = _levels[0];
+        CurrentLevel = _levels[_currentLevelIndex];
     }
 
     public LevelPreset GetFirstLevel()
     {
-        CurrentLevel = _levels[0];
         _currentLevelIndex = 0;
+        CurrentLevel = _levels[_currentLevelIndex];       
         return CurrentLevel;
     }
 

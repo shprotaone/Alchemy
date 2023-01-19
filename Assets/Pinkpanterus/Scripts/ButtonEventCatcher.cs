@@ -38,6 +38,9 @@ public sealed class ButtonEventCatcher : MonoBehaviour, IPointerDownHandler, IPo
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        OnButtonRelease?.Invoke();
+        if (_button.interactable)
+        {
+            OnButtonRelease?.Invoke();
+        }        
     }
 }

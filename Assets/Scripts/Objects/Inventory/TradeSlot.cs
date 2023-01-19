@@ -93,12 +93,25 @@ public class TradeSlot : MonoBehaviour,ISlot
     public void ResetSlot()
     {
         _isFree = true;
-        _isAdded = false;
-        BottleInSlot.DestroyBottle();
+        _isAdded = false;       
+        _bottleInSlot.DestroyBottle();
+        _bottleInSlot = null;
+        ColliderController();
+    }
+    private void ColliderController()
+    {
+        if (IsFree)
+        {
+            _collider.enabled = true;
+        }
+        else
+        {
+            _collider.enabled = false;
+        }
     }
 
     public void CheckFreeSlot()
     {
-           
+        ColliderController();
     }   
 }

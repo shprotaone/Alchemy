@@ -180,14 +180,17 @@ MonoBehaviour:
   _particlelUpBubble: {fileID: 9200294882107543848}
   _blobLeftPartical: {fileID: 9200294882241406543}
   _blobRightPartical: {fileID: 9200294883063649291}
+  _audioSource: {fileID: 0}
   _stockLifeTimeUpBubble: 1.5
   _boilLifetimeDownBubble: 1
   _boilSpeed: 1
   _stockSpeed: 0.3
-  _linearStockSpeedY: 0
-  _linearBoilSpeedY: 0.3
-  _orbitalStockSpeedY: 0
-  _orbitalBoilSpeedY: 1.5
+  _linearStockSpeedZ: 0
+  _linearBoilSpeedZ: 0
+  _orbitalStockSpeedZ: 0
+  _orbitalBoilSpeedZ: 0
+  _stockRadial: 0
+  _boilRadial: 0
 --- !u!1 &4270393637183133208
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,11 +430,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9200294881856296536}
+  - component: {fileID: 7611727552823212656}
+  - component: {fileID: 2847012138386538197}
   - component: {fileID: 6727536608254224082}
   - component: {fileID: 750783821228144885}
   - component: {fileID: 7104018071959288634}
-  - component: {fileID: 7611727552823212656}
-  - component: {fileID: 2847012138386538197}
   - component: {fileID: 5789244335983976525}
   m_Layer: 0
   m_Name: Claudron
@@ -459,59 +462,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6727536608254224082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9200294881856296542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e3977d8e7f75c14f86c5d0dc7748880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _clearClaudronButton: {fileID: 0}
-  _claudronSprite: {fileID: 9200294881935765117}
-  _mixingSystem: {fileID: 7104018071959288634}
-  _waterColor: {fileID: 291086533}
-  _cookSystem: {fileID: 750783821228144885}
-  _buttonEvent: {fileID: 0}
-  _crunchSprite: {fileID: 0}
---- !u!114 &750783821228144885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9200294881856296542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183b3cb2ee2c2054db62c3ce2785f17b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bottleStorage: {fileID: 0}
-  _clickController: {fileID: 0}
-  _mixingSystem: {fileID: 7104018071959288634}
-  _claudron: {fileID: 6727536608254224082}
---- !u!114 &7104018071959288634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9200294881856296542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4fbeeea6007d9f4da4ec8b87535c2f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bottleInventory: {fileID: 0}
-  _claudronSystem: {fileID: 6727536608254224082}
-  _claudronLabelView: {fileID: 1767675455903863279}
-  _waterColor: {fileID: 291086533}
-  _cook: {fileID: 750783821228144885}
-  IngredientsInClaudron: []
 --- !u!50 &7611727552823212656
 Rigidbody2D:
   serializedVersion: 4
@@ -559,6 +509,60 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5928872, y: 3.2504349}
   m_EdgeRadius: 0
+--- !u!114 &6727536608254224082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200294881856296542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3977d8e7f75c14f86c5d0dc7748880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clearClaudronButton: {fileID: 0}
+  _claudronSprite: {fileID: 9200294881935765117}
+  _mixingSystem: {fileID: 7104018071959288634}
+  _waterColor: {fileID: 291086533}
+  _cookSystem: {fileID: 750783821228144885}
+  _buttonEvent: {fileID: 0}
+--- !u!114 &750783821228144885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200294881856296542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183b3cb2ee2c2054db62c3ce2785f17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bottleStorage: {fileID: 0}
+  _clickController: {fileID: 0}
+  _mixingSystem: {fileID: 7104018071959288634}
+  _claudron: {fileID: 6727536608254224082}
+--- !u!114 &7104018071959288634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200294881856296542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fbeeea6007d9f4da4ec8b87535c2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bottleInventory: {fileID: 0}
+  _claudronSystem: {fileID: 6727536608254224082}
+  _claudronLabelView: {fileID: 1767675455903863279}
+  _waterColor: {fileID: 291086533}
+  _potionViewer: {fileID: 0}
+  _cook: {fileID: 750783821228144885}
+  _audioSource: {fileID: 5789244335983976525}
+  IngredientsInClaudron: []
 --- !u!82 &5789244335983976525
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10479,6 +10483,7 @@ MonoBehaviour:
   _effectController: {fileID: 0}
   _waterUpSprite: {fileID: 0}
   _waterDownSprite: {fileID: 0}
+  _resetColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &9200294882597057959
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,9 @@ public class MixingSystemv3 : MonoBehaviour
     [SerializeField] private ClaudronSystem _claudronSystem;
     [SerializeField] private ClaudronLabelView _claudronLabelView;
     [SerializeField] private WaterColorv2 _waterColor;
+    [SerializeField] private CompletePotionViewer _potionViewer;
     [SerializeField] private Cookv2 _cook;
+    [SerializeField] private AudioSource _audioSource;
 
     private Potion _potionInClaudron;
     private LabelSetter _labelSetter;
@@ -47,6 +49,7 @@ public class MixingSystemv3 : MonoBehaviour
             bottle.FillBottle(_potionInClaudron, _waterColor.ResultColor);
 
             SetPositionBottle(bottle);
+            _potionViewer.AddLastPotion(bottle);
 
             OnBottleFilled?.Invoke();
             _claudronSystem.ClearClaudron();
@@ -94,6 +97,8 @@ public class MixingSystemv3 : MonoBehaviour
 
             _waterColor.AddColor(ingredient.IngredienColor);
             CheckLabelInClaudron();
+
+            _audioSource?.Play();
 
         }
         else

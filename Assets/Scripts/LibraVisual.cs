@@ -14,19 +14,15 @@ public class LibraVisual : MonoBehaviour
     [SerializeField] private bool _center;
 
 
-    public void SetPosition(int labelTaskInBottle, int labelCountTask)
+    public void CheckPosition(int countOfLabels)
     {
-        if (labelTaskInBottle == labelCountTask)
-        {
-            ResetPos();
-        } 
-        else if (labelTaskInBottle < labelCountTask)
-        {
-            LeftPos();
-        }
-        else if(labelTaskInBottle > labelCountTask)
+        if(countOfLabels > 0)
         {
             RightPos();
+        }
+        else
+        {
+            ResetPos();
         }
     }
 
