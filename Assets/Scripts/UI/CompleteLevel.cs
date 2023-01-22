@@ -9,7 +9,8 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private const string defeatText = "ƒневна€ цель не достигнута";
 
     [SerializeField] private LevelInitializator _init;
-    [SerializeField] private CompleteLevelPanelController _controller; 
+    [SerializeField] private CompleteLevelPanelController _controller;
+    [SerializeField] private DraggableObjectController _dragController;
     [SerializeField] private GameObject _backGroundPanel;
     [SerializeField] private ParticleSystem _completeParticle;
     [SerializeField] private Button _nextLevelButton;
@@ -19,6 +20,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     private Money _money;
     private MoneyTask _moneyTask;
+    private AudioManager _audioManager;
     private LevelSelector _levelSelector;
     private string _resultText;
 
@@ -29,8 +31,9 @@ public class CompleteLevel : MonoBehaviour,IMenu
         _mainMenuButton?.onClick.AddListener(MainMenuLoad);
     }
 
-    public void Init(Money money,MoneyTask moneyTask,LevelSelector levelSelector)
+    public void Init(Money money,MoneyTask moneyTask,LevelSelector levelSelector,AudioManager audioManager)
     {
+        _audioManager = audioManager;
         _levelSelector = levelSelector;
         _money = money;
         _moneyTask = moneyTask;      
@@ -39,8 +42,10 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private void CheckResult()
     {       
         _coinResult.text = _money.CurrentMoney.ToString();
+        _audioManager.MainMusicSoruce.Stop();
+        _dragController.SetInterract(false);
 
-        if(_moneyTask.TaskMoney < _money.CurrentMoney)
+        if (_moneyTask.TaskMoney < _money.CurrentMoney)
         {
             _nextLevelButton.gameObject.SetActive(true);
             _restartButton.gameObject.SetActive(false);
@@ -48,12 +53,15 @@ public class CompleteLevel : MonoBehaviour,IMenu
             _resultText = "ƒень " + (int)_levelSelector.CurrentLevel.levelNumber + " пройден";
             _completeParticle.gameObject.SetActive(true);
             _completeParticle.Play();
+            _audioManager.PlaySFX(_audioManager.Data.WinWindowSound);
+            
         }
         else
         {
             _restartButton.gameObject.SetActive(true);
             _nextLevelButton.gameObject.SetActive(false);
             _resultText = defeatText;
+            _audioManager.PlaySFX(_audioManager.Data.LoseWindowSound);
         }
 
         _init.DisableLevel();
@@ -80,6 +88,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
         _controller.Disable();
         _completeParticle.Stop();
         _backGroundPanel.SetActive(false);
+        _dragController.SetInterract(false);
     }
 
     public void Activated()

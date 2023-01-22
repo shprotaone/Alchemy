@@ -21,4 +21,4 @@ MonoBehaviour:
   pressedSprite: {fileID: 21300000, guid: 1e7f53453d794bf4eac57ea1e41636b3, type: 3}
   resourceType: 1
   resourceRarity: 0
-  dragSound: {fileID: 8300000, guid: 762eb7b05cd7938478ec50a8f4f1cbd2, type: 3}
+  dragSound: {fileID: 0}

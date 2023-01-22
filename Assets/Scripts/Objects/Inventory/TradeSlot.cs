@@ -1,6 +1,3 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TradeSlot : MonoBehaviour,ISlot
@@ -8,11 +5,9 @@ public class TradeSlot : MonoBehaviour,ISlot
     [SerializeField] private Collider2D _collider;
     [SerializeField] private bool _isFree;
 
-    //private List<PotionLabelType> _labels;
     private TradeSystem _tradeSystem;
     private BottleModel _bottleInSlot;
     private bool _isAdded = false;
-    private bool _slotIsChanged = false;
 
     public BottleModel BottleInSlot => _bottleInSlot;
     public bool IsFree => _isFree;
@@ -22,7 +17,6 @@ public class TradeSlot : MonoBehaviour,ISlot
     {
         _isFree = true;
         _tradeSystem = GetComponentInParent<TradeSystem>();
-        //_labels = new List<PotionLabelType>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,14 +25,11 @@ public class TradeSlot : MonoBehaviour,ISlot
         {
             if(_bottleInSlot == bottle)
             {
-                _slotIsChanged = false;
                 _bottleInSlot = bottle;
                 bottle.transform.SetParent(this.transform);
             }
             else
-            {
-                _slotIsChanged = true;
-                
+            {                
                 if (IsFree)
                 {
                     SetSlot(bottle, true);
@@ -55,7 +46,7 @@ public class TradeSlot : MonoBehaviour,ISlot
             bottle.SetPosition(this.transform);
             _isFree = false;
 
-            _tradeSystem.FillLabels(bottle.BottleData.Labels);
+            _tradeSystem.FillLabels(bottle.Data.Labels);
             _bottleInSlot = bottle;           
         }
 
@@ -78,16 +69,16 @@ public class TradeSlot : MonoBehaviour,ISlot
 
     public void CheckSlot()
     {
-        CheckFreeSlot();      
+        ColliderController();       
     }
 
     public void SetSlotFree()
     {
-        _tradeSystem.DeleteLabel(_bottleInSlot.BottleData.Labels);
-        _tradeSystem.CalculateReward();
+        _tradeSystem.DeleteLabel(_bottleInSlot.Data.Labels);
         _isAdded = false;
         _isFree = true;
         _bottleInSlot = null;
+        ColliderController();
     }
 
     public void ResetSlot()
@@ -103,15 +94,11 @@ public class TradeSlot : MonoBehaviour,ISlot
         if (IsFree)
         {
             _collider.enabled = true;
+            _tradeSystem.CalculateReward();
         }
         else
         {
             _collider.enabled = false;
         }
     }
-
-    public void CheckFreeSlot()
-    {
-        ColliderController();
-    }   
 }

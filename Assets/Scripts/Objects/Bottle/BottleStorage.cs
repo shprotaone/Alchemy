@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
 {
-    [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private TMP_Text _amountText; //разделить на view?    
     [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private TableManager _tableManager;
@@ -36,8 +35,7 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
         bottle.transform.position = _uprisePos.position;
         _upriseParticle.Play();
 
-        bottle.InitBottle(this, _tableManager,_bottleInventory);
-        _boxCollider.enabled = false;
+        bottle.InitBottle(this,_bottleInventory);
 
         return bottle;
     }
@@ -57,7 +55,6 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     public void ReturnBottle()
     {
         _amount++;
-        _boxCollider.enabled = true;
 
         RefreshAmount();
     }
@@ -80,7 +77,6 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     public void SetInterract(bool value)
     {
         _interract = value;
-        _boxCollider.enabled = true;
     }
 
     public void InitTimer(int delayDrag)

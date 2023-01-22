@@ -7,13 +7,19 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private Button _cameraMovementButton;
     [SerializeField] private CameraMovement _cameraMovement;
+    [SerializeField] private AudioManager _audioManager;
 
     private MixingSystemv3 _mixingSystem;
+    private LevelPreset _preset;
     public bool InventoryIsEmpty { get; private set; }
 
-    public void Init(MixingSystemv3 mixingSystem)
+    public void Init(MixingSystemv3 mixingSystem,LevelPreset preset)
     {
         _mixingSystem = mixingSystem;
+        _preset = preset;
+
+        _audioManager.ChangeMainMusic(_audioManager.Data.ClaudronRoomTheme);
+
         InventoryIsEmpty = false;
         _mixingSystem.OnBottleFilled += CheckLeftIngredients;
         _cameraMovementButton.interactable = true;
@@ -25,6 +31,7 @@ public class GameStateController : MonoBehaviour
         {          
             _cameraMovement.Movement();
             _visitorController.Activate();
+            _audioManager.ChangeMainMusic(_preset._mainSound);
         }
     }
 

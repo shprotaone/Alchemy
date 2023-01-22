@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class VisitorController : MonoBehaviour
@@ -6,20 +6,19 @@ public class VisitorController : MonoBehaviour
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private VisitorCountSystemView _countView;
     [SerializeField] private Visitor[] _visitors;
-    [SerializeField] private AudioClip _visitorFadingSound;
 
     private VisitorCountSystem _visitorCountSystem;
+    private AudioManager _audioManager;
     private PotionTaskSystem _taskSystem;
     private PotionTask _currentTask;
     private Visitor _prevVisitor;
-    private AudioSource _audioSource;
 
     public Visitor CurrentVisitor { get; private set; }
     public bool IsActive { get; private set; }
 
-    public void InitVisitorController(PotionTaskSystem taskSystem,int visitorCount)
+    public void InitVisitorController(PotionTaskSystem taskSystem,int visitorCount,AudioManager audioManager)
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioManager = audioManager;
         _taskSystem = taskSystem;
         IsActive = true;
         _visitorCountSystem = new VisitorCountSystem(_countView,visitorCount);
@@ -29,24 +28,32 @@ public class VisitorController : MonoBehaviour
     {
         VisitorChoice();
         SetNextTask(_taskSystem.GetTaskv2());
-        CallVisitor();
+        Behaviour();
     }
 
-    public void SetNextTask(PotionTask task)
+    private void SetNextTask(PotionTask task)
     {
         _currentTask = task;
     }
 
     public void CallVisitor()
     {
+        DisableVisitor();
+        DOVirtual.DelayedCall(0.5f, Behaviour);
+    }
+
+    private void Behaviour()
+    {
+        
         if (_visitorCountSystem.VisitorLeft > 0)
-        {
+        {           
             VisitorChoice();
             SetNextTask(_taskSystem.GetTaskv2());
 
             CurrentVisitor.gameObject.SetActive(true);
             CurrentVisitor.Init(_currentTask);
-            _audioSource.Play();
+           
+            _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.DoorOpenClips));
 
             _prevVisitor = CurrentVisitor;
         }
@@ -79,10 +86,10 @@ public class VisitorController : MonoBehaviour
 
     public void VisitorGoOutSound()
     {
-        _audioSource.PlayOneShot(_visitorFadingSound);
+        _audioManager.PlaySFX(_audioManager.Data.Closed);
     }
 
-    public void DisableVisitor()
+    private void DisableVisitor()
     {
         if (CurrentVisitor != null)
         {

@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 5689046917964428914}
   - component: {fileID: 5689046917964428915}
   m_Layer: 5
-  m_Name: StoryText1
+  m_Name: Text (Guide)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.98938, y: -8.154301}
+  m_AnchoredPosition: {x: -6.98938, y: -117}
   m_SizeDelta: {x: 743.7224, y: 564.6904}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5689046917964428914
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 341.128, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0ca6279d6a471ee46987817a9016021a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30cf1aed1ea80334f9dae2bcf0c98b9a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

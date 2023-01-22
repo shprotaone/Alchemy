@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviour
     private const string musicName = "Music";
     private const string sfxName = "Effects";
 
+    [SerializeField] private SoundsData _data;
     [SerializeField] private AudioSource _mainMusicSource;
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioMixer _audioMixer;
@@ -17,6 +19,8 @@ public class AudioManager : MonoBehaviour
     private bool _music;
     private bool _sfx;
 
+    public AudioSource MainMusicSoruce => _mainMusicSource;
+    public SoundsData Data => _data; 
     public bool SFX { get { return _sfx; } }
     public bool Music { get { return _music; } }
 
@@ -29,6 +33,22 @@ public class AudioManager : MonoBehaviour
         LoadSettings();
         _settingDisplay.LoadCurrentSettings();
         _mainMusicSource?.Play();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        _sfxSource.PlayOneShot(clip);
+    }
+
+    public void ChangeMainMusic(AudioClip clip)
+    {
+        _mainMusicSource.clip = clip;
+        _mainMusicSource.Play();
+    }
+
+    public AudioClip GetRandomSound(AudioClip[] clips)
+    {
+        return clips[UnityEngine.Random.Range(0, clips.Length)];
     }
 
     private void ReadSaveSettings()

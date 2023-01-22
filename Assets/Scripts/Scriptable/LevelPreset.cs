@@ -9,6 +9,7 @@ public class LevelPreset : ScriptableObject
 
     public LevelNumber levelNumber;
     public Sprite backgroundSprite;
+    public AudioClip _mainSound;
     public int addCommonResourceCount;
 
     [HideInInspector]
@@ -24,16 +25,6 @@ public class LevelPreset : ScriptableObject
     [Header("Настройки денег")]
     public int startMoney;
     public int minRangeMoney;
-
-    [Header("Вступительный текст")]
-    [TextArea]
-    public string[] levelTaskText;
-    
-    [Header("Текст в заданиях")]
-    [TextArea(5, 10)]
-    public string goalText;
-    public bool DropDownMenu;
-
 }
 
 #region Old

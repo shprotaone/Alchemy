@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gameplay1
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: WebGL
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 12
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 9eeb1efbd1956fd40973b6ae352310ae, type: 3}
+    - {fileID: 2800000, guid: 1d6fcccadb0437e4a9ae25fce4624e85, type: 3}
+    - {fileID: 2800000, guid: 505349f53dbd0b2428cf1c7055639897, type: 3}
+    - {fileID: 2800000, guid: d02cafd12bc6942428a4ac5791eecd35, type: 3}
+    - {fileID: 2800000, guid: 78ba84c2b3acb4b4b9fb583d61c3e4a7, type: 3}
+    - {fileID: 2800000, guid: 24ec1a0967ffa204b89f6c242f6a1bc0, type: 3}
+    - {fileID: 2800000, guid: ff79980c993330a41909f94a4bea45b2, type: 3}
+    - {fileID: 2800000, guid: d83204076abcc40408d7648cf6996c21, type: 3}
+    - {fileID: 2800000, guid: 69f4e1a93951738469940d898c7970eb, type: 3}
+    - {fileID: 2800000, guid: a8325a12ce1b8fd47949c439cc1ccf72, type: 3}
+    - {fileID: 2800000, guid: 924ff5df2ecf2c24db64fbbf805016b6, type: 3}
+    - {fileID: 2800000, guid: 1ddd95f545f51ac40afbccf2dfd15308, type: 3}
+    - {fileID: 2800000, guid: 483e92c030409f44286b484339371d01, type: 3}
+    - {fileID: 2800000, guid: 8c8256e7b1c192548b53fab0eed191d4, type: 3}
+    - {fileID: 2800000, guid: e27a1dcb508f6cb4b9170ba95af69664, type: 3}
+    - {fileID: 2800000, guid: c4ee9cd2cba0ac541a8e96b93c138bdb, type: 3}
+    - {fileID: 2800000, guid: 6408bae48442de741b89011748c49081, type: 3}
+    - {fileID: 2800000, guid: bab3ee977a32a9b408dcbe9e3b7ebe6f, type: 3}
+    - {fileID: 2800000, guid: 1d4694b8614f15449a9338d6625e23a8, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 483e92c030409f44286b484339371d01, type: 3}
+  - {fileID: 21300000, guid: d02cafd12bc6942428a4ac5791eecd35, type: 3}
+  - {fileID: 21300000, guid: a8325a12ce1b8fd47949c439cc1ccf72, type: 3}
+  - {fileID: 21300000, guid: 78ba84c2b3acb4b4b9fb583d61c3e4a7, type: 3}
+  - {fileID: 21300000, guid: c4ee9cd2cba0ac541a8e96b93c138bdb, type: 3}
+  - {fileID: 21300000, guid: 6408bae48442de741b89011748c49081, type: 3}
+  - {fileID: 21300000, guid: 1ddd95f545f51ac40afbccf2dfd15308, type: 3}
+  - {fileID: 21300000, guid: 505349f53dbd0b2428cf1c7055639897, type: 3}
+  - {fileID: 21300000, guid: d83204076abcc40408d7648cf6996c21, type: 3}
+  - {fileID: 21300000, guid: bab3ee977a32a9b408dcbe9e3b7ebe6f, type: 3}
+  - {fileID: 21300000, guid: 8c8256e7b1c192548b53fab0eed191d4, type: 3}
+  - {fileID: 21300000, guid: 1d4694b8614f15449a9338d6625e23a8, type: 3}
+  - {fileID: 21300000, guid: 24ec1a0967ffa204b89f6c242f6a1bc0, type: 3}
+  - {fileID: 21300000, guid: 69f4e1a93951738469940d898c7970eb, type: 3}
+  - {fileID: 21300000, guid: 1d6fcccadb0437e4a9ae25fce4624e85, type: 3}
+  - {fileID: 21300000, guid: e27a1dcb508f6cb4b9170ba95af69664, type: 3}
+  - {fileID: 21300000, guid: 9eeb1efbd1956fd40973b6ae352310ae, type: 3}
+  - {fileID: 21300000, guid: ff79980c993330a41909f94a4bea45b2, type: 3}
+  - {fileID: 21300000, guid: 924ff5df2ecf2c24db64fbbf805016b6, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Blue
+  - FAQ
+  - Coin
+  - Pause
+  - Yellow
+  - YellowPinch
+  - BluePinch
+  - Bottle
+  - wood button1 3
+  - White
+  - Red
+  - WhitePinch
+  - BoilPotion
+  - wood2 2
+  - knight_line
+  - RedPinch
+  - bottle_line
+  - SmallWindow
+  - Rope
+  m_RenderDataMap: {}
+  m_Tag: Gameplay1
+  m_IsVariant: 0

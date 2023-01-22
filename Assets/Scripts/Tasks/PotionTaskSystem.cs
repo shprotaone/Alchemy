@@ -39,11 +39,6 @@ public class PotionTaskSystem : MonoBehaviour
         return potionTask;
     }    
 
-    public void TaskCanceled()
-    {      
-        _visitorController.DisableVisitor();
-    }
-
     private Potion GetPotionForTask()
     {
         //TODO: CLEAR

@@ -17,6 +17,7 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] private Button _openButton;
 
     [SerializeField] private float _openDuration;
+    [SerializeField] private AudioSource _audio;
     private void Start()
     {
         _openButton?.onClick.AddListener(Open);
@@ -25,6 +26,7 @@ public class MenuPanelController : MonoBehaviour
 
     public void Open()
     {
+        _audio?.Play();
         OnInterract?.Invoke(false);
         _panel.gameObject.SetActive(true);
         _panel.DOAnchorPos(_openPosition.anchoredPosition, _openDuration, false);
@@ -32,6 +34,7 @@ public class MenuPanelController : MonoBehaviour
 
     public void Close()
     {
+        _audio?.Play();
         OnInterract?.Invoke(true);
         _ingameTimeController.ResumeGame();
         _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false).OnComplete(() => _panel.gameObject.SetActive(false));

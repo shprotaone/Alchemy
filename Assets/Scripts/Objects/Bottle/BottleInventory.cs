@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -65,7 +63,7 @@ public class BottleInventory : MonoBehaviour
         {
             if (slot.BottlesInSlot != null)
             {
-                if (Enumerable.SequenceEqual(slot.BottlesInSlot.BottleData.Labels, potion.Labels))
+                if (Enumerable.SequenceEqual(slot.BottlesInSlot.Data.Labels, potion.Labels))
                 {
                     return slot;
                 }

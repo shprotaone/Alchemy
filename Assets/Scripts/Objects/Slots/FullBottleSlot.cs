@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -9,11 +7,9 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 {
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private bool _isFree;
-    [SerializeField] private bool isCheck = false;
 
     [SerializeField] private BottleModel _bottlesInSlot;
 
-    private int _calls;
     public BottleModel BottlesInSlot => _bottlesInSlot;
     public int Count { get; private set; }
     public bool IsFree => _isFree;
@@ -31,12 +27,20 @@ public class FullBottleSlot : MonoBehaviour,ISlot
                 {
                     SetSlot(bottle,true);
                 }
-                else if(Enumerable.SequenceEqual(_bottlesInSlot.BottleData.Labels, bottle.BottleData.Labels))
+                else if(Enumerable.SequenceEqual(_bottlesInSlot?.Data.Labels, bottle?.Data.Labels))
                 {
                     bottle.SetPosition(this.transform);
-                    _bottlesInSlot = bottle;
                     CheckSlot();
                 }
+            ScaleBottles();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out BottleModel bottle))
+        {
+            ScaleBottles();
         }
     }
 
@@ -53,10 +57,9 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         {
             _bottlesInSlot = bottle;
         }
-        //бутылки не удаляются до конца уровня
+
         SlotBehaviour(bottle._prevSlot);
         CheckSlot();
-        //HidePrevBottle();
     }
 
     private void SlotBehaviour(ISlot slot)
@@ -82,9 +85,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
             {
                 SetFreeSlot();
             }
-
-        });
-        
+        });       
     }
 
     public void CheckCountSlot()
@@ -98,6 +99,22 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         else
         {
             _countText.text = Count.ToString();
+        }        
+    }
+
+    private void ScaleBottles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if(i == 1)
+            {
+                transform.GetChild(i).TryGetComponent(out BottleModel bottle);
+                bottle.transform.DOScale(bottle.View.standartScale, 0.5f).OnStart(() => bottle.transform.gameObject.SetActive(true)); 
+            }
+            else if (transform.GetChild(i).TryGetComponent(out BottleModel bottle))
+            {
+                bottle.transform.DOScale(0, 0.5f).OnComplete(() =>bottle.transform.gameObject.SetActive(false));
+            }
         }
     }
 
@@ -120,10 +137,5 @@ public class FullBottleSlot : MonoBehaviour,ISlot
             }
         }
         SetFreeSlot();
-    }
-
-    public void SetSlot(BottleModel bottle)
-    {
-        //throw new NotImplementedException();
     }
 }

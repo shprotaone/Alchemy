@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class DraggableObjectController : MonoBehaviour
 
     [SerializeField] private GameObject[] _interractGo;
     [SerializeField] private List<IInterract> _interract;
+    [SerializeField] private BottleInventory _bottleInventory;
 
     private void Awake()
     {
@@ -24,11 +26,32 @@ public class DraggableObjectController : MonoBehaviour
             _interract.Add(component);
         }
 
+        //LevelInitializator.OnLevelEnded += DisableObjects;
+        //LevelInitializator.OnLevelStarted += EnableObjects;
         //SetInterract(true);
+    }
+
+    private void EnableObjects()
+    {
+        foreach (var slot in _bottleInventory.Slots)
+        {
+            slot.BottlesInSlot?.SetInterract(true);
+        }
+    }
+
+    private void DisableObjects()
+    {
+        foreach (var slot in _bottleInventory.Slots)
+        {
+            slot.BottlesInSlot?.SetInterract(false);
+        }
     }
 
     public void SetInterract(bool flag)
     {
+        if (flag) EnableObjects();
+        else DisableObjects();
+
         foreach (var item in _interract)
         {
             item.SetInterract(flag);

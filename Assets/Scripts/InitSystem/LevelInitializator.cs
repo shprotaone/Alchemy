@@ -27,6 +27,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private ClickController _clickController;
     [SerializeField] private CameraMovement _cameraMovement;
+    [SerializeField] private AudioManager _audioManager;
 
     [Header("Подсветка и UI")]
     [SerializeField] private MoneyView _moneyView;
@@ -46,7 +47,7 @@ public class LevelInitializator : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = -1;
-        DOTween.SetTweensCapacity(500,50);
+        DOTween.SetTweensCapacity(1250,500);
 
         _levelSelector.Init();
         _currentLevelPreset = _levelSelector.CurrentLevel;
@@ -57,6 +58,7 @@ public class LevelInitializator : MonoBehaviour
     public void InitLevelSettings()
     {
         _startDialogViewer.DisableViewer();
+        _audioManager?.MainMusicSoruce.Play();
 
         InitTask();
 
@@ -68,7 +70,7 @@ public class LevelInitializator : MonoBehaviour
         _gameManager.Init(_money);
         _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
-        _levelCompletePanel.Init(_money, _moneyTask,_levelSelector);
+        _levelCompletePanel.Init(_money, _moneyTask,_levelSelector,_audioManager);
         _cameraMovement.Init();
         _clickController.InitializeProgressBar();
 
@@ -88,9 +90,9 @@ public class LevelInitializator : MonoBehaviour
         SetChances();
         _potionTaskSystem.Init(_tasksChance, _money);
         
-        _visitorController.InitVisitorController(_potionTaskSystem,_currentLevelPreset.visitorCount);
-        _gameStateController.Init(_mixingSystem);
-        _tradeSystem.Init(_visitorController,_money);
+        _visitorController.InitVisitorController(_potionTaskSystem,_currentLevelPreset.visitorCount,_audioManager);
+        _gameStateController.Init(_mixingSystem,_currentLevelPreset);
+        _tradeSystem.Init(_visitorController,_money,_audioManager);
     }
 
     private void InitTask()
@@ -151,5 +153,10 @@ public class LevelInitializator : MonoBehaviour
         InitLevelSettings();
         OnLevelStarted?.Invoke();
 
+    }
+
+    private void OnDisable()
+    {
+        DOTween.KillAll();
     }
 }

@@ -17,7 +17,8 @@ public class MixingSystemv3 : MonoBehaviour
     [SerializeField] private WaterColorv2 _waterColor;
     [SerializeField] private CompletePotionViewer _potionViewer;
     [SerializeField] private Cookv2 _cook;
-    [SerializeField] private AudioSource _audioSource;
+
+    [SerializeField] private AudioManager _audioManager;
 
     private Potion _potionInClaudron;
     private LabelSetter _labelSetter;
@@ -53,7 +54,8 @@ public class MixingSystemv3 : MonoBehaviour
 
             OnBottleFilled?.Invoke();
             _claudronSystem.ClearClaudron();
-            ClearMixSystem();            
+            ClearMixSystem();
+            _audioManager.PlaySFX(_audioManager.Data.CreatePotionClip);
         }
         else
         {
@@ -65,7 +67,7 @@ public class MixingSystemv3 : MonoBehaviour
     {
         FullBottleSlot fullSlot;
 
-        fullSlot = _bottleInventory.GetSlot(bottle.BottleData.PotionInBottle);
+        fullSlot = _bottleInventory.GetSlot(bottle.Data.PotionInBottle);
 
         if (fullSlot != null)
         {
@@ -98,7 +100,7 @@ public class MixingSystemv3 : MonoBehaviour
             _waterColor.AddColor(ingredient.IngredienColor);
             CheckLabelInClaudron();
 
-            _audioSource?.Play();
+            _audioManager.PlaySFX(_audioManager.Data.WaterDrop);
 
         }
         else

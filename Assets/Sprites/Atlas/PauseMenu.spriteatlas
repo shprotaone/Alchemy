@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PauseMenu
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: WebGL
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 12
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 0ca6279d6a471ee46987817a9016021a, type: 3}
+    - {fileID: 2800000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
+    - {fileID: 2800000, guid: 9f2447e751556214a92f515e4682f6c5, type: 3}
+    - {fileID: 2800000, guid: 9b13ae41d08e8c343b79c268b4881ad5, type: 3}
+    - {fileID: 2800000, guid: 7277a5e5598bf0e46a8995b693b6792c, type: 3}
+    - {fileID: 2800000, guid: ebcec271ef9fd5341a0c448855af7fc8, type: 3}
+    - {fileID: 2800000, guid: 032d2f6aeadd9854082d8f47dd10b817, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
+  - {fileID: 21300000, guid: 9b13ae41d08e8c343b79c268b4881ad5, type: 3}
+  - {fileID: 21300000, guid: ebcec271ef9fd5341a0c448855af7fc8, type: 3}
+  - {fileID: 21300000, guid: 7277a5e5598bf0e46a8995b693b6792c, type: 3}
+  - {fileID: 21300000, guid: 9f2447e751556214a92f515e4682f6c5, type: 3}
+  - {fileID: 21300000, guid: 032d2f6aeadd9854082d8f47dd10b817, type: 3}
+  - {fileID: 21300000, guid: 0ca6279d6a471ee46987817a9016021a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BaseRedButton
+  - btn_icon_music
+  - sound_off
+  - btn_icon_music_mute
+  - BlueButton
+  - sound_on
+  - GuildWindow2 2
+  m_RenderDataMap: {}
+  m_Tag: PauseMenu
+  m_IsVariant: 0

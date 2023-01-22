@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TradeSystem : MonoBehaviour
 {
@@ -11,7 +10,8 @@ public class TradeSystem : MonoBehaviour
     [SerializeField] private TradeSystemView _tradeView;
     [SerializeField] private LibraVisual _libraVisual;
     
-    private VisitorController _visitorController;  
+    private VisitorController _visitorController;
+    private AudioManager _audioManager;
     private Money _money;
     private RewardCalculator _rewardCalculator;
     private MatchCalculate _matchCalculate;
@@ -21,17 +21,18 @@ public class TradeSystem : MonoBehaviour
     private int _reward;
     private int _indexMatch;
 
-    public void Init(VisitorController visitorController,Money money) 
+    public void Init(VisitorController visitorController,Money money,AudioManager audioManager) 
     {
         _tradeView.Init(this);
         _visitorController = visitorController;
+        _audioManager = audioManager;
 
         _rewardCalculator = new RewardCalculator();
         _matchCalculate = new MatchCalculate();
         _labelsIn = new List<PotionLabelType>();
 
         _completeSeries = new CompleteSeries();
-        _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
 
         _money = money;              
     }
@@ -80,11 +81,15 @@ public class TradeSystem : MonoBehaviour
         ClearLabelList();
 
         _money.Increase(_reward);
-        _visitorController.DisableVisitor();
-        DOVirtual.DelayedCall(0.5f, _visitorController.CallVisitor);
+        _tradeView.Refresh(0);
+        _visitorController.CallVisitor();
+        _tradeView.DeclineButtonDelay();
+
         _completeSeries.IncreaseMultiply(_indexMatch);
-        _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.StartCoinAnimation();
         _tradeView.TradeButtoneControl(0);
+        _audioManager.PlaySFX(_audioManager.Data.CoinDrop);
 
         ClearSlots(false);
     }
@@ -93,14 +98,15 @@ public class TradeSystem : MonoBehaviour
     {
         ClearLabelList();
         _money.Decrease(100);
-        _visitorController.DisableVisitor();
-        DOVirtual.DelayedCall(0.5f, _visitorController.CallVisitor);
-        
+        _visitorController.CallVisitor();
+        _tradeView.DeclineButtonDelay();
+
         _completeSeries.ResetSeries();
-        _tradeView.RefreshMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
+        _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
 
         ReturnBottle();
-        ClearSlots(true);
+        DOVirtual.DelayedCall(0.3f,() => ClearSlots(true));
                
     }
 
@@ -141,8 +147,6 @@ public class TradeSystem : MonoBehaviour
                 slot.BottleInSlot.ReturnToSlot();                
             }
         }
-
-        //DOVirtual.DelayedCall(1f, ClearSlots);
     }
 
     public void Disable()
@@ -150,15 +154,5 @@ public class TradeSystem : MonoBehaviour
         _tradeView.Disable();
         _task = null;
         _labelInTask.Clear();
-    }
-
-   
-
-    private void StartCoinAnimation()
-    {
-        //GameObject curCoin = ObjectPool.SharedInstance.GetObject(ObjectType.COINDROP);
-        //curCoin.transform.position = _currentTask.CurrentTaskView.transform.position;
-        //Coin coin = curCoin.GetComponent<Coin>();
-        //coin.Movement(_jarTransform.position);
     }
 }

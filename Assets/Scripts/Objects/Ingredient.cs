@@ -45,7 +45,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
         _ingredientData = ingredient;
         ResourceType = ingredient.resourceType;
         DrawIngredient();
-        _audioSource.PlayOneShot(_ingredientData.dragSound);
+        //_audioSource.PlayOneShot(_ingredientData?.dragSound);
     }
 
     private void DrawIngredient()

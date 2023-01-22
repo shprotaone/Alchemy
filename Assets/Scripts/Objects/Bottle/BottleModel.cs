@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class BottleModel : MonoBehaviour,IAction,IPooledObject
+public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 {
     private const float moveSpeed = 0.3f;
     
@@ -18,20 +18,15 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
 
     private Transform _destination;
     private BottleData _bottleData;
-
-    private int _calls = 0;
-
-    private TableManager _tableManager;
     private BottleStorage _bottleStorage;
     private BottleInventory _bottleInventory;
-    public BottleData BottleData => _bottleData;
+    public BottleData Data => _bottleData;
     public BottleView View => _bottleView;    
     public ObjectType Type => _type;
 
-    public void InitBottle(BottleStorage storage,TableManager tableManager, BottleInventory inventory)
+    public void InitBottle(BottleStorage storage, BottleInventory inventory)
     {
         _bottleStorage = storage;
-        _tableManager = tableManager;
         _bottleInventory = inventory;
         _bottleData = null;
     }
@@ -94,7 +89,6 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
 
     public void Drop()
     {
-        //_rigid.simulated = false;
         _collider.enabled = false;
 
         _bottleView.StandartSize();
@@ -104,11 +98,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
         {
             transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
                                                                  .OnComplete(ReturnBottleToSlot);
-        }
-
-        //SlotBehaviour(_prevSlot);
-        //_slot.CheckSlot();
-            
+        }           
     }
 
     
@@ -132,11 +122,6 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
     private void ReturnBottleToSlot()
     {
         _collider.enabled = true;
-        //_rigid.MovePosition(Vector3.zero);
-        //DOVirtual.DelayedCall(1, () =>
-        //{
-        //    _rigid.simulated = true;
-        //});
     }
 
     public void Action()
@@ -147,8 +132,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
         if (_slot is FullBottleSlot fullSlot)
         {
             DOVirtual.DelayedCall(0.2f, fullSlot.CheckCountSlot);
-        }
-         
+        }         
     }
 
     public void DestroyBottle()
@@ -158,6 +142,11 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject
         _prevSlot = null;
         _slot = null;
         ObjectPool.SharedInstance.DestroyObject(gameObject);
+    }
+
+    public void SetInterract(bool value)
+    {
+        _collider.enabled = value;
     }
 }
 

@@ -15,8 +15,7 @@ public class MoneyView : MonoBehaviour
     [SerializeField] private Color _winColorSlider;
 
     private bool _isComplete;
-    private float _minValueSlider;
-    private float _maxValueSlider;
+    private int _prevMoneyValue;
 
     public void Init(int min,int max)
     {
@@ -39,16 +38,22 @@ public class MoneyView : MonoBehaviour
     {
         _taskSlider.DOValue(value, 0.5f);
 
-        if(value > _taskSlider.maxValue && !_isComplete)
+        if(value > _taskSlider.maxValue)
         {
-            _isComplete = true;            
+            _isComplete = true;
+        }
+        else
+        {
+            _isComplete = false;
         }
 
         CheckTaskState();
     }
     public void RefreshMoneyText(int value)
     {
-        _moneyText.text = value.ToString();
+        DOTween.To(() => _prevMoneyValue, x => _prevMoneyValue = x, value, 0.3f)
+            .OnUpdate(() => _moneyText.text = _prevMoneyValue.ToString()).OnComplete(() => _prevMoneyValue = value);
+
         RefreshSliderValue(value);
     }
 
