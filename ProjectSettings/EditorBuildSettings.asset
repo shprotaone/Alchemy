@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EndlessLevel.unity
     guid: 23b1267858686e541bc4f82d372c2ae4
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: bf9f74cd305e3df40a5887fdc0610e47,
+      type: 2}

@@ -32,7 +32,7 @@ public class BottleView : MonoBehaviour
 
         for (int i = 0; i < label.Count; i++)
         {
-            _labels[i].sprite = _labelToSprite.GetSprite(label[i]);
+            _labels[i].sprite = _labelToSprite.GetSprite(label[i],false);
         }
     }
 

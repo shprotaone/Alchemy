@@ -1,29 +1,68 @@
+using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.U2D;
 
 public class LabelToSprite : MonoBehaviour
 {
-    [SerializeField] private Sprite _fireSprite;
-    [SerializeField] private Sprite _rockSprite;
-    [SerializeField] private Sprite _waterSprite;
+    [SerializeField] private string _atlasPath = "Assets/Sprites/Atlas/Labels.spriteatlas";
 
-    public Sprite GetSprite(PotionLabelType label)
+    private Sprite _fireSprite;
+    private Sprite _rockSprite;
+    private Sprite _waterSprite;
+
+    private Sprite _fireSpriteNB;
+    private Sprite _rockSpriteNB;
+    private Sprite _waterSpriteNB;
+
+    private AsyncOperationHandle<SpriteAtlas> _spriteOperation;
+
+    private void Awake()
     {
-        if(label == PotionLabelType.ROCK)
+        _spriteOperation = Addressables.LoadAssetAsync<SpriteAtlas>(_atlasPath);
+        _spriteOperation.Completed += SpriteLoaded;
+    }
+
+    private void SpriteLoaded(AsyncOperationHandle<SpriteAtlas> obj)
+    {
+        switch (obj.Status)
         {
-            return _rockSprite;
+            case AsyncOperationStatus.Succeeded:
+                LoadSprites(obj.Result);
+                break;
+            case AsyncOperationStatus.Failed:
+                Debug.LogError("SpriteNotLoaded");
+                break;
+            default:
+                break;
         }
-        else if(label == PotionLabelType.FIRE)
+    }
+
+    private void LoadSprites(SpriteAtlas atlas)
+    {
+        _fireSprite = atlas.GetSprite("FireB");
+        _rockSprite = atlas.GetSprite("RockB");
+        _waterSprite = atlas.GetSprite("WaterB");
+
+        _fireSpriteNB = atlas.GetSprite("FireNB");
+        _rockSpriteNB = atlas.GetSprite("RockNB");
+        _waterSpriteNB = atlas.GetSprite("WaterNB");
+    }
+
+    public Sprite GetSprite(PotionLabelType label, bool withBG)
+    {
+        if (withBG)
         {
-            return _fireSprite;
-        }
-        else if(label == PotionLabelType.WATER)
-        {
-            return _waterSprite;
+            if (label == PotionLabelType.ROCK) return _rockSprite;
+            else if (label == PotionLabelType.FIRE) return _fireSprite;
+            else return _waterSprite;
         }
         else
         {
-            Debug.LogError("изображение не найдено");
-            return null;
+            if (label == PotionLabelType.ROCK) return _rockSpriteNB;
+            else if (label == PotionLabelType.FIRE) return _fireSpriteNB;
+            else return _waterSpriteNB;
         }
     }
 }

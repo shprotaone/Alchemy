@@ -5,23 +5,21 @@ using UnityEngine;
 public class PotionTaskSystem : MonoBehaviour
 {
     [SerializeField] private TradeSystem _tradeSystem;
-    [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private LabelToSprite _labelToSprite;
-    [SerializeField] private TaskChance _chances;
+    [SerializeField] private VisitorController _visitorController;       
     [SerializeField] private GameObject _coinPrefab;
     [SerializeField] private Transform _jarTransform;
 
-    [SerializeField] private bool _imageTask;
-
+    private TaskChance _chances;
+    private LabelToSprite _labelToSprite;
     private RewardCalculator _rewardCalculator;
-    private List<PotionLabelType> _labels;
-    
+    private List<PotionLabelType> _labels;   
     private Potion _currentPotion;
 
-    public void Init(List<CounterTask> chances, Money moneySystem)
+    public void Init(List<CounterTask> chances, LabelToSprite labelToSprite)
     {
         _currentPotion = new Potion();
         _rewardCalculator = new RewardCalculator();
+        _labelToSprite = labelToSprite;
         _chances = new TaskChance(chances);
     }
 
@@ -41,7 +39,6 @@ public class PotionTaskSystem : MonoBehaviour
 
     private Potion GetPotionForTask()
     {
-        //TODO: CLEAR
         int count = _chances.GetTaskCount();
 
         _labels = new List<PotionLabelType>();    
@@ -60,12 +57,11 @@ public class PotionTaskSystem : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            sprites[i] = _labelToSprite.GetSprite(_labels[i]);
+            sprites[i] = _labelToSprite.GetSprite(_labels[i],false);
         }
 
         return sprites;
     }
-
 }
 
 #region OldSystem

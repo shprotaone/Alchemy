@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Labels
+  m_EditorClassIdentifier: 
+  m_GroupName: Labels
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5ca3c34503b1d4649a26e4d565f77f31
+  m_SerializeEntries:
+  - m_GUID: 297b64706e0f7094ba039033be86354c
+    m_Address: Assets/Sprites/Atlas/Labels.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8f759d167a738ce4a9b69744d7babece, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: cebc61f4892a4b8438a7888277c4b962, type: 2}
+    - {fileID: 11400000, guid: 5393d37ba7ed48d458b65559372e09a1, type: 2}

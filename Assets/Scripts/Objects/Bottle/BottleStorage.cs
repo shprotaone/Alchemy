@@ -7,21 +7,23 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     [SerializeField] private TMP_Text _amountText; //разделить на view?    
     [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private TableManager _tableManager;
-    [SerializeField] private LabelToSprite _labelToSprite;
+    
     [SerializeField] private Transform _uprisePos;
     [SerializeField] private ParticleSystem _upriseParticle;
 
     [SerializeField] private int _delayDrag;
 
+    private LabelToSprite _labelToSprite;
     private LocalTimer _timer;
     private int _amount;
     private bool _interract;
 
     public LabelToSprite LabelToSprite => _labelToSprite;
 
-    public void InitBottleStorage(int bottleCount)
+    public void InitBottleStorage(int bottleCount,LabelToSprite labelToSprite)
     {
         _amount = bottleCount;
+        _labelToSprite = labelToSprite;
         RefreshAmount();
 
         InitTimer(_delayDrag);

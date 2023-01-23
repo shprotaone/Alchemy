@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelInitializator : MonoBehaviour
-{   
+{
     public static event Action OnLevelStarted;
 
     [SerializeField] private CameraMovement _startCameraPos;
@@ -31,19 +31,20 @@ public class LevelInitializator : MonoBehaviour
     [Header("Подсветка и UI")]
     [SerializeField] private MoneyView _moneyView;
     [SerializeField] private BrightObject _brightObjectSystem;
-    [SerializeField] private UIController _UIController;    
+    [SerializeField] private UIController _UIController;
     [SerializeField] private GameStateController _gameStateController;
     [SerializeField] private LevelSelector _levelSelector;
     [SerializeField] private CompleteLevel _levelCompletePanel;
     [SerializeField] private DayEntryController _dayEntryController;
     [SerializeField] private Transform _guideTransform;
+    [SerializeField] private LabelToSprite _labelToSprite;
 
     private Money _money;
     private MoneyTask _moneyTask;
     private GameProgressSaver _gameSaver;
-    
-    private List<CounterTask> _tasksChance;
 
+    private List<CounterTask> _tasksChance;
+    
     private void Start()
     {
         Application.targetFrameRate = -1;
@@ -85,13 +86,13 @@ public class LevelInitializator : MonoBehaviour
     {
         _inventory.InitInventory();
         _inventory.FillCommonIngredients(_currentLevelPreset.addCommonResourceCount);
-        _bottleStorage.InitBottleStorage(_currentLevelPreset.startBottleCount);
+        _bottleStorage.InitBottleStorage(_currentLevelPreset.startBottleCount,_labelToSprite);
     }
 
     private void InitSystems()
     {
         SetChances();
-        _potionTaskSystem.Init(_tasksChance, _money);
+        _potionTaskSystem.Init(_tasksChance, _labelToSprite);
         
         _visitorController.InitVisitorController(_potionTaskSystem,_currentLevelPreset.visitorCount,_audioManager);
         _gameStateController.Init(_mixingSystem,_currentLevelPreset);

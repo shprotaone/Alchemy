@@ -107,7 +107,6 @@ public sealed class ClickController : MonoBehaviour
             _incrementTween = DOVirtual.DelayedCall(0, IncrementWhileHold, false).SetLoops(-1).SetUpdate(UpdateType.Fixed)
                                                                                  .OnKill(() => _isStartHold = false);
             _isStartHold = true;
-            Debug.Log(_isStartHold);
         }
         
     }

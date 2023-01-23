@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ClaudronLabelView : MonoBehaviour
 {
-    [SerializeField] private List<SpriteRenderer> _sprites;
+    [SerializeField] private List<SpriteRenderer> _sprites;    
     [SerializeField] private LabelToSprite _labelToSprite;
 
     public void SetLabel(List<PotionLabelType> labels)
     {
         for (int i = 0; i < labels.Count; i++)
         {
-            _sprites[i].sprite = _labelToSprite.GetSprite(labels[i]);
+            _sprites[i].sprite = _labelToSprite.GetSprite(labels[i],true);
         }
     }
 
