@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
-{    
-    private const string musicName = "Music";
-    private const string sfxName = "Effects";
+{
+    public event Action OnSoundSettingsChanged;
 
     [SerializeField] private SoundsData _data;
     [SerializeField] private AudioSource _mainMusicSource;
@@ -16,22 +15,22 @@ public class AudioManager : MonoBehaviour
     
     private GameProgressSaver _gameProgress;
 
-    private bool _music;
-    private bool _sfx;
-
+    public bool Music { get; private set; }
+    public bool SFX { get; private set;
+    }
     public AudioSource MainMusicSoruce => _mainMusicSource;
-    public SoundsData Data => _data; 
-    public bool SFX { get { return _sfx; } }
-    public bool Music { get { return _music; } }
+    public SoundsData Data => _data;
 
-    private void Start()
+    public void Init(GameProgressSaver gameProgress)
     {
-        _gameProgress = new GameProgressSaver();
-        _gameProgress.OnSaveProgress += SaveSettings;
-        ReadSaveSettings();
+        _gameProgress = gameProgress;
+        Music = _gameProgress.Music;
+        SFX = _gameProgress.SFX;
 
-        LoadSettings();
-        _settingDisplay.LoadCurrentSettings();
+        _settingDisplay.Init();
+        OnSoundSettingsChanged?.Invoke();
+
+        LoadSettings();        
         _mainMusicSource?.Play();
     }
 
@@ -49,23 +48,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip GetRandomSound(AudioClip[] clips)
     {
         return clips[UnityEngine.Random.Range(0, clips.Length)];
-    }
-
-    private void ReadSaveSettings()
-    {
-        if (_gameProgress.IsFirstGame == 0)
-        {
-            _music = true;
-            _sfx = true;
-            _gameProgress.IsFirstGame = 1;
-            SaveSettings();
-        }
-        else
-        {
-            _music = Convert.ToBoolean(PlayerPrefs.GetInt(musicName));
-            _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName));
-        }
-    }
+    }  
 
     /// <summary>
     /// Загрузка текущих настроек
@@ -74,8 +57,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="sounds"></param>
     public void LoadSettings()
     {
-        SetSound(musicName, _music);
-        SetSound(sfxName, _sfx);
+        SetSound(_gameProgress.musicName, Music);
+        SetSound(_gameProgress.sfxName, SFX);
     }
 
     private void SetSound(string soundLayer, bool value)
@@ -92,39 +75,32 @@ public class AudioManager : MonoBehaviour
 
     public void SwitchMusic()
     {
-        if (_music)
+        if (Music)
         {
-            _music = false;
+            Music = false;
         }
         else
         {
-            _music = true;
+            Music = true;
         }
 
-        SaveSettings();
-        _settingDisplay.ChangeSpriteMusic();
-        SetSound(musicName, _music);
+        _gameProgress.SaveSoundsSettings(Music, SFX);
+        SetSound(_gameProgress.musicName, Music);
+        OnSoundSettingsChanged?.Invoke();       
     }
 
     public void SwitchSFX()
     {
-        if (_sfx)
+        if (SFX)
         {
-            _sfx = false;
+            SFX = false;
         }
         else
         {
-            _sfx = true;
+            SFX = true;
         }
-
-        SaveSettings();
-        _settingDisplay.ChangeSpriteSounds();
-        SetSound(sfxName, _sfx);
-    }
-
-    private void SaveSettings()
-    {
-        PlayerPrefs.SetInt(musicName, _music.GetHashCode());
-        PlayerPrefs.SetInt(sfxName, _sfx.GetHashCode());
+        _gameProgress.SaveSoundsSettings(Music, SFX);
+        SetSound(_gameProgress.sfxName, SFX);
+        OnSoundSettingsChanged?.Invoke();      
     }
 }

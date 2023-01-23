@@ -50,6 +50,7 @@ public sealed class ClickController : MonoBehaviour
     private float _lastTimeButtonPressed;
     private float _delayTime;
 
+    private bool _isStartHold;
     public float ResetDelayTime => _resetFailDelayTime;
     private void OnEnable()
     {
@@ -97,12 +98,18 @@ public sealed class ClickController : MonoBehaviour
     }
 
     private void HandleButtonHold()
-    {
-        
+    {       
         _claudronEffectController.Boil();
         PrepareCooking();
         //InvokeRepeating(nameof(IncrementWhileHold), 0, _incrementPauseTime);
-        _incrementTween = DOVirtual.DelayedCall(0, IncrementWhileHold,false).SetLoops(-1).SetUpdate(UpdateType.Fixed);
+        if(!_isStartHold)
+        {
+            _incrementTween = DOVirtual.DelayedCall(0, IncrementWhileHold, false).SetLoops(-1).SetUpdate(UpdateType.Fixed)
+                                                                                 .OnKill(() => _isStartHold = false);
+            _isStartHold = true;
+            Debug.Log(_isStartHold);
+        }
+        
     }
 
     private void IncrementWhileHold()
@@ -184,9 +191,10 @@ public sealed class ClickController : MonoBehaviour
             DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
         });*/
 
-        var progressPerSegment = _maxClickCounterValue / (_currentParts.Count);
-        var currentPartNumber = (_counter.Value / progressPerSegment);
+        float progressPerSegment = (float)_maxClickCounterValue / _currentParts.Count;
+        float  resultSegment = _counter.Value / progressPerSegment;
 
+        var currentPartNumber = Mathf.FloorToInt(resultSegment);
         if (currentPartNumber < _currentParts.Count)
         {
             var currentPart = _currentParts[currentPartNumber];
@@ -204,8 +212,7 @@ public sealed class ClickController : MonoBehaviour
         {
             FailCoocking();
         }
-   
-        //DOVirtual.DelayedCall(_resetDelayTime, () => Reset());
+
     }
 
     private void ShowMessage(string message)

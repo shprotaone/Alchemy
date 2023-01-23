@@ -10,7 +10,7 @@ public class DayEntryController : MonoBehaviour
     [SerializeField] private TMP_Text _dayText;
     [SerializeField] private CanvasGroup _group;
 
-    public void CallNextDay(int dayCount)
+    public Tween CallNextDay(int dayCount)
     {
         _group.gameObject.SetActive(true);
 
@@ -18,9 +18,9 @@ public class DayEntryController : MonoBehaviour
         _dayText.alpha = 0;
         _dayTitle.alpha = 0;
 
-        _dayText.text = dayCount.ToString();
-        _dayText.DOFade(1, 2).OnComplete(DisablePanel);
+        _dayText.text = dayCount.ToString();       
         _dayTitle.DOFade(1, 2);
+        return _dayText.DOFade(1, 2).OnComplete(DisablePanel);
     }
 
     public void DisablePanel()

@@ -6,7 +6,6 @@ using UnityEngine;
 public class LevelInitializator : MonoBehaviour
 {   
     public static event Action OnLevelStarted;
-    public static event Action OnLevelEnded;
 
     [SerializeField] private CameraMovement _startCameraPos;
 
@@ -37,6 +36,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private LevelSelector _levelSelector;
     [SerializeField] private CompleteLevel _levelCompletePanel;
     [SerializeField] private DayEntryController _dayEntryController;
+    [SerializeField] private Transform _guideTransform;
 
     private Money _money;
     private MoneyTask _moneyTask;
@@ -49,15 +49,18 @@ public class LevelInitializator : MonoBehaviour
         Application.targetFrameRate = -1;
         DOTween.SetTweensCapacity(1250,500);
 
+        _gameSaver = new GameProgressSaver();
+
         _levelSelector.Init();
         _currentLevelPreset = _levelSelector.CurrentLevel;
         InitLevelSettings();
-        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
+        _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber).OnKill(FirstStart);
     }  
 
     public void InitLevelSettings()
     {
         _startDialogViewer.DisableViewer();
+        _audioManager.Init(_gameSaver);
         _audioManager?.MainMusicSoruce.Play();
 
         InitTask();
@@ -67,7 +70,7 @@ public class LevelInitializator : MonoBehaviour
             _money = new Money(_moneyView, _currentLevelPreset.startMoney,_moneyTask.TaskMoney,_currentLevelPreset.minRangeMoney);
         }
 
-        _gameManager.Init(_money);
+        _gameManager.Init(_money,_gameSaver);
         _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money, _moneyTask,_levelSelector,_audioManager);
@@ -125,7 +128,7 @@ public class LevelInitializator : MonoBehaviour
         _gameStateController.Disable();
         _clickController.Disable();
 
-        OnLevelEnded?.Invoke();
+        _gameSaver.FirstGameComplete();
     }
 
     public void LoadNextLevel(LevelPreset preset)
@@ -153,6 +156,14 @@ public class LevelInitializator : MonoBehaviour
         InitLevelSettings();
         OnLevelStarted?.Invoke();
 
+    }
+
+    private void FirstStart()
+    {
+        if (_gameSaver.IsFirstGame)
+        {
+            _guideTransform.gameObject.SetActive(true);
+        }      
     }
 
     private void OnDisable()

@@ -44,31 +44,22 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 0ca6279d6a471ee46987817a9016021a, type: 3}
-    - {fileID: 2800000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
-    - {fileID: 2800000, guid: 9f2447e751556214a92f515e4682f6c5, type: 3}
-    - {fileID: 2800000, guid: 9b13ae41d08e8c343b79c268b4881ad5, type: 3}
-    - {fileID: 2800000, guid: 7277a5e5598bf0e46a8995b693b6792c, type: 3}
-    - {fileID: 2800000, guid: ebcec271ef9fd5341a0c448855af7fc8, type: 3}
-    - {fileID: 2800000, guid: 032d2f6aeadd9854082d8f47dd10b817, type: 3}
+    - {fileID: 2800000, guid: 39761ae1c01ad7747b8b9a2862df6eb1, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
-  - {fileID: 21300000, guid: 9b13ae41d08e8c343b79c268b4881ad5, type: 3}
-  - {fileID: 21300000, guid: ebcec271ef9fd5341a0c448855af7fc8, type: 3}
-  - {fileID: 21300000, guid: 7277a5e5598bf0e46a8995b693b6792c, type: 3}
-  - {fileID: 21300000, guid: 9f2447e751556214a92f515e4682f6c5, type: 3}
-  - {fileID: 21300000, guid: 032d2f6aeadd9854082d8f47dd10b817, type: 3}
+  - {fileID: 1176245160360600735, guid: 39761ae1c01ad7747b8b9a2862df6eb1, type: 3}
+  - {fileID: -7971827817526512134, guid: 39761ae1c01ad7747b8b9a2862df6eb1, type: 3}
+  - {fileID: 3893417718264177278, guid: 39761ae1c01ad7747b8b9a2862df6eb1, type: 3}
+  - {fileID: 6902942414278325751, guid: 39761ae1c01ad7747b8b9a2862df6eb1, type: 3}
   - {fileID: 21300000, guid: 0ca6279d6a471ee46987817a9016021a, type: 3}
   m_PackedSpriteNamesToIndex:
-  - BaseRedButton
-  - btn_icon_music
-  - sound_off
-  - btn_icon_music_mute
-  - BlueButton
-  - sound_on
+  - Group 60_3
+  - Group 60_2
+  - Group 60_1
+  - Group 60_0
   - GuildWindow2 2
   m_RenderDataMap: {}
   m_Tag: PauseMenu

@@ -238,6 +238,7 @@ MonoBehaviour:
   _bottleContainer: {fileID: 415803956}
   _bottle: {fileID: 562828405}
   _bar: {fileID: 1826506306}
+  _amountMultiply: 2.6
 --- !u!1 &5897921959830797888
 GameObject:
   m_ObjectHideFlags: 0
