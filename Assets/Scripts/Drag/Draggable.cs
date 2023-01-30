@@ -42,11 +42,15 @@ public class Draggable : MonoBehaviour
 
         if (_action is Ingredient || _action is BottleModel)
         {
-            yield return new WaitForSeconds(0.2f);     //Как можно еще задержать исполнение? 
-
-            _action.Drop();
+            //yield return new WaitForSeconds(0.3f);     //Как можно еще задержать исполнение? 
+            _action?.Drop();
         }
 
         yield return null;
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(DropActionWithDelay());
     }
 }

@@ -8,6 +8,7 @@ public class BottleView : MonoBehaviour
     public readonly Vector3 increaseScale = new Vector3(0.4f, 0.4f, 1);
     public readonly Vector3 tradeScale = new Vector3(0.2f, 0.2f, 1);
 
+    [SerializeField] private Transform _view;
     [SerializeField] private SpriteRenderer _waterInBottle;
     [SerializeField] private SpriteRenderer _bottle;
     [SerializeField] private List<SpriteRenderer> _labels;

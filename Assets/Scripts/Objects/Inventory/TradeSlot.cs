@@ -1,104 +1,134 @@
+using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TradeSlot : MonoBehaviour,ISlot
 {
+    [SerializeField] private List<BottleModel> _bottlesInSlot;
+    [SerializeField] private BottlePOS[] _bottlePos;
     [SerializeField] private Collider2D _collider;
-    [SerializeField] private bool _isFree;
+    [SerializeField] private BottleInventory _bottleInventory;
 
     private TradeSystem _tradeSystem;
-    private BottleModel _bottleInSlot;
-    private bool _isAdded = false;
-
-    public BottleModel BottleInSlot => _bottleInSlot;
-    public bool IsFree => _isFree;
     
+    private bool _isFree;
+    private bool _colliderDelay;
 
-    private void Start()
+    public List<BottleModel> BottlesInSlot => _bottlesInSlot;
+    public bool IsFree => _isFree;   //проверка что все слоты заполнены
+
+    public Transform Transform => this.transform;
+
+    public void Init(TradeSystem tradeSystem)
     {
-        _isFree = true;
-        _tradeSystem = GetComponentInParent<TradeSystem>();
+        _tradeSystem = tradeSystem;
+        _bottlesInSlot = new List<BottleModel>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out BottleModel bottle))
         {
-            if(_bottleInSlot == bottle)
+            SetSlot(bottle);
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out BottleModel bottle))
+        {
+            //удаление из списка бутылок в слоте.
+            _bottlesInSlot.Remove(bottle);
+            DeleteDraggableBottleFromSlot(bottle);
+            //просчет оставшихся лейблов в слоте. 
+            DeleteLabel(bottle);
+        }
+    }
+
+    private void DeleteDraggableBottleFromSlot(BottleModel bottle)
+    {
+        foreach (var slot in _bottlePos)
+        {
+            if(slot.Bottle != null && slot.Bottle == bottle)
             {
-                _bottleInSlot = bottle;
-                bottle.transform.SetParent(this.transform);
+                slot.ResetSlot();
             }
-            else
-            {                
-                if (IsFree)
-                {
-                    SetSlot(bottle, true);
-                    _isAdded = true;
-                }
-            }          
         }
     }
 
-    public void SetSlot(BottleModel bottle, bool IsDraggable)
+    private void DeleteLabel(BottleModel bottle)
     {
-        if (!_isAdded)  //вторая проверка
-        {
-            bottle.SetPosition(this.transform);
-            _isFree = false;
-
-            _tradeSystem.FillLabels(bottle.Data.Labels);
-            _bottleInSlot = bottle;           
-        }
-
-        SlotBehaviour(bottle._prevSlot);
-        CheckSlot();
+        if(bottle.Data != null) _tradeSystem.DeleteLabel(bottle.Data.Labels);
     }
 
-    private void SlotBehaviour(ISlot slot)
+    private ISlot GetSlot(BottleModel bottle)
     {
-        if (slot is TradeSlot trade)
+        foreach (var slot in _bottlePos)
         {
-            trade.SetSlotFree();
-            trade.CheckSlot();
+            if (slot.IsFree)
+            {
+                slot.SetSlot(bottle);
+                return slot.GetSlot();
+            }
         }
-        else
+        Debug.Log("Свободные позиции не найдены");
+        return null;
+    }
+
+    private void AddBottleToList(BottleModel bottle)
+    {
+        if(_bottlesInSlot.Count < 3)
         {
-            slot?.CheckSlot();
+            _bottlesInSlot.Add(bottle);
+            _tradeSystem.FillLabels(bottle.Data.Labels);          
+        }
+    }
+
+    public void SetSlot(BottleModel bottle)
+    {
+        ISlot slot = GetSlot(bottle);
+        //Присвоение бутылке позициии свободного слота
+        bottle.SetSlot(slot.Transform);
+        //Добавление в список текущих бутылок
+        AddBottleToList(bottle);
+        //Просчет стоимости текщих лейблов из бутылок
+        _tradeSystem.CalculateReward();
+
+        _colliderDelay = true;
+        DOVirtual.DelayedCall(1, () => _colliderDelay = false);
+    }
+
+    public void SetSlotFree()
+    {
+        _isFree = true;
+    }
+
+    public void ResetAllBottlesAfterTrade()
+    {
+        foreach (var slot in _bottlePos)
+        {
+            slot.ResetSlotAfterTrade();
+        }
+    }
+
+    public void ResetSlot()
+    {
+        
+    }
+
+    public void ReturnBottles()
+    {
+        foreach (var bottle in _bottlesInSlot)
+        {
+            bottle.ReturnToSlot();
         }
     }
 
     public void CheckSlot()
     {
-        ColliderController();       
-    }
-
-    public void SetSlotFree()
-    {
-        _tradeSystem.DeleteLabel(_bottleInSlot.Data.Labels);
-        _isAdded = false;
-        _isFree = true;
-        _bottleInSlot = null;
-        ColliderController();
-    }
-
-    public void ResetSlot()
-    {
-        _isFree = true;
-        _isAdded = false;       
-        _bottleInSlot.DestroyBottle();
-        _bottleInSlot = null;
-        ColliderController();
-    }
-    private void ColliderController()
-    {
-        if (IsFree)
-        {
-            _collider.enabled = true;
-            _tradeSystem.CalculateReward();
-        }
-        else
-        {
-            _collider.enabled = false;
-        }
+        
     }
 }

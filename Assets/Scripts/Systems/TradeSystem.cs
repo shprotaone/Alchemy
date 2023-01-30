@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TradeSystem : MonoBehaviour
 {
-    [SerializeField] private List<TradeSlot> _slots;
+    [SerializeField] private TradeSlot _tradeSlot;
     [SerializeField] private List<PotionLabelType> _labelsIn;
     [SerializeField] private List<PotionLabelType> _labelInTask;
     [SerializeField] private TradeSystemView _tradeView;
@@ -24,6 +24,8 @@ public class TradeSystem : MonoBehaviour
     public void Init(VisitorController visitorController,Money money,AudioManager audioManager) 
     {
         _tradeView.Init(this);
+        _tradeSlot.Init(this);
+
         _visitorController = visitorController;
         _audioManager = audioManager;
 
@@ -50,7 +52,7 @@ public class TradeSystem : MonoBehaviour
         CalculateReward();
     }
 
-    public void ClearLabelList()
+    private void ClearLabelList()
     {
         _labelsIn.Clear();
     }
@@ -66,7 +68,7 @@ public class TradeSystem : MonoBehaviour
     }
 
     public void CalculateReward()
-    {
+    {       
         _indexMatch = _matchCalculate.IndexMatchLabel(_labelsIn, _task.CurrentPotion.Labels);
         float result = _rewardCalculator.GetReward(_indexMatch);
 
@@ -91,7 +93,7 @@ public class TradeSystem : MonoBehaviour
         _tradeView.TradeButtoneControl(0);
         _audioManager.PlaySFX(_audioManager.Data.CoinDrop);
 
-        ClearSlots(false);
+        ClearSlotsAfterTrade();
     }
 
     public void DeclineTrade()
@@ -105,48 +107,19 @@ public class TradeSystem : MonoBehaviour
         _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
         _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
 
-        ReturnBottle();
-        DOVirtual.DelayedCall(0.3f,() => ClearSlots(true));
-               
+        ReturnBottleAfterDecline();               
     }
 
-    private void ClearSlots(bool decline)
+    private void ClearSlotsAfterTrade()
     {
-        if (decline)
-        {
-            foreach (var slot in _slots)
-            {
-                if (!slot.IsFree)
-                {
-                    slot.SetSlotFree();
-                }
-            }
-        }
-        else
-        {
-            foreach (var slot in _slots)
-            {
-                if (!slot.IsFree)
-                {
-                    slot.ResetSlot();
-                }
-            }
-        }
-
-        CalculateReward();
-        _tradeView.Refresh(0);
+        _tradeSlot.ResetAllBottlesAfterTrade();
         _libraVisual.ResetPos();
+        _tradeView.Refresh(0);
     }
 
-    private void ReturnBottle()
+    private void ReturnBottleAfterDecline()
     {
-        foreach (var slot in _slots)
-        {
-            if (!slot.IsFree)
-            {
-                slot.BottleInSlot.ReturnToSlot();                
-            }
-        }
+        _tradeSlot.ReturnBottles();
     }
 
     public void Disable()

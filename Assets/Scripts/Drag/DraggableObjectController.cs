@@ -35,7 +35,7 @@ public class DraggableObjectController : MonoBehaviour
     {
         foreach (var slot in _bottleInventory.Slots)
         {
-            slot.BottlesInSlot?.SetInterract(true);
+            slot.BottleInSlot?.SetInterract(true);
         }
     }
 
@@ -43,7 +43,7 @@ public class DraggableObjectController : MonoBehaviour
     {
         foreach (var slot in _bottleInventory.Slots)
         {
-            slot.BottlesInSlot?.SetInterract(false);
+            slot.BottleInSlot?.SetInterract(false);
         }
     }
 

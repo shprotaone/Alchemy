@@ -40,10 +40,10 @@ public class CompletePotionViewSlot : MonoBehaviour
 
             for (int i = 0; i < _images.Count; i++)
             {
-                if (i < slot.BottlesInSlot.Data.Labels.Count)
+                if (i < slot.BottleInSlot.Data.Labels.Count)
                 {
                     _images[i].enabled = true;
-                    _images[i].sprite = slot.BottlesInSlot.View.LabelSprites[i].sprite;
+                    _images[i].sprite = slot.BottleInSlot.View.LabelSprites[i].sprite;
                 }
                 else
                 {

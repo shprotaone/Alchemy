@@ -49,7 +49,7 @@ public class MixingSystemv3 : MonoBehaviour
             CreatePotionForBottle();
             bottle.FillBottle(_potionInClaudron, _waterColor.ResultColor);
 
-            SetPositionBottle(bottle);
+            SetSlotInInventory(bottle);
             _potionViewer.AddLastPotion(bottle);
 
             OnBottleFilled?.Invoke();
@@ -63,7 +63,7 @@ public class MixingSystemv3 : MonoBehaviour
         }
     }
 
-    private void SetPositionBottle(BottleModel bottle)
+    private void SetSlotInInventory(BottleModel bottle)
     {
         FullBottleSlot fullSlot;
 
@@ -71,7 +71,8 @@ public class MixingSystemv3 : MonoBehaviour
 
         if (fullSlot != null)
         {
-            bottle.SetPosition(fullSlot.transform);
+            //bottle.SetSlot(fullSlot.transform);
+            bottle.SetDestination(fullSlot.transform);
             _bottleInventory.AddPotionInInventory(_potionInClaudron);
         }
         else

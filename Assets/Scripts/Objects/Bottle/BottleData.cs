@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+[System.Serializable]
 public class BottleData
 {    
     private List<PotionLabelType> _labels;

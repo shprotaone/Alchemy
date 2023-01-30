@@ -9,6 +9,8 @@ public class TradeSystemV2 : MonoBehaviour,ISlot
 
     public bool IsFree => throw new System.NotImplementedException();
 
+    public Transform Transform => throw new System.NotImplementedException();
+
     private void Start()
     {
         _bottles = new List<BottleModel>();
@@ -22,7 +24,7 @@ public class TradeSystemV2 : MonoBehaviour,ISlot
             if (!duplicate)
             {
                 _bottles.Add(bottle);
-                bottle.SetPosition(GetPositon());
+                bottle.SetSlot(GetPositon());
             }
         }
     }
