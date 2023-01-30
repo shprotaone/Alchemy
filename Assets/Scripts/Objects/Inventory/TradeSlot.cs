@@ -91,7 +91,7 @@ public class TradeSlot : MonoBehaviour,ISlot
     {
         ISlot slot = GetSlot(bottle);
         //Присвоение бутылке позициии свободного слота
-        bottle.SetSlot(slot.Transform);
+        bottle.SetPosition(slot.Transform);
         //Добавление в список текущих бутылок
         AddBottleToList(bottle);
         //Просчет стоимости текщих лейблов из бутылок

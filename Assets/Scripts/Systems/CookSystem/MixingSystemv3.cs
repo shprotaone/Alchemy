@@ -72,7 +72,7 @@ public class MixingSystemv3 : MonoBehaviour
         if (fullSlot != null)
         {
             //bottle.SetSlot(fullSlot.transform);
-            bottle.SetDestination(fullSlot.transform);
+            bottle.SetPosition(fullSlot.transform);
             _bottleInventory.AddPotionInInventory(_potionInClaudron);
         }
         else

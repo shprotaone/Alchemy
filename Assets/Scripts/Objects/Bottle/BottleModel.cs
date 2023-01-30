@@ -6,22 +6,22 @@ using UnityEngine;
 public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 {
     private const float moveSpeed = 0.3f;
-    
+
     [SerializeField] private BottleView _bottleView;
     [SerializeField] private BoxCollider2D _collider;
     [SerializeField] private Rigidbody2D _rigid;
     [SerializeField] private LabelPhysController _labelController;
     [SerializeField] private ObjectType _type;
-    [SerializeField] private BottleData _bottleData;
 
     public ISlot _slot;
     public ISlot _prevSlot;
 
-    private Transform _destination; 
+    private Transform _destination;
+    private BottleData _bottleData;
     private BottleStorage _bottleStorage;
     private BottleInventory _bottleInventory;
     public BottleData Data => _bottleData;
-    public BottleView View => _bottleView;    
+    public BottleView View => _bottleView;
     public ObjectType Type => _type;
 
     public void InitBottle(BottleStorage storage, BottleInventory inventory)
@@ -46,10 +46,10 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         {
             Debug.Log("Уже заполнена");
         }
-       
+
         _bottleView.AddLabels(_bottleStorage.LabelToSprite, _bottleData.Labels);
-        
-        DOVirtual.DelayedCall(0.2f,RepositionToSlot);
+
+        DOVirtual.DelayedCall(0.2f, RepositionToSlot);
     }
 
     private void SetWaterColor(Color color)
@@ -60,27 +60,23 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     /// Репозиция в слот из котла
     /// </summary>
     private void RepositionToSlot()
-    {       
+    {
         _bottleView.StandartSize();
         _labelController.Deactivate();
 
         if (_destination != null)
         {
-            transform.DOMove(_destination.position, 1, false).SetEase(Ease.InOutBack, 0.8f)
+            transform.DOMove(_destination.position, 2, false).SetEase(Ease.InOutBack, 0.8f)
                                                                  .OnComplete(ReturnBottleToSlot);
         }
 
-        //_slot.SetSlot(this,false);        
+        _slot.SetSlot(this);
     }
 
-    public void SetDestination(Transform destinationTransform)
-    {
-        _destination = destinationTransform;
-    }
 
-    public void SetSlot(Transform slotTransform)
+    public void SetPosition(Transform slotTransform)
     {
-        slotTransform.TryGetComponent(out ISlot slot);         
+        slotTransform.TryGetComponent(out ISlot slot);
 
         if (slot != null)
         {
@@ -88,7 +84,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
             _slot = slot;
             _destination = slotTransform;
             transform.SetParent(slotTransform);
-        }            
+        }
     }
 
     public void Drop()
@@ -96,22 +92,28 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         //_collider.enabled = false;
 
         _bottleView.StandartSize();
-        _labelController.Deactivate();       
+        _labelController.Deactivate();
 
-        if(_destination != null)
+        if (_destination != null)
         {
             transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
-                                                                 .OnComplete(ReturnBottleToSlot);
+                                                                     .OnComplete(ReturnBottleToSlot);
+                                                                 
         }
-
-        _prevSlot.CheckSlot();
+        _slot?.CheckSlot();
     }
 
-    
+
     public void ReturnToSlot()
     {
-
-        SetSlot(_bottleInventory.GetSlot(_bottleData.PotionInBottle).transform);
+        if (_prevSlot is FullBottleSlot slot)
+        {
+            SetPosition(slot.transform);
+        }
+        else
+        {
+            SetPosition(_bottleInventory.GetSlot(_bottleData.PotionInBottle).transform);
+        }
 
         Drop();
     }
@@ -127,7 +129,12 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     public void Action()
     {
         _bottleView.IncreaseSize();
-        _labelController.Activate();      
+        _labelController.Activate();
+
+        if (_slot is FullBottleSlot fullSlot)
+        {
+            DOVirtual.DelayedCall(0.2f, fullSlot.CheckCountSlot);
+        }
     }
 
     public void DestroyBottle()
@@ -142,6 +149,11 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     public void SetInterract(bool value)
     {
         _collider.enabled = value;
+    }
+
+    public void SetForcePosition(Vector3 position)
+    {
+        this.transform.position = position;        
     }
 }
 

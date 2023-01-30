@@ -14,7 +14,7 @@ public class ReturnZone : MonoBehaviour
             if (bottle.gameObject.layer != Layer.Dragging)
             {
                 _isCall = true;                
-                bottle.SetSlot(_bottleInventory.GetSlot(bottle.Data.PotionInBottle).transform);
+                bottle.SetPosition(_bottleInventory.GetSlot(bottle.Data.PotionInBottle).transform);
                 //if(bottle._prevSlot is TradeSlot slot)
                 //{
                 //    slot.SetSlotFree();

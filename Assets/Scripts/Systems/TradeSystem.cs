@@ -49,7 +49,7 @@ public class TradeSystem : MonoBehaviour
     {
         _labelsIn.AddRange(label);
         _libraVisual.CheckPosition(label.Count);
-        CalculateReward();
+        //CalculateReward();
     }
 
     private void ClearLabelList()

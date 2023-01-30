@@ -33,7 +33,10 @@ public class Draggable : MonoBehaviour
     {
         _collider.enabled = true;
 
-        StartCoroutine(DropActionWithDelay());
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(DropActionWithDelay());
+        }      
     }
 
     private IEnumerator DropActionWithDelay()
@@ -42,7 +45,7 @@ public class Draggable : MonoBehaviour
 
         if (_action is Ingredient || _action is BottleModel)
         {
-            //yield return new WaitForSeconds(0.3f);     //Как можно еще задержать исполнение? 
+            yield return new WaitForSeconds(0.3f);     //Как можно еще задержать исполнение? 
             _action?.Drop();
         }
 

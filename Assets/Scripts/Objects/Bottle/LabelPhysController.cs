@@ -20,4 +20,9 @@ public class LabelPhysController : MonoBehaviour
         transform.DOLocalMove(stablePos, 0.2f);
         transform.DOLocalRotate(Vector3.zero, 0.2f);
     }
+
+    private void OnDisable()
+    {
+        Deactivate();
+    }
 }

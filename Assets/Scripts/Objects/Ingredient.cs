@@ -63,7 +63,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     {
         if (!_inClaudron)
         {
-            _slot.IncreaseAmount();
+            _slot?.IncreaseAmount();
 
             ObjectPool.SharedInstance.DestroyObject(gameObject);
         }

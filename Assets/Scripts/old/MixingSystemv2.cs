@@ -57,7 +57,7 @@ public class MixingSystemv2 : MonoBehaviour
 
                 //CheckOnContraband(_potionOnClaudron);
                 //bottle.FillBottle(_potionOnClaudron);
-                bottle.SetSlot(_bottleInventory.GetSlot(_potionOnClaudron).transform);
+                bottle.SetPosition(_bottleInventory.GetSlot(_potionOnClaudron).transform);
                 _bottleInventory.AddPotionInInventory(_potionOnClaudron);
 
                 FilledBottleDelegateForTutorial?.Invoke();

@@ -9,9 +9,9 @@ public class FullBottleSlot : MonoBehaviour,ISlot
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private bool _isFree;
 
-    private BottleModel _bottleInSlot;
-    private bool _inThisSlot;
-    public BottleModel BottleInSlot => _bottleInSlot;
+    [SerializeField] private BottleModel _bottlesInSlot;
+
+    public BottleModel BottleInSlot => _bottlesInSlot;
     public int Count { get; private set; }
     public bool IsFree => _isFree;
 
@@ -24,18 +24,24 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out BottleModel bottle) )
+        if (collision.TryGetComponent(out BottleModel bottle))
         {
             if (IsFree)
             {
-                SetSlot(bottle);
+                SetSlot(bottle, true);
             }
-            else if (Enumerable.SequenceEqual(_bottleInSlot?.Data.Labels, bottle?.Data.Labels))
+            else if (_bottlesInSlot != null)
             {
-                bottle.SetSlot(this.transform);
-                CheckSlot();
+                bool isEqual = _bottlesInSlot.Data.Labels.SequenceEqual(bottle.Data.Labels);
+                if(isEqual)
+                {
+                    bottle.SetPosition(this.transform);
+                    CheckSlot();
+                    bottle.SetForcePosition(this.transform.position);       //сделано специально, так как при маленьком расстоянии бутылка не успевает долететь
+                }
+                ScaleBottles();
             }
-            ScaleBottles();
+            
         }
     }
 
@@ -47,12 +53,30 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         }
     }
 
+    public void SetSlot(BottleModel bottle, bool IsDraggable)
+    {
+        if (IsDraggable)
+        {
+            bottle.SetPosition(this.transform);
+        }
+
+        _isFree = false;
+
+        if (_bottlesInSlot == null)
+        {
+            _bottlesInSlot = bottle;
+        }
+
+        SlotBehaviour(bottle._prevSlot);
+        CheckSlot();
+    }
+
     private void SlotBehaviour(ISlot slot)
     {
         if (slot is TradeSlot trade)
         {
             trade.SetSlotFree();
-            //trade.CheckSlot();
+            trade.CheckSlot();
         }
         else
         {
@@ -60,29 +84,25 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         }
     }
 
-    public void SetSlot(BottleModel bottle)
+    public void CheckSlot()
     {
-        bottle.SetSlot(this.transform);
+        CheckCountSlot();
 
-        if (_bottleInSlot == null)
+        if (transform.childCount == 1)
         {
-            _bottleInSlot = bottle;
+            SetFreeSlot();
         }
-        _isFree = false;
-
-        SlotBehaviour(bottle._prevSlot);
-        CheckSlot();
+        DOVirtual.DelayedCall(0.2f, () =>       //задержка 0,2f была сделана для того, чтобы не сразу определялся пустой слот или нет
+        {                                       
+                                                
+        });
     }
 
-    public void CheckSlot()
+    public void CheckCountSlot()
     {
         Count = transform.childCount - 1;
 
-        if (Count == 0)
-        {
-            _isFree = true;
-        }
-        else if (Count <= 1)
+        if (Count <= 1)
         {
             _countText.text = " ";
         }
@@ -96,30 +116,22 @@ public class FullBottleSlot : MonoBehaviour,ISlot
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if(i == 1)
+            if (i == 1)
             {
                 transform.GetChild(i).TryGetComponent(out BottleModel bottle);
-                bottle.transform.DOScale(bottle.View.standartScale, 0.5f).OnStart(() => AfterEnable(bottle)); 
+                bottle.transform.DOScale(bottle.View.standartScale, 0.1f).OnStart(() => bottle.transform.gameObject.SetActive(true));
             }
             else if (transform.GetChild(i).TryGetComponent(out BottleModel bottle))
             {
-                bottle.transform.DOScale(0, 0.5f).OnComplete(() =>bottle.gameObject.SetActive(false));
+                bottle.transform.DOScale(0, 0.3f).OnComplete(() => bottle.transform.gameObject.SetActive(false));       
             }
         }
-    }
-
-    private void AfterEnable(BottleModel bottle)
-    {
-        _inThisSlot = true;
-        bottle.gameObject.SetActive(true);
-
-        DOVirtual.DelayedCall(1, () => _inThisSlot = false);
     }
 
     private void SetFreeSlot()
     {
         _isFree = true;
-        _bottleInSlot = null;
+        _bottlesInSlot = null;
     }
 
     public void ResetSlot()
@@ -131,11 +143,14 @@ public class FullBottleSlot : MonoBehaviour,ISlot
             if (bottle != null)
             {
                 bottle.DestroyBottle();
-                SetFreeSlot();
+                CheckSlot();
             }
-
-            CheckSlot();
         }
+        SetFreeSlot();
+    }
+
+    public void SetSlot(BottleModel bottle)
+    {
         
     }
 }  

@@ -24,7 +24,7 @@ public class TradeSystemV2 : MonoBehaviour,ISlot
             if (!duplicate)
             {
                 _bottles.Add(bottle);
-                bottle.SetSlot(GetPositon());
+                bottle.SetPosition(GetPositon());
             }
         }
     }
