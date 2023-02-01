@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -67,5 +68,10 @@ public class GuideController : MonoBehaviour
         Movement();
         _guideText.text = _text._guideTextRU[_currentContentIndex];
         _dragController?.SetInterract(false);
+    }
+
+    internal void Activate()
+    {
+        gameObject.SetActive(true);
     }
 }

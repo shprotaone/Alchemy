@@ -78,5 +78,11 @@ public class Slot : MonoBehaviour,IAction,IInterract,IDragTimer
     {        
         StartCoroutine(_timer.StartTimer());        
     }
+
+    private void OnDisable()
+    {
+        StopCoroutine(_timer.StartTimer());
+        _timer.OnTimerEnded -= SetInterract;
+    }
 }
 

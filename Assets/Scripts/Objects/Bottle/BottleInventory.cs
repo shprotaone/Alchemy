@@ -24,7 +24,7 @@ public class BottleInventory : MonoBehaviour
 
         foreach (var slot in _slots)
         {
-            if (!slot.IsFree && slot != null)
+            if (slot.Bottles.Count > 0)
             {
                 slot.ResetSlot();
             }

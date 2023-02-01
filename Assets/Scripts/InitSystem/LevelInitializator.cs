@@ -12,9 +12,7 @@ public class LevelInitializator : MonoBehaviour
     [Header("Настройки для запуска")]
     [SerializeField] private bool _directLoad;
     [SerializeField] private LevelPreset _currentLevelPreset;
-
     [SerializeField] private BackgroundLoader _backGroundLoader;
-    [SerializeField] private StartDialogViewer _startDialogViewer;
 
     [Header("Системы")]
     [SerializeField] private GameManager _gameManager;
@@ -36,14 +34,16 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private LevelSelector _levelSelector;
     [SerializeField] private CompleteLevel _levelCompletePanel;
     [SerializeField] private DayEntryController _dayEntryController;
-    [SerializeField] private Transform _guideTransform;
+    [SerializeField] private FirstPlayObserver _firstPlayHandler;
     [SerializeField] private LabelToSprite _labelToSprite;
+    [SerializeField] private DraggableObjectController _dragController;
 
     private Money _money;
     private MoneyTask _moneyTask;
     private GameProgressSaver _gameSaver;
 
-    private List<CounterTask> _tasksChance;
+    private List<RandomPart> _tasksChance;
+    private List<RandomPart> _labelTypeForTaskChance;
     
     private void Start()
     {
@@ -60,7 +60,6 @@ public class LevelInitializator : MonoBehaviour
 
     public void InitLevelSettings()
     {
-        _startDialogViewer.DisableViewer();
         _audioManager.Init(_gameSaver);
         _audioManager?.MainMusicSoruce.Play();
 
@@ -68,7 +67,7 @@ public class LevelInitializator : MonoBehaviour
 
         if (_money == null)
         {
-            _money = new Money(_moneyView, _currentLevelPreset.startMoney,_moneyTask.TaskMoney,_currentLevelPreset.minRangeMoney);
+            _money = new Money(_moneyView ,0,_moneyTask.TaskMoney,0);
         }
 
         _gameManager.Init(_money,_gameSaver);
@@ -92,7 +91,7 @@ public class LevelInitializator : MonoBehaviour
     private void InitSystems()
     {
         SetChances();
-        _potionTaskSystem.Init(_tasksChance, _labelToSprite);
+        _potionTaskSystem.Init(_tasksChance, _labelTypeForTaskChance, _labelToSprite,_currentLevelPreset.withEvent);
         
         _visitorController.InitVisitorController(_potionTaskSystem,_currentLevelPreset.visitorCount,_audioManager);
         _gameStateController.Init(_mixingSystem,_currentLevelPreset);
@@ -115,11 +114,17 @@ public class LevelInitializator : MonoBehaviour
 
     private void SetChances()
     {
-        _tasksChance = new List<CounterTask>();
+        _tasksChance = new List<RandomPart>();
 
-        _tasksChance.Add(new CounterTask(1, _currentLevelPreset.chance1Label));
-        _tasksChance.Add(new CounterTask(2, _currentLevelPreset.chance2Label));
-        _tasksChance.Add(new CounterTask(3, _currentLevelPreset.chance3Label));
+        _tasksChance.Add(new RandomPart(1, _currentLevelPreset.chance1Label));
+        _tasksChance.Add(new RandomPart(2, _currentLevelPreset.chance2Label));
+        _tasksChance.Add(new RandomPart(3, _currentLevelPreset.chance3Label));
+
+        _labelTypeForTaskChance = new List<RandomPart>();
+
+        _labelTypeForTaskChance.Add(new RandomPart(1, _currentLevelPreset.chanceWater));
+        _labelTypeForTaskChance.Add(new RandomPart(2, _currentLevelPreset.chanceFire));
+        _labelTypeForTaskChance.Add(new RandomPart(3, _currentLevelPreset.chanceStone));
     }
 
     public void DisableLevel()
@@ -134,6 +139,7 @@ public class LevelInitializator : MonoBehaviour
 
     public void LoadNextLevel(LevelPreset preset)
     {
+        _moneyView.RefreshMoneyTaskText(_money.CurrentMoney);
         _moneyView.RefreshMoneyText(_money.CurrentMoney);
         _currentLevelPreset = preset;
 
@@ -148,8 +154,6 @@ public class LevelInitializator : MonoBehaviour
     {
         DisableLevel();
         _money.SetMoney(0);
-        _moneyView.RefreshMoneyTaskText(_money.CurrentMoney);
-
         _currentLevelPreset = _levelSelector.GetFirstLevel();
         _levelCompletePanel.Disable();
         _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
@@ -163,11 +167,11 @@ public class LevelInitializator : MonoBehaviour
     {
         if (_gameSaver.IsFirstGame)
         {
-            _guideTransform.gameObject.SetActive(true);
-        }      
+            _firstPlayHandler.Activate();
+        }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DOTween.KillAll();
     }

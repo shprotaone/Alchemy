@@ -12,6 +12,7 @@ public sealed class ClickController : MonoBehaviour
     public event Action OnGoodPotion;
     public event Action OnBadPotion;
 
+    [SerializeField] private ClickerSubject _clickerSubject;
     [SerializeField] private TimerScript _timer;
     [SerializeField] private MonoLimitedNumber _counter;
     [SerializeField] private ButtonEventCatcher _button;
@@ -36,7 +37,6 @@ public sealed class ClickController : MonoBehaviour
     [SerializeField] private float _resetFailDelayTime = 5f;
     [SerializeField] private float _resetCompleteDelayTime;
     [SerializeField] private float _incrementPauseTime = 1f;
-
 
     [Space]
     [SerializeField] private int _countParts;
@@ -101,8 +101,9 @@ public sealed class ClickController : MonoBehaviour
     {       
         _claudronEffectController.Boil();
         PrepareCooking();
+        _clickerSubject.Notify();
         //InvokeRepeating(nameof(IncrementWhileHold), 0, _incrementPauseTime);
-        if(!_isStartHold)
+        if (!_isStartHold)
         {
             _incrementTween = DOVirtual.DelayedCall(0, IncrementWhileHold, false).SetLoops(-1).SetUpdate(UpdateType.Fixed)
                                                                                  .OnKill(() => _isStartHold = false);
@@ -158,7 +159,7 @@ public sealed class ClickController : MonoBehaviour
 
     private void StartCooking()
     {
-        PrepareCooking();
+        PrepareCooking();       
 
         if (_buttonMode == PRESS_BUTTON)
         {

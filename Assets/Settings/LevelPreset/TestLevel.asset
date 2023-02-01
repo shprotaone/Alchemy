@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564228740d25fe34181d692d1010233d, type: 3}
+  m_Name: TestLevel
+  m_EditorClassIdentifier: 
+  levelNumber: 12
+  backgroundSprite: {fileID: 0}
+  _mainSound: {fileID: 0}
+  addCommonResourceCount: 5
+  startBottleCount: 10000
+  visitorCount: 100
+  chance1Label: 100
+  chance2Label: 200
+  chance3Label: 300
+  moneyTaskComplete: 10000
+  chanceWater: 15
+  chanceFire: 1
+  chanceStone: 10
+  withEvent: 1

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,17 +7,20 @@ using UnityEngine.UI;
 
 public class PotionTaskView : MonoBehaviour
 {
-    private const float timeAlpha = 2f;
-    
-    [SerializeField] private TMP_Text _potionNameText;
-    [SerializeField] private TMP_Text _rewardText;
+    private const float timeAlpha = 1f;
+
+    [SerializeField] private EmojiController _emojiController;
     [SerializeField] private Transform _imagesObj;
     [SerializeField] private List<Image> _ingredientImages;
     [SerializeField] private List<Image> _UIImages;
-    [SerializeField] private string _potionInTask;
 
     private PotionTask _task;
+    public EmojiController EmojiController => _emojiController;
 
+    private void OnEnable()
+    {
+        StartCoroutine(SleepRoutine());
+    }
     public void InitTask(PotionTask task)
     {
         ResetIngredientImages();
@@ -33,15 +37,9 @@ public class PotionTaskView : MonoBehaviour
     /// <param name="reward"></param>
     public void FillTaskView(PotionTask task)
     {     
-        _potionNameText.gameObject.SetActive(false);
         _imagesObj.gameObject.SetActive(true);
 
         FillImageTask(task.Images);      
-    }
-
-    public void SetRewardText(PotionTask task)
-    {
-        _rewardText.text = task.RewardCoin.ToString();
     }
 
     /// <summary>
@@ -67,7 +65,7 @@ public class PotionTaskView : MonoBehaviour
         }
     }
 
-    private void RisingTask()
+    public void RisingTask()
     {       
         foreach (var item in _UIImages)
         {
@@ -78,33 +76,71 @@ public class PotionTaskView : MonoBehaviour
         {
             DOTween.ToAlpha(() => item.color, x => item.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
         }
-
-        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
-        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 1, timeAlpha).SetEase(Ease.InExpo);
     }
 
     public void FadingTask()
     {
+        //выключаем лейблы задания
+        DisableLables(true);
+        _emojiController.ShowEmoji(); // показываем Emoji
+        _emojiController.FadeEmoji(timeAlpha);
+
         foreach (var item in _UIImages)
         {
-            DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha);
+            DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha).OnComplete(FadingShowBox);
         }
-
-        foreach (var item in _ingredientImages)
-        {
-            DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha);
-        }
-
-        DOTween.ToAlpha(() => _potionNameText.color, x => _potionNameText.color = x, 0, timeAlpha);
-        DOTween.ToAlpha(() => _rewardText.color, x => _rewardText.color = x, 0, timeAlpha);
     }
 
-    private void OnDisable()
+    public IEnumerator SleepRoutine()
     {
-        ResetIngredientImages();
+        int timeToSleep = 15;
+
+        while (timeToSleep > 0)
+        {
+            timeToSleep--;
+            yield return new WaitForSeconds(1);
+        }
+
+        DisableLables(true);
+        _emojiController.SetSleepEmoji();
+
+        yield return new WaitForSeconds(3);
+
+        _emojiController.FadeEmoji(timeAlpha);
+        DisableLables(false);
+    }
+
+    public void DisableLables(bool flag)
+    {
+        if (flag)
+        {
+            _imagesObj.gameObject.SetActive(false);
+
+            foreach (var item in _ingredientImages)
+            {
+                item.color = new Color(1, 1, 1, 0);
+            }
+        } 
+        else
+        {
+            _imagesObj.gameObject.SetActive(true);
+
+            foreach (var item in _ingredientImages)
+            {
+                item.color = new Color(1, 1, 1, 1);
+            }
+        }
+    }
+    private void FadingShowBox()
+    {
         foreach (var item in _UIImages)
         {
             item.color = new Color(1, 1, 1, 0);
         }
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(SleepRoutine());
     }
 }

@@ -10,7 +10,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
 
     [SerializeField] private LevelInitializator _init;
     [SerializeField] private CompleteLevelPanelController _controller;
-    [SerializeField] private DraggableObjectController _dragController;
+    
     [SerializeField] private GameObject _backGroundPanel;
     [SerializeField] private ParticleSystem _completeParticle;
     [SerializeField] private Button _nextLevelButton;
@@ -43,8 +43,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     {       
         _coinResult.text = _money.CurrentMoney.ToString();
         _audioManager.MainMusicSoruce.Stop();
-        _dragController.SetInterract(false);
-
+        
         if (_moneyTask.TaskMoney < _money.CurrentMoney)
         {
             _nextLevelButton.gameObject.SetActive(true);
@@ -88,7 +87,6 @@ public class CompleteLevel : MonoBehaviour,IMenu
         _controller.Disable();
         _completeParticle.Stop();
         _backGroundPanel.SetActive(false);
-        _dragController.SetInterract(false);
     }
 
     public void Activated()

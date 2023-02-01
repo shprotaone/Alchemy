@@ -15,6 +15,7 @@ public class VisitorView : MonoBehaviour
 
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private SpriteRenderer _visitorImage;
+    [SerializeField] private PotionTaskView _taskView;
 
     public void Rising()
     {  
@@ -22,10 +23,11 @@ public class VisitorView : MonoBehaviour
         _timerText.enabled = false;
 
         _visitorImage.transform.DOScale(1, 2);
-        _visitorImage.transform.DOMove(_upPose, 2);
+        _visitorImage.transform.DOMove(_upPose, 2).OnComplete(_taskView.RisingTask);
         _visitorImage.transform.DOLocalRotate(_rotate, 0.3f)
             .SetLoops(6, LoopType.Yoyo)
             .SetEase(Ease.Linear);
+            
 
         DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, RisingDuration);
     }

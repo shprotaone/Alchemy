@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using DG.Tweening;
 
 public class Visitor : MonoBehaviour
 {
@@ -16,8 +15,12 @@ public class Visitor : MonoBehaviour
     public void Init(PotionTask task)
     {      
         _task = task;
-
         _visitorView.Rising();
+    }
+
+    public void ShowEmoji()
+    {
+        TaskView.EmojiController.ShowEmoji();
     }
 
     public void Disable()
@@ -30,5 +33,10 @@ public class Visitor : MonoBehaviour
     {
         _task = null;
         _visitorView.RefreshView();
+    }
+
+    public void SetEmoji(float index)
+    {
+        TaskView.EmojiController.SetEmoji(index);
     }
 }

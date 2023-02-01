@@ -24,7 +24,6 @@ public class PotionTask
 
     public void SetReward(int reward)
     {
-        _rewardCoin = reward;
-        CurrentTaskView.SetRewardText(this);
+        _rewardCoin = reward;        
     }
 }

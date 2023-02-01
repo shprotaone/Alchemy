@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8905055718911620326}
   - component: {fileID: 8905055718911620321}
+  - component: {fileID: 1221863439}
   m_Layer: 0
   m_Name: InitLevel
   m_TagString: Untagged
@@ -47,7 +48,6 @@ MonoBehaviour:
   _directLoad: 0
   _currentLevelPreset: {fileID: 0}
   _backGroundLoader: {fileID: 0}
-  _startDialogViewer: {fileID: 0}
   _gameManager: {fileID: 0}
   _inventory: {fileID: 0}
   _bottleStorage: {fileID: 0}
@@ -55,11 +55,40 @@ MonoBehaviour:
   _tradeSystem: {fileID: 0}
   _visitorController: {fileID: 0}
   _mixingSystem: {fileID: 0}
+  _clickController: {fileID: 0}
   _cameraMovement: {fileID: 0}
+  _audioManager: {fileID: 0}
   _moneyView: {fileID: 0}
   _brightObjectSystem: {fileID: 0}
   _UIController: {fileID: 0}
   _gameStateController: {fileID: 0}
-  _gameProgress: {fileID: 0}
+  _levelSelector: {fileID: 0}
   _levelCompletePanel: {fileID: 0}
   _dayEntryController: {fileID: 0}
+  _firstPlayHandler: {fileID: 0}
+  _labelToSprite: {fileID: 1221863439}
+--- !u!114 &1221863439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905055718911620327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698f638556feef649939943ed6546819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _atlasPath: Assets/Sprites/Atlas/Labels.spriteatlas
+  _fireSprite: {fileID: 7320620431626507655, guid: 29b6060072d07f74caa9174827952059,
+    type: 3}
+  _rockSprite: {fileID: 1554745273777121078, guid: 29b6060072d07f74caa9174827952059,
+    type: 3}
+  _waterSprite: {fileID: 3849849815805253139, guid: 29b6060072d07f74caa9174827952059,
+    type: 3}
+  _fireSpriteNB: {fileID: -4879296861188627566, guid: 169459fbe957cbd44b0e0c15ac36d6cf,
+    type: 3}
+  _rockSpriteNB: {fileID: 1633630543421584206, guid: 169459fbe957cbd44b0e0c15ac36d6cf,
+    type: 3}
+  _waterSpriteNB: {fileID: -4118604485415975817, guid: 169459fbe957cbd44b0e0c15ac36d6cf,
+    type: 3}

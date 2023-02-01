@@ -46,7 +46,7 @@ public class TradeSystemView : MonoBehaviour
             .OnUpdate(() => _rewardText.text = result.ToString());
     }
 
-    public void RestartMultiply(float multiply)
+    public void RefreshMultiplyValue(float multiply)
     {
         _multiplyText.text = Math.Round((double)multiply, 2).ToString(); ;
     }

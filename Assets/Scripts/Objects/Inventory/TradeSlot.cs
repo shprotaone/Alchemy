@@ -10,10 +10,8 @@ public class TradeSlot : MonoBehaviour,ISlot
     [SerializeField] private Collider2D _collider;
     [SerializeField] private BottleInventory _bottleInventory;
 
-    private TradeSystem _tradeSystem;
-    
+    private TradeSystem _tradeSystem;    
     private bool _isFree;
-    private bool _colliderDelay;
 
     public List<BottleModel> BottlesInSlot => _bottlesInSlot;
     public bool IsFree => _isFree;   //проверка что все слоты заполнены
@@ -97,8 +95,8 @@ public class TradeSlot : MonoBehaviour,ISlot
         //Просчет стоимости текщих лейблов из бутылок
         _tradeSystem.CalculateReward();
 
-        _colliderDelay = true;
-        DOVirtual.DelayedCall(1, () => _colliderDelay = false);
+        //_colliderDelay = true;
+        //DOVirtual.DelayedCall(1, () => _colliderDelay = false);
     }
 
     public void SetSlotFree()

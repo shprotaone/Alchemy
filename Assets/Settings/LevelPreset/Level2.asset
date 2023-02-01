@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564228740d25fe34181d692d1010233d, type: 3}
-  m_Name: Level3
+  m_Name: Level2
   m_EditorClassIdentifier: 
-  levelNumber: 3
-  backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}
-  _mainSound: {fileID: 8300000, guid: 69c52899178beaa48836d2d9b3ce625d, type: 3}
-  addCommonResourceCount: 5
+  levelNumber: 2
+  backgroundSprite: {fileID: 21300000, guid: 726ab7e9ccc7d8249b6dd20cf5160c9e, type: 3}
+  _mainSound: {fileID: 8300000, guid: 6773b4842de337e43bff6debf38dad77, type: 3}
+  addCommonResourceCount: 4
   startBottleCount: 1000
   visitorCount: 5
-  chance1Label: 30
-  chance2Label: 45
-  chance3Label: 30
-  moneyTaskComplete: 1000
-  startMoney: 0
-  minRangeMoney: 0
-  levelTaskText: []
-  goalText: 
-  DropDownMenu: 0
+  chance1Label: 25
+  chance2Label: 35
+  chance3Label: 40
+  moneyTaskComplete: 800
+  chanceWater: 60
+  chanceFire: 30
+  chanceStone: 40
+  withEvent: 1

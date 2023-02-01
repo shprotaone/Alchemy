@@ -63,16 +63,14 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     {
         _bottleView.StandartSize();
         _labelController.Deactivate();
+        _slot.SetSlot(this);
 
         if (_destination != null)
         {
             transform.DOMove(_destination.position, 2, false).SetEase(Ease.InOutBack, 0.8f)
                                                                  .OnComplete(ReturnBottleToSlot);
-        }
-
-        _slot.SetSlot(this);
+        }       
     }
-
 
     public void SetPosition(Transform slotTransform)
     {
@@ -89,8 +87,6 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 
     public void Drop()
     {
-        //_collider.enabled = false;
-
         _bottleView.StandartSize();
         _labelController.Deactivate();
 
@@ -100,9 +96,20 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
                                                                      .OnComplete(ReturnBottleToSlot);
                                                                  
         }
+        SlotBehaviourAfterDrop();
         _slot?.CheckSlot();
     }
 
+    private void SlotBehaviourAfterDrop()
+    {
+        if(_slot is FullBottleSlot fullSlot)
+        {
+            fullSlot.SetSlot(this,true);
+            fullSlot.ScaleBottles();
+        }
+
+        _prevSlot?.CheckSlot();
+    }
 
     public void ReturnToSlot()
     {
@@ -124,6 +131,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     private void ReturnBottleToSlot()
     {
         _collider.enabled = true;
+        if (_slot is FullBottleSlot bottleSlot) bottleSlot.ScaleBottles();
     }
 
     public void Action()
@@ -133,8 +141,11 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 
         if (_slot is FullBottleSlot fullSlot)
         {
-            DOVirtual.DelayedCall(0.2f, fullSlot.CheckCountSlot);
+            fullSlot.DeleteBottle(this);
+            fullSlot.CheckCountSlot();
         }
+
+        _prevSlot?.CheckSlot();
     }
 
     public void DestroyBottle()

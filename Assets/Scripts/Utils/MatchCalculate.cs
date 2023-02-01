@@ -1,11 +1,19 @@
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class MatchCalculate
-{  
+{
+    private List<PotionLabelType> _labelsInBottle;
+    private List<PotionLabelType> _labelsInTask;
+
+    private int _matchIndex;
     public int IndexMatchLabel(List<PotionLabelType> labelsInBottle, List<PotionLabelType> labelsInTask)
     {
         int matchIndex = 0;
+
+        _labelsInBottle = labelsInBottle;   //заполенние для emoji индекса
+        _labelsInTask = labelsInTask;
 
         labelsInBottle.Sort();
         labelsInTask.Sort();
@@ -24,8 +32,16 @@ public class MatchCalculate
                 }
             }           
         }
-        
+
+        _matchIndex = matchIndex;       
         return matchIndex;
+    }
+
+    public int GetEmojiIndex()
+    {
+        if (_matchIndex == 0) return 0;
+        else if (_matchIndex == _labelsInTask.Count && _matchIndex == _labelsInTask.Count) return 2;
+        else return 1;
     }
 
     private List<LabelsPair> FillDictionaryTask(List<PotionLabelType> labelsInTask)

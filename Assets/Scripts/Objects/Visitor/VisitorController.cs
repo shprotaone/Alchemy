@@ -28,7 +28,7 @@ public class VisitorController : MonoBehaviour
     {
         VisitorChoice();
         SetNextTask(_taskSystem.GetTaskv2());
-        Behaviour();
+        BehaviourAfterDisable();
     }
 
     private void SetNextTask(PotionTask task)
@@ -38,13 +38,17 @@ public class VisitorController : MonoBehaviour
 
     public void CallVisitor()
     {
-        DisableVisitor();
-        DOVirtual.DelayedCall(0.5f, Behaviour);
+        CurrentVisitor.TaskView.DisableLables(true);
+        CurrentVisitor.ShowEmoji();      
+        DOVirtual.DelayedCall(0.5f, DisableVisitor).OnComplete(BehaviourAfterDisable);
+    }
+    public void FillEmojiStatus(float index)
+    {
+        CurrentVisitor.SetEmoji(index);
     }
 
-    private void Behaviour()
-    {
-        
+    private void BehaviourAfterDisable()
+    {       
         if (_visitorCountSystem.VisitorLeft > 0)
         {           
             VisitorChoice();

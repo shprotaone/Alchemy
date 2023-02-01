@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
 
 public class DayEntryController : MonoBehaviour
 {
+    [SerializeField] private DayNotifySubject _dayNotify;
+    [SerializeField] private DraggableObjectController _draggableObjectController;
     [SerializeField] private TMP_Text _dayTitle;
     [SerializeField] private TMP_Text _dayText;
     [SerializeField] private CanvasGroup _group;
@@ -25,6 +25,8 @@ public class DayEntryController : MonoBehaviour
 
     public void DisablePanel()
     {
+        _draggableObjectController.SetInterract(true);
         _group.DOFade(0, 2).OnComplete(()=> _group.gameObject.SetActive(false));
+        _dayNotify.CallNotify();
     }
 }

@@ -34,7 +34,7 @@ public class TradeSystem : MonoBehaviour
         _labelsIn = new List<PotionLabelType>();
 
         _completeSeries = new CompleteSeries();
-        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
 
         _money = money;              
     }
@@ -80,6 +80,7 @@ public class TradeSystem : MonoBehaviour
 
     public void Trade()
     {
+        _visitorController.FillEmojiStatus(_matchCalculate.GetEmojiIndex());
         ClearLabelList();
 
         _money.Increase(_reward);
@@ -88,7 +89,7 @@ public class TradeSystem : MonoBehaviour
         _tradeView.DeclineButtonDelay();
 
         _completeSeries.IncreaseMultiply(_indexMatch);
-        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
         _tradeView.StartCoinAnimation();
         _tradeView.TradeButtoneControl(0);
         _audioManager.PlaySFX(_audioManager.Data.CoinDrop);
@@ -98,13 +99,14 @@ public class TradeSystem : MonoBehaviour
 
     public void DeclineTrade()
     {
+        _visitorController.FillEmojiStatus(0);
         ClearLabelList();
         _money.Decrease(100);
         _visitorController.CallVisitor();
         _tradeView.DeclineButtonDelay();
 
         _completeSeries.ResetSeries();
-        _tradeView.RestartMultiply(_completeSeries.CurrentMultiply);
+        _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
         _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
 
         ReturnBottleAfterDecline();               

@@ -28,29 +28,15 @@ public class DraggableObjectController : MonoBehaviour
 
         //LevelInitializator.OnLevelEnded += DisableObjects;
         //LevelInitializator.OnLevelStarted += EnableObjects;
-        //SetInterract(true);
-    }
-
-    private void EnableObjects()
-    {
-        foreach (var slot in _bottleInventory.Slots)
-        {
-            slot.BottleInSlot?.SetInterract(true);
-        }
-    }
-
-    private void DisableObjects()
-    {
-        foreach (var slot in _bottleInventory.Slots)
-        {
-            slot.BottleInSlot?.SetInterract(false);
-        }
+        SetInterract(true);
     }
 
     public void SetInterract(bool flag)
     {
-        if (flag) EnableObjects();
-        else DisableObjects();
+        foreach (var slot in _bottleInventory.Slots)
+        {
+            slot.BottleInSlot?.SetInterract(flag);
+        }
 
         foreach (var item in _interract)
         {
