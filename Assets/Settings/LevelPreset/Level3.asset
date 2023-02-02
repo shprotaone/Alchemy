@@ -23,6 +23,6 @@ MonoBehaviour:
   chance3Label: 30
   moneyTaskComplete: 1000
   chanceWater: 30
-  chanceFire: 50
+  chanceFire: 30
   chanceStone: 40
   withEvent: 1

@@ -135,6 +135,7 @@ public class LevelInitializator : MonoBehaviour
         _clickController.Disable();
 
         _gameSaver.FirstGameComplete();
+        _gameSaver.SaveAchievments();
     }
 
     public void LoadNextLevel(LevelPreset preset)

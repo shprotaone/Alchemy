@@ -44,6 +44,7 @@ public class GameProgressSaver
 
         SaveProgress();
     }
+
     public void SaveRecord(int money)
     {
         int currentRecord = PlayerPrefs.GetInt(RecordLoader.RecordName, 0);
@@ -54,6 +55,7 @@ public class GameProgressSaver
             PlayerPrefs.Save();
         }
     }
+
     public void SaveProgress()
     {
         PlayerPrefs.SetInt(firstPlayName, IsFirstGame.GetHashCode());
@@ -80,6 +82,12 @@ public class GameProgressSaver
         if (result == 1) return true;
         else return false;
     }
+
+    internal void SaveAchievments()
+    {
+        
+    }
+
     ~GameProgressSaver()
     {
         SaveProgress();

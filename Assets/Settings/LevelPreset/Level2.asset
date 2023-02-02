@@ -22,7 +22,7 @@ MonoBehaviour:
   chance2Label: 35
   chance3Label: 40
   moneyTaskComplete: 800
-  chanceWater: 60
-  chanceFire: 30
-  chanceStone: 40
-  withEvent: 1
+  chanceWater: 50
+  chanceFire: 50
+  chanceStone: 50
+  withEvent: 0

@@ -24,6 +24,7 @@ public class MixingSystemv3 : MonoBehaviour
     private LabelSetter _labelSetter;
 
     public List<Ingredient> IngredientsInClaudron; //get; private set;
+    public LabelSetter LabelSetter => _labelSetter;
 
     private void Start()
     {

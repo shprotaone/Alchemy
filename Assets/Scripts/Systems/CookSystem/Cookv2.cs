@@ -1,5 +1,7 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Cookv2 : MonoBehaviour
 {
@@ -7,15 +9,15 @@ public class Cookv2 : MonoBehaviour
     [SerializeField] private ClickController _clickController;
     [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private ClaudronSystem _claudron;
+    [SerializeField] private CookSubject _cookSubject;
 
     private bool _canFillBottle = false;
-
+    
     public bool CanFillBottle => _canFillBottle;
 
     private void Start()
     {
         _clickController.OnGoodPotion += CookComplete;
-        //_clickController.OnNormalPotion += CookComplete;
         _clickController.OnBadPotion += CookFailed;
     }
 
@@ -26,8 +28,11 @@ public class Cookv2 : MonoBehaviour
             _canFillBottle = true;
             BottleModel bottle = _bottleStorage.CreateBottle();
 
+            FillCommonSubject();
+            FillLabelSubjects(_mixingSystem.LabelSetter.Labels);
+
             _mixingSystem.FillBottle(bottle);
-            //TODO Создание бутылки
+            //TODO Создание бутылки           
         }
     }
 
@@ -42,6 +47,21 @@ public class Cookv2 : MonoBehaviour
             _canFillBottle = false;
             _claudron.CrunchClaudron(false);
             //_clickController.Reset();        
+    }
+
+    private void FillLabelSubjects(List<PotionLabelType> labels)
+    {
+        foreach (var item in labels)
+        {
+            _cookSubject.AddCountLabel(item);
+        }
+
+        _cookSubject.CheckCookPotion(labels);
+        
+    }
+    private void FillCommonSubject()
+    {
+        _cookSubject.AddCount();
     }
 
     private void OnDisable()

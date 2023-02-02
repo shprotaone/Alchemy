@@ -85,7 +85,7 @@ public class TradeSystem : MonoBehaviour
 
         _money.Increase(_reward);
         _tradeView.Refresh(0);
-        _visitorController.CallVisitor();
+        _visitorController.GoAwayVisitor();
         _tradeView.DeclineButtonDelay();
 
         _completeSeries.IncreaseMultiply(_indexMatch);
@@ -95,6 +95,8 @@ public class TradeSystem : MonoBehaviour
         _audioManager.PlaySFX(_audioManager.Data.CoinDrop);
 
         ClearSlotsAfterTrade();
+
+        DOVirtual.DelayedCall(1f,_visitorController.CallVisitor);
     }
 
     public void DeclineTrade()
@@ -102,14 +104,16 @@ public class TradeSystem : MonoBehaviour
         _visitorController.FillEmojiStatus(0);
         ClearLabelList();
         _money.Decrease(100);
-        _visitorController.CallVisitor();
+        _visitorController.GoAwayVisitor();
         _tradeView.DeclineButtonDelay();
 
         _completeSeries.ResetSeries();
         _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
         _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
 
-        ReturnBottleAfterDecline();               
+        ReturnBottleAfterDecline();
+
+        DOVirtual.DelayedCall(1f, _visitorController.CallVisitor);
     }
 
     private void ClearSlotsAfterTrade()

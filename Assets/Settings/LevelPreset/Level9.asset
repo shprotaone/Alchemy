@@ -22,8 +22,7 @@ MonoBehaviour:
   chance2Label: 45
   chance3Label: 20
   moneyTaskComplete: 1750
-  startMoney: 0
-  minRangeMoney: 0
-  levelTaskText: []
-  goalText: 
-  DropDownMenu: 0
+  chanceWater: 30
+  chanceFire: 30
+  chanceStone: 40
+  withEvent: 1
