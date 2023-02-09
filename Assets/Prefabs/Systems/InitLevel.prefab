@@ -67,6 +67,7 @@ MonoBehaviour:
   _dayEntryController: {fileID: 0}
   _firstPlayHandler: {fileID: 0}
   _labelToSprite: {fileID: 1221863439}
+  _dragController: {fileID: 0}
 --- !u!114 &1221863439
 MonoBehaviour:
   m_ObjectHideFlags: 0

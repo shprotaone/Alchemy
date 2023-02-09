@@ -17,7 +17,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     public ISlot _prevSlot;
 
     private Transform _destination;
-    private BottleData _bottleData;
+    [SerializeField] private BottleData _bottleData;
     private BottleStorage _bottleStorage;
     private BottleInventory _bottleInventory;
     public BottleData Data => _bottleData;
@@ -61,9 +61,10 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     /// </summary>
     private void RepositionToSlot()
     {
+        _slot.SetSlot(this);
         _bottleView.StandartSize();
         _labelController.Deactivate();
-        _slot.SetSlot(this);
+        
 
         if (_destination != null)
         {
@@ -82,6 +83,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
             _slot = slot;
             _destination = slotTransform;
             transform.SetParent(slotTransform);
+            
         }
     }
 

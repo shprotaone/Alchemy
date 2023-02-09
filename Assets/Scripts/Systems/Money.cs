@@ -6,8 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Money
 {
-    public static event Action<int> OnChangeMoney;
-    public static event Action OnChangeMoneyAction;
+    public static event Action<int> OnChangeValueMoney;
 
     private MoneyView _view;
     private int _money;
@@ -24,7 +23,7 @@ public class Money
         _moneyTask = moneyTask;
 
         _view.Init(startMoney, moneyTask);
-        OnChangeMoney?.Invoke(_money);
+        _view.RefreshMoneyView(_money);
     }
 
     public void Decrease(int value)
@@ -34,29 +33,30 @@ public class Money
         if (_moneyMinRange < value && CanBuy)
         {
             _money -= value;
-            OnChangeMoney?.Invoke(_money);
-            OnChangeMoneyAction?.Invoke();
+            OnChangeValueMoney?.Invoke(-value);
         }
         else
         {
             _money = 0;
-            OnChangeMoney?.Invoke(_money);
+            OnChangeValueMoney?.Invoke(_money);
             Debug.LogWarning("NotHaveMoney");
         }       
+
+        _view.RefreshMoneyView(_money);
     }
 
     public void Increase(int value)
     {
         _money += value;
-        OnChangeMoney?.Invoke(_money);
-        OnChangeMoneyAction?.Invoke();
+        _view.RefreshMoneyView(_money);
+        OnChangeValueMoney?.Invoke(value);
     }
 
-    internal void SetMoney(int moneyInPrevSession)
+    public void ResetMoneyValue(int moneyInPrevSession)
     {
         _money = moneyInPrevSession;
         _view.Init(_money, _moneyTask);
-        OnChangeMoneyAction?.Invoke();
-        OnChangeMoney(_money);
+        _view.RefreshMoneyView(_money);
+        //OnChangeValueMoney?.Invoke(_money);
     }
 }

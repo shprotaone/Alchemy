@@ -46,6 +46,6 @@ public class TaskElementChance
     private void SetMaxWeight()
     {
         MaxWeightIndex = _chancesElementList.IndexOf(_chancesElementList.Max());
-        Debug.Log(MaxWeightIndex);
+       
     }
 }

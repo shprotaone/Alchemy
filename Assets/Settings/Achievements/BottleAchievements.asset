@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d599ebcb58a414f4cb10d15fd6528560, type: 3}
   m_Name: BottleAchievements
   m_EditorClassIdentifier: 
-  Name: "\u0421\u0432\u0430\u0440\u0438 1000 \u0431\u0443\u0442\u044B\u043B\u043E\u043A"
-  ID: 0
-  goal: 1000
-  goalProgress: 0
-  complete: 0
+  Name: "\u041F\u043E\u0432\u0435\u043B\u0438\u0442\u0435\u043B\u044C \u0410\u043B\u0445\u0438\u043C\u0438\u0438"
+  Desription: "\u0421\u0432\u0430\u0440\u0438 1000 \u0437\u0435\u043B\u0438\u0439"
+  Id: 0
+  Goal: 1000
+  GoalProgress: 0
+  Complete: 0

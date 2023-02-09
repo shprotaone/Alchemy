@@ -11,8 +11,8 @@ public class LevelMoneyTask
         _moneyTask = moneyTask;
         _minMoneyRange = minRange;
 
-        Money.OnChangeMoney += CheckGoalMoneyTask;
-        Money.OnChangeMoney += CheckFailMoneyTask;
+        //Money.OnChangeMoney += CheckGoalMoneyTask;
+        //Money.OnChangeMoney += CheckFailMoneyTask;
     }
 
     private void CheckGoalMoneyTask(int currentMoney)

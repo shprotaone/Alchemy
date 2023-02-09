@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CompletePotionViewer : MonoBehaviour
 {
-    [SerializeField] private Button _openButton;
+    //[SerializeField] private Button _openButton;
     [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private List<CompletePotionViewSlot> _slots;
 
@@ -15,7 +15,7 @@ public class CompletePotionViewer : MonoBehaviour
 
     private void Start()
     {
-        _openButton.onClick.AddListener(FillCurrentBottles);
+        //_openButton.onClick.AddListener(FillCurrentBottles);
         _bottleList = new List<BottleModel>();
         LevelInitializator.OnLevelStarted += ClearSlots;
     }

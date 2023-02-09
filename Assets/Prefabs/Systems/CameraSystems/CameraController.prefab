@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orderWindow: {fileID: 0}
   _room: {fileID: 0}
-  _button: {fileID: 0}
+  _cameraMovementButton: {fileID: 0}
+  _buttonTransfrom: {fileID: 0}
   _cameraSpeed: 1
 --- !u!61 &5158688599070207632
 BoxCollider2D:

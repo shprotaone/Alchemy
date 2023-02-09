@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d599ebcb58a414f4cb10d15fd6528560, type: 3}
   m_Name: FireLabelAchievements
   m_EditorClassIdentifier: 
-  Name: "\u0421\u0432\u0430\u0440\u0438 100 \u0437\u0435\u043B\u0438\u0439 \u0441
-    \u043E\u0433\u043D\u0435\u043C"
-  ID: 1
-  goal: 100
-  goalProgress: 0
-  complete: 0
+  Name: "\u041F\u043E\u0432\u0435\u043B\u0438\u0442\u0435\u043B\u044C \u043E\u0433\u043D\u044F"
+  Desription: "\u0421\u0432\u0430\u0440\u0438\u0442\u044C 100 \u043E\u0433\u043D\u0435\u043D\u043D\u044B\u0445
+    \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432"
+  Id: 1
+  Goal: 100
+  GoalProgress: 0
+  Complete: 0

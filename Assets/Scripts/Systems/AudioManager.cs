@@ -26,19 +26,25 @@ public class AudioManager : MonoBehaviour
         _gameProgress = gameProgress;
         Music = _gameProgress.Music;
         SFX = _gameProgress.SFX;
-
-        _settingDisplay.Init();
         OnSoundSettingsChanged?.Invoke();
 
         LoadSettings();        
         _mainMusicSource?.Play();
     }
 
+    /// <summary>
+    /// ПРоигрывание звуков из разных мест
+    /// </summary>
+    /// <param name="clip"></param>
     public void PlaySFX(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
     }
 
+    /// <summary>
+    /// Изменение музыки в зависимости от стадии игры
+    /// </summary>
+    /// <param name="clip"></param>
     public void ChangeMainMusic(AudioClip clip)
     {
         _mainMusicSource.clip = clip;

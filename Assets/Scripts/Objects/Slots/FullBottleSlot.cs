@@ -25,7 +25,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         Bottles = new List<BottleModel>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out BottleModel bottle) && bottle.gameObject.layer != Layer.Dragging)
         {
@@ -80,7 +80,6 @@ public class FullBottleSlot : MonoBehaviour,ISlot
     public void CheckSlot()
     {
         CheckCountSlot();
-        
 
         if (Bottles.Count == 0)
         {
@@ -155,10 +154,9 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         for (int i = 0; i < Bottles.Count; i++)
         {
             Bottles[i].DestroyBottle();
-            CheckSlot();
-          
         }
-        SetFreeSlot();
+        Bottles.Clear();
+        CheckSlot();
     }
 
     public void SetSlot(BottleModel bottle)

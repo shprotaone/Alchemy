@@ -5,7 +5,6 @@ public class GameStateController : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
     [SerializeField] private VisitorController _visitorController;
-    [SerializeField] private Button _cameraMovementButton;
     [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private AudioManager _audioManager;
 
@@ -22,7 +21,6 @@ public class GameStateController : MonoBehaviour
 
         InventoryIsEmpty = false;
         _mixingSystem.OnBottleFilled += CheckLeftIngredients;
-        _cameraMovementButton.interactable = true;
     }
 
     public void CheckState()

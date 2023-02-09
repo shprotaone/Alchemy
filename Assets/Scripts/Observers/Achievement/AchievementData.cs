@@ -7,10 +7,11 @@ public class AchievementData : ScriptableObject
     public event Action<AchievementData> OnUpdate;
 
     public string Name;
-    public AchieveID ID;
-    public int goal;
-    public int goalProgress;
-    public bool complete;
+    public string Desription;
+    public AchieveID Id;
+    public int Goal;
+    public int GoalProgress;
+    public bool Complete;
 
     public void Update()
     {
@@ -19,13 +20,23 @@ public class AchievementData : ScriptableObject
 
     public void Increase()
     {
-        goalProgress++;
-
-        if (goal <= goalProgress)
-        {
-            complete = true;
-        }
-        OnUpdate?.Invoke(this);        
+        GoalProgress++;
+        CheckGoal();
+        
     }
 
+    public void IncreaseWithCount(int count)
+    {
+        GoalProgress += count;
+        CheckGoal();
+    }
+
+    private void CheckGoal()
+    {
+        if (Goal <= GoalProgress)
+        {
+            Complete = true;
+        }
+        OnUpdate?.Invoke(this);
+    }
 }

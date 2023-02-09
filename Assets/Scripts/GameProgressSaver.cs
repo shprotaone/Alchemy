@@ -30,17 +30,8 @@ public class GameProgressSaver
 
     private void ReadSaveSettings()
     {
-        if (_isFirstGame)
-        {
-            _music = true;
-            _sfx = true;
-            SaveSoundsSettings(_music, _sfx);
-        }
-        else
-        {
-            _music = Convert.ToBoolean(PlayerPrefs.GetInt(musicName));
-            _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName));
-        }
+        _music = Convert.ToBoolean(PlayerPrefs.GetInt(musicName,1));
+        _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName,1));
 
         SaveProgress();
     }
@@ -65,8 +56,11 @@ public class GameProgressSaver
 
     public void SaveSoundsSettings(bool music, bool sfx)
     {
-        PlayerPrefs.SetInt(musicName, music.GetHashCode());
-        PlayerPrefs.SetInt(sfxName, sfx.GetHashCode());
+        _music = music;
+        _sfx = sfx;
+
+        PlayerPrefs.SetInt(musicName, _music.GetHashCode());
+        PlayerPrefs.SetInt(sfxName, _sfx.GetHashCode());
     }
 
     public void FirstGameComplete() 
@@ -81,11 +75,6 @@ public class GameProgressSaver
 
         if (result == 1) return true;
         else return false;
-    }
-
-    internal void SaveAchievments()
-    {
-        
     }
 
     ~GameProgressSaver()

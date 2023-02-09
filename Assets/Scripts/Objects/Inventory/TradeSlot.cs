@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TradeSlot : MonoBehaviour,ISlot
 {
+    public event Action<int> OnSell;
+
     [SerializeField] private List<BottleModel> _bottlesInSlot;
     [SerializeField] private BottlePOS[] _bottlePos;
     [SerializeField] private Collider2D _collider;
@@ -106,6 +108,8 @@ public class TradeSlot : MonoBehaviour,ISlot
 
     public void ResetAllBottlesAfterTrade()
     {
+        OnSell?.Invoke(_bottlesInSlot.Count);
+        Debug.Log(("Продано " + _bottlesInSlot.Count + " бутылок"));
         foreach (var slot in _bottlePos)
         {
             slot.ResetSlotAfterTrade();

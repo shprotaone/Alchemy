@@ -17,19 +17,18 @@ public class SettingsView : MonoBehaviour
 
     [SerializeField] private AudioManager _audioManager;
 
+    private void Start()
+    {
+        _audioManager.OnSoundSettingsChanged += ChangeMusic;
+        _audioManager.OnSoundSettingsChanged += ChangeSFX;
+
+        _musicButton.onClick.AddListener(_audioManager.SwitchMusic);
+        _soundsButton.onClick.AddListener(_audioManager.SwitchSFX);
+    }
     private void OnEnable()
     {
         ChangeSFX();
         ChangeMusic();
-
-    }
-    public void Init()
-    {
-        _musicButton.onClick.AddListener(_audioManager.SwitchMusic);
-        _soundsButton.onClick.AddListener(_audioManager.SwitchSFX);
-
-        _audioManager.OnSoundSettingsChanged += ChangeMusic;
-        _audioManager.OnSoundSettingsChanged += ChangeSFX;
     }
 
     public void ChangeMusic()

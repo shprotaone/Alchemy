@@ -1,22 +1,22 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AchievementsProgressSaver : MonoBehaviour
 {
-    private string _fileName = "AchievmentsProgress.json";
-    private string _SOName = "AchievementData";
+    private readonly string _fileName = "AchievmentsProgress.json";
+    private readonly string _soName = "AchievementData";
 
-    [SerializeField] private List<AchievementData> _achievementData; 
-    [SerializeField] private PotionStock _stock;
-    [SerializeField] private CookSubject _cookSubject;
+    [SerializeField] private List<AchievementData> _achievementData;
+    private ISubject[] _subjectsList;
 
     private JSONSave<AchievementData> _json;
 
     private void Start()
     {
-        _cookSubject.Init(_achievementData);
+        InitSubjects();
 
-        _json = new JSONSave<AchievementData>(_fileName, _SOName);
+        _json = new JSONSave<AchievementData>(_fileName, _soName);
 
         List<AchievementData> list = new List<AchievementData>();
         list = _json.LoadFromJson();
@@ -31,15 +31,36 @@ public class AchievementsProgressSaver : MonoBehaviour
         }
 
         LevelInitializator.OnLevelStarted += SaveProgress;
+
+        StartCoroutine(AutoSaveRoutine());
+    }
+
+    private void InitSubjects()
+    {
+        _subjectsList = GetComponents<ISubject>();
+
+        for (int i = 0; i < _subjectsList.Length; i++)
+        {
+            _subjectsList[i].Init(_achievementData);
+        }
     }
 
     private void SetLoadData(List<AchievementData> achievements)
     {
         for (int i = 0; i < _achievementData.Count; i++)
         {
-            _achievementData[i].complete = achievements[i].complete;
-            _achievementData[i].goalProgress = achievements[i].goalProgress;
-            _achievementData[i].goal = achievements[i].goal;
+            _achievementData[i].Complete = achievements[i].Complete;
+            _achievementData[i].GoalProgress = achievements[i].GoalProgress;
+            _achievementData[i].Goal = achievements[i].Goal;
+        }
+    }
+
+    private IEnumerator AutoSaveRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(30);
+            SaveProgress();
         }
     }
 
@@ -51,6 +72,7 @@ public class AchievementsProgressSaver : MonoBehaviour
     private void OnDisable()
     {
         SaveProgress();
+        StopCoroutine(AutoSaveRoutine());
         LevelInitializator.OnLevelStarted -= SaveProgress;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CookSubject : MonoBehaviour
+public class CookSubject : MonoBehaviour,ISubject
 {
     [SerializeField] private PotionStock _stock;
 
@@ -16,11 +16,11 @@ public class CookSubject : MonoBehaviour
     {
         foreach (var item in achievments)
         {
-            if (item.ID == AchieveID.COMMONBOTTLE) _commonBottleCounter = item;
-            else if (item.ID == AchieveID.FIRELABEL) _fireLabelCounter = item;
-            else if (item.ID == AchieveID.WATERLABEL) _waterLabelCounter = item;
-            else if (item.ID == AchieveID.ROCKLABEL) _rockLabelCounter = item;
-            else if (item.ID == AchieveID.POTIONSTOCK) _potionStockCounter = item;
+            if (item.Id == AchieveID.COMMONBOTTLE) _commonBottleCounter = item;
+            else if (item.Id == AchieveID.FIRELABEL) _fireLabelCounter = item;
+            else if (item.Id == AchieveID.WATERLABEL) _waterLabelCounter = item;
+            else if (item.Id == AchieveID.ROCKLABEL) _rockLabelCounter = item;
+            else if (item.Id == AchieveID.POTIONSTOCK) _potionStockCounter = item;
         }
     }
 

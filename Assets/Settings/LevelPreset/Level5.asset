@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level5
   m_EditorClassIdentifier: 
   levelNumber: 5
-  backgroundSprite: {fileID: 21300000, guid: 726ab7e9ccc7d8249b6dd20cf5160c9e, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: ae0e0d9420e5bee4bb73e93d7d6a9e72, type: 3}
   _mainSound: {fileID: 8300000, guid: 6773b4842de337e43bff6debf38dad77, type: 3}
   addCommonResourceCount: 6
   startBottleCount: 1000

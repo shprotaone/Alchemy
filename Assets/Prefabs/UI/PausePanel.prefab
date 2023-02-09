@@ -335,7 +335,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
+  m_Sprite: {fileID: -3926645467788292836, guid: c94aceba73b61234aa0fb36558eea16e,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -364,7 +365,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -487,16 +488,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicButton: {fileID: 2716206265006544990}
   _soundsButton: {fileID: 2716206263238336181}
-  _turnOnMusic: {fileID: -7971827817526512134, guid: 39761ae1c01ad7747b8b9a2862df6eb1,
+  _turnOnMusic: {fileID: 1878361554287950751, guid: c94aceba73b61234aa0fb36558eea16e,
     type: 3}
-  _turnOffMusic: {fileID: 6902942414278325751, guid: 39761ae1c01ad7747b8b9a2862df6eb1,
+  _turnOffMusic: {fileID: -3549878461088776956, guid: c94aceba73b61234aa0fb36558eea16e,
     type: 3}
-  _turnOnSfx: {fileID: 1176245160360600735, guid: 39761ae1c01ad7747b8b9a2862df6eb1,
+  _turnOnSfx: {fileID: -3926645467788292836, guid: c94aceba73b61234aa0fb36558eea16e,
     type: 3}
-  _turnOffSfx: {fileID: 3893417718264177278, guid: 39761ae1c01ad7747b8b9a2862df6eb1,
+  _turnOffSfx: {fileID: -357361913367934587, guid: c94aceba73b61234aa0fb36558eea16e,
     type: 3}
-  _musicImage: {fileID: 0}
-  _sfxImage: {fileID: 0}
+  _musicImage: {fileID: 2716206265006544991}
+  _sfxImage: {fileID: 2716206263238336178}
   _audioManager: {fileID: 0}
 --- !u!114 &6954288691753764977
 MonoBehaviour:
@@ -657,7 +658,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec6094100d48e2d4492e4c7b699414ef, type: 3}
+  m_Sprite: {fileID: 1878361554287950751, guid: c94aceba73b61234aa0fb36558eea16e,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -686,7 +688,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

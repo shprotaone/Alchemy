@@ -89,6 +89,9 @@ public class PotionTaskView : MonoBehaviour
         {
             DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha).OnComplete(FadingShowBox);
         }
+
+
+        StopCoroutine(SleepRoutine());
     }
 
     public IEnumerator SleepRoutine()
@@ -127,7 +130,7 @@ public class PotionTaskView : MonoBehaviour
 
             foreach (var item in _ingredientImages)
             {
-                item.color = new Color(1, 1, 1, 1);
+                item.color = new Color(1, 1, 1, 1);     //после сна
             }
         }
     }
@@ -137,10 +140,5 @@ public class PotionTaskView : MonoBehaviour
         {
             item.color = new Color(1, 1, 1, 0);
         }
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(SleepRoutine());
     }
 }

@@ -9,12 +9,12 @@ public class BottleInventory : MonoBehaviour
     [SerializeField] private List<FullBottleSlot> _slots;
 
     private FullBottleSlot _currentSlot;
-    private int _bottleInInventory = 0;
+    [SerializeField] private int _bottleInInventory = 0;
     public List<FullBottleSlot> Slots => _slots;
 
     public void Start()
     {
-        LevelInitializator.OnLevelStarted += ResetInventory;
+        LevelInitializator.OnLevelEnded += ResetInventory;
     }
 
     private void ResetInventory()
@@ -24,7 +24,7 @@ public class BottleInventory : MonoBehaviour
 
         foreach (var slot in _slots)
         {
-            if (slot.Bottles.Count > 0)
+            if (!slot.IsFree)
             {
                 slot.ResetSlot();
             }
@@ -63,7 +63,7 @@ public class BottleInventory : MonoBehaviour
         {
             if (!slot.IsFree)
             {
-                if (Enumerable.SequenceEqual(slot.BottleInSlot.Data.Labels, potion.Labels))
+                if (slot.BottleInSlot.Data.Labels.SequenceEqual(potion.Labels))
                 {
                     return slot;
                 }
@@ -82,5 +82,10 @@ public class BottleInventory : MonoBehaviour
     public void RefreshText()
     {
         _bottleCount.text = _bottleInInventory.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        LevelInitializator.OnLevelEnded -= ResetInventory;
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class VisitorView : MonoBehaviour
 {
-    private const float RisingDuration = 0.5f;
-    private const float FadingDuration = 2f;
+    private const float risingDuration = 1.5f;
+    private const float fadingDuration = 1.5f;
 
-    private Vector3 _startScale = new Vector3(0.5f, 0.5f, 0.5f);
-    private Vector3 _downPos = new Vector3(5,4,0);
-    private Vector3 _forwardPos = new Vector3(6, -4, 0);
-    private Vector3 _upPose = new Vector3(-3, -1.6f, 0);
-    private Vector3 _rotate = new Vector3(0, 0, 12);
+    private readonly Vector3 _startScale = new Vector3(0.5f, 0.5f, 0.5f);
+    private readonly Vector3 _startPos = new Vector3(5,4,0);
+    private readonly Vector3 _endPos = new Vector3(6, -4, 0);
+    private readonly Vector3 _tradePos = new Vector3(-3, -1.6f, 0);
+    private readonly Vector3 _rotate = new Vector3(0, 0, 12);
 
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private SpriteRenderer _visitorImage;
@@ -22,14 +22,14 @@ public class VisitorView : MonoBehaviour
         this.gameObject.SetActive(true);
         _timerText.enabled = false;
 
-        _visitorImage.transform.DOScale(1, 2);
-        _visitorImage.transform.DOMove(_upPose, 2).OnComplete(_taskView.RisingTask);
-        _visitorImage.transform.DOLocalRotate(_rotate, 0.3f)
+        _visitorImage.transform.DOScale(1, risingDuration);
+        _visitorImage.transform.DOMove(_tradePos, risingDuration).OnComplete(_taskView.RisingTask);
+        _visitorImage.transform.DOLocalRotate(_rotate, risingDuration / 6)
             .SetLoops(6, LoopType.Yoyo)
             .SetEase(Ease.Linear);
             
 
-        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, RisingDuration);
+        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, risingDuration);
     }
 
     public void Fading()
@@ -38,16 +38,16 @@ public class VisitorView : MonoBehaviour
 
         _timerText.gameObject.SetActive(false);
 
-        _visitorImage.transform.DOScale(0.5f, 2);
-        _visitorImage.transform.DOMove(_forwardPos, FadingDuration).OnComplete(() => _visitorImage.transform.position = -_downPos);
-        _visitorImage.transform.DOLocalRotate(new Vector3(0, 0, 12), 0.3f)
-            .SetLoops(4, LoopType.Yoyo);
+        _visitorImage.transform.DOScale(0.5f, fadingDuration);
+        _visitorImage.transform.DOMove(_endPos, fadingDuration).OnComplete(() => _visitorImage.transform.position = -_startPos);
+        _visitorImage.transform.DOLocalRotate(new Vector3(0, 0, 12), fadingDuration / 4)
+            .SetLoops(4, LoopType.Yoyo)
+            .SetEase(Ease.Linear);
 
-        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, 3)
+        DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 0, fadingDuration)
             .OnComplete(() =>
             {              
                 this.gameObject.SetActive(false);
-                
             });
     }
 

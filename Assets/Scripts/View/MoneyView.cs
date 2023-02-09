@@ -19,9 +19,6 @@ public class MoneyView : MonoBehaviour
 
     public void Init(int min,int max)
     {
-        Money.OnChangeMoney += RefreshMoneyText;
-        Money.OnChangeMoney += RefreshSliderValue;
-        
         InitSlider(min, max);        
     }
 
@@ -49,7 +46,7 @@ public class MoneyView : MonoBehaviour
 
         CheckTaskState();
     }
-    public void RefreshMoneyText(int value)
+    public void RefreshMoneyView(int value)
     {
         DOTween.To(() => _prevMoneyValue, x => _prevMoneyValue = x, value, 0.3f)
             .OnUpdate(() => _moneyText.text = _prevMoneyValue.ToString()).OnComplete(() => _prevMoneyValue = value);

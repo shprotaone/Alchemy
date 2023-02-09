@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class LevelInitializator : MonoBehaviour
 {
+    public static event Action OnLevelEnded;
     public static event Action OnLevelStarted;
+    public static event Action OnLoopRestart;
 
     [SerializeField] private CameraMovement _startCameraPos;
 
@@ -114,17 +116,19 @@ public class LevelInitializator : MonoBehaviour
 
     private void SetChances()
     {
-        _tasksChance = new List<RandomPart>();
+        _tasksChance = new List<RandomPart>
+        {
+            new RandomPart(1, _currentLevelPreset.chance1Label),
+            new RandomPart(2, _currentLevelPreset.chance2Label),
+            new RandomPart(3, _currentLevelPreset.chance3Label)
+        };
 
-        _tasksChance.Add(new RandomPart(1, _currentLevelPreset.chance1Label));
-        _tasksChance.Add(new RandomPart(2, _currentLevelPreset.chance2Label));
-        _tasksChance.Add(new RandomPart(3, _currentLevelPreset.chance3Label));
-
-        _labelTypeForTaskChance = new List<RandomPart>();
-
-        _labelTypeForTaskChance.Add(new RandomPart(1, _currentLevelPreset.chanceWater));
-        _labelTypeForTaskChance.Add(new RandomPart(2, _currentLevelPreset.chanceFire));
-        _labelTypeForTaskChance.Add(new RandomPart(3, _currentLevelPreset.chanceStone));
+        _labelTypeForTaskChance = new List<RandomPart>
+        {
+            new RandomPart(1, _currentLevelPreset.chanceWater),
+            new RandomPart(2, _currentLevelPreset.chanceFire),
+            new RandomPart(3, _currentLevelPreset.chanceStone)
+        };
     }
 
     public void DisableLevel()
@@ -135,13 +139,13 @@ public class LevelInitializator : MonoBehaviour
         _clickController.Disable();
 
         _gameSaver.FirstGameComplete();
-        _gameSaver.SaveAchievments();
+        OnLevelEnded?.Invoke();
     }
 
     public void LoadNextLevel(LevelPreset preset)
     {
         _moneyView.RefreshMoneyTaskText(_money.CurrentMoney);
-        _moneyView.RefreshMoneyText(_money.CurrentMoney);
+        _moneyView.RefreshMoneyView(_money.CurrentMoney);
         _currentLevelPreset = preset;
 
         _levelCompletePanel.Disable();
@@ -154,12 +158,14 @@ public class LevelInitializator : MonoBehaviour
     public void RestartGame()
     {
         DisableLevel();
-        _money.SetMoney(0);
+        _money.ResetMoneyValue(0);
         _currentLevelPreset = _levelSelector.GetFirstLevel();
         _levelCompletePanel.Disable();
         _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
         _cameraMovement.Movement();
         InitLevelSettings();
+
+        OnLoopRestart?.Invoke();
         OnLevelStarted?.Invoke();
 
     }
@@ -170,10 +176,5 @@ public class LevelInitializator : MonoBehaviour
         {
             _firstPlayHandler.Activate();
         }
-    }
-
-    private void OnDestroy()
-    {
-        DOTween.KillAll();
     }
 }

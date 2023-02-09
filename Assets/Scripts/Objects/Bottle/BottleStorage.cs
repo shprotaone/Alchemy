@@ -2,9 +2,8 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
+public class BottleStorage : MonoBehaviour,IInterract,IDragTimer
 {
-    [SerializeField] private TMP_Text _amountText; //разделить на view?    
     [SerializeField] private BottleInventory _bottleInventory;
     [SerializeField] private TableManager _tableManager;
     
@@ -24,7 +23,6 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     {
         _amount = bottleCount;
         _labelToSprite = labelToSprite;
-        RefreshAmount();
 
         InitTimer(_delayDrag);
     }
@@ -45,35 +43,6 @@ public class BottleStorage : MonoBehaviour,IAction,IInterract,IDragTimer
     public void AddBottle(int value)
     {
         _amount += value;
-        RefreshAmount();
-    }
-
-    private void DecreaseAmount()
-    {
-        _amount--;
-        RefreshAmount();
-    }
-
-    public void ReturnBottle()
-    {
-        _amount++;
-
-        RefreshAmount();
-    }
-
-    private void RefreshAmount()
-    {
-        _amountText.text = _amount.ToString();
-    }
-
-    public void Action()
-    {
-        //CreateBottle();
-    }
-
-    public void Drop()
-    {
-        
     }
 
     public void SetInterract(bool value)

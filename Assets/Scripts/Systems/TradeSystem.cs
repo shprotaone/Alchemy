@@ -1,9 +1,12 @@
+using System;
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TradeSystem : MonoBehaviour
 {
+    public event Action OnDecline;
+
     [SerializeField] private TradeSlot _tradeSlot;
     [SerializeField] private List<PotionLabelType> _labelsIn;
     [SerializeField] private List<PotionLabelType> _labelInTask;
@@ -49,7 +52,6 @@ public class TradeSystem : MonoBehaviour
     {
         _labelsIn.AddRange(label);
         _libraVisual.CheckPosition(label.Count);
-        //CalculateReward();
     }
 
     private void ClearLabelList()
@@ -112,6 +114,7 @@ public class TradeSystem : MonoBehaviour
         _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
 
         ReturnBottleAfterDecline();
+        OnDecline?.Invoke();
 
         DOVirtual.DelayedCall(1f, _visitorController.CallVisitor);
     }
