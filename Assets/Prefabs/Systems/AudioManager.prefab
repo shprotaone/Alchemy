@@ -1,0 +1,229 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5783539749839212684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5783539749839212687}
+  - component: {fileID: 5783539749839212686}
+  - component: {fileID: 5783539749839212675}
+  - component: {fileID: 5783539749839212672}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5783539749839212687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783539749839212684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.008, y: -0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5783539749839212686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783539749839212684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05a464eb298a474ab4b6f89f166b25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 5783539749839212672}
+  _settingDisplay: {fileID: 0}
+--- !u!114 &5783539749839212675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783539749839212684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a156d16d60230154894dd031c05e4eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioManager: {fileID: 5783539749839212686}
+--- !u!114 &5783539749839212672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5783539749839212684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4d7d78f2e75ec47930f916aa3744d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickBottleClip:
+    Guid:
+      Data1: 752244443
+      Data2: 1149700784
+      Data3: 1228430471
+      Data4: 1371800675
+    Path: event:/Objeect movement/Take item
+  _createPotionClip:
+    Guid:
+      Data1: -1383947465
+      Data2: 1233613068
+      Data3: -643504201
+      Data4: 663996324
+    Path: event:/Objeect movement/Bottle appearance
+  _waterDrop:
+    Guid:
+      Data1: 31168024
+      Data2: 1074789548
+      Data3: -1104855912
+      Data4: 629856255
+    Path: event:/Objeect movement/Ingredient in water
+  _bottleOnShelf:
+    Guid:
+      Data1: -278765006
+      Data2: 1338884821
+      Data3: -1510009420
+      Data4: 1394503772
+    Path: event:/Objeect movement/Bottle on a shelf
+  _scales:
+    Guid:
+      Data1: -1500485348
+      Data2: 1246780384
+      Data3: 363423929
+      Data4: 1866606529
+    Path: event:/Objeect movement/Scales
+  _closed:
+    Guid:
+      Data1: -1179247355
+      Data2: 1256527200
+      Data3: -61664345
+      Data4: 497053995
+    Path: event:/Objeect movement/Doorhandle
+  _coinDrop:
+    Guid:
+      Data1: 644199300
+      Data2: 1249568260
+      Data3: 440550056
+      Data4: 992915277
+    Path: event:/Objeect movement/Money
+  _cancelTasks:
+  - Guid:
+      Data1: 1128108861
+      Data2: 1096093624
+      Data3: 1599045797
+      Data4: 1530912786
+    Path: event:/Voices/Voice sad
+  _winWindowSound:
+    Guid:
+      Data1: -620419773
+      Data2: 1219662664
+      Data3: -983499901
+      Data4: 791524438
+    Path: event:/Jingles/Jingle WIN
+  _loseWindowSound:
+    Guid:
+      Data1: -1298331914
+      Data2: 1227445162
+      Data3: -1262676558
+      Data4: -271361298
+    Path: event:/Jingles/Jingle LOSING
+  _boilSound:
+    Guid:
+      Data1: 617912233
+      Data2: 1222198184
+      Data3: 802373528
+      Data4: 1162975446
+    Path: event:/Objeect movement/Bubbles in boiler
+  _stepsBandit:
+    Guid:
+      Data1: -212680425
+      Data2: 1200170817
+      Data3: 1264139666
+      Data4: -1533640115
+    Path: event:/Steps/Steps bandit
+  _stepsKnight:
+    Guid:
+      Data1: 296526824
+      Data2: 1099719510
+      Data3: 1078660002
+      Data4: 1816701571
+    Path: event:/Steps/Steps knight
+  _stepsSaint:
+    Guid:
+      Data1: 374765330
+      Data2: 1305026467
+      Data3: 2067773825
+      Data4: -1124035004
+    Path: event:/Steps/Steps saint
+  _stepsWizzard:
+    Guid:
+      Data1: 1899648717
+      Data2: 1309056820
+      Data3: 131481510
+      Data4: 1109603528
+    Path: event:/Steps/Steps wizzard
+  _voiceGood:
+    Guid:
+      Data1: -456140552
+      Data2: 1313340766
+      Data3: -1136932703
+      Data4: -2069333224
+    Path: event:/Voices/Voice good
+  _voiceSad:
+    Guid:
+      Data1: 1128108861
+      Data2: 1096093624
+      Data3: 1599045797
+      Data4: 1530912786
+    Path: event:/Voices/Voice sad
+  _voiceWaiting:
+    Guid:
+      Data1: -907706467
+      Data2: 1093312759
+      Data3: -704210021
+      Data4: 817384442
+    Path: event:/Voices/Voice waiting
+  _claudronRoomTheme:
+    Guid:
+      Data1: 1973873103
+      Data2: 1248000022
+      Data3: -805344882
+      Data4: 1157019369
+    Path: event:/Music/Laboratory
+  _okSoundButton:
+    Guid:
+      Data1: 897459385
+      Data2: 1148710907
+      Data3: 2053572255
+      Data4: -2062784241
+    Path: event:/UI/Button Ok
+  _soundButton:
+    Guid:
+      Data1: 1683759666
+      Data2: 1239254910
+      Data3: -613048438
+      Data4: 1926486026
+    Path: event:/UI/Button arrow right
+  _closeButton:
+    Guid:
+      Data1: 1714183443
+      Data2: 1271431548
+      Data3: 1831478187
+      Data4: 1580405426
+    Path: event:/UI/Button cross

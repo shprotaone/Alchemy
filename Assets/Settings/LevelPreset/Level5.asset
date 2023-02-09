@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 5
   backgroundSprite: {fileID: 21300000, guid: ae0e0d9420e5bee4bb73e93d7d6a9e72, type: 3}
-  _mainSound: {fileID: 8300000, guid: 6773b4842de337e43bff6debf38dad77, type: 3}
+  _mainSound:
+    Guid:
+      Data1: 2004528560
+      Data2: 1174972021
+      Data3: 308438438
+      Data4: -1804217470
+    Path: event:/Music/Crossroad
   addCommonResourceCount: 6
   startBottleCount: 1000
   visitorCount: 6

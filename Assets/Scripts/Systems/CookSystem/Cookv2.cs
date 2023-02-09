@@ -31,7 +31,6 @@ public class Cookv2 : MonoBehaviour
             FillLabelSubjects(_mixingSystem.LabelSetter.Labels);
 
             _mixingSystem.FillBottle(bottle);
-            //TODO Создание бутылки           
         }
     }
 

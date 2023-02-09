@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class ClaudronSystem : MonoBehaviour     //это будущая View
 {
-    [SerializeField] private Button _clearClaudronButton;
     [SerializeField] private SpriteRenderer _claudronSprite;
     [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private WaterColorv2 _waterColor;
@@ -14,13 +13,10 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
     private Claudron _currentClaudron;   
     private bool _isTutorial;
 
-    public Button ClearClaudronButton => _clearClaudronButton;  
     public float CookSpeed => _currentClaudron.speedMul;
 
     private void Start()
     {
-        _clearClaudronButton.onClick.AddListener(ClearClaudron);
-        _clearClaudronButton.onClick.AddListener(_mixingSystem.ClearMixSystem);
         _mixingSystem.ActiveButtonBrewDelegate += ClaudronButtonState;
 
         LevelInitializator.OnLevelStarted += ClearClaudron;
@@ -30,12 +26,10 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
     {
         if (_mixingSystem.IngredientsInClaudron.Count >= 2 && !_isTutorial)
         {
-            _clearClaudronButton.interactable = true;
             _buttonEvent.Button.interactable = true;
         }
         else
         {
-            _clearClaudronButton.interactable = false;
             _buttonEvent.Button.interactable = false;
         }
     }

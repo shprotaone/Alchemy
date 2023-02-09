@@ -107,7 +107,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         if(_slot is FullBottleSlot fullSlot)
         {
             fullSlot.SetSlot(this,true);
-            fullSlot.ScaleBottles();
+            fullSlot.BottleDropSound();
         }
 
         _prevSlot?.CheckSlot();
@@ -133,7 +133,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     private void ReturnBottleToSlot()
     {
         _collider.enabled = true;
-        if (_slot is FullBottleSlot bottleSlot) bottleSlot.ScaleBottles();
+        if (_slot is FullBottleSlot bottleSlot) bottleSlot.BottleDropSound();
     }
 
     public void Action()

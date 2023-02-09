@@ -6,10 +6,8 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     private const float moveSpeed = 0.5f;
 
     [SerializeField] private SpriteRenderer _dragableImage;
-    [SerializeField] private AudioClip _backSound;
     [SerializeField] private ObjectType _type;
-    [SerializeField] private AudioSource _audioSource;
- 
+
     private Slot _slot;
     private IngredientData _ingredientData;
     
@@ -24,8 +22,7 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
     {
         if(_slot != null)
         {
-          transform.DOMove(_slot.transform.position, moveSpeed, false).OnStart(()=> _audioSource?.PlayOneShot(_backSound))
-                                                                      .OnComplete(ReturnToSlot).SetEase(Ease.Linear);
+          transform.DOMove(_slot.transform.position, moveSpeed, false).OnComplete(ReturnToSlot).SetEase(Ease.Linear);
         }         
     }
 
@@ -45,7 +42,6 @@ public class Ingredient : MonoBehaviour,IAction,IPooledObject
         _ingredientData = ingredient;
         ResourceType = ingredient.resourceType;
         DrawIngredient();
-        //_audioSource.PlayOneShot(_ingredientData?.dragSound);
     }
 
     private void DrawIngredient()

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 using DG.Tweening;
 
 public class LightController : MonoBehaviour
 {
-    [SerializeField] private Light2D _light;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _light;
     [SerializeField] private float _intencity = 3f;
     [SerializeField] private float _duration;
     [SerializeField] private Ease _easy;

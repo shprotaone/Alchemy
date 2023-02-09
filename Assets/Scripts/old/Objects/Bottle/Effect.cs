@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class Effect : MonoBehaviour,IPooledObject
 {
     [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private Light2D _light2d;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _light2d;
     [SerializeField] private ObjectType _type;
 
     public ObjectType Type => _type;

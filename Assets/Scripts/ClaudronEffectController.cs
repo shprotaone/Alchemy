@@ -9,8 +9,6 @@ public class ClaudronEffectController : MonoBehaviour
     [SerializeField] private ParticleSystem _blobLeftPartical;
     [SerializeField] private ParticleSystem _blobRightPartical;
 
-    [SerializeField] private AudioSource _audioSource;
-
     [SerializeField] private float _stockLifeTimeUpBubble;
     [SerializeField] private float _boilLifetimeDownBubble;
     [SerializeField] private float _boilSpeed;
@@ -32,13 +30,11 @@ public class ClaudronEffectController : MonoBehaviour
     public void Boil()
     {
         ChangeBehaviour(_boilSpeed, _linearBoilSpeedZ, _orbitalBoilSpeedZ, _boilLifetimeDownBubble, _boilRadial);
-        _audioSource.Play();
     }
     public void StopBoil()
     {
         ChangeBehaviour(_stockSpeed, _linearStockSpeedZ, _orbitalStockSpeedZ, _stockLifeTimeUpBubble, _stockRadial);
         SetColorParticle(new Color(1,1,1,0.5f));
-        _audioSource.Stop();
     }
 
     public void IngredientBulk(Color colorInClaudron)

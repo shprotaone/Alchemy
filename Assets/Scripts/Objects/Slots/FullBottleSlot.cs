@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,13 +6,15 @@ using TMPro;
 using UnityEngine;
 
 public class FullBottleSlot : MonoBehaviour,ISlot
-{
+{ 
     public List<BottleModel> Bottles;
+
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private bool _isFree;
 
     [SerializeField] private BottleModel _bottlesInSlot;
 
+    private AudioManager _audioManager;
     public BottleModel BottleInSlot => _bottlesInSlot;
    
     public int Count { get; private set; }
@@ -43,6 +46,11 @@ public class FullBottleSlot : MonoBehaviour,ISlot
                 }
             }           
         }
+    }
+
+    public void AudioManagerHandler(AudioManager audioManager)
+    {
+        _audioManager = audioManager;
     }
 
     public void SetSlot(BottleModel bottle, bool IsDraggable)
@@ -101,8 +109,9 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         }
     }
 
-    public void ScaleBottles()
+    public void BottleDropSound()
     {
+        _audioManager.PlaySFX(_audioManager.Data.BottleOnShelf);
         //BottleModel bottle;
 
         //for (int i = 0; i < Bottles.Count; i++)

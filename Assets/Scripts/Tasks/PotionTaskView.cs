@@ -15,14 +15,15 @@ public class PotionTaskView : MonoBehaviour
     [SerializeField] private List<Image> _UIImages;
 
     private PotionTask _task;
+    private Visitor _visitor;
     public EmojiController EmojiController => _emojiController;
 
-    private void OnEnable()
+    public void InitTask(PotionTask task,Visitor visitor)
     {
-        StartCoroutine(SleepRoutine());
-    }
-    public void InitTask(PotionTask task)
-    {
+        _visitor = visitor;
+        _visitor.OnVisitorSleep += DisableLables;
+        _visitor.OnVisitorSleep += _emojiController.SetSleepEmoji;
+
         ResetIngredientImages();
         _task = task;
         FillTaskView(task);
@@ -89,28 +90,6 @@ public class PotionTaskView : MonoBehaviour
         {
             DOTween.ToAlpha(() => item.color, x => item.color = x, 0, timeAlpha).OnComplete(FadingShowBox);
         }
-
-
-        StopCoroutine(SleepRoutine());
-    }
-
-    public IEnumerator SleepRoutine()
-    {
-        int timeToSleep = 15;
-
-        while (timeToSleep > 0)
-        {
-            timeToSleep--;
-            yield return new WaitForSeconds(1);
-        }
-
-        DisableLables(true);
-        _emojiController.SetSleepEmoji();
-
-        yield return new WaitForSeconds(3);
-
-        _emojiController.FadeEmoji(timeAlpha);
-        DisableLables(false);
     }
 
     public void DisableLables(bool flag)
@@ -140,5 +119,11 @@ public class PotionTaskView : MonoBehaviour
         {
             item.color = new Color(1, 1, 1, 0);
         }
+    }
+
+    private void OnDisable()
+    {
+        _visitor.OnVisitorSleep -= DisableLables;
+        _visitor.OnVisitorSleep -= _emojiController.SetSleepEmoji;
     }
 }

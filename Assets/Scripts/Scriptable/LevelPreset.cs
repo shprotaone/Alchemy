@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -7,7 +8,7 @@ public class LevelPreset : ScriptableObject
 
     public LevelNumber levelNumber;
     public Sprite backgroundSprite;
-    public AudioClip _mainSound;
+    public EventReference _mainSound;
     public int addCommonResourceCount;
 
     [HideInInspector]

@@ -12,6 +12,7 @@ public sealed class ClickController : MonoBehaviour
     public event Action OnGoodPotion;
     public event Action OnBadPotion;
 
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private ClickerSubject _clickerSubject;
     [SerializeField] private TimerScript _timer;
     [SerializeField] private MonoLimitedNumber _counter;
@@ -109,6 +110,7 @@ public sealed class ClickController : MonoBehaviour
                                                                                  .OnKill(() => _isStartHold = false);
             _isStartHold = true;
         }
+        _audioManager.PlayInstanceSfx(_audioManager.Data.BoilSound);
         
     }
 
@@ -179,7 +181,7 @@ public sealed class ClickController : MonoBehaviour
     private void CheckResult()
     {
         Stop();
-
+        _audioManager.StopInstanceSfx();
         /*DOVirtual.DelayedCall(_indicatorChangeTime, () => 
         {
             var progressPerSegment = _maxClickCounterValue / _progressbarParts.Length;

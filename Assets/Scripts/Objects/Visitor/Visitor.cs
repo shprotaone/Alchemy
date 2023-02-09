@@ -1,21 +1,39 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Visitor : MonoBehaviour
 {
+    public event Action<bool> OnVisitorSleep;
     [SerializeField] private VisitorView _visitorView;
-    [SerializeField] private GuildsType _currentGuild;    
+    [SerializeField] private GuildsType _currentGuildType;    
     [SerializeField] private PotionTaskView _currentTaskView;
-
-    private PotionTask _task;
 
     public VisitorView VisitorView => _visitorView;
     public PotionTaskView TaskView => _currentTaskView;
+    public GuildsType GuildsType => _currentGuildType;
 
-    public void Init(PotionTask task)
-    {      
-        _task = task;
+    public void Init()
+    {
         _visitorView.Rising();
+        StartCoroutine(SleepRoutine());
+    }
+
+    public IEnumerator SleepRoutine()
+    {
+        int timeToSleep = 15;
+
+        while (timeToSleep > 0)
+        {
+            timeToSleep--;
+            yield return new WaitForSeconds(1);
+        }
+
+        OnVisitorSleep?.Invoke(true);
+
+        yield return new WaitForSeconds(3);
+
+        OnVisitorSleep?.Invoke(false);
     }
 
     public void ShowEmoji()
@@ -31,7 +49,6 @@ public class Visitor : MonoBehaviour
 
     private void OnDisable()
     {
-        _task = null;
         _visitorView.RefreshView();
     }
 

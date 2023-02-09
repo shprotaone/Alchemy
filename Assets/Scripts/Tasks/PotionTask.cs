@@ -13,13 +13,15 @@ public class PotionTask
 
     public PotionTask(Potion potion, VisitorController visitorController, PotionTaskSystem taskSystem)
     {
+        Visitor visitor = visitorController.CurrentVisitor;
+
         TaskSystem = taskSystem;
         _currentPotion = potion;
        
         Images = taskSystem.GetLabels(potion.Labels.Count);
 
-        CurrentTaskView = visitorController.CurrentVisitor.TaskView;
-        CurrentTaskView.InitTask(this);
+        CurrentTaskView = visitor.TaskView;
+        CurrentTaskView.InitTask(this,visitor);
     }   
 
     public void SetReward(int reward)

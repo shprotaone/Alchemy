@@ -63,7 +63,6 @@ public class LevelInitializator : MonoBehaviour
     public void InitLevelSettings()
     {
         _audioManager.Init(_gameSaver);
-        _audioManager?.MainMusicSoruce.Play();
 
         InitTask();
 

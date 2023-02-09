@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d599ebcb58a414f4cb10d15fd6528560, type: 3}
   m_Name: EarnCommon
   m_EditorClassIdentifier: 
-  Name: "\u0421\u0430\u043C\u044B\u0439 \u0431\u043E\u0433\u0430\u0442\u044B\u0439
-    \u0410\u043B\u0445\u0438\u043C\u0438\u043A"
+  Name: "\u0417\u0435\u043B\u044C\u0435\u0432\u044B\u0439 \u043C\u0430\u0433\u043D\u0430\u0442"
   Desription: "\u0417\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u0439 100000 \u043C\u043E\u043D\u0435\u0442"
   Id: 6
   Goal: 100000

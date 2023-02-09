@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BottleInventory : MonoBehaviour
 {
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private TMP_Text _bottleCount;
     [SerializeField] private List<FullBottleSlot> _slots;
 
@@ -39,6 +40,7 @@ public class BottleInventory : MonoBehaviour
         {
             _currentSlot = FindFreeSlot(potionInBottle);
         }
+        _currentSlot.AudioManagerHandler(_audioManager);
 
         return _currentSlot;
     }

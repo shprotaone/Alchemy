@@ -6,6 +6,7 @@ public class DragController : MonoBehaviour
     public static DragController instance = null;
 
     [SerializeField] private Transform _draggableContainer;
+    [SerializeField] private AudioManager _audioManager;
     private Camera _camera;
     private Vector2 _dragScreenPosition;
     private Vector3 _worldPosition;
@@ -86,6 +87,7 @@ public class DragController : MonoBehaviour
                     if (ingredient = draggable.GetComponentInChildren<Ingredient>())
                     {
                         _lastDragged = ingredient.GetComponent<Draggable>();
+                        _audioManager.PlaySFX(_audioManager.Data.PickBottleClip);
                     }
                     else if (bottle = draggable.GetComponentInChildren<BottleModel>())
                     {

@@ -78,6 +78,7 @@ public class TradeSystem : MonoBehaviour
         _tradeView.Refresh(_reward);
         _tradeView.TradeButtoneControl(_reward);
         _libraVisual.CheckPosition(_labelsIn.Count);
+        _audioManager.PlaySFX(_audioManager.Data.Scales);
     }
 
     public void Trade()
@@ -95,6 +96,7 @@ public class TradeSystem : MonoBehaviour
         _tradeView.StartCoinAnimation();
         _tradeView.TradeButtoneControl(0);
         _audioManager.PlaySFX(_audioManager.Data.CoinDrop);
+        _audioManager.PlaySFX(_audioManager.Data.VoiceGood);
 
         ClearSlotsAfterTrade();
 
@@ -111,7 +113,7 @@ public class TradeSystem : MonoBehaviour
 
         _completeSeries.ResetSeries();
         _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
-        _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.CancelClips));
+        _audioManager.PlaySFX(_audioManager.Data.VoiceSad);
 
         ReturnBottleAfterDecline();
         OnDecline?.Invoke();

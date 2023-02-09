@@ -17,8 +17,6 @@ public class GameStateController : MonoBehaviour
         _mixingSystem = mixingSystem;
         _preset = preset;
 
-        _audioManager.ChangeMainMusic(_audioManager.Data.ClaudronRoomTheme);
-
         InventoryIsEmpty = false;
         _mixingSystem.OnBottleFilled += CheckLeftIngredients;
     }

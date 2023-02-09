@@ -55,9 +55,10 @@ public class VisitorController : MonoBehaviour
             SetNextTask(_taskSystem.GetTaskv2());
 
             CurrentVisitor.gameObject.SetActive(true);
-            CurrentVisitor.Init(_currentTask);
-           
-            _audioManager.PlaySFX(_audioManager.GetRandomSound(_audioManager.Data.DoorOpenClips));
+            CurrentVisitor.Init();
+            CurrentVisitor.OnVisitorSleep += _audioManager.PlaySleepSound;
+
+            _audioManager.PlaySteps(CurrentVisitor.GuildsType);
 
             _prevVisitor = CurrentVisitor;
         }
@@ -90,13 +91,14 @@ public class VisitorController : MonoBehaviour
 
     public void VisitorGoOutSound()
     {
-        _audioManager.PlaySFX(_audioManager.Data.Closed);
+        //_audioManager.PlaySFX(_audioManager.Data.Closed);
     }
 
     private void DisableVisitor()
     {
         if (CurrentVisitor != null)
         {
+            CurrentVisitor.OnVisitorSleep -= _audioManager.PlaySleepSound;
             CurrentVisitor.Disable();
             VisitorGoOutSound();
             _visitorCountSystem.DecreaseVisitorCount();

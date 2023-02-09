@@ -33,13 +33,13 @@ public class SettingsView : MonoBehaviour
 
     public void ChangeMusic()
     {
-        if (_audioManager.Music) _musicImage.sprite = _turnOnMusic;
+        if (_audioManager.IsMusicOn) _musicImage.sprite = _turnOnMusic;
         else _musicImage.sprite = _turnOffMusic;
     }
 
     public void ChangeSFX()
     {
-        if (_audioManager.SFX) _sfxImage.sprite = _turnOnSfx;
+        if (_audioManager.IsSoundEffectOn) _sfxImage.sprite = _turnOnSfx;
         else _sfxImage.sprite = _turnOffSfx;
     }
 

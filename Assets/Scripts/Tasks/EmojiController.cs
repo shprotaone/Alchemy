@@ -34,13 +34,19 @@ public class EmojiController : MonoBehaviour
         _emoji.DOFade(1, fadeTime);
     }
 
-    public void SetSleepEmoji()
+    public void SetSleepEmoji(bool flag)
     {
-        _emoji.sprite = _emojiContainer.sleepEmoji;
-        ShowEmoji();
+        if (flag)
+        {
+            _emoji.sprite = _emojiContainer.sleepEmoji;
+            ShowEmoji();
+        }
+        else
+        {
+            FadeEmoji(fadeTime);
+        }
     }
-   
-
+    
     public void FadeEmoji(float fadeTime)
     {
         _emoji.DOFade(0,fadeTime);     

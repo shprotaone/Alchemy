@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,8 +43,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private void CheckResult()
     {       
         _coinResult.text = _money.CurrentMoney.ToString();
-        _audioManager.MainMusicSoruce.Stop();
-        
+
         if (_moneyTask.TaskMoney < _money.CurrentMoney)
         {
             _nextLevelButton.gameObject.SetActive(true);

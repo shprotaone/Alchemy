@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 9
   backgroundSprite: {fileID: 21300000, guid: 5b98b2ac3477f4e49bf786330b473532, type: 3}
-  _mainSound: {fileID: 8300000, guid: 0134d53550a85164b97b0b775cf22ffa, type: 3}
+  _mainSound:
+    Guid:
+      Data1: 1951471120
+      Data2: 1299374983
+      Data3: -978740075
+      Data4: 1479388429
+    Path: event:/Music/Contraband
   addCommonResourceCount: 7
   startBottleCount: 1000
   visitorCount: 10

@@ -87,7 +87,7 @@ TextureImporter:
       213: -6327649544635266564
     second: RedButton
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -104,10 +104,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -146,6 +148,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -185,6 +189,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -796,9 +812,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Recipe: 3644371587469575412
+      RecipePress: 6635412944064950014
+      ClosePress: 8549552700689403096
+      EnableSFX: -3926645467788292836
+      DisableMusic: -3549878461088776956
+      BlueButton: -2750896186866711111
+      Pause: 1918052449500429155
+      Seal: -391524103182469424
+      Right: -8300301952019772343
+      SealPress: 8476831252591697560
+      EnableMusic: 1878361554287950751
+      LeftPress: 7332157009614597519
+      AchievmentPress: 7261087569967101552
+      Next: -2055766830316432418
+      VisitorLine: 7569936295444863062
+      BottleLine: -131200060930148472
+      RedButtonPress: 8500102962812886248
+      Left: 8389833378824544936
+      Restart: 5395434124839223819
+      BlueButtonPress: 9132418779355674812
+      FAQ: 8644339912668200350
+      DisableSFX: -357361913367934587
+      PausePress: 2961230009022893817
+      Achievments: 4540361532361880021
+      RedButton: -6327649544635266564
+      Close: 4699565534421458468
+      FAQPress: 9146276609747522882
+      RightPress: 6078116130328058563
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

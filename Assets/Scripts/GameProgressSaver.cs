@@ -5,7 +5,7 @@ public class GameProgressSaver
 {
     public event Action OnSaveProgress;
 
-    public readonly string musicName = "Music";
+    public readonly string musicName = "isMusicOn";
     public readonly string sfxName = "Effects";
     public readonly string firstPlayName = "FirstPlay";
 

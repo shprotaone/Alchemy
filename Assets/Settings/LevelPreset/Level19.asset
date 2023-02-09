@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 19
   backgroundSprite: {fileID: 21300000, guid: 9c3e7cc4c618db3449b0a4e4630d3c07, type: 3}
-  _mainSound: {fileID: 0}
+  _mainSound:
+    Guid:
+      Data1: 987700717
+      Data2: 1149565921
+      Data3: -2109950800
+      Data4: -716708803
+    Path: event:/Music/Village
   addCommonResourceCount: 12
   startBottleCount: 10000
   visitorCount: 16

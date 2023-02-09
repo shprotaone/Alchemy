@@ -1,112 +1,139 @@
 using DG.Tweening;
 using System;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Audio;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class AudioManager : MonoBehaviour
 {
     public event Action OnSoundSettingsChanged;
 
     [SerializeField] private SoundsData _data;
-    [SerializeField] private AudioSource _mainMusicSource;
-    [SerializeField] private AudioSource _sfxSource;
-    [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private SettingsView _settingDisplay;
     
     private GameProgressSaver _gameProgress;
+    private EventInstance _mainMusicInstance;
+    private EventInstance _sfxInstance;
 
-    public bool Music { get; private set; }
-    public bool SFX { get; private set;
-    }
-    public AudioSource MainMusicSoruce => _mainMusicSource;
+    public bool IsMusicOn { get; private set; }
+    public bool IsSoundEffectOn { get; private set; }
     public SoundsData Data => _data;
 
     public void Init(GameProgressSaver gameProgress)
     {
         _gameProgress = gameProgress;
-        Music = _gameProgress.Music;
-        SFX = _gameProgress.SFX;
+        IsMusicOn = _gameProgress.Music;
+        IsSoundEffectOn = _gameProgress.SFX;
         OnSoundSettingsChanged?.Invoke();
 
-        LoadSettings();        
-        _mainMusicSource?.Play();
+        ChangeMainMusic(_data.ClaudronRoomTheme);
     }
 
     /// <summary>
-    /// ПРоигрывание звуков из разных мест
+    /// Проигрывание звуков из разных мест
     /// </summary>
     /// <param name="clip"></param>
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(EventReference clip)
     {
-        _sfxSource.PlayOneShot(clip);
+        if (IsSoundEffectOn)
+        {
+            RuntimeManager.PlayOneShot(clip);
+        }
+    }
+
+    public void PlayInstanceSfx(EventReference clip)
+    {
+        if (IsSoundEffectOn)
+        {
+            _sfxInstance = RuntimeManager.CreateInstance(clip);
+            _sfxInstance.start();
+        }
+    }
+
+    public void StopInstanceSfx()
+    {
+        _sfxInstance.stop(STOP_MODE.IMMEDIATE);
     }
 
     /// <summary>
     /// Изменение музыки в зависимости от стадии игры
     /// </summary>
     /// <param name="clip"></param>
-    public void ChangeMainMusic(AudioClip clip)
+    public void ChangeMainMusic(EventReference clip)
     {
-        _mainMusicSource.clip = clip;
-        _mainMusicSource.Play();
-    }
+        _mainMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        _mainMusicInstance = RuntimeManager.CreateInstance(clip);
 
-    public AudioClip GetRandomSound(AudioClip[] clips)
-    {
-        return clips[UnityEngine.Random.Range(0, clips.Length)];
-    }  
-
-    /// <summary>
-    /// Загрузка текущих настроек
-    /// </summary>
-    /// <param name="music"></param>
-    /// <param name="sounds"></param>
-    public void LoadSettings()
-    {
-        SetSound(_gameProgress.musicName, Music);
-        SetSound(_gameProgress.sfxName, SFX);
-    }
-
-    private void SetSound(string soundLayer, bool value)
-    {
-        if (value)
+        if (IsMusicOn)
         {
-            _audioMixer.SetFloat(soundLayer, 0);
+            _mainMusicInstance.start();
+        }
+    }
+
+    public void PlaySteps(GuildsType guild)
+    {
+        EventReference temp;
+        if (guild == GuildsType.Saint)
+        {
+            temp = _data.StepsSaint;
+        }
+        else if(guild == GuildsType.Bandit)
+        {
+            temp = _data.StepsBandit;
+        }
+        else if (guild == GuildsType.Knight)
+        {
+            temp = _data.StepsKnight;
         }
         else
         {
-            _audioMixer.SetFloat(soundLayer, -80);
+            temp = _data.StepsWizzard;
         }
+
+        PlaySFX(temp);
+    }
+
+    public void PlaySleepSound(bool value)
+    {
+        PlaySFX(_data.VoiceWaiting);
     }
 
     public void SwitchMusic()
     {
-        if (Music)
+        if (IsMusicOn)
         {
-            Music = false;
+            IsMusicOn = false;
+            _mainMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
         }
         else
         {
-            Music = true;
+            IsMusicOn = true;
+            _mainMusicInstance.start();
         }
 
-        _gameProgress.SaveSoundsSettings(Music, SFX);
-        SetSound(_gameProgress.musicName, Music);
+        _gameProgress.SaveSoundsSettings(IsMusicOn, IsSoundEffectOn);
         OnSoundSettingsChanged?.Invoke();       
     }
 
     public void SwitchSFX()
     {
-        if (SFX)
+        if (IsSoundEffectOn)
         {
-            SFX = false;
+            IsSoundEffectOn = false;
         }
         else
         {
-            SFX = true;
+            IsSoundEffectOn = true;
         }
-        _gameProgress.SaveSoundsSettings(Music, SFX);
-        SetSound(_gameProgress.sfxName, SFX);
+
+        _gameProgress.SaveSoundsSettings(IsMusicOn, IsSoundEffectOn);
         OnSoundSettingsChanged?.Invoke();      
+    }
+
+    private void OnDisable()
+    {
+        _mainMusicInstance.stop(STOP_MODE.IMMEDIATE);
     }
 }

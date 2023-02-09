@@ -53,7 +53,6 @@ public class Cook : MonoBehaviour
 
         _boilProgress.maxValue = endTime;
         _cookButton.interactable = false;
-        _claudron.ClearClaudronButton.interactable = false;
 
         while (startTime < _boilProgress.maxValue)
         {
@@ -62,12 +61,7 @@ public class Cook : MonoBehaviour
             _boilProgress.value = startTime;
             yield return new WaitForFixedUpdate();
         }
-
-        //_mixingSystem.CheckPotion();
-
-        //CheckTruePotion(_mixingSystem.BottleFilled);                
-        _claudron.ClearClaudronButton.interactable = true;
-
+        
         _audioSource.Stop();
 
         _speed = 0;
