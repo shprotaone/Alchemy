@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Potion 7
   m_EditorClassIdentifier: 
   labels: 0100000002000000
-  isCooked: 1
+  isCooked: 0

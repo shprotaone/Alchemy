@@ -27,7 +27,7 @@ public class BottleInventory : MonoBehaviour
         {
             if (!slot.IsFree)
             {
-                slot.ResetSlot();
+                slot.CleanSLotAfterDraggable();
             }
         }
     }
@@ -40,7 +40,7 @@ public class BottleInventory : MonoBehaviour
         {
             _currentSlot = FindFreeSlot(potionInBottle);
         }
-        _currentSlot.AudioManagerHandler(_audioManager);
+        _currentSlot.AudioManagerHandler(_audioManager,this);
 
         return _currentSlot;
     }
@@ -63,9 +63,9 @@ public class BottleInventory : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            if (!slot.IsFree)
+            if (!slot.IsFree && potion != null)
             {
-                if (slot.BottleInSlot.Data.Labels.SequenceEqual(potion.Labels))
+                if (slot.BottleInSlot.PotionInBottle.LabelID == potion.LabelID)
                 {
                     return slot;
                 }

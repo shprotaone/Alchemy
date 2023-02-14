@@ -64,7 +64,7 @@ public class TradeSystemV2 : MonoBehaviour,ISlot
         
     }
 
-    public void ResetSlot()
+    public void CleanSLotAfterDraggable()
     {
         //throw new System.NotImplementedException();
     }

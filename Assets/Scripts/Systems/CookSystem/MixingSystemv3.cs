@@ -43,7 +43,7 @@ public class MixingSystemv3 : MonoBehaviour
 
     public void FillBottle(BottleModel bottle)
     {      
-        bool checkFilling = _labelSetter.Labels.Count != 0 && _cook.CanFillBottle;
+        bool checkFilling = _labelSetter.Labels.Count != 0 && _cook.CanFillBottle && !bottle.IsFull;
 
         if (checkFilling)
         {
@@ -68,7 +68,7 @@ public class MixingSystemv3 : MonoBehaviour
     {
         FullBottleSlot fullSlot;
 
-        fullSlot = _bottleInventory.GetSlot(bottle.Data.PotionInBottle);
+        fullSlot = _bottleInventory.GetSlot(bottle.PotionInBottle);
 
         if (fullSlot != null)
         {

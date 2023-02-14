@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class RecordLoader : MonoBehaviour
 {
@@ -10,14 +11,19 @@ public class RecordLoader : MonoBehaviour
     [SerializeField] private TMP_Text _recordText;
 
     private int _record;
-    void Start()
+
+    private void OnEnable() => YandexGame.GetDataEvent += LoadRecord;
+    private void OnDisable() => YandexGame.GetDataEvent -= LoadRecord;
+
+    private void LoadRecord()
     {
-        LoadRecordFromPrefs();
-        _recordText.text = _record.ToString();
+        //_record = PlayerPrefs.GetInt(RecordName, 0);
+        _record = YandexGame.savesData.moneyRecord;
+        UpdateRecord();
     }
 
-    private void LoadRecordFromPrefs()
+    private void UpdateRecord()
     {
-        _record = PlayerPrefs.GetInt(RecordName, 0);
+        _recordText.text = _record.ToString();
     }
 }

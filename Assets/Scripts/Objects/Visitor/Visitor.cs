@@ -47,11 +47,6 @@ public class Visitor : MonoBehaviour
         _currentTaskView.FadingTask();
     }
 
-    private void OnDisable()
-    {
-        _visitorView.RefreshView();
-    }
-
     public void SetEmoji(float index)
     {
         TaskView.EmojiController.SetEmoji(index);

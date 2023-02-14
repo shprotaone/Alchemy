@@ -1,31 +1,7 @@
 fileFormatVersion: 2
 guid: e470633b818900d4c948539a65de2ec4
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -9030329824578680296
-    second: LeftRope
-  - first:
-      213: 2064775212213459780
-    second: RightRope
-  - first:
-      213: 5310194754266385674
-    second: SmallTable
-  - first:
-      213: 1093322335628213334
-    second: BigPlate
-  - first:
-      213: 8096668429458821923
-    second: BoilButton
-  - first:
-      213: 7806014354678736379
-    second: TradeButton
-  - first:
-      213: 3472499252858563494
-    second: LeftShelf
-  - first:
-      213: 8615462059371855731
-    second: RightShelf
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -89,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -116,15 +92,15 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 12
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -140,15 +116,15 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
+    buildTarget: WebGL
+    maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 50
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -159,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 42
-        y: 801
+        y: 798
         width: 42
-        height: 161
+        height: 164
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81a4f598ed2dda280800000000000000
-      internalID: -9030329824578680296
+      spriteID: ae19ab9be28a52341ae0ab9b4708c610
+      internalID: 2041259309
       vertices: []
       indices: 
       edges: []
@@ -180,9 +156,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 132
-        y: 801
+        y: 798
         width: 42
-        height: 161
+        height: 164
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44bd309ad1e87ac10800000000000000
-      internalID: 2064775212213459780
+      spriteID: 24f3780c8fbd64f49ade7addbabd05c6
+      internalID: -193568676
       vertices: []
       indices: 
       edges: []
@@ -200,10 +176,10 @@ TextureImporter:
       name: SmallTable
       rect:
         serializedVersion: 2
-        x: 233
-        y: 896
+        x: 229
+        y: 893
         width: 126
-        height: 86
+        height: 90
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0dc0309ef991b940800000000000000
-      internalID: 5310194754266385674
+      spriteID: cf892ede6971e5549bfc5841370c8a3c
+      internalID: 666510812
       vertices: []
       indices: 
       edges: []
@@ -221,10 +197,10 @@ TextureImporter:
       name: BigPlate
       rect:
         serializedVersion: 2
-        x: 379
-        y: 891
-        width: 452
-        height: 98
+        x: 378
+        y: 888
+        width: 456
+        height: 102
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65cbe102fd24c2f00800000000000000
-      internalID: 1093322335628213334
+      spriteID: 29faeb6ff9fdbfc46a6b12a06395af54
+      internalID: 325557469
       vertices: []
       indices: 
       edges: []
@@ -242,10 +218,10 @@ TextureImporter:
       name: BoilButton
       rect:
         serializedVersion: 2
-        x: 229
-        y: 796
-        width: 267
-        height: 80
+        x: 224
+        y: 792
+        width: 264
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3235302e9052d5070800000000000000
-      internalID: 8096668429458821923
+      spriteID: 2e8a324c3f4985747b0849681c735153
+      internalID: 424248603
       vertices: []
       indices: 
       edges: []
@@ -264,9 +240,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 12
-        y: 687
-        width: 243
-        height: 90
+        y: 685
+        width: 246
+        height: 93
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf5e93292b8845c60800000000000000
-      internalID: 7806014354678736379
+      spriteID: 3bcdec53dcff2b1479ff5a63c4db9aa6
+      internalID: 871284877
       vertices: []
       indices: 
       edges: []
@@ -286,7 +262,7 @@ TextureImporter:
         serializedVersion: 2
         x: 12
         y: 63
-        width: 292
+        width: 294
         height: 600
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -295,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aba1712cabc03030800000000000000
-      internalID: 3472499252858563494
+      spriteID: 3a7470d6adb90d74c8a98852b5cac577
+      internalID: 701625130
       vertices: []
       indices: 
       edges: []
@@ -305,10 +281,10 @@ TextureImporter:
       name: RightShelf
       rect:
         serializedVersion: 2
-        x: 350
+        x: 347
         y: 63
-        width: 292
-        height: 600
+        width: 294
+        height: 603
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37ff6b8a815409770800000000000000
-      internalID: 8615462059371855731
+      spriteID: c6d47cc1f82427b47ae652027f79087b
+      internalID: 417701447
       vertices: []
       indices: 
       edges: []
@@ -333,14 +309,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RightShelf: 8615462059371855731
-      LeftShelf: 3472499252858563494
-      RightRope: 2064775212213459780
-      SmallTable: 5310194754266385674
-      BigPlate: 1093322335628213334
-      BoilButton: 8096668429458821923
-      LeftRope: -9030329824578680296
-      TradeButton: 7806014354678736379
+      RightShelf: 417701447
+      LeftShelf: 701625130
+      RightRope: -193568676
+      SmallTable: 666510812
+      BigPlate: 325557469
+      BoilButton: 424248603
+      LeftRope: 2041259309
+      TradeButton: 871284877
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

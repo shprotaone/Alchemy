@@ -29,15 +29,26 @@ public class BottleStorage : MonoBehaviour,IInterract,IDragTimer
 
     public BottleModel CreateBottle()
     {
-        GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
+        bool created = false;
+        BottleModel model = null;
 
-        BottleModel bottle = bottleGO.GetComponent<BottleModel>();
-        bottle.transform.position = _uprisePos.position;
-        _upriseParticle.Play();
+        while (!created)
+        {
+            GameObject bottleGO = ObjectPool.SharedInstance.GetObject(ObjectType.BOTTLE);
+            BottleModel bottle = bottleGO.GetComponent<BottleModel>();
 
-        bottle.InitBottle(this,_bottleInventory);
+            if (!bottle.IsFull)
+            {
+                bottle.transform.position = _uprisePos.position;
+                _upriseParticle.Play();
 
-        return bottle;
+                bottle.InitBottle(this, _bottleInventory);
+                created = true;
+                model = bottle;
+            }
+        }
+
+        return model;
     }
 
     public void AddBottle(int value)

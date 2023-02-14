@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4722579840883899169}
   - component: {fileID: 3525310017537107589}
   - component: {fileID: 5029609196458833351}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: LabelContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6650485973180181077}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193668372587723891}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: EffectTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7570146590568218147}
   - component: {fileID: 7386810982512116998}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,13 +322,12 @@ SpriteRenderer:
   m_SortingLayerID: -768495831
   m_SortingLayer: 4
   m_SortingOrder: 26
-  m_Sprite: {fileID: -6895716492971166485, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  m_Sprite: {fileID: 1763189140, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.18, y: 1.28}
+  m_Size: {x: 1.17, y: 1.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -344,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3241208924864703127}
   - component: {fileID: 1353289732945467316}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +428,7 @@ GameObject:
   - component: {fileID: 1978859527022972209}
   - component: {fileID: 8923578668759686147}
   - component: {fileID: 7913342541532121656}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +587,7 @@ GameObject:
   - component: {fileID: 5975492717675343278}
   - component: {fileID: 5975492717675343277}
   - component: {fileID: 5975492717675343276}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2233345837965744541}
   - component: {fileID: 3765002039082025305}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: BottleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,13 +886,12 @@ SpriteRenderer:
   m_SortingLayerID: -768495831
   m_SortingLayer: 4
   m_SortingOrder: 24
-  m_Sprite: {fileID: -4894898745955426128, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  m_Sprite: {fileID: -961750417, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.92, y: 1.48}
+  m_Size: {x: 0.96, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -909,7 +907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679892167472120243}
   - component: {fileID: 3966709684036512564}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Label3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2515949618519052893}
   - component: {fileID: 4336830987589980849}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Label2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

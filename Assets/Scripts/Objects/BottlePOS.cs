@@ -19,11 +19,12 @@ public class BottlePOS : MonoBehaviour,ISlot
         return this;
     }
 
-    public void ResetSlot()
+    public void CleanSLotAfterDraggable()
     {
         if (!_isFree)
         {                       
             _isFree = true;
+            Bottle = null;
         }    
     }
 

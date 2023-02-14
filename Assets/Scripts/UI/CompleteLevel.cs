@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 public class CompleteLevel : MonoBehaviour,IMenu
 {   
@@ -53,7 +54,8 @@ public class CompleteLevel : MonoBehaviour,IMenu
             _completeParticle.gameObject.SetActive(true);
             _completeParticle.Play();
             _audioManager.PlaySFX(_audioManager.Data.WinWindowSound);
-            
+            YandexGame.FullscreenShow();
+
         }
         else
         {

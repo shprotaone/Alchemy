@@ -15,10 +15,7 @@ MonoBehaviour:
   ingredientName: TreeMushroom
   cost: 50
   color: {r: 0.999694, g: 1, b: 0, a: 0.6666667}
-  mainSprite: {fileID: -7067808830664889489, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
-  dragableSprite: {fileID: -2746839580606631015, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  mainSprite: {fileID: 1955370695, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
+  dragableSprite: {fileID: -1418438487, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   resourceType: 2
   resourceRarity: 0
-  dragSound: {fileID: 0}

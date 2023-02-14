@@ -1,15 +1,19 @@
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.Audio;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
     public event Action OnSoundSettingsChanged;
 
+    [FMODUnity.BankRef]
+    [SerializeField] private string _bankPreload;
     [SerializeField] private SoundsData _data;
     [SerializeField] private SettingsView _settingDisplay;
     
@@ -17,12 +21,23 @@ public class AudioManager : MonoBehaviour
     private EventInstance _mainMusicInstance;
     private EventInstance _sfxInstance;
 
+    private EventReference _mainMusicReference;
+    private EventReference _sfxReference;
+
     public bool IsMusicOn { get; private set; }
     public bool IsSoundEffectOn { get; private set; }
     public SoundsData Data => _data;
 
+    private void Awake()
+    {
+        StartCoroutine(LoadBank());
+        
+
+    }
     public void Init(GameProgressSaver gameProgress)
     {
+        ReInitSound();
+
         _gameProgress = gameProgress;
         IsMusicOn = _gameProgress.Music;
         IsSoundEffectOn = _gameProgress.SFX;
@@ -47,7 +62,8 @@ public class AudioManager : MonoBehaviour
     {
         if (IsSoundEffectOn)
         {
-            _sfxInstance = RuntimeManager.CreateInstance(clip);
+            _sfxReference = clip;
+            _sfxInstance = RuntimeManager.CreateInstance(_sfxReference);
             _sfxInstance.start();
         }
     }
@@ -64,7 +80,8 @@ public class AudioManager : MonoBehaviour
     public void ChangeMainMusic(EventReference clip)
     {
         _mainMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        _mainMusicInstance = RuntimeManager.CreateInstance(clip);
+        _mainMusicReference = clip;
+        _mainMusicInstance = RuntimeManager.CreateInstance(_mainMusicReference);
 
         if (IsMusicOn)
         {
@@ -135,5 +152,36 @@ public class AudioManager : MonoBehaviour
     private void OnDisable()
     {
         _mainMusicInstance.stop(STOP_MODE.IMMEDIATE);
+    }
+
+    private void ReInitSound()
+    {
+        var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
+        result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
+    }
+
+    public void DisableSound()
+    {
+        Time.timeScale = 0;
+        var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
+        //RuntimeManager.MuteAllEvents(true);
+        Debug.Log("Не в фокусе");
+    }
+
+    public void EnableSound()
+    {
+        Time.timeScale = 1;
+        var result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
+        Debug.Log("В фокусе");
+    }
+
+    private IEnumerator LoadBank()
+    {
+        FMODUnity.RuntimeManager.LoadBank(_bankPreload);
+
+        yield return new WaitForSeconds(0.5f);
+
+        //_mainMusicInstance = RuntimeManager.CreateInstance(_mainMusicReference);
+        //_sfxInstance = RuntimeManager.CreateInstance(_sfxReference);
     }
 }

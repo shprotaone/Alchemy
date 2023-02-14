@@ -9,5 +9,5 @@ public interface ISlot
     /// </summary>
     void CheckSlot();
     void SetSlot(BottleModel bottle);
-    void ResetSlot();
+    void CleanSLotAfterDraggable();
 }

@@ -26,7 +26,7 @@ public class VisitorView : MonoBehaviour
         _visitorImage.transform.DOMove(_tradePos, risingDuration).OnComplete(_taskView.RisingTask);
         _visitorImage.transform.DOLocalRotate(_rotate, risingDuration / 6)
             .SetLoops(6, LoopType.Yoyo)
-            .SetEase(Ease.Linear);
+            .SetEase(Ease.Linear).OnComplete(() => _visitorImage.transform.rotation = Quaternion.Euler(Vector3.zero));
             
 
         DOTween.ToAlpha(() => _visitorImage.color, x => _visitorImage.color = x, 1, risingDuration);
@@ -48,6 +48,7 @@ public class VisitorView : MonoBehaviour
             .OnComplete(() =>
             {              
                 this.gameObject.SetActive(false);
+                RefreshView();
             });
     }
 
@@ -55,7 +56,8 @@ public class VisitorView : MonoBehaviour
     {
         _visitorImage.color = new Color(1,1,1,1);
         _visitorImage.transform.localScale = _startScale;      
-        _visitorImage.transform.localEulerAngles = Vector3.zero;        
+        _visitorImage.transform.rotation = Quaternion.Euler(Vector3.zero);
+        Debug.Log("—брос к стандартному положению");
     }
 
     public void UpdateTimerText(int currentTime)

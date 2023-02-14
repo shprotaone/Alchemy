@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class AchievementsProgressSaver : MonoBehaviour
 {
@@ -9,30 +10,45 @@ public class AchievementsProgressSaver : MonoBehaviour
 
     [SerializeField] private List<AchievementData> _achievementData;
     private ISubject[] _subjectsList;
+    private GameProgressSaver _saver;
+    //private JSONSave<AchievementData> _json;
+    private SaveToString<AchievementData> _strings;
 
-    private JSONSave<AchievementData> _json;
+    private void OnEnable() => YandexGame.GetDataEvent += LoadData;
 
     private void Start()
     {
         InitSubjects();
-
-        _json = new JSONSave<AchievementData>(_fileName, _soName);
-
-        List<AchievementData> list = new List<AchievementData>();
-        list = _json.LoadFromJson();
-
-        if (list.Count == 0)
+        if (YandexGame.SDKEnabled == true)
         {
-            SaveProgress();
-        }        
-        else
-        {
-            SetLoadData(list);;
+            LoadData();
         }
 
         LevelInitializator.OnLevelStarted += SaveProgress;
 
         StartCoroutine(AutoSaveRoutine());
+    }
+
+    public void LoadData()
+    {
+        _strings = new SaveToString<AchievementData>(_soName);
+
+        List<AchievementData> list = new List<AchievementData>();
+        list = _strings.LoadFromStrings(YandexGame.savesData.achievmentsStrings);
+
+        if (list[0].Goal == 0)
+        {
+            SaveProgress();
+        }
+        else
+        {
+            SetLoadData(list); ;
+        }
+    }
+
+    public void GameProgressSaverHandler(GameProgressSaver saver)
+    {
+        _saver = saver;
     }
 
     private void InitSubjects()
@@ -66,13 +82,16 @@ public class AchievementsProgressSaver : MonoBehaviour
 
     public void SaveProgress()
     {
-        _json.SaveToJson(_achievementData);
+        //_json.SaveToJson(_achievementData);
+        YandexGame.savesData.achievmentsStrings = _strings.SaveToList(_achievementData);
+        YandexGame.SaveProgress();
     }
 
     private void OnDisable()
     {
         SaveProgress();
         StopCoroutine(AutoSaveRoutine());
+        YandexGame.GetDataEvent -= LoadData;
         LevelInitializator.OnLevelStarted -= SaveProgress;
     }
 }

@@ -14,6 +14,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     [SerializeField] private BottleModel _bottlesInSlot;
 
+    private BottleInventory _bottleInventory;
     private AudioManager _audioManager;
     public BottleModel BottleInSlot => _bottlesInSlot;
    
@@ -30,13 +31,13 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out BottleModel bottle) && bottle.gameObject.layer != Layer.Dragging)
+        if (collision.TryGetComponent(out BottleModel bottle))
         {
             if (IsFree)
             {
                 SetSlot(bottle, true);
             }
-            else if(BottleInSlot != null)
+            else if(BottleInSlot != null && bottle.gameObject.layer != Layer.Dragging)
             {
                 bool isEqual = CheckContains(bottle);
                 if(isEqual)
@@ -48,9 +49,10 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         }
     }
 
-    public void AudioManagerHandler(AudioManager audioManager)
+    public void AudioManagerHandler(AudioManager audioManager,BottleInventory bottleInventory)
     {
         _audioManager = audioManager;
+        _bottleInventory = bottleInventory;
     }
 
     public void SetSlot(BottleModel bottle, bool IsDraggable)
@@ -111,22 +113,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     public void BottleDropSound()
     {
-        _audioManager.PlaySFX(_audioManager.Data.BottleOnShelf);
-        //BottleModel bottle;
-
-        //for (int i = 0; i < Bottles.Count; i++)
-        //{
-        //    bottle = Bottles[i];
-
-        //    if (i == 0)
-        //    {              
-        //        bottle.transform.DOScale(bottle.View.standartScale, 0.1f).OnStart(() => bottle.transform.gameObject.SetActive(true));
-        //    }
-        //    else
-        //    {               
-        //        bottle.transform.DOScale(0, 0.3f).OnComplete(() => bottle.transform.gameObject.SetActive(false));       
-        //    }
-        //}
+        _audioManager?.PlaySFX(_audioManager.Data.BottleOnShelf);
     }
 
     private void SetFreeSlot()
@@ -139,7 +126,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     private void AddBottle(BottleModel bottle)
     {
-        if (!Bottles.Contains(bottle) && CheckContains(bottle))
+        if (!Bottles.Contains(bottle) /*&& CheckContains(bottle)*/)
         {
             Bottles.Add(bottle);
         }
@@ -147,7 +134,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
 
     private bool CheckContains(BottleModel bottle)
     {
-        return this.BottleInSlot.Data.Labels.SequenceEqual(bottle.Data.Labels);
+        return BottleInSlot.PotionInBottle.LabelID == bottle.PotionInBottle.LabelID;
     }
 
     public void DeleteBottle(BottleModel bottle)
@@ -158,7 +145,7 @@ public class FullBottleSlot : MonoBehaviour,ISlot
         }
     }
 
-    public void ResetSlot()
+    public void CleanSLotAfterDraggable()
     {
         for (int i = 0; i < Bottles.Count; i++)
         {

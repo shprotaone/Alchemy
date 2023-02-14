@@ -10,5 +10,4 @@ public class IngredientData : ScriptableObject
     public Sprite dragableSprite;
     public ResourceType resourceType;
     public ResourceRarity resourceRarity;
-    public AudioClip dragSound;
 }

@@ -15,10 +15,7 @@ MonoBehaviour:
   ingredientName: WolfBerry
   cost: 50
   color: {r: 0, g: 0.123636246, b: 1, a: 0.6666667}
-  mainSprite: {fileID: 7642980859614939925, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
-  dragableSprite: {fileID: -3001449038190906842, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  mainSprite: {fileID: -68448138, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
+  dragableSprite: {fileID: 470931330, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   resourceType: 3
   resourceRarity: 0
-  dragSound: {fileID: 0}

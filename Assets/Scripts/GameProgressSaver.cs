@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YG;
 
 public class GameProgressSaver
 {
@@ -12,6 +13,7 @@ public class GameProgressSaver
     private bool _music = true;
     private bool _sfx = true;
     private bool _isFirstGame = true;
+    private int _currentRecord;
 
     public bool IsFirstGame => _isFirstGame;
     public bool Music => _music;
@@ -20,7 +22,7 @@ public class GameProgressSaver
     public GameProgressSaver()
     {
         CheckFirstPlay();
-        ReadSaveSettings();
+        LoadSettings();
     }
 
     private void CheckFirstPlay()
@@ -28,22 +30,25 @@ public class GameProgressSaver
         _isFirstGame = GetFirstGame();
     }
 
-    private void ReadSaveSettings()
+    private void LoadSettings()
     {
         _music = Convert.ToBoolean(PlayerPrefs.GetInt(musicName,1));
         _sfx = Convert.ToBoolean(PlayerPrefs.GetInt(sfxName,1));
+    }
 
-        SaveProgress();
+    public void LoadRecord()
+    {
+        _currentRecord = YandexGame.savesData.moneyRecord;
     }
 
     public void SaveRecord(int money)
     {
-        int currentRecord = PlayerPrefs.GetInt(RecordLoader.RecordName, 0);
-
-        if (currentRecord < money)
+        if (_currentRecord < money)
         {
-            PlayerPrefs.SetInt(RecordLoader.RecordName, money);
-            PlayerPrefs.Save();
+            _currentRecord = money;
+            YandexGame.savesData.moneyRecord = _currentRecord;
+            YandexGame.NewLeaderboardScores("CoinLeaderBoard", _currentRecord);
+            YandexGame.SaveProgress();
         }
     }
 

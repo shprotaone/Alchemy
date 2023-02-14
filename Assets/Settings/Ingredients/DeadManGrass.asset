@@ -15,10 +15,7 @@ MonoBehaviour:
   ingredientName: DeadManGrass
   cost: 50
   color: {r: 1, g: 1, b: 1, a: 0.6666667}
-  mainSprite: {fileID: 3275407576765064038, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
-  dragableSprite: {fileID: 5372264662783423788, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  mainSprite: {fileID: -848753646, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
+  dragableSprite: {fileID: -611797150, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   resourceType: 0
   resourceRarity: 0
-  dragSound: {fileID: 0}

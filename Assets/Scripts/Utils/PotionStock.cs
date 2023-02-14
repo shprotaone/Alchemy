@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PotionStock : MonoBehaviour
 {
@@ -9,18 +10,19 @@ public class PotionStock : MonoBehaviour
     [SerializeField] private List<PotionForStock> _potionStockList;
 
     public List<PotionForStock> PotionStockList => _potionStockList;
-    private JSONSave<PotionForStock> JSONSave;
+    private SaveToString<PotionForStock> _strings;
+    //private JSONSave<PotionForStock> JSONSave;
 
     private void Start()
     {
-        JSONSave = new JSONSave<PotionForStock>(_fileName, _SOName);
+        _strings = new SaveToString<PotionForStock>(_SOName);
 
         List<PotionForStock> list = new List<PotionForStock>();
-        list = JSONSave.LoadFromJson();
+        list = _strings.LoadFromStrings(YandexGame.savesData.openPotions);
 
-        if(list.Count == 0)
+        if (list[0].labels == null)
         {
-            JSONSave.SaveToJson(_potionStockList);
+            Save();
         }
         else
         {
@@ -41,7 +43,8 @@ public class PotionStock : MonoBehaviour
 
     private void Save()
     {
-        JSONSave.SaveToJson(_potionStockList);
+        YandexGame.savesData.openPotions = _strings.SaveToList(_potionStockList);
+        YandexGame.SaveProgress();
     }
 
     private void OnDisable()

@@ -1,40 +1,7 @@
 fileFormatVersion: 2
 guid: 89fda94cafcbab548a16a5b9fd744d12
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 7642980859614939925
-    second: Blue
-  - first:
-      213: -174804484191063705
-    second: Red
-  - first:
-      213: 3275407576765064038
-    second: White
-  - first:
-      213: -7067808830664889489
-    second: Yellow
-  - first:
-      213: -3001449038190906842
-    second: BluePinch
-  - first:
-      213: 2058049638561703503
-    second: RedPinch
-  - first:
-      213: -2746839580606631015
-    second: YellowPinch
-  - first:
-      213: 5372264662783423788
-    second: WhitePinch
-  - first:
-      213: -6895716492971166485
-    second: Label
-  - first:
-      213: -4894898745955426128
-    second: Bottle
-  - first:
-      213: 734368628706365288
-    second: Coin
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -98,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -125,15 +92,15 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 12
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -149,15 +116,15 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
+    buildTarget: WebGL
+    maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -168,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 363
+        y: 360
         width: 235
-        height: 200
+        height: 203
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51b457af892511a60800000000000000
-      internalID: 7642980859614939925
+      spriteID: 4bff0f4a535b1114285665cb5a17a34d
+      internalID: -68448138
       vertices: []
       indices: 
       edges: []
@@ -199,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76175ae6f38f29df0800000000000000
-      internalID: -174804484191063705
+      spriteID: 85fc14525881db44295d24445f9d764f
+      internalID: -230095558
       vertices: []
       indices: 
       edges: []
@@ -220,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66364b356d5947d20800000000000000
-      internalID: 3275407576765064038
+      spriteID: 35bf12a230b05db4cb72ae5eaab58f96
+      internalID: -848753646
       vertices: []
       indices: 
       edges: []
@@ -241,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6ba9dbb0591aed90800000000000000
-      internalID: -7067808830664889489
+      spriteID: 97944e953088255489c84ae69b81e839
+      internalID: 1955370695
       vertices: []
       indices: 
       edges: []
@@ -252,9 +219,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 174
-        width: 200
-        height: 169
+        y: 175
+        width: 204
+        height: 167
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,50 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 622713b8006b856d0800000000000000
-      internalID: -3001449038190906842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RedPinch
-      rect:
-        serializedVersion: 2
-        x: 223
-        y: 174
-        width: 200
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4667940e39af8c10800000000000000
-      internalID: 2058049638561703503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: YellowPinch
-      rect:
-        serializedVersion: 2
-        x: 446
-        y: 174
-        width: 200
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99375fe64f341e9d0800000000000000
-      internalID: -2746839580606631015
+      spriteID: 6995c80a925bea34fa01ef4e6951f16f
+      internalID: 470931330
       vertices: []
       indices: 
       edges: []
@@ -314,10 +239,10 @@ TextureImporter:
       name: WhitePinch
       rect:
         serializedVersion: 2
-        x: 669
+        x: 666
         y: 174
-        width: 200
-        height: 169
+        width: 204
+        height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,8 +250,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c25f6905f3e1e8a40800000000000000
-      internalID: 5372264662783423788
+      spriteID: 6c84e32e568c12043ab44d43eb7d8af3
+      internalID: -611797150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedPinch
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 174
+        width: 204
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fe125e0101116642a16358f4595ec1e
+      internalID: -362637859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YellowPinch
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 174
+        width: 204
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5389849f489eed4a8037ebd007cda39
+      internalID: -1418438487
       vertices: []
       indices: 
       edges: []
@@ -336,9 +303,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 33
-        width: 118
-        height: 128
+        y: 30
+        width: 117
+        height: 132
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be4b6ac726e7d40a0800000000000000
-      internalID: -6895716492971166485
+      spriteID: 59d4255407a71c9439ca35aa27ca76de
+      internalID: 1763189140
       vertices: []
       indices: 
       edges: []
@@ -356,10 +323,10 @@ TextureImporter:
       name: Bottle
       rect:
         serializedVersion: 2
-        x: 148
-        y: 15
-        width: 92
-        height: 148
+        x: 144
+        y: 12
+        width: 96
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b062db5683d11cb0800000000000000
-      internalID: -4894898745955426128
+      spriteID: f3738a342be6b18439a5852b9e1ee6b0
+      internalID: -961750417
       vertices: []
       indices: 
       edges: []
@@ -377,10 +344,10 @@ TextureImporter:
       name: Coin
       rect:
         serializedVersion: 2
-        x: 278
-        y: 82
-        width: 68
-        height: 73
+        x: 276
+        y: 78
+        width: 72
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,8 +355,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fcb308060013a00800000000000000
-      internalID: 734368628706365288
+      spriteID: a2292ade49443ee4ebc3dc7c6a9b49ca
+      internalID: -2082248154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Objects_19
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 36
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a076507f93f6efa47bed24d3a5324bf5
+      internalID: 635615474
       vertices: []
       indices: 
       edges: []
@@ -405,17 +393,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      YellowPinch: -2746839580606631015
-      White: 3275407576765064038
-      WhitePinch: 5372264662783423788
-      BluePinch: -3001449038190906842
-      Bottle: -4894898745955426128
-      Red: -174804484191063705
-      RedPinch: 2058049638561703503
-      Coin: 734368628706365288
-      Label: -6895716492971166485
-      Yellow: -7067808830664889489
-      Blue: 7642980859614939925
+      YellowPinch: -1418438487
+      Objects_13: 1160938873
+      Objects_19: 635615474
+      White: -848753646
+      WhitePinch: -611797150
+      BluePinch: 470931330
+      Bottle: -961750417
+      Objects_5: -1032254380
+      Objects_6: 646626971
+      Red: -230095558
+      Objects_14: 24250557
+      Coin: -2082248154
+      Objects_15: 939354487
+      Label: 1763189140
+      RedPinch: -362637859
+      Objects_9: -1571034277
+      Objects_8: -1621626029
+      Objects_11: -79060522
+      Yellow: 1955370695
+      Blue: -68448138
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

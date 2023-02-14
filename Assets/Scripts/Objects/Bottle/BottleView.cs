@@ -16,7 +16,6 @@ public class BottleView : MonoBehaviour
 
     private LabelToSprite _labelToSprite;
     private Color _potionColor;
-    private GameObject _effectInBottle;
 
     public List<SpriteRenderer> LabelSprites => _labels;
 
@@ -39,20 +38,11 @@ public class BottleView : MonoBehaviour
 
     public void ResetView()
     {
-        ReturnEffect();
         _waterInBottle.enabled = false;
 
         foreach (var label in _labels)
         {
             label.sprite = null;
-        }
-    }
-
-    private void ReturnEffect()
-    {
-        if (_effectInBottle != null)
-        {
-            ObjectPool.SharedInstance.DestroyObject(_effectInBottle);
         }
     }
 
@@ -72,20 +62,3 @@ public class BottleView : MonoBehaviour
     }
 
 }
-
-#region
-//public void AddEffect(Potion potion)
-//{
-//    GameObject effect = ObjectPool.SharedInstance.GetObject(potion.EffectType);
-
-//    if (potion.Rarity == ResourceRarity.rare)
-//    {
-//        _effectInBottle = effect;
-//        _effectInBottle.transform.position = transform.position;
-//        _effectInBottle.transform.SetParent(transform);
-//        _effectInBottle.transform.localScale = new Vector3(1, 1, 0);
-
-//        _effectInBottle.GetComponentInChildren<Effect>().ChangeParticleColor(_potionColor);
-//    }
-//}
-#endregion

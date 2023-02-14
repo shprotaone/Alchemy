@@ -54,14 +54,14 @@ public class TradeSlot : MonoBehaviour,ISlot
         {
             if(slot.Bottle != null && slot.Bottle == bottle)
             {
-                slot.ResetSlot();
+                slot.CleanSLotAfterDraggable();
             }
         }
     }
 
     private void DeleteLabel(BottleModel bottle)
     {
-        if(bottle.Data != null) _tradeSystem.DeleteLabel(bottle.Data.Labels);
+        if(bottle.PotionInBottle != null) _tradeSystem.DeleteLabel(bottle.PotionInBottle.Labels);
     }
 
     private ISlot GetSlot(BottleModel bottle)
@@ -83,7 +83,7 @@ public class TradeSlot : MonoBehaviour,ISlot
         if(_bottlesInSlot.Count < 3)
         {
             _bottlesInSlot.Add(bottle);
-            _tradeSystem.FillLabels(bottle.Data.Labels);          
+            _tradeSystem.FillLabels(bottle.PotionInBottle.Labels);          
         }
     }
 
@@ -116,7 +116,7 @@ public class TradeSlot : MonoBehaviour,ISlot
         }
     }
 
-    public void ResetSlot()
+    public void CleanSLotAfterDraggable()
     {
         
     }

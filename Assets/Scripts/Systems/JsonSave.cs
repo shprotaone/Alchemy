@@ -22,7 +22,7 @@ public class JSONSave<T>
         _dataPath = Path.Combine(Application.persistentDataPath, _fileName);
         Debug.Log(_dataPath);
 
-        List<T> _achievements = new List<T>();
+        List<T> list = new List<T>();
 
         if (File.Exists(_dataPath))
         {
@@ -32,14 +32,14 @@ public class JSONSave<T>
             {
                 object achievments = ScriptableObject.CreateInstance(_SOName);
                 JsonUtility.FromJsonOverwrite(data[i], achievments);
-                _achievements.Add((T)achievments);
+                list.Add((T)achievments);
             }
 
-            return _achievements;
+            return list;
         }
         else
         {
-            return _achievements;
+            return list;
         }
 
     }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BottleAchievements
   m_EditorClassIdentifier: 
   Name: "\u041E\u043F\u044B\u0442\u043D\u044B\u0439 \u0437\u0435\u043B\u044C\u0435\u0432\u0430\u0440"
-  Desription: "\u0421\u0432\u0430\u0440\u0438 1000 \u0437\u0435\u043B\u0438\u0439"
+  Desription: "\u0421\u0432\u0430\u0440\u0438\u0442\u044C 1000 \u0437\u0435\u043B\u0438\u0439"
   Id: 0
   Goal: 1000
-  GoalProgress: 0
+  GoalProgress: 268
   Complete: 0

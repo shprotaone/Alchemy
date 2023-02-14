@@ -12,34 +12,37 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     [SerializeField] private Rigidbody2D _rigid;
     [SerializeField] private LabelPhysController _labelController;
     [SerializeField] private ObjectType _type;
+    [SerializeField] private Potion _potionInBottle;
 
     public ISlot _slot;
     public ISlot _prevSlot;
 
     private Transform _destination;
-    [SerializeField] private BottleData _bottleData;
     private BottleStorage _bottleStorage;
     private BottleInventory _bottleInventory;
-    public BottleData Data => _bottleData;
+    private bool _isFull;
+    public Potion PotionInBottle => _potionInBottle;
     public BottleView View => _bottleView;
     public ObjectType Type => _type;
+    public bool IsFull => _isFull;
 
     public void InitBottle(BottleStorage storage, BottleInventory inventory)
     {
         _bottleStorage = storage;
         _bottleInventory = inventory;
-        _bottleData = null;
+        _potionInBottle = null;
+        _isFull = false;
     }
 
     public void FillBottle(Potion potion, Color color)
     {
         _collider.enabled = false;
 
-        if (_bottleData == null)
+        if (!_isFull)
         {
-            _bottleData = new BottleData(potion, true);
+            _potionInBottle = potion;
+            _isFull = true;
 
-            potion.Labels.Sort();
             SetWaterColor(color);
         }
         else
@@ -47,7 +50,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
             Debug.Log("Уже заполнена");
         }
 
-        _bottleView.AddLabels(_bottleStorage.LabelToSprite, _bottleData.Labels);
+        _bottleView.AddLabels(_bottleStorage.LabelToSprite, _potionInBottle.Labels);
 
         DOVirtual.DelayedCall(0.2f, RepositionToSlot);
     }
@@ -68,7 +71,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 
         if (_destination != null)
         {
-            transform.DOMove(_destination.position, 2, false).SetEase(Ease.InOutBack, 0.8f)
+            transform.DOMove(_destination.position, 1, false).SetEase(Ease.InOutBack, 0.8f)
                                                                  .OnComplete(ReturnBottleToSlot);
         }       
     }
@@ -95,8 +98,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         if (_destination != null)
         {
             transform.DOMove(_destination.position, moveSpeed, false).SetEase(Ease.Linear)
-                                                                     .OnComplete(ReturnBottleToSlot);
-                                                                 
+                                                                                     .OnComplete(ReturnBottleToSlot);
         }
         SlotBehaviourAfterDrop();
         _slot?.CheckSlot();
@@ -107,7 +109,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         if(_slot is FullBottleSlot fullSlot)
         {
             fullSlot.SetSlot(this,true);
-            fullSlot.BottleDropSound();
+            _bottleInventory.GetSlot(_potionInBottle);
         }
 
         _prevSlot?.CheckSlot();
@@ -121,7 +123,7 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
         }
         else
         {
-            SetPosition(_bottleInventory.GetSlot(_bottleData.PotionInBottle).transform);
+            SetPosition(_bottleInventory.GetSlot(_potionInBottle).transform);
         }
 
         Drop();
@@ -133,7 +135,10 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
     private void ReturnBottleToSlot()
     {
         _collider.enabled = true;
-        if (_slot is FullBottleSlot bottleSlot) bottleSlot.BottleDropSound();
+        if (_slot is FullBottleSlot bottleSlot)
+        {
+            bottleSlot.BottleDropSound();
+        }
     }
 
     public void Action()
@@ -152,21 +157,17 @@ public class BottleModel : MonoBehaviour,IAction,IPooledObject,IInterract
 
     public void DestroyBottle()
     {
-        _bottleView.ResetView();
-        _bottleData = null;
+        _isFull = false;
+        _potionInBottle = null;
         _prevSlot = null;
         _slot = null;
+        _bottleView.ResetView();
         ObjectPool.SharedInstance.DestroyObject(gameObject);
     }
 
     public void SetInterract(bool value)
     {
         _collider.enabled = value;
-    }
-
-    public void SetForcePosition(Vector3 position)
-    {
-        this.transform.position = position;        
     }
 }
 

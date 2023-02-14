@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class LevelInitializator : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private MixingSystemv3 _mixingSystem;
     [SerializeField] private ClickController _clickController;
-    [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private AchievementsProgressSaver _achievementsProgressSaver;
 
     [Header("Подсветка и UI")]
     [SerializeField] private MoneyView _moneyView;
@@ -46,14 +47,21 @@ public class LevelInitializator : MonoBehaviour
 
     private List<RandomPart> _tasksChance;
     private List<RandomPart> _labelTypeForTaskChance;
-    
-    private void Start()
+
+    private void OnEnable() => YandexGame.GetDataEvent += _gameSaver.LoadRecord;
+    private void OnDisable() => YandexGame.GetDataEvent-= _gameSaver.LoadRecord;
+
+    private void Awake()
     {
         Application.targetFrameRate = -1;
-        DOTween.SetTweensCapacity(1250,500);
+        DOTween.SetTweensCapacity(1250, 500);
 
         _gameSaver = new GameProgressSaver();
+        _achievementsProgressSaver.GameProgressSaverHandler(_gameSaver);
 
+    }
+    private void Start()
+    {
         _levelSelector.Init();
         _currentLevelPreset = _levelSelector.CurrentLevel;
         InitLevelSettings();
@@ -75,7 +83,6 @@ public class LevelInitializator : MonoBehaviour
         _moneyView.InitSlider(_money.CurrentMoney, _moneyTask.TaskMoney);
         _backGroundLoader.SetBackGround(_currentLevelPreset.backgroundSprite);
         _levelCompletePanel.Init(_money, _moneyTask,_levelSelector,_audioManager);
-        _cameraMovement.Init();
         _clickController.InitializeProgressBar();
 
         InitInventory();
@@ -148,7 +155,6 @@ public class LevelInitializator : MonoBehaviour
         _currentLevelPreset = preset;
 
         _levelCompletePanel.Disable();
-        _cameraMovement.Movement();
         InitLevelSettings();
         _dayEntryController.CallNextDay((int)preset.levelNumber);
         OnLevelStarted?.Invoke();       
@@ -161,7 +167,6 @@ public class LevelInitializator : MonoBehaviour
         _currentLevelPreset = _levelSelector.GetFirstLevel();
         _levelCompletePanel.Disable();
         _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber);
-        _cameraMovement.Movement();
         InitLevelSettings();
 
         OnLoopRestart?.Invoke();

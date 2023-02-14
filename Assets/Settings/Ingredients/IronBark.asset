@@ -15,10 +15,7 @@ MonoBehaviour:
   ingredientName: IronBark
   cost: 50
   color: {r: 1, g: 0, b: 0, a: 0.6666667}
-  mainSprite: {fileID: -174804484191063705, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
-  dragableSprite: {fileID: 2058049638561703503, guid: 89fda94cafcbab548a16a5b9fd744d12,
-    type: 3}
+  mainSprite: {fileID: -230095558, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
+  dragableSprite: {fileID: -362637859, guid: 89fda94cafcbab548a16a5b9fd744d12, type: 3}
   resourceType: 1
   resourceRarity: 0
-  dragSound: {fileID: 0}
