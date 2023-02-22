@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class StartDialogViewer : MonoBehaviour
 {
     [SerializeField] private RectTransform _box;
-    [SerializeField] private InGameTimeController _gameTimeController;
     [SerializeField] private DraggableObjectController _draggableController;
     [SerializeField] private Button _nextButton;
     [SerializeField] private TMP_Text _buttonText;
@@ -27,8 +26,6 @@ public class StartDialogViewer : MonoBehaviour
 
         _nextButton.onClick.AddListener(NextText);
         ButtonNaming();
-
-        _gameTimeController.PauseGame();
         _draggableController.SetInterract(false);
     }
 
@@ -52,7 +49,6 @@ public class StartDialogViewer : MonoBehaviour
 
     public void DisableViewer()
     {
-        _gameTimeController.ResumeGame();
         _draggableController.SetInterract(true);
         _box.gameObject.SetActive(false);
     }

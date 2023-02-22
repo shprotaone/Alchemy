@@ -7,7 +7,6 @@ public class MenuPanelController : MonoBehaviour
 {
     public event Action<bool> OnInterract;
 
-    [SerializeField] private InGameTimeController _ingameTimeController;
     [SerializeField] private RectTransform _panel;
 
     [SerializeField] private RectTransform _closePosition;
@@ -33,7 +32,6 @@ public class MenuPanelController : MonoBehaviour
     public void Close()
     {
         OnInterract?.Invoke(true);
-        _ingameTimeController.ResumeGame();
         _panel.DOAnchorPos(_closePosition.anchoredPosition, _openDuration, false).OnComplete(() => _panel.gameObject.SetActive(false));
     }
 }

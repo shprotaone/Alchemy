@@ -91,7 +91,7 @@ public class VisitorController : MonoBehaviour
 
     public void VisitorGoOutSound()
     {
-        //_audioManager.PlaySFX(_audioManager.PotionInBottle.Closed);
+        _audioManager.PlaySFX(_audioManager.Data.Closed);
     }
 
     private void DisableVisitor()

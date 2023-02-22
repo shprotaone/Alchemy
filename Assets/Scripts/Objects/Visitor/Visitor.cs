@@ -43,8 +43,9 @@ public class Visitor : MonoBehaviour
 
     public void Disable()
     {
+        OnVisitorSleep?.Invoke(false);
         _visitorView.Fading();
-        _currentTaskView.FadingTask();
+        _currentTaskView.Fading();
     }
 
     public void SetEmoji(float index)

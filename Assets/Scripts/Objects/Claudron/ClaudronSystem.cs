@@ -5,15 +5,13 @@ using UnityEngine.UI;
 public class ClaudronSystem : MonoBehaviour     //это будущая View
 {
     [SerializeField] private SpriteRenderer _claudronSprite;
-    [SerializeField] private MixingSystemv3 _mixingSystem;
-    [SerializeField] private WaterColorv2 _waterColor;
-    [SerializeField] private Cookv2 _cookSystem;
+    [SerializeField] private MixingSystem _mixingSystem;
+    [SerializeField] private WaterColoring _waterColor;
+    [SerializeField] private CookHandler _cookSystem;
     [SerializeField] private ButtonEventCatcher _buttonEvent;
 
-    private Claudron _currentClaudron;   
     private bool _isTutorial;
 
-    public float CookSpeed => _currentClaudron.speedMul;
 
     private void Start()
     {
@@ -41,27 +39,12 @@ public class ClaudronSystem : MonoBehaviour     //это будущая View
             _waterColor.ResetWaterColor();
             _cookSystem.FillBottleReset();
             _mixingSystem.ClearMixSystem();
-            CrunchClaudron(false);           
         }
-    }
-
-    public void SetClaudron(Claudron claudron)
-    {
-        _currentClaudron = claudron;
-        _claudronSprite.sprite = claudron.image;
     }
 
     public void SetTutorial(bool value)
     {
         _isTutorial = value;
-    }
-
-    public void CrunchClaudron(bool value)
-    {
-        //if (_crunchSprite.enabled == value)
-        //    return;
-
-        //_crunchSprite.enabled = value;
     }
 
     private void OnDestroy()

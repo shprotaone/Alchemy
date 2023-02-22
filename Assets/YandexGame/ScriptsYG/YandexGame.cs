@@ -315,8 +315,8 @@ namespace YG
             errMessage.AddComponent<RawImage>();
 
             Time.timeScale = 0;
-            AudioListener.volume = 0;
-            AudioListener.pause = true;
+            //AudioListener.volume = 0;
+            //AudioListener.pause = true;
         }
         #endregion SiteLock
 

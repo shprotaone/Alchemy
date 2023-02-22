@@ -1,30 +1,18 @@
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
-public class BottleStorage : MonoBehaviour,IInterract,IDragTimer
+public class BottleStorage : MonoBehaviour
 {
     [SerializeField] private BottleInventory _bottleInventory;
-    [SerializeField] private TableManager _tableManager;
-    
     [SerializeField] private Transform _uprisePos;
     [SerializeField] private ParticleSystem _upriseParticle;
 
-    [SerializeField] private int _delayDrag;
-
     private LabelToSprite _labelToSprite;
-    private LocalTimer _timer;
-    private int _amount;
-    private bool _interract;
 
     public LabelToSprite LabelToSprite => _labelToSprite;
 
-    public void InitBottleStorage(int bottleCount,LabelToSprite labelToSprite)
+    public void InitBottleStorage(LabelToSprite labelToSprite)
     {
-        _amount = bottleCount;
         _labelToSprite = labelToSprite;
-
-        InitTimer(_delayDrag);
     }
 
     public BottleModel CreateBottle()
@@ -49,26 +37,5 @@ public class BottleStorage : MonoBehaviour,IInterract,IDragTimer
         }
 
         return model;
-    }
-
-    public void AddBottle(int value)
-    {
-        _amount += value;
-    }
-
-    public void SetInterract(bool value)
-    {
-        _interract = value;
-    }
-
-    public void InitTimer(int delayDrag)
-    {
-        _timer = new LocalTimer(delayDrag, false);
-        _timer.OnTimerEnded += SetInterract;
-    }
-
-    public void StartTimer()
-    {
-        StartCoroutine(_timer.StartTimer());
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class PausePanelController : MonoBehaviour
 {
-    [SerializeField] private InGameTimeController _timeController;
     [SerializeField] private DraggableObjectController _draggableObjectController;
     [SerializeField] private LevelInitializator _init;
 
@@ -21,7 +20,6 @@ public class PausePanelController : MonoBehaviour
 
     private void Close()
     {
-        _timeController.ResumeGame();
         _draggableObjectController.SetInterract(true);
         this.gameObject.SetActive(false);
     }

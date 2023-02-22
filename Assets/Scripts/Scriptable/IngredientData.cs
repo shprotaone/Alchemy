@@ -9,5 +9,4 @@ public class IngredientData : ScriptableObject
     public Sprite mainSprite;
     public Sprite dragableSprite;
     public ResourceType resourceType;
-    public ResourceRarity resourceRarity;
 }

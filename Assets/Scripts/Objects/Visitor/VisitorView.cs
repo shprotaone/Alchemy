@@ -23,7 +23,7 @@ public class VisitorView : MonoBehaviour
         _timerText.enabled = false;
 
         _visitorImage.transform.DOScale(1, risingDuration);
-        _visitorImage.transform.DOMove(_tradePos, risingDuration).OnComplete(_taskView.RisingTask);
+        _visitorImage.transform.DOMove(_tradePos, risingDuration).OnComplete(_taskView.Rising);
         _visitorImage.transform.DOLocalRotate(_rotate, risingDuration / 6)
             .SetLoops(6, LoopType.Yoyo)
             .SetEase(Ease.Linear).OnComplete(() => _visitorImage.transform.rotation = Quaternion.Euler(Vector3.zero));
@@ -39,7 +39,12 @@ public class VisitorView : MonoBehaviour
         _timerText.gameObject.SetActive(false);
 
         _visitorImage.transform.DOScale(0.5f, fadingDuration);
-        _visitorImage.transform.DOMove(_endPos, fadingDuration).OnComplete(() => _visitorImage.transform.position = -_startPos);
+        _visitorImage.transform.DOMove(_endPos, fadingDuration)
+            .OnComplete(() => {
+                _visitorImage.transform.position = -_startPos;
+                _taskView.Fading();
+            });
+
         _visitorImage.transform.DOLocalRotate(new Vector3(0, 0, 12), fadingDuration / 4)
             .SetLoops(4, LoopType.Yoyo)
             .SetEase(Ease.Linear);

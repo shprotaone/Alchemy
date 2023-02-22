@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// –асширение дл€ отображени€ бутылки в конце слайдера при приготовлении
+/// </summary>
 public class EdgeExtensionForBar : MonoBehaviour
 {
     [SerializeField] private RectTransform _bottleContainer;

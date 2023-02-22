@@ -37,7 +37,7 @@ public sealed class ClickController : MonoBehaviour
     //[SerializeField] private AnimationCurve _animationCurve;
     [SerializeField] private float _resetFailDelayTime = 5f;
     [SerializeField] private float _resetCompleteDelayTime;
-    [SerializeField] private float _incrementPauseTime = 1f;
+    //[SerializeField] private float _incrementPauseTime = 1f;  //для Tap режима
 
     [Space]
     [SerializeField] private int _countParts;

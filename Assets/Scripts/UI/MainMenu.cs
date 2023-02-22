@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public static readonly string mainMenuSceneName = "Menu";
     public static readonly string GameSceneName = "DevelopSimpleVersion";
+    [SerializeField] private AudioManager _audioManager;
 
     [SerializeField] private Button _startGameButton;
     [SerializeField] private Button _guideButton;
@@ -23,6 +24,8 @@ public class MainMenu : MonoBehaviour
 
     private void StartGame()
     {
+        _audioManager.DisableSounds();
+        _audioManager.SuspendSoundCore();
         SceneManager.LoadScene(GameSceneName);
     }
 

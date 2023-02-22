@@ -602,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5975492717675343279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.023999998, y: 0.13, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.29, z: 0}
   m_LocalScale: {x: 0.9023311, y: 1.1581995, z: 0.34451815}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -629,7 +629,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 54c77801f686d9d47a72b45809614ee5, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -649,7 +649,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -768495831
   m_SortingLayer: 4
-  m_SortingOrder: 25
+  m_SortingOrder: 26
   m_Sprite: {fileID: 21300000, guid: 45b8234bace516d499c81d64464ef399, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -674,9 +674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 5975492717675343277}
-  _maxWobble: 0.02
-  _wobbleSpeed: 1
-  _recovery: 3
 --- !u!1 &5975492717874033009
 GameObject:
   m_ObjectHideFlags: 0

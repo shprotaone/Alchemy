@@ -152,8 +152,8 @@ namespace YG
             {
                 if (pauseMethod == PauseMethod.CustomState)
                 {
-                    if (pause) AudioListener.pause = openAudioPause;
-                    else AudioListener.pause = closeAudioPause;
+                    //if (pause) AudioListener.pause = openAudioPause;
+                    //else AudioListener.pause = closeAudioPause;
 
                     if (pause) RuntimeManager.CoreSystem.mixerSuspend();
                     else RuntimeManager.CoreSystem.mixerResume();
@@ -162,9 +162,9 @@ namespace YG
                 {
                     if (pause)
                     {
-                        audioPauseOnAd = AudioListener.pause;
+                        //audioPauseOnAd = AudioListener.pause;
                         RuntimeManager.CoreSystem.mixerSuspend();
-                        AudioListener.pause = true;
+                        //AudioListener.pause = true;
                     }
                     else RuntimeManager.CoreSystem.mixerResume();
                     

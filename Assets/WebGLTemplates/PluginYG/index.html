@@ -828,10 +828,10 @@
     document.addEventListener("visibilitychange", 
     function(){
         if(document.visibilityState == "hidden"){
-            myGameInstance.SendMessage('AudioManager','DisableSound')
+            myGameInstance.SendMessage('AudioManager','SuspendSoundCore')
             console.log("The game is " + document.visibilityState)
         }else{
-            myGameInstance.SendMessage('AudioManager','EnableSound')
+            myGameInstance.SendMessage('AudioManager','ResumeSoundCore')
         }          
     });
 
