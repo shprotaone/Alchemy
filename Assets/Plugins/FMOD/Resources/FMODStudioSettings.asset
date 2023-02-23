@@ -559,7 +559,7 @@ MonoBehaviour:
       Value: 9264
       HasValue: 1
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     Logging:
       Value: 0
@@ -583,7 +583,7 @@ MonoBehaviour:
       Value: 4096
       HasValue: 1
     DSPBufferCount:
-      Value: 4
+      Value: 6
       HasValue: 1
     Plugins:
       Value: []

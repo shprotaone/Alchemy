@@ -183,7 +183,7 @@ public class LevelInitializator : MonoBehaviour
     {
         if (_gameSaver.IsFirstGame)
         {
-            _firstPlayHandler.Activate();
+            //_firstPlayHandler.Activate();
         }
     }
 }

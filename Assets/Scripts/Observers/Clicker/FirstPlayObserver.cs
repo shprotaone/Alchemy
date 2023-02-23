@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class FirstPlayObserver : MonoBehaviour, IObserver
-{
+public class FirstPlayObserver : MonoBehaviour, IObserver {
     [SerializeField] private GuideController _guideController;
     [SerializeField] private ImageBlink _blink;
     public void Notify(object obj, string text)
     {
-        Deactivate();    
+        //Deactivate();    
     }
 
     public void Activate()

@@ -7,6 +7,7 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private VisitorController _visitorController;
     [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private Step4 _step4;
 
     private MixingSystem _mixingSystem;
     private LevelPreset _preset;
@@ -29,6 +30,7 @@ public class GameStateController : MonoBehaviour
             _cameraMovement.Movement();
             _visitorController.Activate();
             _audioManager.ChangeMainMusic(_preset._mainSound);
+            if (_step4!= null) _step4.Next();
         }
     }
 

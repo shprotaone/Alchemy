@@ -12,6 +12,8 @@ public class TradeSystem : MonoBehaviour
     [SerializeField] private List<PotionLabelType> _labelInTask;
     [SerializeField] private TradeSystemView _tradeView;
     [SerializeField] private LibraVisual _libraVisual;
+    [SerializeField] private StepHandler _step5Handler;
+    [SerializeField] private StepHandler _step6Handler;
     
     private VisitorController _visitorController;
     private AudioManager _audioManager;
@@ -39,7 +41,7 @@ public class TradeSystem : MonoBehaviour
         _completeSeries = new CompleteSeries();
         _tradeView.RefreshMultiplyValue(_completeSeries.CurrentMultiply);
 
-        _money = money;              
+        _money = money;
     }
 
     public void SetTask(PotionTask task)
@@ -79,6 +81,8 @@ public class TradeSystem : MonoBehaviour
         _tradeView.TradeButtoneControl(_reward);
         _libraVisual.CheckPosition(_labelsIn.Count);
         _audioManager.PlaySFX(_audioManager.Data.Scales);
+
+        _step5Handler?.Call();
     }
 
     public void Trade()
@@ -99,6 +103,7 @@ public class TradeSystem : MonoBehaviour
         _audioManager.PlaySFX(_audioManager.Data.VoiceGood);
 
         ClearSlotsAfterTrade();
+        _step6Handler?.Call();
 
         DOVirtual.DelayedCall(1f,_visitorController.CallVisitor);
     }
