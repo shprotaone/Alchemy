@@ -40,6 +40,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private FirstPlayObserver _firstPlayHandler;
     [SerializeField] private LabelToSprite _labelToSprite;
     [SerializeField] private DraggableObjectController _dragController;
+    [SerializeField] private Tutorial _tutorial;
 
     private Money _money;
     private MoneyTask _moneyTask;
@@ -76,6 +77,7 @@ public class LevelInitializator : MonoBehaviour
     public void InitLevelSettings()
     {
         _audioManager.Init(_gameSaver);
+        _audioManager.ChangeMainMusic(_audioManager.Data.ClaudronRoomTheme);    //сомнительно размещение
 
         InitTask();
 
@@ -183,7 +185,8 @@ public class LevelInitializator : MonoBehaviour
     {
         if (_gameSaver.IsFirstGame)
         {
-            //_firstPlayHandler.Activate();
+            _tutorial.Init(true);
+            _firstPlayHandler.Activate();
         }
     }
 }

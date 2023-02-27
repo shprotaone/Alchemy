@@ -417,8 +417,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../FMOD/Alchemistry FMOD/Alchemistry.fspro
-  sourceBankPath: ../../FMOD/Alchemistry FMOD/Build
+  sourceProjectPath: ../../FMOD/Alchemistry FMOD (2)/Alchemistry FMOD/Alchemistry.fspro
+  sourceBankPath: ../../FMOD/Alchemistry FMOD (2)/Alchemistry FMOD/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -583,7 +583,7 @@ MonoBehaviour:
       Value: 4096
       HasValue: 1
     DSPBufferCount:
-      Value: 6
+      Value: 4
       HasValue: 1
     Plugins:
       Value: []

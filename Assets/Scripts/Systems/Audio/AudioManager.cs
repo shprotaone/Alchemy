@@ -1,12 +1,8 @@
-using DG.Tweening;
-using System;
-using System.Collections.Generic;
+using FMOD;
 using FMOD.Studio;
 using FMODUnity;
+using System;
 using UnityEngine;
-using UnityEngine.Audio;
-using STOP_MODE = FMOD.Studio.STOP_MODE;
-using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,21 +17,23 @@ public class AudioManager : MonoBehaviour
 
     private EventReference _mainMusicReference;
     private EventReference _sfxReference;
+    private ChannelGroup _channelGroup;
 
     public bool IsMusicOn { get; private set; }
     public bool IsSoundEffectOn { get; private set; }
     public SoundsData Data => _data;
 
     public void Init(GameProgressSaver gameProgress)
-    {
-        ReInitSound();
+    {             
+        _mainMusicInstance.getChannelGroup(out _channelGroup);
+
+        ResumeSoundCore();
+        EnableSounds();
 
         _gameProgress = gameProgress;
         IsMusicOn = _gameProgress.Music;
-        IsSoundEffectOn = _gameProgress.SFX;
+        IsSoundEffectOn = _gameProgress.SFX;      
         OnSoundSettingsChanged?.Invoke();
-
-        ChangeMainMusic(_data.ClaudronRoomTheme);
     }
 
     /// <summary>
@@ -62,7 +60,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopInstanceSfx()
     {
-        _sfxInstance.stop(STOP_MODE.IMMEDIATE);
+        _sfxInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     /// <summary>
@@ -71,7 +69,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="clip"></param>
     public void ChangeMainMusic(EventReference clip)
     {
-        _mainMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        _mainMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _mainMusicInstance.release();
         _mainMusicReference = clip;
         _mainMusicInstance = RuntimeManager.CreateInstance(_mainMusicReference);
 
@@ -114,7 +113,7 @@ public class AudioManager : MonoBehaviour
         if (IsMusicOn)
         {
             IsMusicOn = false;
-            _mainMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            _mainMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
         else
         {
@@ -141,26 +140,17 @@ public class AudioManager : MonoBehaviour
         OnSoundSettingsChanged?.Invoke();      
     }
 
-    private void OnDisable()
-    {
-        DisableSounds();
-    }
-
-    private void ReInitSound()
-    {
-        var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
-        result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
-    }
-
     public void DisableSounds()
     {
+        RuntimeManager.MuteAllEvents(true);
         _mainMusicInstance.setPaused(true);
         _sfxInstance.setPaused(true);
     }
 
     public void EnableSounds()
     {
-        if(IsMusicOn) _mainMusicInstance.setPaused(false);
+        RuntimeManager.MuteAllEvents(false);
+        if (IsMusicOn) _mainMusicInstance.setPaused(false);
         if(IsSoundEffectOn) _sfxInstance.setPaused(false);
     }
 
@@ -168,12 +158,19 @@ public class AudioManager : MonoBehaviour
     {
         var result = FMODUnity.RuntimeManager.CoreSystem.mixerSuspend();
         //RuntimeManager.MuteAllEvents(true);
-        Debug.Log("Не в фокусе");
+        //Debug.Log("Не в фокусе");
     }
 
     public void ResumeSoundCore()
     {
         var result = FMODUnity.RuntimeManager.CoreSystem.mixerResume();
-        Debug.Log("В фокусе");
+        //Debug.Log("В фокусе");
+    }
+
+    private void OnDisable()
+    {
+        DisableSounds();
+        SuspendSoundCore();
+        _mainMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }

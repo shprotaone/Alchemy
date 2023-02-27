@@ -13,5 +13,4 @@ public class MainMenuLoader : MonoBehaviour
         _audioManager.Init(_gameProgress);
         _audioManager.ChangeMainMusic(_audioManager.Data.MainMenuMusic);
     }
-
 }

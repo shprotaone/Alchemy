@@ -109,7 +109,6 @@ public class TradeSlot : MonoBehaviour,ISlot
     public void ResetAllBottlesAfterTrade()
     {
         OnSell?.Invoke(_bottlesInSlot.Count);
-        Debug.Log(("Продано " + _bottlesInSlot.Count + " бутылок"));
         foreach (var slot in _bottlePos)
         {
             slot.ResetSlotAfterTrade();

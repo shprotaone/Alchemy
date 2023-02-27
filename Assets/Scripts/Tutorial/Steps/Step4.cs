@@ -20,6 +20,6 @@ public class Step4 : MonoBehaviour,IStepTutorial {
     }
 
     public void Next() {
-        _tutorial.CallNextStep();
+        _tutorial?.CallNextStep();
     }
 }

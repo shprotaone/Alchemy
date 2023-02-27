@@ -13,14 +13,12 @@ public class VisitorView : MonoBehaviour
     private readonly Vector3 _tradePos = new Vector3(-3, -1.6f, 0);
     private readonly Vector3 _rotate = new Vector3(0, 0, 12);
 
-    [SerializeField] private TMP_Text _timerText;
     [SerializeField] private SpriteRenderer _visitorImage;
     [SerializeField] private PotionTaskView _taskView;
 
     public void Rising()
     {  
         this.gameObject.SetActive(true);
-        _timerText.enabled = false;
 
         _visitorImage.transform.DOScale(1, risingDuration);
         _visitorImage.transform.DOMove(_tradePos, risingDuration).OnComplete(_taskView.Rising);
@@ -35,8 +33,6 @@ public class VisitorView : MonoBehaviour
     public void Fading()
     {
         StopAllCoroutines();
-
-        _timerText.gameObject.SetActive(false);
 
         _visitorImage.transform.DOScale(0.5f, fadingDuration);
         _visitorImage.transform.DOMove(_endPos, fadingDuration)
@@ -62,12 +58,6 @@ public class VisitorView : MonoBehaviour
         _visitorImage.color = new Color(1,1,1,1);
         _visitorImage.transform.localScale = _startScale;      
         _visitorImage.transform.rotation = Quaternion.Euler(Vector3.zero);
-        Debug.Log("—брос к стандартному положению");
-    }
-
-    public void UpdateTimerText(int currentTime)
-    {
-        _timerText.text = currentTime.ToString();
     }
 
     public void BrightVisitor(string sortingLayerName)

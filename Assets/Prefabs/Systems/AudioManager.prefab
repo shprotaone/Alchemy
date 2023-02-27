@@ -199,6 +199,13 @@ MonoBehaviour:
       Data3: -704210021
       Data4: 817384442
     Path: event:/Voices/Voice waiting
+  _mainMenuMusic:
+    Guid:
+      Data1: 817206940
+      Data2: 1142838191
+      Data3: 708911284
+      Data4: 1811807065
+    Path: event:/Music/Main menu
   _claudronRoomTheme:
     Guid:
       Data1: 1973873103

@@ -10,7 +10,6 @@ public class FirstPlayObserver : MonoBehaviour, IObserver {
 
     public void Activate()
     {
-        _blink.StartBlink();
         _guideController.Activate();
     }
 

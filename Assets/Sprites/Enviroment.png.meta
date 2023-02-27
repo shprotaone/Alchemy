@@ -117,7 +117,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 50
     textureCompression: 1
@@ -131,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LeftRope
+      name: RopeLeft
       rect:
         serializedVersion: 2
         x: 42
-        y: 798
+        y: 173
         width: 42
-        height: 164
+        height: 163
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae19ab9be28a52341ae0ab9b4708c610
-      internalID: 2041259309
+      spriteID: b0b511e4fc92cd44ca1336fcba4b69de
+      internalID: -1530999081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RightRope
+      name: RopeRight
       rect:
         serializedVersion: 2
         x: 132
-        y: 798
+        y: 168
         width: 42
-        height: 164
+        height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24f3780c8fbd64f49ade7addbabd05c6
-      internalID: -193568676
+      spriteID: c915e744748ca8d49bd0844b32c01706
+      internalID: 709867197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SmallTable
+      name: PrevPotionTable
       rect:
         serializedVersion: 2
-        x: 229
-        y: 893
+        x: 234
+        y: 267
         width: 126
-        height: 90
+        height: 87
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf892ede6971e5549bfc5841370c8a3c
-      internalID: 666510812
+      spriteID: 46f63345c7aefa5489dfb742a873cb51
+      internalID: 1859865882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BigPlate
+      name: UpPlate
       rect:
         serializedVersion: 2
         x: 378
-        y: 888
-        width: 456
-        height: 102
+        y: 262
+        width: 453
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,19 +208,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29faeb6ff9fdbfc46a6b12a06395af54
-      internalID: 325557469
+      spriteID: 7d5e2b1ab5361af499ea43660c8e9ea0
+      internalID: 1500957333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoilButton
+      name: CookButton
       rect:
         serializedVersion: 2
-        x: 224
-        y: 792
-        width: 264
+        x: 229
+        y: 162
+        width: 267
         height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e8a324c3f4985747b0849681c735153
-      internalID: 424248603
+      spriteID: fa4a2c93174960f46a999459344c89dd
+      internalID: -442536801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TradeButton
+      name: AcceptButton
       rect:
         serializedVersion: 2
         x: 12
-        y: 685
-        width: 246
-        height: 93
+        y: 54
+        width: 243
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,50 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bcdec53dcff2b1479ff5a63c4db9aa6
-      internalID: 871284877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LeftShelf
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 63
-        width: 294
-        height: 600
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3a7470d6adb90d74c8a98852b5cac577
-      internalID: 701625130
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RightShelf
-      rect:
-        serializedVersion: 2
-        x: 347
-        y: 63
-        width: 294
-        height: 603
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6d47cc1f82427b47ae652027f79087b
-      internalID: 417701447
+      spriteID: 0fcad06758c488a4a80b55df5d5b8d26
+      internalID: 685025962
       vertices: []
       indices: 
       edges: []
@@ -309,14 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RightShelf: 417701447
-      LeftShelf: 701625130
-      RightRope: -193568676
-      SmallTable: 666510812
-      BigPlate: 325557469
-      BoilButton: 424248603
-      LeftRope: 2041259309
-      TradeButton: 871284877
+      AcceptButton: 685025962
+      RopeRight: 709867197
+      UpPlate: 1500957333
+      Enviroment_4: -1215751124
+      PrevPotionTable: 1859865882
+      RopeLeft: -1530999081
+      CookButton: -442536801
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FMODUnity;
 using TMPro;
 using UnityEngine;
@@ -52,10 +53,11 @@ public class CompleteLevel : MonoBehaviour,IMenu
             
             _resultText = "День " + (int)_levelSelector.CurrentLevel.levelNumber + " пройден";
             _completeParticle.gameObject.SetActive(true);
+
             _completeParticle.Play();
             _audioManager.PlaySFX(_audioManager.Data.WinWindowSound);
-            YandexGame.FullscreenShow();
 
+            StartCoroutine(ADDelay());
         }
         else
         {
@@ -97,5 +99,11 @@ public class CompleteLevel : MonoBehaviour,IMenu
         CheckResult();
         _controller.Enable();
         _controller.SetText(_resultText);
+    }
+
+    private IEnumerator ADDelay()
+    {
+        yield return new WaitForSeconds(1);
+        YandexGame.FullscreenShow();
     }
 }

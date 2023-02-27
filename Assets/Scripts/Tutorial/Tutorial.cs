@@ -7,10 +7,17 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] private IStepTutorial[] _steps;
 
     private int _tutroialStep = 0;
-    void Start() {
-        //TODO: проверка на активацию туториала
-        _steps = GetComponentsInChildren<IStepTutorial>();
-        _steps[0].Activate(this);
+    public void Init(bool flag) {
+        
+        if (flag) {
+            _tutorialCanvas?.gameObject.SetActive(true);
+            _steps = GetComponentsInChildren<IStepTutorial>();
+            _steps[0].Activate(this);
+        }
+        else
+        {
+            _tutorialCanvas?.gameObject.SetActive(false);
+        }
     }
 
     public void CallNextStep() {
