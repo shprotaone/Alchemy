@@ -63,7 +63,7 @@ public class BottleInventory : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            if (!slot.IsFree && potion != null)
+            if (potion != null & !slot.IsFree)
             {
                 if (slot.BottleInSlot.PotionInBottle.LabelID == potion.LabelID)
                 {

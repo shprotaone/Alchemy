@@ -4,6 +4,8 @@ public class Step4 : MonoBehaviour,IStepTutorial {
 
     [SerializeField] private GameObject _tutorialObject;
     private Tutorial _tutorial;
+
+    public bool IsActive { get;private set; }
     public void ShowText(string text) {
         
     }

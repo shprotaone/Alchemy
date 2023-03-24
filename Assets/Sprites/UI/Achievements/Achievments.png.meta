@@ -131,64 +131,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Achievments_0
+      name: AchievmentPanel
       rect:
         serializedVersion: 2
         x: 0
-        y: 335
+        y: 448
         width: 605
         height: 585
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 051f1a3c947bd9e43b67421f7b4db2d8
-      internalID: -509440887
+      spriteID: ac5b9b233d4d0bd4d8c729dfa03960c4
+      internalID: 775437594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AchievmentsActivePlate
+      name: AchievmentSlot
       rect:
         serializedVersion: 2
         x: 102
-        y: 217
+        y: 288
         width: 400
-        height: 113
+        height: 145
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c7a2d855a438c94d9efc214fb78f9e1
-      internalID: 1670375744
+      spriteID: c3818e1a3431a6b4298b8217e7f5668d
+      internalID: -1837296349
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AchievmentsUnactivePlate
+      name: AchievmentHideSlot
       rect:
         serializedVersion: 2
-        x: 102
-        y: 96
-        width: 402
-        height: 109
+        x: 100
+        y: 120
+        width: 400
+        height: 145
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6bc23aa07ef2b647a9aa277dfde0232
-      internalID: -670274156
+      spriteID: 87ba705f87d158545bd128d3d44f902f
+      internalID: -1727180644
       vertices: []
       indices: 
       edges: []
@@ -197,40 +197,40 @@ TextureImporter:
       name: GuideArrow
       rect:
         serializedVersion: 2
-        x: 107
-        y: 22
-        width: 195
-        height: 44
+        x: 95
+        y: 0
+        width: 216
+        height: 89
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ced528b23738aa44a80be16dad76f416
-      internalID: 883867887
+      spriteID: 0b895e55484c77848848065471f511e8
+      internalID: -7526037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unComplete
+      name: Uncomplete
       rect:
         serializedVersion: 2
-        x: 332
+        x: 330
         y: 0
-        width: 80
+        width: 82
         height: 90
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec77040664ba4b844a77b496e3d5b296
-      internalID: -765176326
+      spriteID: 448faf2425ae61b4691cfb8d0d8d857b
+      internalID: 1748294344
       vertices: []
       indices: 
       edges: []
@@ -239,19 +239,19 @@ TextureImporter:
       name: Complete
       rect:
         serializedVersion: 2
-        x: 420
+        x: 422
         y: 0
-        width: 82
+        width: 80
         height: 90
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69c147529d56c7b43922a579c4a0671b
-      internalID: 631901604
+      spriteID: 454bf28099187f842b2d4756b34208bb
+      internalID: 2087623732
       vertices: []
       indices: 
       edges: []
@@ -267,12 +267,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Complete: 631901604
-      GuideArrow: 883867887
-      AchievmentsActivePlate: 1670375744
-      Achievments_0: -509440887
-      unComplete: -765176326
-      AchievmentsUnactivePlate: -670274156
+      Complete: 2087623732
+      Uncomplete: 1748294344
+      Achievments_9: -476434594
+      Achievments_11: 504988990
+      Achievments_14: 1749795002
+      Achievments_5: 767227203
+      Achievments_6: -100316423
+      AchievmentPanel: 775437594
+      GuideArrow: -7526037
+      Achievments_13: -799051112
+      Achievments_12: 428119375
+      AchievmentHideSlot: -1727180644
+      Achievments_15: 1269492811
+      Achievments_3: -1137495467
+      Achievments_10: 174524695
+      AchievmentSlot: -1837296349
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,6 +18,7 @@ public class Step7 : MonoBehaviour,IStepTutorial {
     public void Deactivate() {
         
         _tutorialObject.SetActive(false);
+        _tutorial.Disable();
     }
 
     public void Next() {

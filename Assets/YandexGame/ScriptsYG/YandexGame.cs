@@ -162,7 +162,7 @@ namespace YG
 
         public static void LoadEditor()
         {
-            Message("Load Editor");
+            //Message("Load Editor");
             if (File.Exists(pathSaves))
             {
                 FileStream fs = new FileStream(pathSaves, FileMode.Open);

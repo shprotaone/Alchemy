@@ -30,6 +30,7 @@ public class GameStateController : MonoBehaviour
             _cameraMovement.Movement();
             _visitorController.Activate();
             _audioManager.ChangeMainMusic(_preset._mainSound);
+            
             if (_step4!= null) _step4.Next();
         }
     }

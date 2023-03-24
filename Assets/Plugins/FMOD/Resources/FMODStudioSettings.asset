@@ -157,7 +157,7 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     Logging:
       Value: 0
@@ -417,8 +417,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../FMOD/Alchemistry FMOD (2)/Alchemistry FMOD/Alchemistry.fspro
-  sourceBankPath: ../../FMOD/Alchemistry FMOD (2)/Alchemistry FMOD/Build
+  sourceProjectPath: ../../FMOD/Alchemistry FMOD_v4/Alchemistry FMOD/Alchemistry.fspro
+  sourceBankPath: ../../FMOD/Alchemistry FMOD_v4/Alchemistry FMOD/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

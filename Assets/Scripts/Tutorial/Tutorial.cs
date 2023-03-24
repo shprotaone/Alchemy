@@ -7,12 +7,14 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] private IStepTutorial[] _steps;
 
     private int _tutroialStep = 0;
+    private bool isActive = false;
     public void Init(bool flag) {
         
         if (flag) {
             _tutorialCanvas?.gameObject.SetActive(true);
             _steps = GetComponentsInChildren<IStepTutorial>();
             _steps[0].Activate(this);
+            isActive = true;
         }
         else
         {
@@ -22,9 +24,17 @@ public class Tutorial : MonoBehaviour {
 
     public void CallNextStep() {
 
-        _steps[_tutroialStep].Deactivate();
+        if (isActive)
+        {
+            _steps[_tutroialStep].Deactivate();
 
-        _tutroialStep++;
-        _steps[_tutroialStep].Activate(this);
+            _tutroialStep++;
+            _steps[_tutroialStep].Activate(this);
+        }      
+    }
+
+    public void Disable()
+    {
+        isActive= false;
     }
 }

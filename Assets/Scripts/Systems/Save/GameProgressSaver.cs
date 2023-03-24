@@ -9,6 +9,7 @@ public class GameProgressSaver
     public readonly string musicName = "isMusicOn";
     public readonly string sfxName = "Effects";
     public readonly string firstPlayName = "FirstPlay";
+    public readonly string saveRecord = "Record";
 
     private bool _music = true;
     private bool _sfx = true;
@@ -23,6 +24,7 @@ public class GameProgressSaver
     {
         CheckFirstPlay();
         LoadSettings();
+        LoadRecord();
     }
 
     private void CheckFirstPlay()
@@ -38,7 +40,12 @@ public class GameProgressSaver
 
     public void LoadRecord()
     {
-        _currentRecord = YandexGame.savesData.moneyRecord;
+        if(YandexGame.SDKEnabled == true)
+        {
+            _currentRecord = YandexGame.savesData.moneyRecord;
+        }
+        
+        Debug.Log("Текущий рекорд " + _currentRecord);
     }
 
     public void SaveRecord(int money)
@@ -46,9 +53,14 @@ public class GameProgressSaver
         if (_currentRecord < money)
         {
             _currentRecord = money;
-            YandexGame.savesData.moneyRecord = _currentRecord;
-            YandexGame.NewLeaderboardScores("CoinLeaderBoard", _currentRecord);
-            YandexGame.SaveProgress();
+
+            if(YandexGame.SDKEnabled == true)
+            {
+                YandexGame.savesData.moneyRecord = _currentRecord;
+                YandexGame.NewLeaderboardScores("CoinLeaderBoard", _currentRecord);
+                YandexGame.SaveProgress();
+                
+            }       
         }
     }
 
@@ -80,10 +92,5 @@ public class GameProgressSaver
 
         if (result == 1) return true;
         else return false;
-    }
-
-    ~GameProgressSaver()
-    {
-        SaveProgress();
     }
 }

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
@@ -49,8 +50,6 @@ public class LevelInitializator : MonoBehaviour
     private List<RandomPart> _tasksChance;
     private List<RandomPart> _labelTypeForTaskChance;
 
-    private void OnEnable() => YandexGame.GetDataEvent += _gameSaver.LoadRecord;
-
     private void OnDisable()
     {
        YandexGame.GetDataEvent -= _gameSaver.LoadRecord;
@@ -72,9 +71,11 @@ public class LevelInitializator : MonoBehaviour
         _currentLevelPreset = _levelSelector.CurrentLevel;
         InitLevelSettings();
         _dayEntryController.CallNextDay((int)_levelSelector.CurrentLevel.levelNumber).OnKill(FirstStart);
+       
+        YandexGame.GetDataEvent += _gameSaver.LoadRecord;
     }  
 
-    public void InitLevelSettings()
+    private void InitLevelSettings()
     {
         _audioManager.Init(_gameSaver);
         _audioManager.ChangeMainMusic(_audioManager.Data.ClaudronRoomTheme);    //сомнительно размещение
@@ -94,6 +95,15 @@ public class LevelInitializator : MonoBehaviour
 
         InitInventory();
         InitSystems();
+
+        StartCoroutine(StartLevel());
+        Debug.Log("LoadLevel");
+    }
+
+    private IEnumerator StartLevel()
+    {
+        yield return new WaitForSeconds(2);
+        OnLevelStarted?.Invoke();
     }
 
     private void InitInventory()
@@ -164,7 +174,6 @@ public class LevelInitializator : MonoBehaviour
         _levelCompletePanel.Disable();
         InitLevelSettings();
         _dayEntryController.CallNextDay((int)preset.levelNumber);
-        OnLevelStarted?.Invoke();       
     }
 
     public void RestartGame()
@@ -177,8 +186,6 @@ public class LevelInitializator : MonoBehaviour
         InitLevelSettings();
 
         OnLoopRestart?.Invoke();
-        OnLevelStarted?.Invoke();
-
     }
 
     private void FirstStart()

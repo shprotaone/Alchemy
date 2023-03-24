@@ -244,7 +244,6 @@ public sealed class ClickController : MonoBehaviour
     {
         _counter.Setup(0, _maxClickCounterValue);
         _widgetClicker.ClearProgress();
-        ShowMessage(String.Empty);
         _isPauseTimeBefore = false;
 
         _claudronSystem.ClaudronButtonState();
@@ -307,8 +306,9 @@ public sealed class ClickController : MonoBehaviour
 
     public void Disable()
     {
-        _currentParts.Clear();
-        InitializeProgressBar();
+        _currentParts.Clear();       
+        Reset();
+        //InitializeProgressBar();
     }
 }
 
