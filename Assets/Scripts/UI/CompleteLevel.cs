@@ -26,6 +26,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
     private AudioManager _audioManager;
     private LevelSelector _levelSelector;
     private string _resultText;
+    public bool IsLevelComplete { get; private set; }
 
     private void Start()
     {
@@ -58,6 +59,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
             _audioManager.PlaySFX(_audioManager.Data.WinWindowSound);
 
             StartCoroutine(ADDelay());
+            IsLevelComplete = true;
         }
         else
         {
@@ -65,6 +67,7 @@ public class CompleteLevel : MonoBehaviour,IMenu
             _nextLevelButton.gameObject.SetActive(false);
             _resultText = defeatText;
             _audioManager.PlaySFX(_audioManager.Data.LoseWindowSound);
+            IsLevelComplete = false;
         }
 
         _init.DisableLevel();

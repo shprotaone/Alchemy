@@ -628,7 +628,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u0410\u043B\u0445\u0438\u043C\u0438\u044F: \u0424\u043E\u0440\u043C\u0443\u043B\u0430
-    \u0431\u043E\u0433\u0430\u0442\u0441\u0432\u0430"
+    \u0431\u043E\u0433\u0430\u0442\u0441\u0442\u0432\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b2668361da9950408b2f949d24fbf58, type: 2}
   m_sharedMaterial: {fileID: -5134417324763962014, guid: 2b2668361da9950408b2f949d24fbf58,

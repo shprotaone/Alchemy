@@ -29,6 +29,7 @@ public class LevelInitializator : MonoBehaviour
     [SerializeField] private ClickController _clickController;
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private AchievementsProgressSaver _achievementsProgressSaver;
+    [SerializeField] private Analytics _analytics;
 
     [Header("Подсветка и UI")]
     [SerializeField] private MoneyView _moneyView;
@@ -156,6 +157,11 @@ public class LevelInitializator : MonoBehaviour
 
     public void DisableLevel()
     {
+        _analytics.SendAnalytics(_levelSelector.CurrentLevel.levelNumber.ToString(),
+                         _money.CurrentMoney,
+                         _moneyTask.TaskMoney,
+                         _levelCompletePanel.IsLevelComplete);
+
         _visitorController.Disable();
         _tradeSystem.Disable();
         _gameStateController.Disable();
